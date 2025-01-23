@@ -101,17 +101,14 @@ class ArrayList:
             raise IndexOutOfBounds()
         return self.a_list[index]
 
+
     #Time complexity: O(1) - constant time
     def get_last(self) -> int:
-        """ Returns the last item in the list.
-        Raises Empty() if the list is empty. """
-
-        # List is empty
+        """ Returns the last item in the list. """
         if self.size == 0:
             raise Empty()
-        
-        # return the last element
         return self.a_list[self.size - 1]
+
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self) -> None:
@@ -212,8 +209,10 @@ if __name__ == "__main__":
     x = arr_lis.get_first()
     print(x)
 
-
     x = arr_lis.get_at(0)
+    print(x)
+
+    x = arr_lis.get_last()
     print(x)
 
 
