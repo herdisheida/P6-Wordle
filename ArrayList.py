@@ -1,6 +1,3 @@
-import re
-
-
 class IndexOutOfBounds(Exception):
     pass
 
@@ -43,7 +40,6 @@ class ArrayList:
         index = 0
 
         while index < self.size - 1:
-            print("self.size", self.size)
 
             if index != self.size:
                 # add the all elements, except the last one
@@ -55,7 +51,8 @@ class ArrayList:
             index += 1
 
         # return an empty string if the array is empty
-        return return_string if return_string else "The Array is empty" # HELP PA - á ég að skila tómum?
+        # HELP PA - á ég að skila tómum?
+        return return_string if return_string else "The Array is empty"
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
@@ -100,7 +97,6 @@ class ArrayList:
         """ Adds an item to the list after the last item. """
         self.array += [value]
 
-
     #Time complexity: O(1) - constant time
     def set_at(self, value, index: int) -> None:
         """ Sets the value at a specific location to a specific value.
@@ -111,7 +107,6 @@ class ArrayList:
             self.array[index] = value
         except :
             raise IndexOutOfBounds()
-
 
     #Time complexity: O(1) - constant time
     def get_first(self) -> int:
@@ -127,22 +122,17 @@ class ArrayList:
         """ Returns the item at index.
         Raises IndexOutOfBounds() if index is invalid. """
 
-        # # List is empty
-        # if not self.array():
-        #     raise IndexOutOfBounds()
+        # List is empty
+        if self.size == 0:
+            raise IndexOutOfBounds()
 
-        # # Index is a negative num
-        # if index < 0:
-        #     raise IndexOutOfBounds()
-        
-        # HELP - má ég bara gera þetta
-        try:
-            return self.array[index]
-        except :
-            raise IndexOutOfBounds()         
-        
+        # Index is out of bounds; negatie or bigger than the size of the list
+        if index < 0 or index >= self.size:
+            raise IndexOutOfBounds()
 
-         
+        # return the element at the index
+        return self.array[index]
+
 
     #Time complexity: O(1) - constant time
     def get_last(self) -> int:
