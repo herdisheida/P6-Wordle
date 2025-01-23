@@ -195,6 +195,7 @@ if __name__ == "__main__":
     arr_lis = ArrayList()
     print(arr_lis)
 
+
     
     # TEST: add to list
     arr_lis.append("append 1 HERE")
@@ -217,9 +218,8 @@ if __name__ == "__main__":
 
 
     # TEST: get elements
-    
-
-
+    x = arr_lis.get_at(0)
+    print(x)
 
 
 
