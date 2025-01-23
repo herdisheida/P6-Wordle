@@ -12,9 +12,9 @@ class NotOrdered(Exception):
 
 
 class ArrayList:
-    def __init__(self, array=None):
+    def __init__(self, size: int = None) -> None:
         """ Initializes the array list """
-        self.array = [] if array == None else array
+        self.arr = [0] * size if size else []
 
 
     #Time complexity: O(n) - linear time in size of list
