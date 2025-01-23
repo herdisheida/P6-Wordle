@@ -171,6 +171,7 @@ if __name__ == "__main__":
     # and make sure they are at this indent level
 
     arr_lis = ArrayList()
+
     print("\n   ALL CLEARED: ")
     arr_lis.clear()
     print("Size:      ", arr_lis.size)
@@ -224,15 +225,12 @@ if __name__ == "__main__":
     print(arr_lis)
 
 
-# set at 0, prepend 1 HERE, append 1 HERE, insert at 3, append 2 HERE
-# set at 0, prepend 1 HERE, append 1 HERE, insert at 3, append 2 HERE
 
+    arr_lis.set_at("set_at HERE", 0)
+    print(arr_lis)
 
-    # arr_lis.set_at("set_at HERE", 1)
-    # print(arr_lis)
-
-    # arr_lis.insert("inserting HERE", 0)
-    # print(arr_lis)
+    arr_lis.insert("inserting HERE", 0)
+    print(arr_lis)
 
 
     # print(str(arr_lis))
