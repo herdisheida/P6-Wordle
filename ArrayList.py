@@ -14,9 +14,12 @@ class NotOrdered(Exception):
 class ArrayList:
     def __init__(self, size: int = None) -> None:
         """ Initializes the array list """
-        size = 5 # HELP
+        size = 5 # HELP breyta þessu seinna - vtk hvort ég ætli að hardkóða size
         self.array = [0] * size if size else []
         self.size = size if size else 0 # len(array)
+
+        self.array_length = self._get_array_length() # má þetta vera hér HELP
+
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
@@ -24,11 +27,9 @@ class ArrayList:
         Have a comma and a space between them. """
         return_string = ""
         index = 0
-        array_length = self._get_array_length()
+        while index < self.array_length - 1:
 
-        while index < array_length - 1:
-
-            if index != array_length:
+            if index != self.array_length:
                 return_string += f"{self.array[index]}" + ", "
             index += 1
 
@@ -46,16 +47,47 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int) -> None:
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Inserts an item into the list at a specific location, not overwriting other items.
+        If the index is not within the current list, raise IndexOutOfBounds().
+        It should be possible to add to the front and back of the list, and anywhere in between """
+
+        # the empty list
+        if not self.array:
+            self.array = [value]
+
+        # adding in the front
+        if index == 0:
+            self.prepend(value)
+        
+        # adding at the back
+        # if index == self.array_length - 1:
+        #     self.append(value)
+
+        # adding in between
+        # try:
+        #     # make template for new list
+        #     new_array = [0] * (self.size + 1)
+
+        #     # insert each element into the new_array, once at a time
+        #     for x in range(self.array_length): # má þetta ? EXTRA HELP TA - ég er ekki að nota for x in list, en er að nota lengdinu á listanum...
+        #         # insert the new element
+        #         if x == index:
+        #             new_array[x] = value
+        #         new_array[x] = self.array[x]
+
+        # except :
+        #     raise IndexOutOfBounds() # vtk en hvor ég negi nota try: except: HELP
 
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
-        new_array = self.array + ["GEYMA"] # má gera þetta HELP
-        index = new_array.index("GEYMA")
+        new_array = self.array + ["KEEP_FOR_NOW"] # má gera þetta HELP
+        index = new_array.index("KEEP_FOR_NOW")
+        print(index)
         new_array[index] = value
         self.array = new_array
+        print("TESTING",new_array)
+        print("self.array", self.array)
 
 
     #Time complexity: O(1) - constant time
@@ -173,13 +205,16 @@ if __name__ == "__main__":
     print(arr_lis)
 
 
-    # test
+    # testing - að setja eitthvað í listan, einhverstaðar
     arr_lis.prepend("prepending HERE")
     print(arr_lis)
     arr_lis.append("appending HERE")
     print(arr_lis)
-    arr_lis.set_at("set_at HERE", 1)
-    print(arr_lis)
+    # arr_lis.set_at("set_at HERE", 1)
+    # print(arr_lis)
+
+    # arr_lis.insert("inserting HERE", 0)
+    # print(arr_lis)
 
 
     # print(str(arr_lis))
