@@ -51,8 +51,12 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Adds an item to the list after the last item. """
+        new_array = self.array + ["KEEP_FOR_NOW"] # má gera þetta HELP
+        index = new_array.index("KEEP_FOR_NOW")
+        new_array[index] = value
+        self.array = new_array
+
 
     #Time complexity: O(1) - constant time
     def set_at(self, value, index) -> None:
@@ -161,7 +165,8 @@ if __name__ == "__main__":
     arr_lis = ArrayList()
 
     # test
-    arr_lis.prepend("HEllo World")
+    arr_lis.prepend("PREPENDING HERE")
+    arr_lis.append("APPENDING HERE")
 
 
     print(str(arr_lis))
