@@ -14,7 +14,8 @@ class NotOrdered(Exception):
 class ArrayList:
     def __init__(self, size: int = None) -> None:
         """ Initializes the array list """
-        self.arr = [0] * size if size else []
+        self.array = [0] * size if size else []
+        self.size = size if size else 0 # len(array)
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -25,6 +26,7 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value):
+        """ Inserts an item into the list before the first item """
         # TODO: remove 'pass' and implement functionality
         pass
 
