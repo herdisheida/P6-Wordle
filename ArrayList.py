@@ -78,14 +78,7 @@ class ArrayList:
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
-
-        """ Adds an item to the list after the last item. """
-        new_array = self.array + ["KEEP_FOR_NOW"] # má gera þetta HELP
-        index = new_array.index("KEEP_FOR_NOW")
-        new_array[index] = value
-        self.array = new_array
-
-        # self.array += [value]
+        self.array += [value]
 
 
     #Time complexity: O(1) - constant time
