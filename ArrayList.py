@@ -1,3 +1,6 @@
+import re
+
+
 class IndexOutOfBounds(Exception):
     pass
 
@@ -11,12 +14,25 @@ class NotOrdered(Exception):
     pass
 
 
+# TODO: rezise stuff,
+# TODO: breyta append, prepend og insert - þarf að nota rezise þar
+# TODO: eyða get_array_length - þarf ekki að nota það því ég hef self.size breytuna
+
+# HELP EDIT LATER : skoða seinna
+# HELP : basic hjálp
+# EXTRA HELP TA : spyrja kennara
+# HELP PA : spyrja félaga
+
+
 class ArrayList:
-    def __init__(self, size: int = None) -> None:
+    def __init__(self, capacity: int = 10) -> None:
         """ Initializes the array list """
-        size = 5 # HELP breyta þessu seinna - vtk hvort ég ætli að hardkóða size
-        self.array = [0] * size if size else []
-        self.size = size if size else 0 # len(array)
+        self.array = [None] * capacity # default capacity is 10
+
+        # how manu elements the array can hold
+        self.capacity = capacity if capacity else 0
+        # how many elements are in the array
+        self.size = 0
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -25,17 +41,21 @@ class ArrayList:
         Have a comma and a space between them. """
         return_string = ""
         index = 0
-        self.array_length = self._get_array_length() # má þetta vera hér HELP
 
-        while index < self.array_length - 1:
+        while index < self.size - 1:
+            print("self.size", self.size)
 
-            if index != self.array_length:
+            if index != self.size:
+                # add the all elements, except the last one
                 return_string += f"{self.array[index]}" + ", "
+            else:
+                # add the last element
+                return_string += f"{self.array[index]}"
+
             index += 1
 
-        # add the last element, without a comma
-        return_string += f"{self.array[index]}"
-        return return_string
+        # return an empty string if the array is empty
+        return return_string if return_string else "The Array is empty" # HELP PA - á ég að skila tómum?
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
@@ -134,8 +154,17 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self) -> None:
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Re-allocates memory for a larger array and populates it with the original array's items. """
+        # make a new array with the size of the original array + 1
+        new_array = [None] * (self.size + 1)
+
+        # insert each element into the new_array
+        for x in range(self.size):
+            new_array[x] = self.array[x]
+
+        # set the new_array as the array
+        self.array = new_array
+
 
     #Time complexity: O(n) - linear time in size of list
     def remove_at(self, index: int) -> None:
@@ -172,9 +201,9 @@ class ArrayList:
     def _get_array_length(self, index=0) -> int:
         """ Get the length of the array """
 
-        # # the empty list
-        # if not self.array:
-        #     return 0
+        # the empty list
+        if not self.array:
+            return 0
         
         try:
             value_at_index = self.array[index]
@@ -192,15 +221,19 @@ if __name__ == "__main__":
     # Do not add them outside this if statement
     # and make sure they are at this indent level
 
-    arr_lis = ArrayList()
+    arr_lis = ArrayList(5) # 5 is the size of the list - vtk á ég að hardkóða? HELP EDIT LATER
+    print(arr_lis)
+    print(arr_lis.array)
+
+    arr_lis.resize()
     print(arr_lis)
 
 
     # testing - að setja eitthvað í listan, einhverstaðar
-    arr_lis.prepend("prepending HERE")
-    print(arr_lis)
-    arr_lis.append("appending HERE")
-    print(arr_lis)
+    # arr_lis.prepend("prepending HERE")
+    # print(arr_lis)
+    # arr_lis.append("appending HERE")
+    # print(arr_lis)
     # arr_lis.set_at("set_at HERE", 1)
     # print(arr_lis)
 
