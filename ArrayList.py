@@ -14,9 +14,8 @@ class NotOrdered(Exception):
     pass
 
 
-# TODO: rezise stuff,
-# TODO: breyta append, prepend og insert - þarf að nota rezise þar
-# TODO: eyða get_array_length - þarf ekki að nota það því ég hef self.size breytuna
+
+
 
 # HELP EDIT LATER : skoða seinna
 # HELP : basic hjálp
@@ -24,9 +23,9 @@ class NotOrdered(Exception):
 # HELP PA : spyrja félaga
 # DELETE LATER: eyða seinna
 
+# TODO:
+# TODO: Sorting and searching (20%)
 
-
-# ÆTLA NOTA capacity - 
 
 class ArrayList:
     def __init__(self) -> None:
@@ -36,6 +35,7 @@ class ArrayList:
         self.size = 0
         self.capacity = 3
         self.a_list = [None] * self.capacity
+
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
@@ -52,20 +52,20 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
-        """ Inserts an item into the list before the first item """
+        """ Inserts an item into the list before the first item. """
         self.insert(value, 0)
 
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int) -> None:
-        """ Inserts an item into the list at a specific location, not overwriting other items."""
+        """ Inserts an item into the list at a specific location, not overwriting other items. """
         if 0 > index or index > self.size:
             raise IndexOutOfBounds()
         
         self.resize()
         # Move all elements to the right, until the index
         for x in range(self.size, index, - 1):
-               self.a_list[x] = self.a_list[x - 1]
+            self.a_list[x] = self.a_list[x - 1]
         # Add the inserted value
         self.a_list[index] = value
         self.size += 1
@@ -117,7 +117,6 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def resize(self) -> None:
         """ Re-allocates memory for a larger array and populates it with the original array's items. """
-            
         if self.size == self.capacity:
             self.capacity *= 2
             temp = [None] * self.capacity
@@ -172,15 +171,21 @@ if __name__ == "__main__":
     # and make sure they are at this indent level
 
     arr_lis = ArrayList()
-    print(arr_lis)
-
+    print("\n   ALL CLEARED: ")
+    arr_lis.clear()
+    print("Size:      ", arr_lis.size)
+    print("Capacity:  ", arr_lis.capacity)
+    print("Array:     ", arr_lis, "\n")
 
     
+        
     # TEST: add to list
     arr_lis.append("append 1 HERE")
     print(arr_lis)
+
     arr_lis.prepend("prepend 1 HERE")
     print(arr_lis)
+
     arr_lis.append("append 2 HERE")
     print(arr_lis)
     # arr_lis.prepend("prepend 2 HERE")
@@ -190,9 +195,9 @@ if __name__ == "__main__":
     print(arr_lis)
     arr_lis.insert("insert at 3", 3)
     print(arr_lis)
-
     arr_lis.set_at("set at 0", 0)
     print(arr_lis)
+
 
 
     # TEST: get elements
@@ -203,10 +208,20 @@ if __name__ == "__main__":
     # x = arr_lis.get_last()
     # print(x)
 
-
     # TEST: remove
     arr_lis.remove_at(0)
     print("remove at 0: ", arr_lis)
+
+
+
+    print("\n   ALL CLEARED: ")
+    arr_lis.clear()
+    print("Size:      ", arr_lis.size)
+    print("Capacity:  ", arr_lis.capacity)
+    print("Array:     ", arr_lis, "\n")
+
+    arr_lis.insert(124, 0)
+    print(arr_lis)
 
 
 # set at 0, prepend 1 HERE, append 1 HERE, insert at 3, append 2 HERE
