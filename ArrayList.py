@@ -47,8 +47,13 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def get_first(self):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Returns the first item in the list.
+        Raises Empty() if the list is empty.
+        """
+		# the empty list
+        if not self.array:
+            raise Empty()
+        return self.array[0]
 
     #Time complexity: O(1) - constant time
     def get_at(self, index):
