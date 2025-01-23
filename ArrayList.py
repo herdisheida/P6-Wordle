@@ -1,75 +1,98 @@
-class ArrayList():
-
-    def __str__(self):
-        """
-        ○ Returns a string with all items from the array
-        ○ Have a comma and a space between them
-        ■ but no brackets ([ ]) around them
-        """
-        pass
-
-    def prepend(self, value):
-        """
-        Inserts an item into the list before the first item
-        """
-        pass
-
-
-    def insert(self, value, index):
-        """
-        ○ Inserts an item into the list at a specific location, not overwriting other items
-        ○ If the index is not within the current list, raise IndexOutOfBounds()
-        ○ It should be possible to add to the front and back of the list, and anywhere in between
-        """
-        pass
-
-    def append(self, value):
-        """
-        ○ Adds an item to the list after the last item
-        """
-        pass
-    
-    def set_at(self, value, index):
-        """○ Sets the value at a specific location to a specific value
-        ■ Overwrites the current value there
-        ■ If the index is not within the current list, raise IndexOutOfBounds()
-        """
+class IndexOutOfBounds(Exception):
     pass
 
+class NotFound(Exception):
+    pass
+
+class Empty(Exception):
+    pass
+
+class NotOrdered(Exception):
+    pass
+
+class ArrayList:
+    def __init__(self):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+    #Time complexity: O(n) - linear time in size of list
+    def __str__(self):
+        # TODO: remove 'pass' and implement functionality
+        return_string = ""
+        return return_string
+
+    #Time complexity: O(n) - linear time in size of list
+    def prepend(self, value):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+    #Time complexity: O(n) - linear time in size of list
+    def insert(self, value, index):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+    #Time complexity: O(1) - constant time
+    def append(self, value):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+    #Time complexity: O(1) - constant time
+    def set_at(self, value, index):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+    #Time complexity: O(1) - constant time
     def get_first(self):
-        """○ Returns the first value in the list
-        ○ If there are no items in the list, raise Empty()
-        """
+        # TODO: remove 'pass' and implement functionality
         pass
-    
+
+    #Time complexity: O(1) - constant time
     def get_at(self, index):
-        """
-        ○ Returns the value at a specific location in the list
-        ○ If the index is not within the current list, raise IndexOutOfBounds()
-        """
+        # TODO: remove 'pass' and implement functionality
         pass
 
+    #Time complexity: O(1) - constant time
     def get_last(self):
-        """
-        ○ Returns the last value in the list
-        ○ If there are no items in the list, raise Empty()
-        """
+        # TODO: remove 'pass' and implement functionality
         pass
 
+    #Time complexity: O(n) - linear time in size of list
     def resize(self):
-        """
-        ○ Re-allocates memory for a larger array and populates it with the original array’s items
-        """
+        # TODO: remove 'pass' and implement functionality
+        pass
 
+    #Time complexity: O(n) - linear time in size of list
     def remove_at(self, index):
-        """
-        ○ Removes from the list an item at a specific location
-        ○ If the index is not within the current list, raise IndexOutOfBounds()
-        """
+        # TODO: remove 'pass' and implement functionality
         pass
-        
+
+    #Time complexity: O(1) - constant time
     def clear(self):
-        """
-        ○ Removes all items from the list
-        """
+        # TODO: remove 'pass' and implement functionality
         pass
+
+    #Time complexity: O(n) - linear time in size of list
+    def insert_ordered(self, value):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+    #Time complexity: O(n) - linear time in size of list
+    #Time complexity: O(log n) - logarithmic time in size of list
+    def find(self, value):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+    #Time complexity: O(n) - linear time in size of list
+    def remove_value(self, value):
+        # TODO: remove 'pass' and implement functionality
+        pass
+
+
+if __name__ == "__main__":
+    pass
+    # add your tests here or in a different file.
+    # Do not add them outside this if statement
+    # and make sure they are at this indent level
+
+    arr_lis = ArrayList()
+    print(str(arr_lis))
