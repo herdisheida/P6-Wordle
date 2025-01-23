@@ -66,12 +66,13 @@ class ArrayList:
         # Resize the list
         self.resize()
 
-        # If the list is not was not empty
-
+        # If the list is not empty
         if self.size != 1:
+
             old_list = self.array # save this
+
             # Move all elements to the right by one
-            for x in range(self.size):
+            for x in range(self.size - 1):
                 self.array[x + 1] = old_list[x]
 
         # Set the new value as the first element
@@ -114,7 +115,12 @@ class ArrayList:
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
-        self.array += [value]
+
+        # Resize the list
+        self.resize()
+        # Add the new element
+        self.array[self.size - 1] = value
+
 
     #Time complexity: O(1) - constant time
     def set_at(self, value, index: int) -> None:
@@ -168,16 +174,17 @@ class ArrayList:
     def resize(self) -> None:
         """ Re-allocates memory for a larger array and populates it with the original array's items. """
         
-        # Increase the size of the list by 1
-        self.size += 1    
+        # Increase the list by 1
+        self.size += 1
+        # Make template for the new list
         new_array = [None] * (self.size)
 
-        
-        # If the list is not empty, copy elements from the old list to the new list
+        # If the list is not empty
         if self.array:
-            for x in range(self.size):
+            # Copy old elements to the template
+            for x in range(self.size - 1):
                 new_array[x] = self.array[x]
-
+                
         # Save the list
         self.array = new_array
 
@@ -244,11 +251,15 @@ if __name__ == "__main__":
     
 
     # testing - að setja eitthvað í listan, einhverstaðar
-    arr_lis.prepend("prepending HERE")
+    arr_lis.prepend("prepending 1 HERE")
+    # print(arr_lis)
+
+    arr_lis.append("appending 1 HERE")
     print(arr_lis)
 
-    # arr_lis.append("appending HERE")
+    arr_lis.prepend("prepending 2 HERE")
     # print(arr_lis)
+
     # arr_lis.set_at("set_at HERE", 1)
     # print(arr_lis)
 
@@ -257,3 +268,16 @@ if __name__ == "__main__":
 
 
     # print(str(arr_lis))
+
+
+
+
+
+
+
+#     print(f""" AFTER PREPENDING
+                  
+# self.size = {self.size}
+# self.array = {self.array}
+
+# """)
