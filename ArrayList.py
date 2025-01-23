@@ -39,59 +39,36 @@ class ArrayList:
         """ Returns a string with all items from the array.
         Have a comma and a space between them. """
         return_string = ""
-        index = 0
+        for x in range(self.size):
 
-
-        while index < self.size:
-
-            if index != self.size - 1:
-                # add the all elements, except the last one
-                return_string += f"{self.a_list[index]}" + ", "
+            if x == self.size - 1:
+                # add the last elelment
+                return_string += f"{self.a_list[x]}"
             else:
-                # add the last element
-                return_string += f"{self.a_list[index]}"
+                # add all the elements until the last one
+                return_string += f"{self.a_list[x]}"  + ", "
 
-            index += 1
+        return return_string if return_string else "The Array is empty" # HELP PA - á ég að skila tómum?
 
-        # return an empty string if the array is empty
-        # HELP PA - á ég að skila tómum?
-        return return_string if return_string else "The Array is empty"
 
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
         """ Inserts an item into the list before the first item """
         self.insert(value, 0)
-        self.size += 1
-
 
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int) -> None:
-        """ Inserts an item into the list at a specific location, not overwriting other items.
-        If the index is not within the current list, raise IndexOutOfBounds().
-        It should be possible to add to the front and back of the list, and anywhere in between """
-
+        """ Inserts an item into the list at a specific location, not overwriting other items."""
         if 0 > index or index >= self.size:
             raise IndexOutOfBounds()
         
-
-        # self.resize()
-        # new_list = [None] * self.size
-
-        # for x in range(self.size - 1):
-        #     # insert the new value
-        #     if x == index:
-        #         new_list[index] = value
-        #     elif x > index:
-        #         new_list[x +1] = self.a_list[x]
-        #     else:
-        #         new_list[x] = self.a_list[x]
-
-
         self.resize()
         for x in range(self.size, index, - 1):
+               # Move all elements to the right, until the index
                self.a_list[x] = self.a_list[x - 1]
         self.a_list[index] = value
+        self.size += 1
 
 
 
@@ -223,7 +200,7 @@ if __name__ == "__main__":
     # and make sure they are at this indent level
 
     arr_lis = ArrayList()
-    # print(arr_lis)
+    print(arr_lis)
 
     
     # TEST: add to list
@@ -241,11 +218,6 @@ if __name__ == "__main__":
     print(arr_lis)
     arr_lis.insert("insert at 3", 3)
     print(arr_lis)
-
-
-
-    # arr_lis.insert("insert at 4", 4)
-    # print(arr_lis)
 
 
     # arr_lis.set_at("set_at HERE", 1)
