@@ -18,7 +18,6 @@ class ArrayList:
         self.array = [0] * size if size else []
         self.size = size if size else 0 # len(array)
 
-
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
         """ Returns a string with all items from the array.
@@ -40,8 +39,10 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
         """ Inserts an item into the list before the first item """
-        # TODO: remove 'pass' and implement functionality
-        pass
+
+        new_array = [0] + self.array # má gera þetta HELP
+        new_array[0] = value
+        self.array = new_array
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index) -> None:
@@ -158,4 +159,9 @@ if __name__ == "__main__":
     # and make sure they are at this indent level
 
     arr_lis = ArrayList()
+
+    # test
+    arr_lis.prepend("HEllo World")
+
+
     print(str(arr_lis))
