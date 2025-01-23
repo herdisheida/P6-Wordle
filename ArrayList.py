@@ -14,7 +14,7 @@ class NotOrdered(Exception):
 class ArrayList:
     def __init__(self, size: int = None) -> None:
         """ Initializes the array list """
-        size = 4 # HELP
+        size = 5 # HELP
         self.array = [0] * size if size else []
         self.size = size if size else 0 # len(array)
 
@@ -45,23 +45,30 @@ class ArrayList:
         self.array = new_array
 
     #Time complexity: O(n) - linear time in size of list
-    def insert(self, value, index) -> None:
+    def insert(self, value, index: int) -> None:
         # TODO: remove 'pass' and implement functionality
         pass
 
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
-        new_array = self.array + ["KEEP_FOR_NOW"] # má gera þetta HELP
-        index = new_array.index("KEEP_FOR_NOW")
+        new_array = self.array + ["GEYMA"] # má gera þetta HELP
+        index = new_array.index("GEYMA")
         new_array[index] = value
         self.array = new_array
 
 
     #Time complexity: O(1) - constant time
-    def set_at(self, value, index) -> None:
-        # TODO: remove 'pass' and implement functionality
-        pass
+    def set_at(self, value, index: int) -> None:
+        """ Sets the value at a specific location to a specific value.
+        Overwrites the current value there.
+        If the index is not within the current list, raise IndexOutOfBounds(). """
+
+        try: # má þetta HELP - lookar too easy...
+            self.array[index] = value
+        except :
+            raise IndexOutOfBounds()
+
 
     #Time complexity: O(1) - constant time
     def get_first(self) -> int:
@@ -73,7 +80,7 @@ class ArrayList:
         return self.array[0]
 
     #Time complexity: O(1) - constant time
-    def get_at(self, index) -> int:
+    def get_at(self, index: int) -> int:
         """ Returns the item at index.
         Raises IndexOutOfBounds() if index is invalid. """
 
@@ -108,7 +115,7 @@ class ArrayList:
         pass
 
     #Time complexity: O(n) - linear time in size of list
-    def remove_at(self, index) -> None:
+    def remove_at(self, index: int) -> None:
         """ Removes from the list an item at a specific location.
         If the index is not within the current list, raise IndexOutOfBounds(). """
         # TODO: remove 'pass' and implement functionality
@@ -163,10 +170,16 @@ if __name__ == "__main__":
     # and make sure they are at this indent level
 
     arr_lis = ArrayList()
+    print(arr_lis)
+
 
     # test
-    arr_lis.prepend("PREPENDING HERE")
-    arr_lis.append("APPENDING HERE")
+    arr_lis.prepend("prepending HERE")
+    print(arr_lis)
+    arr_lis.append("appending HERE")
+    print(arr_lis)
+    arr_lis.set_at("set_at HERE", 1)
+    print(arr_lis)
 
 
-    print(str(arr_lis))
+    # print(str(arr_lis))
