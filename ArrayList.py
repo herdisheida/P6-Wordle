@@ -138,9 +138,13 @@ class ArrayList:
     def get_last(self) -> int:
         """ Returns the last item in the list.
         Raises Empty() if the list is empty. """
-        # how do i do this if i'm not allowed to use list[-a] ? - spyrja TA
-        # TODO: remove 'pass' and implement functionality
-        pass
+
+        # List is empty
+        if self.size == 0:
+            raise Empty()
+        
+        # return the last element
+        return self.array[self.size - 1]
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self) -> None:
