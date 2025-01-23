@@ -1,3 +1,6 @@
+import re
+
+
 class IndexOutOfBounds(Exception):
     pass
 
@@ -40,9 +43,10 @@ class ArrayList:
         return_string = ""
         index = 0
 
-        while index < self.size - 1:
 
-            if index != self.size:
+        while index < self.size:
+
+            if index != self.size - 1:
                 # add the all elements, except the last one
                 return_string += f"{self.array[index]}" + ", "
             else:
@@ -58,7 +62,21 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
         """ Inserts an item into the list before the first item """
-        self.array = [value] + self.array # má gera þetta HELP - lookar of létt
+
+        # Resize the list
+        self.resize()
+
+        # If the list is not was not empty
+
+        if self.size != 1:
+            old_list = self.array # save this
+            # Move all elements to the right by one
+            for x in range(self.size):
+                self.array[x + 1] = old_list[x]
+
+        # Set the new value as the first element
+        self.array[0] = value
+
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int) -> None:
@@ -151,7 +169,7 @@ class ArrayList:
         """ Re-allocates memory for a larger array and populates it with the original array's items. """
         
         # Increase the size of the list by 1
-        self.size += 1
+        self.size += 1    
         new_array = [None] * (self.size)
 
         
@@ -160,7 +178,7 @@ class ArrayList:
             for x in range(self.size):
                 new_array[x] = self.array[x]
 
-        # Set the new list as the class list
+        # Save the list
         self.array = new_array
 
 
@@ -221,15 +239,14 @@ if __name__ == "__main__":
 
     arr_lis = ArrayList()
     print(arr_lis)
-    print("print the list like normal", arr_lis.array)
 
-    arr_lis.resize()
-    print(arr_lis)
-
+    
+    
 
     # testing - að setja eitthvað í listan, einhverstaðar
-    # arr_lis.prepend("prepending HERE")
-    # print(arr_lis)
+    arr_lis.prepend("prepending HERE")
+    print(arr_lis)
+
     # arr_lis.append("appending HERE")
     # print(arr_lis)
     # arr_lis.set_at("set_at HERE", 1)
