@@ -50,15 +50,32 @@ class ArrayList:
         """ Returns the first item in the list.
         Raises Empty() if the list is empty.
         """
-		# the empty list
         if not self.array:
             raise Empty()
         return self.array[0]
 
     #Time complexity: O(1) - constant time
     def get_at(self, index):
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Returns the item at index.
+        Raises IndexOutOfBounds() if index is invalid. """
+
+        # List is empty
+        if not self.array():
+            raise IndexOutOfBounds()
+
+        # Index is a negative num
+        if index < 0:
+            raise IndexOutOfBounds()
+        
+
+        # HELP - má ég bara gera þetta
+        try:
+            return self.array[index]
+        except :
+            raise IndexOutOfBounds         
+        
+
+         
 
     #Time complexity: O(1) - constant time
     def get_last(self):
