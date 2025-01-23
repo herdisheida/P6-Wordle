@@ -68,15 +68,14 @@ class ArrayList:
 
         # If the list is not empty
         if self.size != 1:
-            new_array = [None] * self.size
+            new_list = [None] * self.size
 
             # Move all elements to the right by one
             for x in range(self.size - 1):
-
-                new_array[x + 1] = self.a_list[x]
+                new_list[x + 1] = self.a_list[x]
                 
             # Set the shifted list as OUR list
-            self.a_list = new_array
+            self.a_list = new_list
 
         # Set the new value as the first element
         self.a_list[0] = value
@@ -89,32 +88,33 @@ class ArrayList:
         If the index is not within the current list, raise IndexOutOfBounds().
         It should be possible to add to the front and back of the list, and anywhere in between """
 
-        # the empty list
-        if not self.a_list:
-            self.a_list = [value]
+        if 0 > index or index >= self.size:
+            raise IndexOutOfBounds()
 
-        # adding in the front
-        if index == 0:
-            self.prepend(value)
-        
-        # adding at the back
-        # if index == self._get_array_length() - 1:
-        #     self.append(value)
+        self.resize()
+        new_list = [None] * self.size
 
-        # adding in between
-        # try:
-        #     # make template for new list
-        #     new_array = [0] * (self.size + 1)
+        for x in range(self.size - 1):
+            # insert the new value
+            if x == index:
+                new_list[index] = value
+            elif x > index:
+                new_list[x +] = self.a_list[x]
+            else:
+                new_list[x] = self.a_list[x]
 
-        #     # insert each element into the new_array, once at a time
-        #     for x in range(self.a_list_length): # má þetta ? EXTRA HELP TA - ég er ekki að nota for x in list, en er að nota lengdinu á listanum...
-        #         # insert the new element
-        #         if x == index:
-        #             new_array[x] = value
-        #         new_array[x] = self.a_list[x]
 
-        # except :
-        #     raise IndexOutOfBounds() # vtk en hvor ég negi nota try: except: HELP
+
+        print(f""" AFTER PREPENDING
+                  
+self.size = {self.size}
+self.a_list = {self.a_list}
+
+""")
+
+        self.a_list = new_list
+
+
 
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
@@ -181,16 +181,16 @@ class ArrayList:
         # Increase the list by 1
         self.size += 1
         # Make template for the new list
-        new_array = [None] * (self.size)
+        new_list = [None] * (self.size)
 
         # If the list is not empty
         if self.a_list:
             # Copy old elements to the template
             for x in range(self.size - 1):
-                new_array[x] = self.a_list[x]
+                new_list[x] = self.a_list[x]
                 
         # Save the list
-        self.a_list = new_array
+        self.a_list = new_list
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -225,19 +225,19 @@ class ArrayList:
 
 
 
-    def _get_array_length(self, index=0) -> int: # MIGHT DELETE LATER
-        """ Get the length of the array """
+    # def _get_array_length(self, index=0) -> int: # MIGHT DELETE LATER
+    #     """ Get the length of the array """
 
-        # the empty list
-        if not self.a_list:
-            return 0
+    #     # the empty list
+    #     if not self.a_list:
+    #         return 0
         
-        try:
-            value_at_index = self.a_list[index]
-            return self._get_array_length(index + 1)
-        except IndexError:
-            # stop calling recoursively, when index gets out of range
-            return index
+    #     try:
+    #         value_at_index = self.a_list[index]
+    #         return self._get_array_length(index + 1)
+    #     except IndexError:
+    #         # stop calling recoursively, when index gets out of range
+    #         return index
 
 
 
@@ -249,25 +249,30 @@ if __name__ == "__main__":
     # and make sure they are at this indent level
 
     arr_lis = ArrayList()
-    print(arr_lis)
+    # print(arr_lis)
 
     
-    
-
     # TEST: add to list
 
     arr_lis.append("append 1 HERE")
-    print(arr_lis)
+    # print(arr_lis)
 
     arr_lis.prepend("prepend 1 HERE")
-    print(arr_lis)
+    # print(arr_lis)
 
     arr_lis.append("append 2 HERE")
-    print(arr_lis)
+    # print(arr_lis)
 
     arr_lis.prepend("prepend 2 HERE")
+    # print(arr_lis)
+
+
+    arr_lis.insert("insert at 2", 2)
     print(arr_lis)
-    
+
+    # arr_lis.insert("insert at 4", 4)
+    # print(arr_lis)
+
 
     # arr_lis.set_at("set_at HERE", 1)
     # print(arr_lis)
