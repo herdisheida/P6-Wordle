@@ -18,8 +18,6 @@ class ArrayList:
         self.array = [0] * size if size else []
         self.size = size if size else 0 # len(array)
 
-        self.array_length = self._get_array_length() # má þetta vera hér HELP
-
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
@@ -27,6 +25,8 @@ class ArrayList:
         Have a comma and a space between them. """
         return_string = ""
         index = 0
+        self.array_length = self._get_array_length() # má þetta vera hér HELP
+
         while index < self.array_length - 1:
 
             if index != self.array_length:
@@ -57,7 +57,7 @@ class ArrayList:
             self.prepend(value)
         
         # adding at the back
-        # if index == self.array_length - 1:
+        # if index == self._get_array_length() - 1:
         #     self.append(value)
 
         # adding in between
@@ -78,7 +78,14 @@ class ArrayList:
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
-        self.array += [value]
+
+        """ Adds an item to the list after the last item. """
+        new_array = self.array + ["KEEP_FOR_NOW"] # má gera þetta HELP
+        index = new_array.index("KEEP_FOR_NOW")
+        new_array[index] = value
+        self.array = new_array
+
+        # self.array += [value]
 
 
     #Time complexity: O(1) - constant time
