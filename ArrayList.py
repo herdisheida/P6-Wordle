@@ -96,18 +96,9 @@ class ArrayList:
 
     #Time complexity: O(1) - constant time
     def get_at(self, index: int) -> int:
-        """ Returns the item at index.
-        Raises IndexOutOfBounds() if index is invalid. """
-
-        # List is empty
-        if self.size == 0:
+        """ Returns the item at index. """
+        if index < 0 or index >= self.size or self.size == 0:
             raise IndexOutOfBounds()
-
-        # Index is out of bounds; negatie or bigger than the size of the list
-        if index < 0 or index >= self.size:
-            raise IndexOutOfBounds()
-
-        # return the element at the index
         return self.a_list[index]
 
     #Time complexity: O(1) - constant time
@@ -218,6 +209,10 @@ if __name__ == "__main__":
 
 
     # TEST: get elements
+    x = arr_lis.get_first()
+    print(x)
+
+
     x = arr_lis.get_at(0)
     print(x)
 
