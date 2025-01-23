@@ -150,14 +150,17 @@ class ArrayList:
     def resize(self) -> None:
         """ Re-allocates memory for a larger array and populates it with the original array's items. """
         
-        # make a new array with the size of the original array + 1
-        new_array = [None] * (self.size + 1)
+        # Increase the size of the list by 1
+        self.size += 1
+        new_array = [None] * (self.size)
 
-        # insert each element into the new_array
-        for x in range(self.size):
-            new_array[x] = self.array[x]
+        
+        # If the list is not empty, copy elements from the old list to the new list
+        if self.array:
+            for x in range(self.size):
+                new_array[x] = self.array[x]
 
-        # set the new_array as the array
+        # Set the new list as the class list
         self.array = new_array
 
 
