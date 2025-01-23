@@ -40,10 +40,7 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
         """ Inserts an item into the list before the first item """
-
-        new_array = [0] + self.array # má gera þetta HELP
-        new_array[0] = value
-        self.array = new_array
+        self.array = [value] + self.array # má gera þetta HELP - lookar of létt
 
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int) -> None:
