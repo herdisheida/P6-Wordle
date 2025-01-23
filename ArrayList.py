@@ -19,18 +19,19 @@ class NotOrdered(Exception):
 # HELP : basic hjálp
 # EXTRA HELP TA : spyrja kennara
 # HELP PA : spyrja félaga
+# DELETE LATER: eyða seinna
 
+
+
+# ÆTLA NOTA capacity - 
 
 class ArrayList:
-    def __init__(self, capacity: int = 10) -> None:
+    def __init__(self) -> None:
         """ Initializes the array list """
-        self.array = [None] * capacity # default capacity is 10
 
-        # how manu elements the array can hold
-        self.capacity = capacity if capacity else 0
-        # how many elements are in the array
+        # default is an empty list
         self.size = 0
-
+        self.array = [None] * self.size
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
@@ -133,7 +134,6 @@ class ArrayList:
         # return the element at the index
         return self.array[index]
 
-
     #Time complexity: O(1) - constant time
     def get_last(self) -> int:
         """ Returns the last item in the list.
@@ -149,6 +149,7 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def resize(self) -> None:
         """ Re-allocates memory for a larger array and populates it with the original array's items. """
+        
         # make a new array with the size of the original array + 1
         new_array = [None] * (self.size + 1)
 
@@ -192,7 +193,7 @@ class ArrayList:
 
 
 
-    def _get_array_length(self, index=0) -> int:
+    def _get_array_length(self, index=0) -> int: # MIGHT DELETE LATER
         """ Get the length of the array """
 
         # the empty list
@@ -215,9 +216,9 @@ if __name__ == "__main__":
     # Do not add them outside this if statement
     # and make sure they are at this indent level
 
-    arr_lis = ArrayList(5) # 5 is the size of the list - vtk á ég að hardkóða? HELP EDIT LATER
+    arr_lis = ArrayList()
     print(arr_lis)
-    print(arr_lis.array)
+    print("print the list like normal", arr_lis.array)
 
     arr_lis.resize()
     print(arr_lis)
