@@ -1,6 +1,3 @@
-import re
-
-
 class IndexOutOfBounds(Exception):
     pass
 
@@ -34,7 +31,8 @@ class ArrayList:
 
         # Default is an empty list
         self.size = 0
-        self.a_list = [None] * self.size
+        self.capacity = 3
+        self.a_list = [None] * self.capacity
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
@@ -62,23 +60,8 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def prepend(self, value) -> None:
         """ Inserts an item into the list before the first item """
-
-        # Resize the list
-        self.resize()
-
-        # If the list is not empty
-        if self.size != 1:
-            new_list = [None] * self.size
-
-            # Move all elements to the right by one
-            for x in range(self.size - 1):
-                new_list[x + 1] = self.a_list[x]
-                
-            # Set the shifted list as OUR list
-            self.a_list = new_list
-
-        # Set the new value as the first element
-        self.a_list[0] = value
+        self.insert(value, 0)
+        self.size += 1
 
 
 
@@ -90,29 +73,25 @@ class ArrayList:
 
         if 0 > index or index >= self.size:
             raise IndexOutOfBounds()
+        
+
+        # self.resize()
+        # new_list = [None] * self.size
+
+        # for x in range(self.size - 1):
+        #     # insert the new value
+        #     if x == index:
+        #         new_list[index] = value
+        #     elif x > index:
+        #         new_list[x +1] = self.a_list[x]
+        #     else:
+        #         new_list[x] = self.a_list[x]
+
 
         self.resize()
-        new_list = [None] * self.size
-
-        for x in range(self.size - 1):
-            # insert the new value
-            if x == index:
-                new_list[index] = value
-            elif x > index:
-                new_list[x +] = self.a_list[x]
-            else:
-                new_list[x] = self.a_list[x]
-
-
-
-        print(f""" AFTER PREPENDING
-                  
-self.size = {self.size}
-self.a_list = {self.a_list}
-
-""")
-
-        self.a_list = new_list
+        for x in range(self.size, index, - 1):
+               self.a_list[x] = self.a_list[x - 1]
+        self.a_list[index] = value
 
 
 
@@ -120,10 +99,9 @@ self.a_list = {self.a_list}
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
 
-        # Resize the list
-        self.resize()
-        # Add the new element
-        self.a_list[self.size - 1] = value
+        self.resize() # Resize the list
+        self.a_list[self.size] = value # Add the new element
+        self.size += 1
 
 
     #Time complexity: O(1) - constant time
@@ -177,20 +155,16 @@ self.a_list = {self.a_list}
     #Time complexity: O(n) - linear time in size of list
     def resize(self) -> None:
         """ Re-allocates memory for a larger array and populates it with the original array's items. """
-        
-        # Increase the list by 1
-        self.size += 1
-        # Make template for the new list
-        new_list = [None] * (self.size)
+            
+        if self.size == self.capacity:
+            self.capacity *= 2
+            temp = [None] * self.capacity
 
-        # If the list is not empty
-        if self.a_list:
-            # Copy old elements to the template
-            for x in range(self.size - 1):
-                new_list[x] = self.a_list[x]
-                
-        # Save the list
-        self.a_list = new_list
+            for x in range(self.size):
+                temp[x] = self.a_list[x]
+            self.a_list = temp
+
+
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -255,20 +229,20 @@ if __name__ == "__main__":
     # TEST: add to list
 
     arr_lis.append("append 1 HERE")
-    # print(arr_lis)
-
-    arr_lis.prepend("prepend 1 HERE")
-    # print(arr_lis)
-
-    arr_lis.append("append 2 HERE")
-    # print(arr_lis)
-
-    arr_lis.prepend("prepend 2 HERE")
-    # print(arr_lis)
-
-
-    arr_lis.insert("insert at 2", 2)
     print(arr_lis)
+    arr_lis.prepend("prepend 1 HERE")
+    print(arr_lis)
+    arr_lis.append("append 2 HERE")
+    print(arr_lis)
+    arr_lis.prepend("prepend 2 HERE")
+    print(arr_lis)
+
+    arr_lis.insert("insert at 0", 0)
+    print(arr_lis)
+    arr_lis.insert("insert at 3", 3)
+    print(arr_lis)
+
+
 
     # arr_lis.insert("insert at 4", 4)
     # print(arr_lis)
