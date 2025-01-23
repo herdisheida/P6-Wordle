@@ -32,9 +32,9 @@ class ArrayList:
     def __init__(self) -> None:
         """ Initializes the array list """
 
-        # default is an empty list
+        # Default is an empty list
         self.size = 0
-        self.array = [None] * self.size
+        self.a_list = [None] * self.size
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
@@ -48,10 +48,10 @@ class ArrayList:
 
             if index != self.size - 1:
                 # add the all elements, except the last one
-                return_string += f"{self.array[index]}" + ", "
+                return_string += f"{self.a_list[index]}" + ", "
             else:
                 # add the last element
-                return_string += f"{self.array[index]}"
+                return_string += f"{self.a_list[index]}"
 
             index += 1
 
@@ -68,15 +68,19 @@ class ArrayList:
 
         # If the list is not empty
         if self.size != 1:
-
-            old_list = self.array # save this
+            new_array = [None] * self.size
 
             # Move all elements to the right by one
             for x in range(self.size - 1):
-                self.array[x + 1] = old_list[x]
+
+                new_array[x + 1] = self.a_list[x]
+                
+            # Set the shifted list as OUR list
+            self.a_list = new_array
 
         # Set the new value as the first element
-        self.array[0] = value
+        self.a_list[0] = value
+
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -86,8 +90,8 @@ class ArrayList:
         It should be possible to add to the front and back of the list, and anywhere in between """
 
         # the empty list
-        if not self.array:
-            self.array = [value]
+        if not self.a_list:
+            self.a_list = [value]
 
         # adding in the front
         if index == 0:
@@ -103,11 +107,11 @@ class ArrayList:
         #     new_array = [0] * (self.size + 1)
 
         #     # insert each element into the new_array, once at a time
-        #     for x in range(self.array_length): # má þetta ? EXTRA HELP TA - ég er ekki að nota for x in list, en er að nota lengdinu á listanum...
+        #     for x in range(self.a_list_length): # má þetta ? EXTRA HELP TA - ég er ekki að nota for x in list, en er að nota lengdinu á listanum...
         #         # insert the new element
         #         if x == index:
         #             new_array[x] = value
-        #         new_array[x] = self.array[x]
+        #         new_array[x] = self.a_list[x]
 
         # except :
         #     raise IndexOutOfBounds() # vtk en hvor ég negi nota try: except: HELP
@@ -119,7 +123,7 @@ class ArrayList:
         # Resize the list
         self.resize()
         # Add the new element
-        self.array[self.size - 1] = value
+        self.a_list[self.size - 1] = value
 
 
     #Time complexity: O(1) - constant time
@@ -129,7 +133,7 @@ class ArrayList:
         If the index is not within the current list, raise IndexOutOfBounds(). """
 
         try: # má þetta HELP - lookar too easy...
-            self.array[index] = value
+            self.a_list[index] = value
         except :
             raise IndexOutOfBounds()
 
@@ -138,9 +142,9 @@ class ArrayList:
         """ Returns the first item in the list.
         Raises Empty() if the list is empty.
         """
-        if not self.array:
+        if not self.a_list:
             raise Empty()
-        return self.array[0]
+        return self.a_list[0]
 
     #Time complexity: O(1) - constant time
     def get_at(self, index: int) -> int:
@@ -156,7 +160,7 @@ class ArrayList:
             raise IndexOutOfBounds()
 
         # return the element at the index
-        return self.array[index]
+        return self.a_list[index]
 
     #Time complexity: O(1) - constant time
     def get_last(self) -> int:
@@ -168,7 +172,7 @@ class ArrayList:
             raise Empty()
         
         # return the last element
-        return self.array[self.size - 1]
+        return self.a_list[self.size - 1]
 
     #Time complexity: O(n) - linear time in size of list
     def resize(self) -> None:
@@ -180,13 +184,13 @@ class ArrayList:
         new_array = [None] * (self.size)
 
         # If the list is not empty
-        if self.array:
+        if self.a_list:
             # Copy old elements to the template
             for x in range(self.size - 1):
-                new_array[x] = self.array[x]
+                new_array[x] = self.a_list[x]
                 
         # Save the list
-        self.array = new_array
+        self.a_list = new_array
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -199,7 +203,7 @@ class ArrayList:
     #Time complexity: O(1) - constant time
     def clear(self) -> None:
         """ Removes  all items from the list. """
-        self.array = []
+        self.a_list = []
         # TODO: remove 'pass' and implement functionality
         pass
 
@@ -225,11 +229,11 @@ class ArrayList:
         """ Get the length of the array """
 
         # the empty list
-        if not self.array:
+        if not self.a_list:
             return 0
         
         try:
-            value_at_index = self.array[index]
+            value_at_index = self.a_list[index]
             return self._get_array_length(index + 1)
         except IndexError:
             # stop calling recoursively, when index gets out of range
@@ -250,15 +254,20 @@ if __name__ == "__main__":
     
     
 
-    # testing - að setja eitthvað í listan, einhverstaðar
-    arr_lis.prepend("prepending 1 HERE")
-    # print(arr_lis)
+    # TEST: add to list
 
-    arr_lis.append("appending 1 HERE")
+    arr_lis.append("append 1 HERE")
     print(arr_lis)
 
-    arr_lis.prepend("prepending 2 HERE")
-    # print(arr_lis)
+    arr_lis.prepend("prepend 1 HERE")
+    print(arr_lis)
+
+    arr_lis.append("append 2 HERE")
+    print(arr_lis)
+
+    arr_lis.prepend("prepend 2 HERE")
+    print(arr_lis)
+    
 
     # arr_lis.set_at("set_at HERE", 1)
     # print(arr_lis)
@@ -278,6 +287,6 @@ if __name__ == "__main__":
 #     print(f""" AFTER PREPENDING
                   
 # self.size = {self.size}
-# self.array = {self.array}
+# self.a_list = {self.a_list}
 
 # """)
