@@ -1,3 +1,6 @@
+from curses import A_ALTCHARSET
+
+
 class IndexOutOfBounds(Exception):
     pass
 
@@ -60,9 +63,10 @@ class ArrayList:
             raise IndexOutOfBounds()
         
         self.resize()
+        # Move all elements to the right, until the index
         for x in range(self.size, index, - 1):
-               # Move all elements to the right, until the index
                self.a_list[x] = self.a_list[x - 1]
+        # Add the inserted value
         self.a_list[index] = value
         self.size += 1
 
@@ -123,21 +127,23 @@ class ArrayList:
             self.a_list = temp
 
 
-
-
     #Time complexity: O(n) - linear time in size of list
     def remove_at(self, index: int) -> None:
-        """ Removes from the list an item at a specific location.
-        If the index is not within the current list, raise IndexOutOfBounds(). """
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Removes from the list an item at a specific location. """
+        if 0 > index or index >= self.size:
+            raise IndexOutOfBounds()
+        
+        # Move all elements to the the left (overwriting the index)
+        for x in range(index, self.size - 1):
+            self.a_list[x] = self.a_list[x + 1]
+        self.size -= 1
+
 
     #Time complexity: O(1) - constant time
     def clear(self) -> None:
         """ Removes  all items from the list. """
-        self.a_list = []
-        # TODO: remove 'pass' and implement functionality
-        pass
+        self.size = 0
+
 
     #Time complexity: O(n) - linear time in size of list
     def insert_ordered(self, value) -> None:
@@ -155,21 +161,6 @@ class ArrayList:
         # TODO: remove 'pass' and implement functionality
         pass
 
-
-
-    # def _get_array_length(self, index=0) -> int: # MIGHT DELETE LATER
-    #     """ Get the length of the array """
-
-    #     # the empty list
-    #     if not self.a_list:
-    #         return 0
-        
-    #     try:
-    #         value_at_index = self.a_list[index]
-    #         return self._get_array_length(index + 1)
-    #     except IndexError:
-    #         # stop calling recoursively, when index gets out of range
-    #         return index
 
 
 
@@ -200,21 +191,26 @@ if __name__ == "__main__":
     arr_lis.insert("insert at 3", 3)
     print(arr_lis)
 
-
     arr_lis.set_at("set at 0", 0)
     print(arr_lis)
 
 
     # TEST: get elements
-    x = arr_lis.get_first()
-    print(x)
+    # x = arr_lis.get_first()
+    # print(x)
+    # x = arr_lis.get_at(0)
+    # print(x)
+    # x = arr_lis.get_last()
+    # print(x)
 
-    x = arr_lis.get_at(0)
-    print(x)
 
-    x = arr_lis.get_last()
-    print(x)
+    # TEST: remove
+    arr_lis.remove_at(0)
+    print("remove at 0: ", arr_lis)
 
+
+# set at 0, prepend 1 HERE, append 1 HERE, insert at 3, append 2 HERE
+# set at 0, prepend 1 HERE, append 1 HERE, insert at 3, append 2 HERE
 
 
     # arr_lis.set_at("set_at HERE", 1)
