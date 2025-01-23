@@ -10,10 +10,12 @@ class Empty(Exception):
 class NotOrdered(Exception):
     pass
 
+
 class ArrayList:
-    def __init__(self):
-        # TODO: remove 'pass' and implement functionality
-        pass
+    def __init__(self, array=None):
+        """ Initializes the array list """
+        self.array = [] if array == None else array
+
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self):
