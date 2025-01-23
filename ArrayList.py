@@ -40,14 +40,10 @@ class ArrayList:
         Have a comma and a space between them. """
         return_string = ""
         for x in range(self.size):
-
             if x == self.size - 1:
-                # add the last elelment
                 return_string += f"{self.a_list[x]}"
             else:
-                # add all the elements until the last one
                 return_string += f"{self.a_list[x]}"  + ", "
-
         return return_string if return_string else "The Array is empty" # HELP PA - á ég að skila tómum?
 
 
@@ -60,7 +56,7 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     def insert(self, value, index: int) -> None:
         """ Inserts an item into the list at a specific location, not overwriting other items."""
-        if 0 > index or index >= self.size:
+        if 0 > index or index > self.size:
             raise IndexOutOfBounds()
         
         self.resize()
@@ -71,11 +67,9 @@ class ArrayList:
         self.size += 1
 
 
-
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
-
         self.resize() # Resize the list
         self.a_list[self.size] = value # Add the new element
         self.size += 1
@@ -84,22 +78,21 @@ class ArrayList:
     #Time complexity: O(1) - constant time
     def set_at(self, value, index: int) -> None:
         """ Sets the value at a specific location to a specific value.
-        Overwrites the current value there.
-        If the index is not within the current list, raise IndexOutOfBounds(). """
-
-        try: # má þetta HELP - lookar too easy...
-            self.a_list[index] = value
-        except :
+        Overwrites the current value there."""
+        if 0 > index or index >= self.size:
             raise IndexOutOfBounds()
+        self.a_list[index] = value
+
 
     #Time complexity: O(1) - constant time
     def get_first(self) -> int:
         """ Returns the first item in the list.
         Raises Empty() if the list is empty.
         """
-        if not self.a_list:
+        if self.size == 0:
             raise Empty()
         return self.a_list[0]
+    
 
     #Time complexity: O(1) - constant time
     def get_at(self, index: int) -> int:
@@ -204,20 +197,30 @@ if __name__ == "__main__":
 
     
     # TEST: add to list
-
     arr_lis.append("append 1 HERE")
     print(arr_lis)
     arr_lis.prepend("prepend 1 HERE")
     print(arr_lis)
     arr_lis.append("append 2 HERE")
     print(arr_lis)
-    arr_lis.prepend("prepend 2 HERE")
-    print(arr_lis)
+    # arr_lis.prepend("prepend 2 HERE")
+    # print(arr_lis)
 
     arr_lis.insert("insert at 0", 0)
     print(arr_lis)
     arr_lis.insert("insert at 3", 3)
     print(arr_lis)
+
+
+    arr_lis.set_at("set at 0", 0)
+    print(arr_lis)
+
+
+    # TEST: get elements
+    
+
+
+
 
 
     # arr_lis.set_at("set_at HERE", 1)
