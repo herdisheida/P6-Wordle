@@ -146,8 +146,28 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def insert_ordered(self, value) -> None:
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Insert a value so that the list retains ordering. """
+
+        # the empty list, or if the value is smaller than the first element
+        if self.size == 0 or value < self.a_list[0]:
+            self.insert(value, 0)
+            return
+
+        # check the last element
+        if value > self.a_list[self.size - 1]:
+            self.insert(value, self.size)
+            return
+
+        # check the values in between two values
+        for x in range(self.size - 1):
+            if self.a_list[x] <= value < self.a_list[x + 1]:
+                self.insert(value, x + 1)
+                break
+
+
+
+
+
 
     #Time complexity: O(n) - linear time in size of list
     #Time complexity: O(log n) - logarithmic time in size of list
@@ -215,26 +235,31 @@ if __name__ == "__main__":
 
 
 
-    print("\n   ALL CLEARED: ")
-    arr_lis.clear()
-    print("Size:      ", arr_lis.size)
-    print("Capacity:  ", arr_lis.capacity)
-    print("Array:     ", arr_lis, "\n")
+    # print("\n   ALL CLEARED: ")
+    # arr_lis.clear()
+    # print("Size:      ", arr_lis.size)
+    # print("Capacity:  ", arr_lis.capacity)
+    # print("Array:     ", arr_lis, "\n")
 
-    arr_lis.insert(124, 0)
-    print(arr_lis)
-
-
-
-    arr_lis.set_at("set_at HERE", 0)
-    print(arr_lis)
-
-    arr_lis.insert("inserting HERE", 0)
-    print(arr_lis)
+    arr_lis1 = ArrayList()
+    arr_lis1.insert(124, 0)
+    print(arr_lis1)
+    arr_lis1.insert(256, 1)
+    print(arr_lis1)
 
 
-    # print(str(arr_lis))
+    # TEST : insert_ordered
+    arr_lis1.insert_ordered(10)
+    print(arr_lis1)
 
+    arr_lis1.insert_ordered(562)
+    print(arr_lis1)
+
+    arr_lis1.insert_ordered(200)
+    print(arr_lis1)
+
+    arr_lis1.insert_ordered(200)
+    print(arr_lis1)
 
 
 

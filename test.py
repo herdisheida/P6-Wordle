@@ -76,7 +76,7 @@ def main():
     else:
         assert False, "Expected IndexOutOfBounds exception"
 
-    print("All tests passed!")
+    print("All tests passed! :D")
 
 if __name__ == "__main__":
     main()
