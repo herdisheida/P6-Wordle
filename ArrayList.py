@@ -165,10 +165,6 @@ class ArrayList:
                 break
 
 
-
-
-
-
     #Time complexity: O(n) - linear time in size of list
     #Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value) -> int:

@@ -76,6 +76,31 @@ def main():
     else:
         assert False, "Expected IndexOutOfBounds exception"
 
+    # Tests for insert_ordered
+    arr_lis.clear()
+    arr_lis.insert_ordered(10)
+    assert str(arr_lis) == "10", "Failed to insert into empty list"
+
+    arr_lis.insert_ordered(5)
+    assert str(arr_lis) == "5, 10", "Failed to insert at the beginning"
+
+    arr_lis.insert_ordered(15)
+    assert str(arr_lis) == "5, 10, 15", "Failed to insert at the end"
+
+    arr_lis.insert_ordered(12)
+    assert str(arr_lis) == "5, 10, 12, 15", "Failed to insert in the middle"
+
+    arr_lis.insert_ordered(10)
+    assert str(arr_lis) == "5, 10, 10, 12, 15", "Failed to insert duplicate value"
+
+    # Test: Insert when size == capacity
+    arr_lis.insert_ordered(20)
+    arr_lis.insert_ordered(25)
+    arr_lis.insert_ordered(30)
+    assert arr_lis.capacity > 3, "Failed to resize when capacity is reached"
+    arr_lis.insert_ordered(1)
+    assert str(arr_lis) == "1, 5, 10, 10, 12, 15, 20, 25, 30", "Failed to insert after resizing"
+
     print("All tests passed! :D")
 
 if __name__ == "__main__":
