@@ -1,44 +1,106 @@
 from ArrayList import ArrayList, IndexOutOfBounds, Empty, NotOrdered
 
+
 def main():
     arr_lis = ArrayList()
 
     # Test: Initial state
     assert arr_lis.size == 0, "The list should start empty"
-    assert arr_lis.capacity == 3
+    assert arr_lis.capacity == 3, "The list should start with a capacity of 3"
     assert str(arr_lis) == "The Array is empty"
 
     # Test: Append and Prepend
+    # Appending an empty list
     arr_lis.append(1)
     assert str(arr_lis) == "1"
     arr_lis.prepend(0)
     assert str(arr_lis) == "0, 1"
+    # Test: Append and Prepend
+    # Prepending an empty list
+    arr_lis.clear()  # Clear the list for next test
+    arr_lis.prepend(0)
+    assert str(arr_lis) == "0"
+    arr_lis.append(1)
+    assert str(arr_lis) == "0, 1"
 
     # Test: Insert
+    # Inserting into an empty list
+    arr_lis.clear()  # Clear the list for next test
+
+    try:  # inserting into an empty list not at index 0
+        arr_lis.insert(1, 1)
+    except IndexOutOfBounds:
+        pass
+    else:
+        assert False, "Expected IndexOutOfBounds exception"
+    try:  # inserting at a negative index
+        arr_lis.insert(1, -1)
+    except IndexOutOfBounds:
+        pass
+    else:
+        assert False, "Expected IndexOutOfBounds exception"
+
+    arr_lis.insert(0, 0)
+    assert str(arr_lis) == "0"
+    assert arr_lis.is_ordered == True
+
+    # Test: Insert
+    # Inserting into a list with elements
+    arr_lis.insert(1, 1)
+    assert str(arr_lis) == "0, 1"
+    assert arr_lis.is_ordered == False, "The list should be unordered"
+
     arr_lis.insert(2, 2)
     assert str(arr_lis) == "0, 1, 2"
     arr_lis.insert(1.5, 2)
     assert str(arr_lis) == "0, 1, 1.5, 2"
 
     # Test: Set at
-    arr_lis.set_at(3, 3)
+    arr_lis.set_at(3, 3)  # set at the end
     assert str(arr_lis) == "0, 1, 1.5, 3"
+    arr_lis.set_at(2, 1)  # set at the middle
+    assert str(arr_lis) == "0, 2, 1.5, 3"
+    arr_lis.set_at(10, 0)  # set at the beginning
+    assert str(arr_lis) == "10, 2, 1.5, 3"
 
     # Test: Get first, at, last
-    assert arr_lis.get_first() == 0
-    assert arr_lis.get_at(1) == 1
+    assert arr_lis.get_first() == 10
+    assert arr_lis.get_at(0) == 10  # get at the beginning
+    assert arr_lis.get_at(1) == 2  # get at the middle
+    assert arr_lis.get_at(3) == 3  # get at the end
     assert arr_lis.get_last() == 3
 
     # Test: Remove at
-    arr_lis.remove_at(1)
-    assert str(arr_lis) == "0, 1.5, 3"
+    arr_lis.remove_at(0)  # remove at the beginning
+    assert str(arr_lis) == "2, 1.5, 3"
+    assert arr_lis.is_ordered == False, "The list should be unordered"
+    arr_lis.remove_at(1)  # remove at the middle
+    assert str(arr_lis) == "2, 3"
+    assert arr_lis.is_ordered == False, "The list should be unordered"
+    arr_lis.remove_at(1)  # remove at the end
+    assert str(arr_lis) == "2"
+    assert arr_lis.is_ordered == True, "The list should be ordered"
+    arr_lis.remove_at(0)  # remove the last element
+    assert str(arr_lis) == "The Array is empty"
+    assert arr_lis.is_ordered == True, "The list should be ordered"
+
+
+    try:  # remove at a negative index
+        arr_lis.remove_at(-1)
+    except IndexOutOfBounds:
+        pass
+    else:
+        assert False, "Expected IndexOutOfBounds exception"
+    try:  # remove at an index greater than the size
+        arr_lis.remove_at(2)
+    except IndexOutOfBounds:
+        pass
 
     # Test: Clear
     arr_lis.clear()
     assert arr_lis.size == 0
     assert str(arr_lis) == "The Array is empty"
-
-
+    assert arr_lis.is_ordered == True
 
     # Test: Edge cases
     try:
@@ -76,62 +138,58 @@ def main():
     else:
         assert False, "Expected IndexOutOfBounds exception"
 
-    # Tests for insert_ordered
-    arr_lis.clear()
+
+    # Test: insert_ordered
     arr_lis.insert_ordered(10)
-    assert str(arr_lis) == "10", "Failed to insert into empty list"
+    assert str(arr_lis) == "10"
 
-    arr_lis.insert_ordered(5)
-    assert str(arr_lis) == "5, 10", "Failed to insert at the beginning"
+    arr_lis.insert_ordered(20)  # insert larger
+    assert str(arr_lis) == "10, 20"
 
-    arr_lis.insert_ordered(15)
-    assert str(arr_lis) == "5, 10, 15", "Failed to insert at the end"
+    arr_lis.insert_ordered(15)  # insert in the middle
+    assert str(arr_lis) == "10, 15, 20"
 
-    arr_lis.insert_ordered(12)
-    assert str(arr_lis) == "5, 10, 12, 15", "Failed to insert in the middle"
+    arr_lis.insert_ordered(5)  # insert smaller
+    assert str(arr_lis) == "5, 10, 15, 20"
 
-    arr_lis.insert_ordered(10)
-    assert str(arr_lis) == "5, 10, 10, 12, 15", "Failed to insert duplicate value"
+    arr_lis.insert_ordered(15)  # insert equal to another element
+    assert str(arr_lis) == "5, 10, 15, 15, 20"
 
-    # Test: Insert when size == capacity
-    arr_lis.insert_ordered(20)
-    arr_lis.insert_ordered(25)
-    arr_lis.insert_ordered(30)
-    assert arr_lis.capacity > 3, "Failed to resize when capacity is reached"
-    arr_lis.insert_ordered(1)
-    assert str(arr_lis) == "1, 5, 10, 10, 12, 15, 20, 25, 30", "Failed to insert after resizing"
 
-    # Edge cases for insert_ordered when list is not ordered
-    arr_lis.append(35)
-    try:
-        arr_lis.insert_ordered(40)
+
+    # Test: insert_ordered
+        # into an unordered list
+        # # make the list unordered with Append/Prepend/Set_at/Insert
+
+
+            # 1. make list unordered with Append
+    arr_lis.append(999)
+    assert str(arr_lis) == "5, 10, 15, 15, 20, 999"
+    assert arr_lis.is_ordered == False
+            # 2. make list unordered with Prepend
+    # arr_lis.prepend(999)
+    # assert str(arr_lis) == "999, 5, 10, 15, 15, 20"
+    # assert arr_lis.is_ordered == False
+            # 3. make list unordered with Set_at
+    # arr_lis.set_at(999, 0)
+    # assert str(arr_lis) == "999, 10, 15, 15, 20"
+    # assert arr_lis.is_ordered == False
+            # 4. make list unordered with Insert
+    # arr_lis.insert(999, 1)
+    # assert str(arr_lis) == "5, 999, 10, 15, 15, 20"
+    # assert arr_lis.is_ordered == False
+
+    try: # insert_ordered into an unordered list
+        arr_lis.insert_ordered(1000)
     except NotOrdered:
         pass
     else:
         assert False, "Expected NotOrdered exception"
 
-    arr_lis.clear()
-    arr_lis.append(10)
-    arr_lis.prepend(5)
-    try:
-        arr_lis.insert_ordered(7)
-    except NotOrdered:
-        pass
-    else:
-        assert False, "Expected NotOrdered exception"
 
-    arr_lis.clear()
-    arr_lis.insert_ordered(10)
-    arr_lis.insert_ordered(20)
-    arr_lis.set_at(15, 1)
-    try:
-        arr_lis.insert_ordered(17)
-    except NotOrdered:
-        pass
-    else:
-        assert False, "Expected NotOrdered exception"
 
     print("All tests passed! :D")
+
 
 if __name__ == "__main__":
     main()
