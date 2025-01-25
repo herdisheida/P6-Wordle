@@ -1,4 +1,4 @@
-from ArrayList import ArrayList, IndexOutOfBounds, Empty, NotOrdered
+from array_list import ArrayList, IndexOutOfBounds, Empty, NotFound, NotOrdered
 
 
 def main():
@@ -99,7 +99,7 @@ def main():
     arr_lis.clear()
     assert arr_lis.size == 0
     assert str(arr_lis) == ""
-    assert arr_lis.is_ordered == True
+    assert arr_lis.is_ordered == False
 
     # Test: Edge cases
     try:
@@ -138,53 +138,103 @@ def main():
         assert False, "Expected IndexOutOfBounds exception"
 
 
-    # Test: insert_ordered
-    arr_lis.insert_ordered(10)
-    assert str(arr_lis) == "10"
-
-    arr_lis.insert_ordered(20)  # insert larger
-    assert str(arr_lis) == "10, 20"
-
-    arr_lis.insert_ordered(15)  # insert in the middle
-    assert str(arr_lis) == "10, 15, 20"
-
-    arr_lis.insert_ordered(5)  # insert smaller
-    assert str(arr_lis) == "5, 10, 15, 20"
-
-    arr_lis.insert_ordered(15)  # insert equal to another element
-    assert str(arr_lis) == "5, 10, 15, 15, 20"
 
 
+    # Test: insert_ordered() and find() in ordered lists
+    new_arr_lis = ArrayList()
 
-    # Test: insert_ordered
+    new_arr_lis.insert_ordered(10)
+    assert str(new_arr_lis) == "10"
+    new_arr_lis.insert_ordered(20)  # insert larger
+    assert str(new_arr_lis) == "10, 20"
+    new_arr_lis.insert_ordered(15)  # insert in the middle
+    assert str(new_arr_lis) == "10, 15, 20"
+    new_arr_lis.insert_ordered(5)  # insert smaller
+    assert str(new_arr_lis) == "5, 10, 15, 20"
+    new_arr_lis.insert_ordered(15)  # insert equal to another element
+    assert str(new_arr_lis) == "5, 10, 15, 15, 20"
+
+
+        # TEST: find() in ordered lists
+    assert new_arr_lis.is_ordered == True
+    assert new_arr_lis.find(5) == 0
+    assert new_arr_lis.find(10) == 1
+    assert new_arr_lis.find(15) == 2
+    assert new_arr_lis.find(20) == 4
+
+    try:  # find value which is not in the list
+        new_arr_lis.find(100)
+    except NotFound:
+        pass
+    else:
+        assert False, "Expected NotFound exception"
+
+
+
+
+    # Test: insert_ordered and find() in unordered lists
         # into an unordered list
-        # # make the list unordered with Append/Prepend/Set_at/Insert
+        # make the list unordered with Append/Prepend/Set_at/Insert
 
 
             # 1. make list unordered with Append
-    arr_lis.append(999)
-    assert str(arr_lis) == "5, 10, 15, 15, 20, 999"
-    assert arr_lis.is_ordered == False
+    new_arr_lis.append(999)
+    assert str(new_arr_lis) == "5, 10, 15, 15, 20, 999"
+    assert new_arr_lis.is_ordered == False
             # 2. make list unordered with Prepend
-    # arr_lis.prepend(999)
-    # assert str(arr_lis) == "999, 5, 10, 15, 15, 20"
-    # assert arr_lis.is_ordered == False
+    # new_arr_lis.prepend(999)
+    # assert str(new_arr_lis) == "999, 5, 10, 15, 15, 20"
+    # assert new_arr_lis.is_ordered == False
             # 3. make list unordered with Set_at
-    # arr_lis.set_at(999, 0)
-    # assert str(arr_lis) == "999, 10, 15, 15, 20"
-    # assert arr_lis.is_ordered == False
+    # new_arr_lis.set_at(999, 0)
+    # assert str(new_arr_lis) == "999, 10, 15, 15, 20"
+    # assert new_arr_lis.is_ordered == False
             # 4. make list unordered with Insert
-    # arr_lis.insert(999, 1)
-    # assert str(arr_lis) == "5, 999, 10, 15, 15, 20"
-    # assert arr_lis.is_ordered == False
+    # new_arr_lis.insert(999, 1)
+    # assert str(new_arr_lis) == "5, 999, 10, 15, 15, 20"
+    # assert new_arr_lis.is_ordered == False
 
     try: # insert_ordered into an unordered list
-        arr_lis.insert_ordered(1000)
+        new_arr_lis.insert_ordered(1000)
     except NotOrdered:
         pass
     else:
         assert False, "Expected NotOrdered exception"
 
+        # Test: find() in unordered lists
+    assert new_arr_lis.find(5) == 0
+    assert new_arr_lis.find(10) == 1
+    assert new_arr_lis.find(15) == 2
+    assert new_arr_lis.find(20) == 4
+    assert new_arr_lis.find(999) == 5
+
+    try:  # find value which is not in the list
+        new_arr_lis.find(-100)
+    except NotFound:
+        pass
+    else:
+        assert False, "Expected NotFound exception"
+
+
+
+    # TEST: remove_value()
+    new_arr_lis.remove_value(5)
+    assert str(new_arr_lis) == "10, 15, 15, 20, 999" # remove at the beginning
+    new_arr_lis.remove_value(20)
+    assert str(new_arr_lis) == "10, 15, 15, 999" # remove in the middle
+    new_arr_lis.remove_value(999)
+    assert str(new_arr_lis) == "10, 15, 15" # remove at the end
+    new_arr_lis.remove_value(15)
+    assert str(new_arr_lis) == "10, 15" # remove doublicates
+
+
+    arr_list_empty = ArrayList()
+    try:  # remove value from an empty list
+        arr_list_empty.remove_value(10)
+    except NotFound:
+        pass
+    else:
+        assert False, "Expected NotFound exception"
 
 
     print("All tests passed! :D")
