@@ -127,6 +127,7 @@ class ArrayList:
     def clear(self):
         """ Removes  all items from the list. """
         self.size = 0
+        self.is_ordered = True
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -149,7 +150,7 @@ class ArrayList:
         """ Returns the index of a specific value """
         if self.is_ordered: # O(log n)
             low = 0
-            high = self.size - 1
+            high = self.size
 
             while low <= high:
                 mid = (low + high) // 2
@@ -158,7 +159,7 @@ class ArrayList:
                 elif value < self.a_list[mid]:
                     high = mid - 1
                 elif value > self.a_list[mid]:
-                    low = mid + 1        
+                    low = mid + 1
         else: # O(n)
             for x in range(self.size):
                 if value == self.a_list[x]:
