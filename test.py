@@ -1,4 +1,4 @@
-from ArrayList import ArrayList, IndexOutOfBounds, Empty
+from ArrayList import ArrayList, IndexOutOfBounds, Empty, NotOrdered
 
 def main():
     arr_lis = ArrayList()
@@ -100,6 +100,36 @@ def main():
     assert arr_lis.capacity > 3, "Failed to resize when capacity is reached"
     arr_lis.insert_ordered(1)
     assert str(arr_lis) == "1, 5, 10, 10, 12, 15, 20, 25, 30", "Failed to insert after resizing"
+
+    # Edge cases for insert_ordered when list is not ordered
+    arr_lis.append(35)
+    try:
+        arr_lis.insert_ordered(40)
+    except NotOrdered:
+        pass
+    else:
+        assert False, "Expected NotOrdered exception"
+
+    arr_lis.clear()
+    arr_lis.append(10)
+    arr_lis.prepend(5)
+    try:
+        arr_lis.insert_ordered(7)
+    except NotOrdered:
+        pass
+    else:
+        assert False, "Expected NotOrdered exception"
+
+    arr_lis.clear()
+    arr_lis.insert_ordered(10)
+    arr_lis.insert_ordered(20)
+    arr_lis.set_at(15, 1)
+    try:
+        arr_lis.insert_ordered(17)
+    except NotOrdered:
+        pass
+    else:
+        assert False, "Expected NotOrdered exception"
 
     print("All tests passed! :D")
 

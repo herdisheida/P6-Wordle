@@ -35,6 +35,7 @@ class ArrayList:
         self.size = 0
         self.capacity = 3
         self.a_list = [None] * self.capacity
+        self.is_ordered = True
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -66,9 +67,11 @@ class ArrayList:
         # Move all elements to the right, until the index
         for x in range(self.size, index, - 1):
             self.a_list[x] = self.a_list[x - 1]
+
         # Add the inserted value
         self.a_list[index] = value
         self.size += 1
+        self.is_ordered = False # EXTRA HELP PA : er þetta allt of sumt ?
 
 
     #Time complexity: O(1) - constant time
@@ -77,6 +80,8 @@ class ArrayList:
         self.resize() # Resize the list
         self.a_list[self.size] = value # Add the new element
         self.size += 1
+        self.is_ordered = False # EXTRA HELP PA : er þetta allt of sumt ?
+
 
 
     #Time complexity: O(1) - constant time
@@ -86,6 +91,8 @@ class ArrayList:
         if 0 > index or index >= self.size:
             raise IndexOutOfBounds()
         self.a_list[index] = value
+        self.is_ordered = False # EXTRA HELP PA : er þetta allt of sumt ?
+
 
 
     #Time complexity: O(1) - constant time
@@ -148,6 +155,10 @@ class ArrayList:
     def insert_ordered(self, value) -> None:
         """ Insert a value so that the list retains ordering. """
 
+        if not self.is_ordered: # EXTRA HELP PA : er þetta allt of sumt ?
+            raise NotOrdered()
+
+
         # the empty list, or if the value is smaller than the first element
         if self.size == 0 or value < self.a_list[0]:
             self.insert(value, 0)
@@ -170,6 +181,7 @@ class ArrayList:
     def find(self, value) -> int:
         # TODO: remove 'pass' and implement functionality
         pass
+
 
     #Time complexity: O(n) - linear time in size of list
     def remove_value(self, value) -> None:
