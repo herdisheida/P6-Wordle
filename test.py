@@ -7,7 +7,7 @@ def main():
     # Test: Initial state
     assert arr_lis.size == 0, "The list should start empty"
     assert arr_lis.capacity == 3, "The list should start with a capacity of 3"
-    assert str(arr_lis) == "The Array is empty"
+    assert str(arr_lis) == ""
 
     # Test: Append and Prepend
     # Appending an empty list
@@ -42,7 +42,6 @@ def main():
 
     arr_lis.insert(0, 0)
     assert str(arr_lis) == "0"
-    assert arr_lis.is_ordered == True
 
     # Test: Insert
     # Inserting into a list with elements
@@ -79,10 +78,10 @@ def main():
     assert arr_lis.is_ordered == False, "The list should be unordered"
     arr_lis.remove_at(1)  # remove at the end
     assert str(arr_lis) == "2"
-    assert arr_lis.is_ordered == True, "The list should be ordered"
+    assert arr_lis.is_ordered == False, "The list should be unordered"
     arr_lis.remove_at(0)  # remove the last element
-    assert str(arr_lis) == "The Array is empty"
-    assert arr_lis.is_ordered == True, "The list should be ordered"
+    assert str(arr_lis) == ""
+    assert arr_lis.is_ordered == False, "The list should be unordered"
 
 
     try:  # remove at a negative index
@@ -99,7 +98,7 @@ def main():
     # Test: Clear
     arr_lis.clear()
     assert arr_lis.size == 0
-    assert str(arr_lis) == "The Array is empty"
+    assert str(arr_lis) == ""
     assert arr_lis.is_ordered == True
 
     # Test: Edge cases

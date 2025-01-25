@@ -1,8 +1,3 @@
-from operator import is_
-from re import S
-import re
-
-
 class IndexOutOfBounds(Exception):
     pass
 
@@ -40,8 +35,6 @@ class NotOrdered(Exception):
 class ArrayList:
     def __init__(self) -> None:
         """ Initializes the array list """
-
-        # Default is an empty list
         self.size = 0
         self.capacity = 3
         self.a_list = [None] * self.capacity
@@ -50,15 +43,14 @@ class ArrayList:
 
     #Time complexity: O(n) - linear time in size of list
     def __str__(self) -> str:
-        """ Returns a string with all items from the array.
-        Have a comma and a space between them. """
+        """ Returns a string with all items from the list, separated by a comma and a space. """
         return_string = ""
         for x in range(self.size):
             if x == self.size - 1:
                 return_string += f"{self.a_list[x]}"
             else:
                 return_string += f"{self.a_list[x]}"  + ", "
-        return return_string if return_string else "The Array is empty" # HELP PA - á ég að skila tómum?
+        return return_string
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -76,40 +68,34 @@ class ArrayList:
         self.resize()
         for x in range(self.size, index, - 1):
             self.a_list[x] = self.a_list[x - 1]
-
         # Add the inserted value
         self.a_list[index] = value
         self.size += 1
-        if self.size != 1: # HELP IS THIS OKAY -- því þetta er ekki instert_ordered
-            self.is_ordered = False
+        self.is_ordered = False
 
 
     #Time complexity: O(1) - constant time
     def append(self, value) -> None:
         """ Adds an item to the list after the last item. """
-        self.resize() # Resize the list
-        self.a_list[self.size] = value # Add the new element
+        self.resize()
+        self.a_list[self.size] = value
         self.size += 1
-        self.is_ordered = False # EXTRA HELP PA : er þetta allt of sumt ?
-
+        self.is_ordered = False
 
 
     #Time complexity: O(1) - constant time
     def set_at(self, value, index: int) -> None:
         """ Sets the value at a specific location to a specific value.
-        Overwrites the current value there."""
+        Overwrites the current value there. """
         if 0 > index or index >= self.size:
             raise IndexOutOfBounds()
         self.a_list[index] = value
-        self.is_ordered = False # EXTRA HELP PA : er þetta allt of sumt ?
-
+        self.is_ordered = False
 
 
     #Time complexity: O(1) - constant time
     def get_first(self) -> int:
-        """ Returns the first item in the list.
-        Raises Empty() if the list is empty.
-        """
+        """ Returns the first item in the list. """
         if self.size == 0:
             raise Empty()
         return self.a_list[0]
@@ -148,21 +134,16 @@ class ArrayList:
         """ Removes from the list an item at a specific location. """
         if 0 > index or index >= self.size:
             raise IndexOutOfBounds()
-        
         # Move all elements to the the left (overwriting the index)
         for x in range(index, self.size - 1):
             self.a_list[x] = self.a_list[x + 1]
         self.size -= 1
-
-        if self.size == 0 or self.size == 1: # HELP IS THIS OKAY
-            self.is_ordered = True
 
 
     #Time complexity: O(1) - constant time
     def clear(self) -> None:
         """ Removes  all items from the list. """
         self.size = 0
-        self.is_ordered = True # EXTRA HELP PA : er þetta allt of sumt ? --- á þetta að vera hér?
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -170,13 +151,11 @@ class ArrayList:
         """ Insert a value so that the list retains ordering. """
         if not self.is_ordered:
             raise NotOrdered()
-        
         for x in range(self.size):
             if self.a_list[x] > value:
                 self.insert(value, x)
                 self.is_ordered = True
                 return
-
         self.append(value)
         self.is_ordered = True
 
@@ -185,35 +164,32 @@ class ArrayList:
     #Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value) -> int:
         """ Returns the index of a specific value """
-
         if self.is_ordered: # O(log n)
             low = 0
             high = self.size - 1
+
             while low <= high:
                 mid = (low + high) // 2
-                
-                if self.a_list[mid] == value:
+                if value == self.a_list[mid]:
                     return mid
                 elif value < self.a_list[mid]:
                     high = mid - 1
                 elif value > self.a_list[mid]:
-                    low = mid + 1
-
-            print("HELLO NOT FOUND")
-        
+                    low = mid + 1        
         else: # O(n)
-            print("for O(n)")
-
-        raise NotFound() # if the value is not found
+            for x in range(self.size):
+                if value == self.a_list[x]:
+                    return x
+        raise NotFound()
 
 
     #Time complexity: O(n) - linear time in size of list
     def remove_value(self, value) -> None:
         # TODO: remove 'pass' and implement functionality
         pass
+        # self.size -= 1
 
-        if self.size == 0 or self.size == 1: # HELP IS THIS OKAY
-            self.is_ordered = True
+
 
 
 
@@ -283,38 +259,55 @@ if __name__ == "__main__":
 
 
     # TEST : insert_ordered
-    arr_lis1.clear() # to test insert_ordered
+    arr_lis2 = ArrayList()
 
-    arr_lis1.insert_ordered(10)
-    print(arr_lis1)
-    arr_lis1.insert_ordered(562)
-    print(arr_lis1)
-    arr_lis1.insert_ordered(200)
-    print(arr_lis1)
-    arr_lis1.insert_ordered(200)
-    print(arr_lis1)
-    arr_lis1.insert_ordered(300)
-    print(arr_lis1)
-    arr_lis1.insert_ordered(600)
-    print(arr_lis1)
-    arr_lis1.insert_ordered(800)
-    print(arr_lis1)
+    arr_lis2.insert_ordered(10)
+    print(arr_lis2)
+    arr_lis2.insert_ordered(562)
+    print(arr_lis2)
+    arr_lis2.insert_ordered(200)
+    print(arr_lis2)
+    arr_lis2.insert_ordered(200)
+    print(arr_lis2)
+    arr_lis2.insert_ordered(300)
+    print(arr_lis2)
+    arr_lis2.insert_ordered(600)
+    print(arr_lis2)
+    arr_lis2.insert_ordered(800)
+    print(arr_lis2)
 
-    assert arr_lis1.is_ordered == True
+    # test find in ordered lists
+    assert arr_lis2.is_ordered == True
+    print(arr_lis2.find(10)) # 0
+    print(arr_lis2.find(200)) # 1
+    print(arr_lis2.find(300)) # 3
+    print(arr_lis2.find(562)) # 4
+    print(arr_lis2.find(600)) # 5
+    print(arr_lis2.find(800)) # 6
 
-    print(arr_lis1.find(10)) # 0
-    print(arr_lis1.find(200)) # 1
-    print(arr_lis1.find(300)) # 3
-    print(arr_lis1.find(562)) # 4
-    print(arr_lis1.find(600)) # 5
-    print(arr_lis1.find(800)) # 6
+    try: # find smth that is not an element in the ordered list
+        arr_lis2.find(9231483490)
+    except NotFound:
+        pass
+    else:
+        assert False, "Expected NotFound exception"
 
+    # test find in unordered lists
+    arr_lis2.append(999) # making list unordered
+    print(arr_lis2)
+    assert arr_lis2.is_ordered == False
+    print(arr_lis2.find(10)) # 0
+    print(arr_lis2.find(200)) # 1
+    print(arr_lis2.find(300)) # 3
+    print(arr_lis2.find(562)) # 4
+    print(arr_lis2.find(600)) # 5
+    print(arr_lis2.find(800)) # 6
+    print(arr_lis2.find(999)) # 7
 
+    try: # find smth that is not an element in the unordred list
+        arr_lis2.find(9231483490)
+    except NotFound:
+        pass
+    else:
+        assert False, "Expected NotFound exception"
 
-
-#     print(f""" AFTER PREPENDING
-                  
-# self.size = {self.size}
-# self.a_list = {self.a_list}
-
-# """)
