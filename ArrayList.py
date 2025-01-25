@@ -1,4 +1,6 @@
-from curses import A_ALTCHARSET
+from operator import is_
+from re import S
+import re
 
 
 class IndexOutOfBounds(Exception):
@@ -23,9 +25,17 @@ class NotOrdered(Exception):
 # HELP PA : spyrja félaga
 # DELETE LATER: eyða seinna
 
-# TODO:
-# TODO: Sorting and searching (20%)
 
+# HELP IS THIS OKEY : á ég að hafa þetta
+
+
+# TODO: Base implementation (60%)
+# TODO: Sorting and searching (20%)
+# TODO: Recursion (20%)
+
+
+# TODO: fix is_ordered check (variable) : when insert() is called the is_ordered should be set to False, but i can't do that because i call the insert() function in insert_ordered() function
+# SPYRJA JB
 
 class ArrayList:
     def __init__(self) -> None:
@@ -62,16 +72,16 @@ class ArrayList:
         """ Inserts an item into the list at a specific location, not overwriting other items. """
         if 0 > index or index > self.size:
             raise IndexOutOfBounds()
-        
-        self.resize()
         # Move all elements to the right, until the index
+        self.resize()
         for x in range(self.size, index, - 1):
             self.a_list[x] = self.a_list[x - 1]
 
         # Add the inserted value
         self.a_list[index] = value
         self.size += 1
-        self.is_ordered = False # EXTRA HELP PA : er þetta allt of sumt ?
+        if self.size != 1: # HELP IS THIS OKAY -- því þetta er ekki instert_ordered
+            self.is_ordered = False
 
 
     #Time complexity: O(1) - constant time
@@ -144,43 +154,57 @@ class ArrayList:
             self.a_list[x] = self.a_list[x + 1]
         self.size -= 1
 
+        if self.size == 0 or self.size == 1: # HELP IS THIS OKAY
+            self.is_ordered = True
+
 
     #Time complexity: O(1) - constant time
     def clear(self) -> None:
         """ Removes  all items from the list. """
         self.size = 0
+        self.is_ordered = True # EXTRA HELP PA : er þetta allt of sumt ? --- á þetta að vera hér?
 
 
     #Time complexity: O(n) - linear time in size of list
     def insert_ordered(self, value) -> None:
         """ Insert a value so that the list retains ordering. """
-
-        if not self.is_ordered: # EXTRA HELP PA : er þetta allt of sumt ?
+        if not self.is_ordered:
             raise NotOrdered()
+        
+        for x in range(self.size):
+            if self.a_list[x] > value:
+                self.insert(value, x)
+                self.is_ordered = True
+                return
 
-
-        # the empty list, or if the value is smaller than the first element
-        if self.size == 0 or value < self.a_list[0]:
-            self.insert(value, 0)
-            return
-
-        # check the last element
-        if value > self.a_list[self.size - 1]:
-            self.insert(value, self.size)
-            return
-
-        # check the values in between two values
-        for x in range(self.size - 1):
-            if self.a_list[x] <= value < self.a_list[x + 1]:
-                self.insert(value, x + 1)
-                break
+        self.append(value)
+        self.is_ordered = True
 
 
     #Time complexity: O(n) - linear time in size of list
     #Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value) -> int:
-        # TODO: remove 'pass' and implement functionality
-        pass
+        """ Returns the index of a specific value """
+
+        if self.is_ordered: # O(log n)
+            low = 0
+            high = self.size - 1
+            while low <= high:
+                mid = (low + high) // 2
+                
+                if self.a_list[mid] == value:
+                    return mid
+                elif value < self.a_list[mid]:
+                    high = mid - 1
+                elif value > self.a_list[mid]:
+                    low = mid + 1
+
+            print("HELLO NOT FOUND")
+        
+        else: # O(n)
+            print("for O(n)")
+
+        raise NotFound() # if the value is not found
 
 
     #Time complexity: O(n) - linear time in size of list
@@ -188,7 +212,8 @@ class ArrayList:
         # TODO: remove 'pass' and implement functionality
         pass
 
-
+        if self.size == 0 or self.size == 1: # HELP IS THIS OKAY
+            self.is_ordered = True
 
 
 
@@ -256,20 +281,33 @@ if __name__ == "__main__":
     print(arr_lis1)
 
 
+
     # TEST : insert_ordered
+    arr_lis1.clear() # to test insert_ordered
+
     arr_lis1.insert_ordered(10)
     print(arr_lis1)
-
     arr_lis1.insert_ordered(562)
     print(arr_lis1)
-
     arr_lis1.insert_ordered(200)
     print(arr_lis1)
-
     arr_lis1.insert_ordered(200)
     print(arr_lis1)
+    arr_lis1.insert_ordered(300)
+    print(arr_lis1)
+    arr_lis1.insert_ordered(600)
+    print(arr_lis1)
+    arr_lis1.insert_ordered(800)
+    print(arr_lis1)
 
+    assert arr_lis1.is_ordered == True
 
+    print(arr_lis1.find(10)) # 0
+    print(arr_lis1.find(200)) # 1
+    print(arr_lis1.find(300)) # 3
+    print(arr_lis1.find(562)) # 4
+    print(arr_lis1.find(600)) # 5
+    print(arr_lis1.find(800)) # 6
 
 
 
