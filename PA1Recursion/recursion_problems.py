@@ -1,12 +1,19 @@
 
+import re
+
+
 def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
     #TODO: remove 'pass' and implement functionality
     pass
 
-    # base step
-    modulus(0,b) = 0
+    # base step: modulus(0,b) = 0
+    if a == 0:
+        return 0
 
     # inductive step
+    modulus(a,b) = 0                # if a=2k and b=2k
+
+
 
 
 
