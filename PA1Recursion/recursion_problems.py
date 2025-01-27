@@ -1,25 +1,13 @@
-
-import re
-
-
 def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
-    #TODO: remove 'pass' and implement functionality
-    pass
-
-    # base step: modulus(0,b) = 0 or modulus(a,a)
+    # base step:
     if a == 0 or a == b:
         return 0
 
     # inductive step: 
-    # plúsum b með sjálfri sér þangað til hún verður jafn jafn stór eða stærri en a
-    # tökum þá fyrrverandi b (áður en hún verður stærri en a) og gerum a-b=modulus
     if a < b:
         return a
     else:
         return modulus(a - b, b)
-
-
-
 
 
 
@@ -62,18 +50,16 @@ def run_recursion_program():
     assert modulus(15, 5) == 0
     assert modulus(128, 16) ==  0
     assert modulus(128, 15) ==  8
+    
+    assert modulus(1, 1) == 0
+    assert modulus(1, 2) == 1
+    assert modulus(2, 1) == 0
+    # assert modulus(1000, 1) == 0
+    # assert modulus(1, 1000) == 1
+    # assert modulus(1000, 1000) == 0
+    # assert modulus(1001, 1000) == 1
 
     print("------ MODULUS TESTS PASSED ------")
-
-
-
-
-
-
-
-
-
-
 
     print("\nTESTING HOW MANY:\n")
 
