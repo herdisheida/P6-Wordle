@@ -51,21 +51,23 @@ def run_recursion_program():
     test_modulus(128, 16)
     test_modulus(128, 15)
 
-    assert modulus(8, 3) == 2
-    assert modulus(9, 3) == 0
-    assert modulus(10, 3) == 1
-    assert modulus(11, 3) == 2
-    assert modulus(8, 2) == 0
-    assert modulus(0, 7) == 0
-    assert modulus(15, 5) == 0
-    assert modulus(128, 16) ==  0
-    assert modulus(128, 15) ==  8
-    # my tests
-    assert modulus(1, 1) == 0
-    assert modulus(1, 2) == 1
-    assert modulus(2, 1) == 0
-    assert modulus(15, 128) == 15
-    print("------ MODULUS TESTS PASSED ------")
+
+    # MY TESTS
+    # assert modulus(8, 3) == 2
+    # assert modulus(9, 3) == 0
+    # assert modulus(10, 3) == 1
+    # assert modulus(11, 3) == 2
+    # assert modulus(8, 2) == 0
+    # assert modulus(0, 7) == 0
+    # assert modulus(15, 5) == 0
+    # assert modulus(128, 16) ==  0
+    # assert modulus(128, 15) ==  8
+
+    # assert modulus(1, 1) == 0
+    # assert modulus(1, 2) == 1
+    # assert modulus(2, 1) == 0
+    # assert modulus(15, 128) == 15
+    # print("------ MODULUS TESTS PASSED ------")
 
     print("\nTESTING HOW MANY:\n")
 
@@ -73,6 +75,21 @@ def run_recursion_program():
     test_how_many(['a', 'b', 'f', 'g', 'a', 't', 'c'], ['a', 'b', 'c', 'd', 'e'])
     test_how_many(['f', 'g', 't'], ['a', 'b', 'c', 'd', 'e'])
 
+
+    # MY TESTS
+    # test_how_many([], ['a', 'b', 'c', 'd', 'e'])  # empty list1
+    # test_how_many(['a', 'b', 'c'], [])  # empty list2
+    # test_how_many([], [])  # both lists empty
+    # test_how_many(['a', 'a', 'a'], ['a'])  # duplicates in list1
+    # test_how_many(['a', 'b', 'c'], ['d', 'e', 'f'])  # no common elements
+    # test_how_many(['a', 'b', 'c'], ['a', 'b', 'c'])  # all elements common
+    # assert how_many([], ['a', 'b', 'c', 'd', 'e']) == 0
+    # assert how_many(['a', 'b', 'c'], []) == 0
+    # assert how_many([], []) == 0
+    # assert how_many(['a', 'a', 'a'], ['a']) == 3
+    # assert how_many(['a', 'b', 'c'], ['d', 'e', 'f']) == 0
+    # assert how_many(['a', 'b', 'c'], ['a', 'b', 'c']) == 3
+    # print("------ HOW_MANY TESTS PASSED ------")
 
 if __name__ == "__main__":
     run_recursion_program()
