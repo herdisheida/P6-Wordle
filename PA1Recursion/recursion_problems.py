@@ -10,7 +10,9 @@ def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
     if a == 0 or a == b:
         return 0
 
-    # inductive step: plúsum b með sjálfri sér þangað til hún verður jafn stór og a -- og mínusum þá b með a (b-a) til að fá afganginn
+    # inductive step: 
+    # plúsum b með sjálfri sér þangað til hún verður jafn jafn stór eða stærri en a
+    # tökum þá fyrrverandi b (áður en hún verður stærri en a) og gerum a-b=modulus
     modulus(a,b)
 
 
