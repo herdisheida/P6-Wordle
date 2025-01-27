@@ -16,6 +16,15 @@ def how_many(lis1, lis2):
     #TODO: remove 'pass' and implement functionality
     pass
 
+    # base case
+    if lis1 == lis2:
+        return len(lis1)
+    
+    if len(lis1) == 0 or len(lis2) == 0:
+        return 0
+
+    # inductive step
+
 
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
 # REMEMBER EDGE CASES!
