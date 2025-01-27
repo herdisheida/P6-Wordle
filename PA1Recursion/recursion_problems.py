@@ -54,10 +54,7 @@ def run_recursion_program():
     assert modulus(1, 1) == 0
     assert modulus(1, 2) == 1
     assert modulus(2, 1) == 0
-    # assert modulus(1000, 1) == 0
-    # assert modulus(1, 1000) == 1
-    # assert modulus(1000, 1000) == 0
-    # assert modulus(1001, 1000) == 1
+
 
     print("------ MODULUS TESTS PASSED ------")
 

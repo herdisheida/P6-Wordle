@@ -8,13 +8,6 @@ print(15 % 5)
 print(128 % 16)
 print(128 % 15)
 
-
-
-print()
-print(-10 % 3)
-
-print(1000001 % 1000000)
-
 # print("The modulus of 8 and 3 is ", 8 % 3)
 # print("The modulus of 9 and 3 is ", 9 % 3)
 # print("The modulus of 10 and 3 is ", 10 % 3)
