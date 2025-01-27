@@ -14,7 +14,7 @@ def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
 
 def how_many(lis1, lis2):
     #TODO: remove 'pass' and implement functionality
-    pass
+    # pass
 
     # base case
     if lis1 == lis2:
@@ -23,7 +23,18 @@ def how_many(lis1, lis2):
     if len(lis1) == 0 or len(lis2) == 0:
         return 0
 
-    # inductive step
+    # inductive step: check if lists have same first element
+    if lis1[0] != lis2[0]:
+        lis1 = lis1[1:] # remove the first element
+    else:
+
+        # print(lis1)
+        # print(lis1[0])
+        # print(lis1[1:])
+        lis1 = lis1[1:] + [lis1[0]] # move the first element last and save it
+
+    return how_many(lis1, lis2)
+
 
 
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
