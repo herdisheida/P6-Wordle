@@ -10,9 +10,6 @@ class Empty(Exception):
 class NotOrdered(Exception):
     pass
 
-# TODO: Base implementation (60%) DONE
-# TODO: Sorting and searching (20%) DONE
-# TODO: Recursion (20%)
 
 
 class ArrayList:
@@ -147,7 +144,7 @@ class ArrayList:
     #Time complexity: O(n) - linear time in size of list
     #Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value):
-        """ Returns the index of a specific value """
+        """ Returns the index of a specific value. """
         if self.is_ordered: # O(log n)
             low = 0
             high = self.size

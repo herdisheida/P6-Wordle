@@ -34,6 +34,7 @@ sys.stdout = fout
 
 # f = open("tests.txt")
 f = open(sys.path[0] + "/tests.txt")
+# f = open(sys.path[0] + "/extra_tests.txt")
 
 type = None
 

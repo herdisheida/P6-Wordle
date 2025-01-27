@@ -1,6 +1,7 @@
 
 f1 = open("out.txt")
 f2 = open("expected_out.txt")
+# f2 = open("extra_expected_out.txt")
 f3 = open("out_diff.txt", "w+")
 
 line_number = 1
