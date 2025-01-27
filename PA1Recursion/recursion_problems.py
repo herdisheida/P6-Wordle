@@ -6,12 +6,12 @@ def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
     #TODO: remove 'pass' and implement functionality
     pass
 
-    # base step: modulus(0,b) = 0
-    if a == 0:
+    # base step: modulus(0,b) = 0 or modulus(a,a)
+    if a == 0 or a == b:
         return 0
 
-    # inductive step
-    modulus(a,b) = 0                # if a=2k and b=2k
+    # inductive step: plúsum b með sjálfri sér þangað til hún verður jafn stór og a -- og mínusum þá b með a (b-a) til að fá afganginn
+    modulus(a,b)
 
 
 
