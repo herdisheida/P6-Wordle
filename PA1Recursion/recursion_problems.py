@@ -13,7 +13,10 @@ def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
     # inductive step: 
     # plúsum b með sjálfri sér þangað til hún verður jafn jafn stór eða stærri en a
     # tökum þá fyrrverandi b (áður en hún verður stærri en a) og gerum a-b=modulus
-    modulus(a,b)
+    if a < b:
+        return a
+    else:
+        return modulus(a - b, b)
 
 
 
@@ -48,6 +51,29 @@ def run_recursion_program():
     test_modulus(15, 5)
     test_modulus(128, 16)
     test_modulus(128, 15)
+
+
+    assert modulus(8, 3) == 2
+    assert modulus(9, 3) == 0
+    assert modulus(10, 3) == 1
+    assert modulus(11, 3) == 2
+    assert modulus(8, 2) == 0
+    assert modulus(0, 7) == 0
+    assert modulus(15, 5) == 0
+    assert modulus(128, 16) ==  0
+    assert modulus(128, 15) ==  8
+
+    print("------ MODULUS TESTS PASSED ------")
+
+
+
+
+
+
+
+
+
+
 
     print("\nTESTING HOW MANY:\n")
 
