@@ -3,6 +3,14 @@ def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
     #TODO: remove 'pass' and implement functionality
     pass
 
+    # base step
+    modulus(0,b) = 0
+
+    # inductive step
+
+
+
+
 
 def how_many(lis1, lis2):
     #TODO: remove 'pass' and implement functionality
