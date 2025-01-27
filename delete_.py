@@ -40,5 +40,8 @@ lis1 = [1,2,3,4]
 
 lis2 = [1,2,3,4,5,6,7]
 
+print(lis2[:-1])
+print(lis2[-1])
+
 if lis1 in lis2:
     print("it worked")
