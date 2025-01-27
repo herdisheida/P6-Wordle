@@ -40,7 +40,6 @@ def run_recursion_program():
     test_modulus(128, 16)
     test_modulus(128, 15)
 
-
     assert modulus(8, 3) == 2
     assert modulus(9, 3) == 0
     assert modulus(10, 3) == 1
@@ -50,12 +49,11 @@ def run_recursion_program():
     assert modulus(15, 5) == 0
     assert modulus(128, 16) ==  0
     assert modulus(128, 15) ==  8
-    
+    # my tests
     assert modulus(1, 1) == 0
     assert modulus(1, 2) == 1
     assert modulus(2, 1) == 0
-
-
+    assert modulus(15, 128) == 15
     print("------ MODULUS TESTS PASSED ------")
 
     print("\nTESTING HOW MANY:\n")
