@@ -16,11 +16,11 @@ class NotOrdered(Exception):
 
 class ArrayList:
     def __init__(self):
-        """Initializes the array list"""
+        """Initializes the array list."""
         self.size = 0
         self.capacity = 3
         self.a_list = [None] * self.capacity
-        self.is_ordered = True
+        self.ordered = True
 
     # Time complexity: O(n) - linear time in size of list
     def __str__(self):
@@ -47,18 +47,20 @@ class ArrayList:
         self.resize()
         for x in range(self.size, index, -1):
             self.a_list[x] = self.a_list[x - 1]
-        # Add the inserted value
+        # udpate list info
         self.a_list[index] = value
         self.size += 1
-        self.is_ordered = False
+        self.ordered = self._is_ordered()
 
     # Time complexity: O(1) - constant time
     def append(self, value):
         """Adds an item to the list after the last item."""
         self.resize()
         self.a_list[self.size] = value
+        # udpate list info
         self.size += 1
-        self.is_ordered = False
+        self.ordered = self._is_ordered()
+
 
     # Time complexity: O(1) - constant time
     def set_at(self, value, index):
@@ -67,7 +69,7 @@ class ArrayList:
         if 0 > index or index >= self.size:
             raise IndexOutOfBounds()
         self.a_list[index] = value
-        self.is_ordered = False
+        self.ordered = self._is_ordered()
 
     # Time complexity: O(1) - constant time
     def get_first(self):
@@ -109,34 +111,37 @@ class ArrayList:
         # Move all elements to the the left (overwriting the index)
         for x in range(index, self.size - 1):
             self.a_list[x] = self.a_list[x + 1]
+        # udpate list info
         self.size -= 1
+        self.ordered = self._is_ordered()
+
 
     # Time complexity: O(1) - constant time
     def clear(self):
         """Removes  all items from the list."""
         self.size = 0
-        self.is_ordered = True
+        self.ordered = True
 
     # Time complexity: O(n) - linear time in size of list
     def insert_ordered(self, value):
         """Insert a value so that the list retains ordering."""
-        if not self.is_ordered:
+        if not self.ordered:
             raise NotOrdered()
         for x in range(self.size):
             if self.a_list[x] > value:
                 self.insert(value, x)
-                self.is_ordered = True
+                self.ordered = True
                 return
         self.append(value)
-        self.is_ordered = True
+        self.ordered = True
 
     # Time complexity: O(n) - linear time in size of list
     # Time complexity: O(log n) - logarithmic time in size of list
     def find(self, value):
         """Returns the index of a specific value."""
-        if self.is_ordered:  # O(log n)
+        if self.ordered:  # O(log n)
             low = 0
-            high = self.size
+            high = self.size - 1
 
             while low <= high:
                 mid = (low + high) // 2
@@ -160,6 +165,17 @@ class ArrayList:
                 self.remove_at(x)
                 return
         raise NotFound()
+
+
+
+    def _is_ordered(self):
+        """Returns True if list is ordered, False otherwise."""
+        if self.size == 0 or self.size == 1:
+            return True
+        for x in range(self.size - 1):
+            if self.a_list[x] > self.a_list[x + 1]:
+                return False
+        return True
 
 
 if __name__ == "__main__":
