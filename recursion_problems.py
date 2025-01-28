@@ -3,12 +3,11 @@ def modulus(a, b):  # ONLY NEEDS TO WORK FOR POSITIVE INTEGERS
     if a == 0 or a == b:
         return 0
 
-    # inductive step: 
+    # inductive step:
     if a < b:
         return a
     else:
         return modulus(a - b, b)
-
 
 
 def how_many(lis1, lis2):
@@ -27,15 +26,17 @@ def how_many(lis1, lis2):
     return how_many(rest, lis2)
 
 
-
 # FEEL FREE TO EDIT THE TESTS AND MAKE THEM BETTER
 # REMEMBER EDGE CASES!
 
+
 def test_modulus(num1, num2):
-    print("The modulus of " + str(num1) + " and " + str(num2) + " is " + str(modulus(num1, num2)))
+    print("The modulus of "+ str(num1)+ " and "+ str(num2)+ " is "+ str(modulus(num1, num2)))
+
 
 def test_how_many(lis1, lis2):
-    print(str(how_many(lis1, lis2)) + " of the items in " + str(lis1) + " are also in " + str(lis2))
+    print(str(how_many(lis1, lis2))+ " of the items in "+ str(lis1)+ " are also in "+ str(lis2))
+
 
 def run_recursion_program():
 
@@ -50,7 +51,6 @@ def run_recursion_program():
     test_modulus(15, 5)
     test_modulus(128, 16)
     test_modulus(128, 15)
-
 
     # MY TESTS
     # assert modulus(8, 3) == 2
@@ -71,10 +71,9 @@ def run_recursion_program():
 
     print("\nTESTING HOW MANY:\n")
 
-    test_how_many(['a', 'f', 'd', 't'], ['a', 'b', 'c', 'd', 'e'])
-    test_how_many(['a', 'b', 'f', 'g', 'a', 't', 'c'], ['a', 'b', 'c', 'd', 'e'])
-    test_how_many(['f', 'g', 't'], ['a', 'b', 'c', 'd', 'e'])
-
+    test_how_many(["a", "f", "d", "t"], ["a", "b", "c", "d", "e"])
+    test_how_many(["a", "b", "f", "g", "a", "t", "c"], ["a", "b", "c", "d", "e"])
+    test_how_many(["f", "g", "t"], ["a", "b", "c", "d", "e"])
 
     # MY TESTS
     # test_how_many([], ['a', 'b', 'c', 'd', 'e'])  # empty list1
@@ -90,6 +89,7 @@ def run_recursion_program():
     # assert how_many(['a', 'b', 'c'], ['d', 'e', 'f']) == 0
     # assert how_many(['a', 'b', 'c'], ['a', 'b', 'c']) == 3
     # print("------ HOW_MANY TESTS PASSED ------")
+
 
 if __name__ == "__main__":
     run_recursion_program()
