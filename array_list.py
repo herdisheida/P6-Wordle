@@ -61,7 +61,6 @@ class ArrayList:
         self.size += 1
         self.ordered = self._is_ordered()
 
-
     # Time complexity: O(1) - constant time
     def set_at(self, value, index):
         """Sets the value at a specific location to a specific value.
@@ -115,7 +114,6 @@ class ArrayList:
         self.size -= 1
         self.ordered = self._is_ordered()
 
-
     # Time complexity: O(1) - constant time
     def clear(self):
         """Removes  all items from the list."""
@@ -144,13 +142,14 @@ class ArrayList:
             high = self.size - 1
 
             while low <= high:
-                mid = (low + high) // 2
+                mid = (low + high + 1) // 2
                 if value == self.a_list[mid]:
                     return mid
                 elif value < self.a_list[mid]:
                     high = mid - 1
-                elif value > self.a_list[mid]:
+                else:  # value > self.a_list[mid]:
                     low = mid + 1
+
         else:  # O(n)
             for x in range(self.size):
                 if value == self.a_list[x]:
@@ -166,16 +165,11 @@ class ArrayList:
                 return
         raise NotFound()
 
-
-
     def _is_ordered(self):
         """Returns True if list is ordered, False otherwise."""
         if self.size == 0 or self.size == 1:
             return True
-        for x in range(self.size - 1):
-            if self.a_list[x] > self.a_list[x + 1]:
-                return False
-        return True
+        return False
 
 
 if __name__ == "__main__":
