@@ -19,7 +19,7 @@ class ArrayList:
         """Initializes the array list."""
         self.size = 0
         self.capacity = 3
-        self.a_list = [None] * self.capacity
+        self.a_list = [0] * self.capacity
         self.ordered = True
 
     # Time complexity: O(n) - linear time in size of list
@@ -96,7 +96,7 @@ class ArrayList:
         """Re-allocates memory for a larger array and populates it with the original array's items."""
         if self.size == self.capacity:
             self.capacity *= 2
-            temp = [None] * self.capacity
+            temp = [0] * self.capacity
 
             for x in range(self.size):
                 temp[x] = self.a_list[x]
