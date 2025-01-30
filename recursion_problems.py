@@ -31,11 +31,11 @@ def how_many(lis1, lis2):
 
 
 def test_modulus(num1, num2):
-    print("The modulus of "+ str(num1)+ " and "+ str(num2)+ " is "+ str(modulus(num1, num2)))
+    print("The modulus of " + str(num1)+ " and " + str(num2) + " is " + str(modulus(num1, num2)))
 
 
 def test_how_many(lis1, lis2):
-    print(str(how_many(lis1, lis2))+ " of the items in "+ str(lis1)+ " are also in "+ str(lis2))
+    print(str(how_many(lis1, lis2)) + " of the items in " + str(lis1)+ " are also in " + str(lis2))
 
 
 def run_recursion_program():
