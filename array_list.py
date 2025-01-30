@@ -27,8 +27,10 @@ class ArrayList:
         """Returns a string with all items from the list, separated by a comma and a space."""
         return_string = ""
         for x in range(self.size):
-            return_string += f"{self.a_list[x]}" + ", "
-        return_string = return_string[:-2] # remove the last comma
+            if x == self.size - 1:
+                return_string += f"{self.a_list[x]}"
+            else:
+                return_string += f"{self.a_list[x]}" + ", "
         return return_string
 
     # Time complexity: O(n) - linear time in size of list
