@@ -16,34 +16,42 @@ class LinkedList():
             self.head = new_node
         else:
             self.tail.next = new_node
-            self.tail = new_node
+        self.tail = new_node
         self.size += 1
 
     def push_front(self, data): # O(1)
         """Takes a parameter and adds its value to the front of the list."""
-        # find first node
-        # make new_node.next = first_node
-        # make self.head = new_node
-        pass
+        new_node = Node(data)
+        if self.head == None:
+            self.tail = new_node
+            self.head = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
         self.size += 1
 
     def pop_front(self): # O(1)
         """Removes the item from the front of the list and returns its value."""
-        if self.head.data == None:
+        if self.head == None:
             return None
-
-        # make self.head = self.head.next
-        # the old self.head should be returned
-        # TODO: ■ If the list is empty, return None
+        return_data = self.head
+        self.head = self.head.next
+        self.size -= 1
+        return return_data
 
     def pop_back(self):
         """Removes the item from the back of the list and returns its value"""
-        # find last node
-        # return last_node
-        # find next_last_node --- next_last_node.next = None
-        return None
-        # TODO: ■ If the list is empty, return None
-
+        current = self.head
+        if current == None:
+            return None
+        return_data = self.tail
+        while current.next != return_data:
+            if current.next == return_data: # find next last node
+                self.tail = current
+                self.size -= 1
+                return return_data
+            current = current.next
+        
 
     def get_size(self): # O(1)
         """Returns the number of items currently in the list."""
