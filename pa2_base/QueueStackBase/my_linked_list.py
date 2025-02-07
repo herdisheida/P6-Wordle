@@ -7,7 +7,7 @@ class LinkedList():
     def __init__(self):
         self.head = None # first node
         self.tail = None # last node
-        self.size = 0
+        self.size = 0    # num of nodes
     
     def push_back(self, data): # O(1)
         """Takes a parameter and adds its value to the back of the list."""
@@ -23,8 +23,7 @@ class LinkedList():
         """Takes a parameter and adds its value to the front of the list."""
         new_node = Node(data)
         if self.head == None:
-            self.tail = new_node
-            self.head = new_node
+            self.tail = self.head = new_node
         else:
             new_node.next = self.head
             self.head = new_node
@@ -68,7 +67,7 @@ class LinkedList():
         """Returns a string with all the items in the list, separated by a single space."""
         return_str = ""
         current = self.head
-        while current != None: # TODO: laga þettta -- get ekkki gert current.data
+        while current != None: # TODO: laga þettta -- get ekkki gert current.data -- UGLY...
             return_str += f"{current.data} " # HELP TA má gera space svona
             current = current.next
         return return_str
