@@ -5,16 +5,18 @@ class Node:
 
 class LinkedList():
     def __init__(self):
-        self.head = Node() # the first node ----- HELO PIAZZA
-        self.head = Node(10)
-
+        self.head = None # first dude
+        self.tail = None # last dude
         self.size = 0
     
     def push_back(self, data): # O(1)
         """Takes a parameter and adds its value to the back of the list."""
-        # find last node
-        # make last_node.next = Node(data)
-        pass
+        new_node = Node(data)
+        if self.head == None:
+            self.head = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
         self.size += 1
 
     def push_front(self, data): # O(1)
