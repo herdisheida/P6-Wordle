@@ -3,21 +3,22 @@ class Node:
         self.data = data
         self.next = next
 
-# TODO: For full marks, implement all these operations (apart from __str__ and pop_back) with time complexity O(1).
 class LinkedList():
     def __init__(self):
-        pass
+        self.head = Node() # the first node ----- HELO PIAZZA
     
-    def push_front(self, data):
+
+    def push_back(self, data):
         """Takes a parameter and adds its value to the back of the list."""
         pass
-    
-    def push_back(self, data):
-        """Removes the item from the front of the list and returns its value."""
+
+    def push_front(self, data):
+        """Takes a parameter and adds its value to the front of the list."""
         pass
+    
 
     def pop_front(self):
-        """Takes a parameter and adds its value to the front of the list."""
+        """Removes the item from the front of the list and returns its value."""
         return None
         # TODO: ■ If the list is empty, return None
 
@@ -35,3 +36,7 @@ class LinkedList():
     def __str__(self):
         """Returns a string with all the items in the list, separated by a single space."""
         return ""
+
+
+
+# TODO: For full marks, implement all these operations (apart from __str__ and pop_back) with time complexity O(1).

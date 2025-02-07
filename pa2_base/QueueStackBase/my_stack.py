@@ -8,6 +8,7 @@ class Stack:
         
         #self.container = LinkedList()
         #self.container = ArrayDeque()
+        pass
 
     def push(self, data):
         """Takes a parameter and adds its value onto the stack."""
