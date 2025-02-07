@@ -62,7 +62,6 @@ def push_back_then_front(ll):
     assert ll.get_size() == 8 # SIZE func
     assert str(ll) == "8 7 6 5 1 2 3 4 " # CHECK WHOLE LIST
 
-
 def push_front_then_back(ll):
     """ TESTING push_front() on an empty list,
     and then push_back() into a non-empty list"""
@@ -107,13 +106,84 @@ def push_front_then_back(ll):
     assert ll.get_size() == 6 # SIZE func
     assert str(ll) == "3 2 1 4 5 6 " # CHECK WHOLE LIST'
 
+def pop_emptyList(ll):
+    """ TESTING pop_front() and pop_back()
+    on an empty list"""
+    data = ll.pop_front()
+    assert data == None
+    assert str(ll) == ""
+    data = ll.pop_back()
+    assert data == None
+    assert str(ll) == ""
+
+def pop_oneElemList(ll):
+    """ TESTING pop_front() and pop_back()
+    with only one element in the list"""
+
+    # ADD 1 element - to begin the test
+    ll.push_front(1)
+    # POP FRONT TEST
+    data = ll.pop_front()
+    assert data == 1
+    assert ll.head == None
+    assert ll.tail == None
+    assert ll.size == 0
+    assert str(ll) == ""
+
+    # ADD 1 element - to begin the test
+    ll.push_front(1)
+    data = ll.pop_back()
+    assert data == 1
+    # POP BACK TEST
+    assert ll.head == None
+    assert ll.tail == None
+    assert ll.size == 0
+    assert str(ll) == ""
+
+
+
+def popping(ll):
+    """ TESTING pop_front() and pop_back()
+    on a non-empty list"""
+
+    # POP FRONT TEST
+    data = ll.pop_front()
+    assert data == 3
+    assert str(ll) == "2 1 4 5 6 "
+    assert ll.head.data == 2
+    assert ll.head.next.data == 1
+    assert ll.tail.data == 6
+    data = ll.pop_front()
+    assert data == 2
+    assert str(ll) == "1 4 5 6 "
+    assert ll.head.data == 1
+    assert ll.head.next.data == 4
+    assert ll.tail.data == 6
+
+    # POP BACK TEST
+    data = ll.pop_back()
+    assert data == 6
+    assert str(ll) == "1 4 5 "
+    assert ll.head.data == 1
+    assert ll.head.next.data == 4
+    assert ll.tail.data == 5
+    data = ll.pop_back()
+    assert data == 5
+    assert str(ll) == "1 4 "
+    assert ll.head.data == 1
+    assert ll.head.next.data == 4
+    assert ll.tail.data == 4
 
 
 if __name__ == "__main__":
     ll = LinkedList()
 
+    pop_emptyList(ll)
+    pop_oneElemList(ll)
     # push_back_then_front(ll)
     push_front_then_back(ll)
+
+    popping(ll) # only works with    push_front_then_back(ll)
 
     print(ll)
 

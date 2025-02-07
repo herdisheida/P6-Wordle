@@ -34,22 +34,30 @@ class LinkedList():
         """Removes the item from the front of the list and returns its value."""
         if self.head == None:
             return None
-        return_data = self.head
+        return_data = self.head.data
         self.head = self.head.next
         self.size -= 1
+        if self.size == 0:
+            self.tail = None
         return return_data
 
     def pop_back(self):
-        """Removes the item from the back of the list and returns its value"""
+        """Removes the item from the back of the list and returns its value."""
         current = self.head
         if current == None:
             return None
-        return_data = self.tail
-        while current.next != return_data:
-            if current.next == return_data: # find next last node
-                self.tail = current
+        last_node = self.tail
+        if self.size == 1:
+            self.tail = None
+            self.head = None
+            self.size -= 1
+            return current.data
+        while current != last_node:
+            if current.next == last_node: # find next last node
+                current.next = None # secondToLastNode.next = None
+                self.tail = current # secondToLastNode = last_node
                 self.size -= 1
-                return return_data
+                return last_node.data
             current = current.next
         
 
