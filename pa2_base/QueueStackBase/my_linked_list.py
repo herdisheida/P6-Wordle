@@ -5,8 +5,8 @@ class Node:
 
 class LinkedList():
     def __init__(self):
-        self.head = None # first dude
-        self.tail = None # last dude
+        self.head = None # first node
+        self.tail = None # last node
         self.size = 0
     
     def push_back(self, data): # O(1)
@@ -43,22 +43,21 @@ class LinkedList():
 
     def pop_back(self):
         """Removes the item from the back of the list and returns its value."""
-        current = self.head
-        if current == None:
+        if self.head == None:
             return None
+        
         last_node = self.tail
         if self.size == 1:
-            self.tail = None
-            self.head = None
-            self.size -= 1
-            return current.data
-        while current != last_node:
-            if current.next == last_node: # find next last node
-                current.next = None # secondToLastNode.next = None
-                self.tail = current # secondToLastNode = last_node
-                self.size -= 1
-                return last_node.data
-            current = current.next
+            self.head = self.tail = None
+        else:
+            # find the second to last node (thnew tail)
+            current = self.head
+            while current.next != self.tail:
+                current = current.next
+            current.next = None # disconnect the new tail from the old tail
+            self.tail = current # second to last node becomes the new tail
+        self.size -= 1
+        return last_node.data
         
 
     def get_size(self): # O(1)
