@@ -52,12 +52,12 @@ class LinkedList():
         if self.size == 1:
             self.head = self.tail = None
         else:
-            # find the second to last node (thnew tail)
+            # find the second-to-last-node (thnew tail)
             current = self.head
             while current.next != last_node:
                 current = current.next
             current.next = None # disconnect the new tail from the old tail
-            self.tail = current # second to last node becomes the new tail
+            self.tail = current # second-to-last-node becomes the new tail
         self.size -= 1
         return last_node.data
         
@@ -66,15 +66,22 @@ class LinkedList():
         """Returns the number of items currently in the list."""
         return self.size
 
+
     def __str__(self):
         """Returns a string with all the items in the list, separated by a single space."""
         return_str = ""
         current = self.head
-        while current != None: # TODO: laga þettta -- get ekkki gert current.data -- UGLY...
-            return_str += f"{current.data} " # HELP TA má gera space svona
+        while current != None:
+            if current != self.tail:
+                return_str += f"{current.data} "
+            else:
+                return_str += f"{current.data}"
             current = current.next
         return return_str
 
-
-
-# TODO: For full marks, implement all these operations (apart from __str__ and pop_back) with time complexity O(1).
+        # return_str = ""
+        # current = self.head
+        # while current != None: # TODO: laga þettta -- get ekkki gert current.data -- UGLY...
+        #     return_str += f"{current.data} " # HELP TA má gera space svona
+        #     current = current.next
+        # return return_str
