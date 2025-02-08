@@ -11,7 +11,11 @@ def print_to_screen(head):
         print("")
 
 def get_size(head):
-    return 0
+    # base case
+    if head == None:
+        return 0
+    # inductive step
+    return 1 + get_size(head.next)
 
 def reverse_list(head):
     return head
