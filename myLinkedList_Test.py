@@ -2,7 +2,7 @@ from pa2_base.QueueStackBase.my_linked_list import LinkedList
 
 
 
-def push_back_then_front(ll):
+def pushBack_then_pushFront(ll):
     """ TESTING push_back() on an empty list,
     and then push_front() into a non-empty list"""
 
@@ -62,7 +62,7 @@ def push_back_then_front(ll):
     assert ll.get_size() == 8 # SIZE func
     assert str(ll) == "8 7 6 5 1 2 3 4 " # CHECK WHOLE LIST
 
-def push_front_then_back(ll):
+def pushFront_then_pushBack(ll):
     """ TESTING push_front() on an empty list,
     and then push_back() into a non-empty list"""
 
@@ -116,7 +116,7 @@ def pop_emptyList(ll):
     assert data == None
     assert str(ll) == ""
 
-def pop_oneElemList(ll):
+def pop_list_with_oneElement(ll):
     """ TESTING pop_front() and pop_back()
     with only one element in the list"""
 
@@ -140,9 +140,7 @@ def pop_oneElemList(ll):
     assert ll.size == 0
     assert str(ll) == ""
 
-
-
-def popping(ll):
+def pop_nonEmptyList(ll):
     """ TESTING pop_front() and pop_back()
     on a non-empty list"""
 
@@ -175,15 +173,173 @@ def popping(ll):
     assert ll.tail.data == 4
 
 
+def test_LinkedList_Class():
+    """ TESTING LinkedList as a whole:
+
+    -- popping empty
+     pop_front()
+     pop_back()
+
+    -- push_back right after push_front
+     push_front()
+     push_back()
+     push_front()
+     push_back()
+    
+    -- push_front right after push_back
+     push_back()
+     push_front()
+     push_back()
+     push_front()
+
+    -- pop right after pushing
+     push_back()
+     pop_back()
+     push_front()
+     pop_front()
+
+     push_back()
+     pop_front()
+     push_front()
+     pop_back()
+     """
+    test = LinkedList()
+    assert str(test) == ""
+
+    # -- popping empty
+    data = test.pop_front()
+    assert data == None
+    assert str(test) == ""
+    data = test.pop_back()
+    assert data == None
+    assert str(test) == ""
+
+
+    # -- push_back right after push_front
+    test.push_front("A")
+    assert str(test) == "A "
+    assert test.head.data == "A"
+    assert test.tail.data == "A"
+    test.push_back("B")
+    assert str(test) == "A B "
+    assert test.head.data == "A"
+    assert test.head.next.data == "B"
+    assert test.tail.data == "B"
+    assert test.tail.next == None
+    test.push_front("C")
+    assert str(test) == "C A B "
+    assert test.head.data == "C"
+    assert test.head.next.data == "A"
+    assert test.tail.data == "B"
+    assert test.tail.next == None
+    test.push_back("D")
+    assert str(test) == "C A B D "
+    assert test.head.data == "C"
+    assert test.head.next.data == "A"
+    assert test.tail.data == "D"
+    assert test.tail.next == None
+
+
+    test = LinkedList() # RESET TO begin empty
+    assert str(test) == ""
+    # -- push_front right after push_back
+    test.push_back("A")
+    assert str(test) == "A "
+    assert test.head.data == "A"
+    assert test.tail.data == "A"
+    test.push_front("B")
+    assert str(test) == "B A "
+    assert test.head.data == "B"
+    assert test.head.next.data == "A"
+    assert test.tail.data == "A"
+    assert test.tail.next == None
+    test.push_back("C")
+    assert str(test) == "B A C "
+    assert test.head.data == "B"
+    assert test.head.next.data == "A"
+    assert test.tail.data == "C"
+    assert test.tail.next == None
+    test.push_front("D")
+    assert str(test) == "D B A C "
+    assert test.head.data == "D"
+    assert test.head.next.data == "B"
+    assert test.tail.data == "C"
+    assert test.tail.next == None
+
+
+    test = LinkedList() # RESET TO begin empty
+    assert str(test) == ""
+    # -- pop_back right after push_back
+    test.push_back(1)
+    assert str(test) == "1 "
+    assert test.head.data == 1
+    assert test.tail.data == 1
+    assert test.head.next == None
+    data = test.pop_back()
+    assert str(test) == ""
+    assert test.head == None
+    assert test.tail == None
+    test.push_front(2)
+    assert str(test) == "2 "
+    assert test.head.data == 2
+    assert test.tail.data == 2
+    assert test.head.next == None
+    data = test.pop_front()
+    assert str(test) == ""
+    assert test.head == None
+    assert test.tail == None
+
+    # -- pop_front right after push_front
+    test.push_back(1)
+    assert str(test) == "1 "
+    assert test.head.data == 1
+    assert test.tail.data == 1
+    assert test.head.next == None
+    data = test.pop_front()
+    assert str(test) == ""
+    assert test.head == None
+    assert test.tail == None
+    test.push_front(2)
+    assert str(test) == "2 "
+    assert test.head.data == 2
+    assert test.tail.data == 2
+    assert test.head.next == None
+    data = test.pop_back()
+    assert str(test) == ""
+    assert test.head == None
+    assert test.tail == None
+
+
+    # -- pop_back() with 2 nodes
+    test.push_front(1) # initalize the 2 nodes
+    test.push_back(2) # initalize the 2 nodes
+    assert str(test) == "1 2 "
+    assert test.head.data == 1
+    assert test.head.next == test.tail
+    assert test.tail.data == 2
+        # begin popping_back
+    data = test.pop_back()
+    assert str(test) == "1 "
+    assert data == 2
+    assert test.head.data == 1
+    assert test.tail.data == 1
+    assert test.head.next == None
+    assert test.tail.next == None
+
+
+
+
+
 if __name__ == "__main__":
     ll = LinkedList()
+    ll2 = LinkedList()
 
     pop_emptyList(ll)
-    pop_oneElemList(ll)
-    # push_back_then_front(ll)
-    push_front_then_back(ll)
+    pop_list_with_oneElement(ll)
+    pushBack_then_pushFront(ll2) # push_back on an emptyList
+    pushFront_then_pushBack(ll) # push_front on an emptyList
+    pop_nonEmptyList(ll) # only works with
 
-    popping(ll) # only works with    push_front_then_back(ll)
+    test_LinkedList_Class() # WHOLE SHIT TOGETHER
 
-    print(ll)
-
+    print("All tests passed")

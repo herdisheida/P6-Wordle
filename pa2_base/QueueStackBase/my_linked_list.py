@@ -33,12 +33,15 @@ class LinkedList():
         """Removes the item from the front of the list and returns its value."""
         if self.head == None:
             return None
-        return_data = self.head.data
-        self.head = self.head.next
+          
+        first_node = self.head
+        if self.size == 1:
+            self.head = self.tail = None
+        else:
+            self.head = first_node.next
         self.size -= 1
-        if self.size == 0:
-            self.tail = None
-        return return_data
+        return first_node.data
+
 
     def pop_back(self):
         """Removes the item from the back of the list and returns its value."""
@@ -51,7 +54,7 @@ class LinkedList():
         else:
             # find the second to last node (thnew tail)
             current = self.head
-            while current.next != self.tail:
+            while current.next != last_node:
                 current = current.next
             current.next = None # disconnect the new tail from the old tail
             self.tail = current # second to last node becomes the new tail
