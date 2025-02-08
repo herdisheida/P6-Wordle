@@ -326,9 +326,77 @@ def test_LinkedList_Class():
     assert test.head.next == None
     assert test.tail.next == None
 
+def final_testing():
+    """ Comprehensive testing of LinkedList operations, including edge cases. """
+    ll = LinkedList()
 
+    # Test on empty list
+    assert ll.pop_front() == None
+    assert ll.pop_back() == None
+    assert ll.get_size() == 0
+    assert str(ll) == ""
 
+    # Test push_back on empty list
+    ll.push_back(1)
+    assert ll.head.data == 1
+    assert ll.tail.data == 1
+    assert ll.get_size() == 1
+    assert str(ll) == "1 "
 
+    # Test push_front on non-empty list
+    ll.push_front(0)
+    assert ll.head.data == 0
+    assert ll.tail.data == 1
+    assert ll.get_size() == 2
+    assert str(ll) == "0 1 "
+
+    # Test pop_front on non-empty list
+    assert ll.pop_front() == 0
+    assert ll.head.data == 1
+    assert ll.tail.data == 1
+    assert ll.get_size() == 1
+    assert str(ll) == "1 "
+
+    # Test pop_back on non-empty list
+    assert ll.pop_back() == 1
+    assert ll.head == None
+    assert ll.tail == None
+    assert ll.get_size() == 0
+    assert str(ll) == ""
+
+    # Test push_back and push_front alternately
+    ll.push_back(1)
+    ll.push_front(0)
+    ll.push_back(2)
+    ll.push_front(-1)
+    assert str(ll) == "-1 0 1 2 "
+    assert ll.get_size() == 4
+
+    # Test pop_front and pop_back alternately
+    assert ll.pop_front() == -1
+    assert ll.pop_back() == 2
+    assert str(ll) == "0 1 "
+    assert ll.get_size() == 2
+
+    # Test edge case with multiple elements
+    ll.push_back(2)
+    ll.push_back(3)
+    ll.push_back(4)
+    assert str(ll) == "0 1 2 3 4 "
+    assert ll.get_size() == 5
+
+    # Pop all elements to test stability
+    assert ll.pop_front() == 0
+    assert ll.pop_front() == 1
+    assert ll.pop_front() == 2
+    assert ll.pop_front() == 3
+    assert ll.pop_front() == 4
+    assert ll.pop_front() == None
+    assert ll.pop_back() == None
+    assert str(ll) == ""
+    assert ll.get_size() == 0
+
+    print("All final tests passed")
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -341,5 +409,5 @@ if __name__ == "__main__":
     pop_nonEmptyList(ll) # only works with
 
     test_LinkedList_Class() # WHOLE SHIT TOGETHER
-
+    final_testing()
     print("All tests passed")
