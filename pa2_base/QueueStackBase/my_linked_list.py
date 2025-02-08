@@ -69,19 +69,19 @@ class LinkedList():
 
     def __str__(self):
         """Returns a string with all the items in the list, separated by a single space."""
-        return_str = ""
-        current = self.head
-        while current != None:
-            if current != self.tail:
-                return_str += f"{current.data} "
-            else:
-                return_str += f"{current.data}"
-            current = current.next
-        return return_str
-
         # return_str = ""
         # current = self.head
-        # while current != None: # TODO: laga þettta -- get ekkki gert current.data -- UGLY...
-        #     return_str += f"{current.data} " # HELP TA má gera space svona
+        # while current != None:
+        #     if current != self.tail:
+        #         return_str += f"{current.data} "
+        #     else:
+        #         return_str += f"{current.data}"
         #     current = current.next
         # return return_str
+
+        return_str = ""
+        current = self.head
+        while current != None: # TODO: laga þettta -- get ekkki gert current.data -- UGLY...
+            return_str += f"{current.data} " # HELP TA má gera space svona
+            current = current.next
+        return return_str
