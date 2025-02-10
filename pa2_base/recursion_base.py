@@ -1,7 +1,8 @@
 class Node:
-    def __init__(self, data = None, next = None):
+    def __init__(self, data=None, next=None):
         self.data = data
         self.next = next
+
 
 def print_to_screen(head):
     if head != None:
@@ -10,9 +11,10 @@ def print_to_screen(head):
     else:
         print("")
 
+
 def get_size(head):
     # base case
-    if head == None:
+    if not head:
         return 0
     # inductive step
     return 1 + get_size(head.next)
@@ -22,25 +24,30 @@ def reverse_list(head):
     def _reverse_copy(node, prev=None):
         if not node:
             return prev
-        new_node = Node(node.data) # get current node
-        new_node.next = prev # link previous node after the current node
-        return _reverse_copy(node.next, new_node) # make current node, the next prev node and iterate through the whole list
+        # get current node
+        new_node = Node(node.data)
+        # link current node to the previous node
+        new_node.next = prev
+        # recursively iterate by making the current node the next prev-node
+        return _reverse_copy(node.next, new_node)
+
     return _reverse_copy(head)
 
 
 def palindrome(head):
-
     def _is_equal(node, rev_node):
-        if node == None and rev_node == None:
+        if not node and not rev_node:
             return True
-        if node == None or rev_node == None:
+        if not node or not rev_node:
             return False
         if node.data != rev_node.data:
             return False
         return _is_equal(node.next, rev_node.next)
-    
+
     reversed_head = reverse_list(head)
     return _is_equal(head, reversed_head)
+
+
 
 if __name__ == "__main__":
     ##
@@ -68,7 +75,6 @@ if __name__ == "__main__":
     print_to_screen(head)
     print("size: " + str(get_size(head)))
     print_to_screen(head)
-
 
     ##
     print("REVERSE TESTS")
@@ -107,7 +113,6 @@ if __name__ == "__main__":
     print_to_screen(head)
     rev_head = reverse_list(head)
     print_to_screen(rev_head)
-
 
     ##
     print("PALINDROME TESTS")
