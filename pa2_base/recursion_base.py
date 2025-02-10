@@ -19,8 +19,8 @@ def get_size(head):
 
 def reverse_list(head):
     # base case
-    if head == None or head.next == None:
-        return head
+    # if head == None or head.next == None:
+        # return head
     # # inductive step
     # print("head: ", head)
     # print("head.next: ", head.next)
@@ -28,8 +28,8 @@ def reverse_list(head):
     # print("new_head: ",new_head)
     # head.next = head
     # head = None
-    print("head: ", head.data)
-    print("head.next: ", head.next.data if head.next != None else 124)
+    # print("head: ", head.data)
+    # print("head.next: ", head.next.data if head.next != None else 124)
 
     # LOOP forever
     # new_head = Node(head.next, head)
@@ -79,13 +79,67 @@ def reverse_list(head):
 
 
 
-    # planið: find the tail
-    reversed = reverse_list(head.next)
-    current = reversed
-    while current.next:
-        current = current.next
-    current.next = Node(head.data)
-    return reversed
+    # WORKS but is time is not good :((
+    # reversed = reverse_list(head.next)
+    # current = reversed
+    # while current.next:
+    #     current = current.next
+    # current.next = Node(head.data)
+    # return reversed
+
+
+
+    # def reverse_inner(head, reversed=None):
+    #     if head == None:
+    #         return reversed
+    #     if head.next == None:
+    #         head.next = reversed
+    #         return head
+        
+    # if head == None or head.next == None:
+    #     return head
+    
+    # print("before", head.data)
+    # reverse_list(head.next)
+    # print("after:", head.data)
+    # # print()
+    # # node = Node(head.data, head)
+    # # print("NODE: ", node.data)
+
+    # def reverse_inner(head, tail=None):
+    #     # base case
+    #     if head == None or head.next == None:
+    #         return head
+    #     if tail == None:
+    #         return 
+        
+    #     # inductive step
+    #     new_head = Node(head.next.data, head.next.next)
+    #     new_tail = Node(head.data, head.next)
+    #     return reverse_inner(new_head, new_tail)
+
+
+    # return reverse_inner(head)
+        
+
+
+
+    def reverse_inner(node):
+        # base case
+        if not node:
+            return None, None # head = tail = None
+        if not node.next:
+            head = tail = Node(node.data)
+            return head, tail
+        
+        # inductive step
+        rev_head, rev_tail = reverse_inner(node.next) # {rev_head, ..., rev_tail}
+        rev_tail.next = Node(node.data) # {rev_head, ..., rev_tail, rev_tail.next}
+        return rev_head, rev_tail.next # {returning new_head, ...,  new_tail}
+    
+    new_head, x = reverse_inner(head)
+    return new_head
+
 
 
 def palindrome(head):
