@@ -19,22 +19,13 @@ def get_size(head):
 
 
 def reverse_list(head):
-    def reverse_inner(node):
-        # base case
-        if not node:
-            return None, None # head = tail = None
-        if not node.next:
-            head = tail = Node(node.data)
-            return head, tail
-        
-        # inductive step
-        new_head, new_tail = reverse_inner(node.next)   # (new_head) -> ... -> (new_tail)
-        new_tail.next = Node(node.data)                 # (new_head) -> ... -> (new_tail) -> (new_tail.next)
-        return new_head, new_tail.next                  # returning (new_head) -> ... -> (new_tail.next)
-
-    new_head, x = reverse_inner(head)
+    if head == None or head.next == None:
+        return head
+    
+    new_head = reverse_list(head.next)
+    head.next.next = head
+    head.next = None
     return new_head
-
 
 
 def palindrome(head):
