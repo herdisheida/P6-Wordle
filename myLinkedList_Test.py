@@ -12,19 +12,19 @@ def pushBack_then_pushFront(ll):
     assert ll.tail.data == 1 # TAIL
     assert ll.head.next == None # AFTER HEAD
     assert ll.get_size() == 1 # SIZE func
-    assert str(ll) == "1" # CHECK WHOLE LIST
+    assert str(ll) == "1 " # CHECK WHOLE LIST
     ll.push_back(2)
     assert ll.head.data == 1 # HEAD
     assert ll.tail.data == 2 # TAIL
     assert ll.head.next.data == 2 # AFTER HEAD
     assert ll.get_size() == 2 # SIZE func
-    assert str(ll) == "1 2" # CHECK WHOLE LIST
+    assert str(ll) == "1 2 " # CHECK WHOLE LIST
     ll.push_back(3)
     assert ll.head.data == 1 # HEAD
     assert ll.tail.data == 3 # TAIL
     assert ll.head.next.data == 2 # AFTER HEAD
     assert ll.get_size() == 3 # SIZE func
-    assert str(ll) == "1 2 3" # CHECK WHOLE LIST
+    assert str(ll) == "1 2 3 " # CHECK WHOLE LIST
     ll.push_back(4)
     assert ll.head.data == 1 # HEAD
     assert ll.tail.data == 4 # TAIL
@@ -33,7 +33,7 @@ def pushBack_then_pushFront(ll):
     assert ll.head.next.next.next.data == 4 # AFTER AFTER AFTER HEAD
     assert ll.head.next.next.next.next == None # AFTER AFTER AFTER AFTER HEAD = AFTER TAIL
     assert ll.get_size() == 4 # SIZE func
-    assert str(ll) == "1 2 3 4" # CHECK WHOLE LIST
+    assert str(ll) == "1 2 3 4 " # CHECK WHOLE LIST
 
 
     # PUSH FRONT TEST
@@ -42,25 +42,25 @@ def pushBack_then_pushFront(ll):
     assert ll.tail.data == 4 # TAIL
     assert ll.head.next.data == 1 # AFTER HEAD
     assert ll.get_size() == 5 # SIZE func
-    assert str(ll) == "5 1 2 3 4" # CHECK WHOLE LIST
+    assert str(ll) == "5 1 2 3 4 " # CHECK WHOLE LIST
     ll.push_front(6)
     assert ll.head.data == 6 # HEAD
     assert ll.tail.data == 4 # TAIL
     assert ll.head.next.data == 5 # AFTER HEAD
     assert ll.get_size() == 6 # SIZE func
-    assert str(ll) == "6 5 1 2 3 4" # CHECK WHOLE LIST
+    assert str(ll) == "6 5 1 2 3 4 " # CHECK WHOLE LIST
     ll.push_front(7)
     assert ll.head.data == 7 # HEAD
     assert ll.tail.data == 4 # TAIL
     assert ll.head.next.data == 6 # AFTER HEAD
     assert ll.get_size() == 7 # SIZE func
-    assert str(ll) == "7 6 5 1 2 3 4" # CHECK WHOLE LIST
+    assert str(ll) == "7 6 5 1 2 3 4 " # CHECK WHOLE LIST
     ll.push_front(8)
     assert ll.head.data == 8 # HEAD
     assert ll.tail.data == 4 # TAIL
     assert ll.head.next.data == 7 # AFTER HEAD
     assert ll.get_size() == 8 # SIZE func
-    assert str(ll) == "8 7 6 5 1 2 3 4" # CHECK WHOLE LIST
+    assert str(ll) == "8 7 6 5 1 2 3 4 " # CHECK WHOLE LIST
 
 def pushFront_then_pushBack(ll):
     """ TESTING push_front() on an empty list,
@@ -72,19 +72,19 @@ def pushFront_then_pushBack(ll):
     assert ll.tail.data == 1 # TAIL
     assert ll.head.next == None # AFTER HEAD
     assert ll.get_size() == 1 # SIZE func
-    assert str(ll) == "1" # CHECK WHOLE LIST'
+    assert str(ll) == "1 " # CHECK WHOLE LIST'
     ll.push_front(2)
     assert ll.head.data == 2 # HEAD
     assert ll.tail.data == 1 # TAIL
     assert ll.head.next.data == 1 # AFTER HEAD
     assert ll.get_size() == 2 # SIZE func
-    assert str(ll) == "2 1" # CHECK WHOLE LIST'
+    assert str(ll) == "2 1 " # CHECK WHOLE LIST'
     ll.push_front(3)
     assert ll.head.data == 3 # HEAD
     assert ll.tail.data == 1 # TAIL
     assert ll.head.next.data == 2 # AFTER HEAD
     assert ll.get_size() == 3 # SIZE func
-    assert str(ll) == "3 2 1" # CHECK WHOLE LIST'
+    assert str(ll) == "3 2 1 " # CHECK WHOLE LIST'
 
     # PUSH BACK TEST
     ll.push_back(4)
@@ -92,19 +92,19 @@ def pushFront_then_pushBack(ll):
     assert ll.tail.data == 4 # TAIL
     assert ll.head.next.data == 2 # AFTER HEAD
     assert ll.get_size() == 4 # SIZE func
-    assert str(ll) == "3 2 1 4" # CHECK WHOLE LIST'
+    assert str(ll) == "3 2 1 4 " # CHECK WHOLE LIST'
     ll.push_back(5)
     assert ll.head.data == 3 # HEAD
     assert ll.tail.data == 5 # TAIL
     assert ll.head.next.data == 2 # AFTER HEAD
     assert ll.get_size() == 5 # SIZE func
-    assert str(ll) == "3 2 1 4 5" # CHECK WHOLE LIST'
+    assert str(ll) == "3 2 1 4 5 " # CHECK WHOLE LIST'
     ll.push_back(6)
     assert ll.head.data == 3 # HEAD
     assert ll.tail.data == 6 # TAIL
     assert ll.head.next.data == 2 # AFTER HEAD
     assert ll.get_size() == 6 # SIZE func
-    assert str(ll) == "3 2 1 4 5 6" # CHECK WHOLE LIST'
+    assert str(ll) == "3 2 1 4 5 6 " # CHECK WHOLE LIST'
 
 def pop_emptyList(ll):
     """ TESTING pop_front() and pop_back()
@@ -147,13 +147,13 @@ def pop_nonEmptyList(ll):
     # POP FRONT TEST
     data = ll.pop_front()
     assert data == 3
-    assert str(ll) == "2 1 4 5 6"
+    assert str(ll) == "2 1 4 5 6 " # CHECK WHOLE LIST
     assert ll.head.data == 2
     assert ll.head.next.data == 1
     assert ll.tail.data == 6
     data = ll.pop_front()
     assert data == 2
-    assert str(ll) == "1 4 5 6"
+    assert str(ll) == "1 4 5 6 " # CHECK WHOLE LIST
     assert ll.head.data == 1
     assert ll.head.next.data == 4
     assert ll.tail.data == 6
@@ -161,13 +161,13 @@ def pop_nonEmptyList(ll):
     # POP BACK TEST
     data = ll.pop_back()
     assert data == 6
-    assert str(ll) == "1 4 5"
+    assert str(ll) == "1 4 5 " # CHECK WHOLE LIST
     assert ll.head.data == 1
     assert ll.head.next.data == 4
     assert ll.tail.data == 5
     data = ll.pop_back()
     assert data == 5
-    assert str(ll) == "1 4"
+    assert str(ll) == "1 4 " # CHECK WHOLE LIST
     assert ll.head.data == 1
     assert ll.head.next.data == 4
     assert ll.tail.data == 4
@@ -217,23 +217,23 @@ def test_LinkedList_Class():
 
     # -- push_back right after push_front
     test.push_front("A")
-    assert str(test) == "A"
+    assert str(test) == "A " # CHECK WHOLE LIST
     assert test.head.data == "A"
     assert test.tail.data == "A"
     test.push_back("B")
-    assert str(test) == "A B"
+    assert str(test) == "A B " # CHECK WHOLE LIST
     assert test.head.data == "A"
     assert test.head.next.data == "B"
     assert test.tail.data == "B"
     assert test.tail.next == None
     test.push_front("C")
-    assert str(test) == "C A B"
+    assert str(test) == "C A B " # CHECK WHOLE LIST
     assert test.head.data == "C"
     assert test.head.next.data == "A"
     assert test.tail.data == "B"
     assert test.tail.next == None
     test.push_back("D")
-    assert str(test) == "C A B D"
+    assert str(test) == "C A B D " # CHECK WHOLE LIST
     assert test.head.data == "C"
     assert test.head.next.data == "A"
     assert test.tail.data == "D"
@@ -244,23 +244,23 @@ def test_LinkedList_Class():
     assert str(test) == ""
     # -- push_front right after push_back
     test.push_back("A")
-    assert str(test) == "A"
+    assert str(test) == "A " # CHECK WHOLE LIST
     assert test.head.data == "A"
     assert test.tail.data == "A"
     test.push_front("B")
-    assert str(test) == "B A"
+    assert str(test) == "B A " # CHECK WHOLE LIST
     assert test.head.data == "B"
     assert test.head.next.data == "A"
     assert test.tail.data == "A"
     assert test.tail.next == None
     test.push_back("C")
-    assert str(test) == "B A C"
+    assert str(test) == "B A C " # CHECK WHOLE LIST
     assert test.head.data == "B"
     assert test.head.next.data == "A"
     assert test.tail.data == "C"
     assert test.tail.next == None
     test.push_front("D")
-    assert str(test) == "D B A C"
+    assert str(test) == "D B A C " # CHECK WHOLE LIST
     assert test.head.data == "D"
     assert test.head.next.data == "B"
     assert test.tail.data == "C"
@@ -271,7 +271,7 @@ def test_LinkedList_Class():
     assert str(test) == ""
     # -- pop_back right after push_back
     test.push_back(1)
-    assert str(test) == "1"
+    assert str(test) == "1 " # CHECK WHOLE LIST
     assert test.head.data == 1
     assert test.tail.data == 1
     assert test.head.next == None
@@ -280,7 +280,7 @@ def test_LinkedList_Class():
     assert test.head == None
     assert test.tail == None
     test.push_front(2)
-    assert str(test) == "2"
+    assert str(test) == "2 " # CHECK WHOLE LIST
     assert test.head.data == 2
     assert test.tail.data == 2
     assert test.head.next == None
@@ -291,7 +291,7 @@ def test_LinkedList_Class():
 
     # -- pop_front right after push_front
     test.push_back(1)
-    assert str(test) == "1"
+    assert str(test) == "1 " # CHECK WHOLE LIST
     assert test.head.data == 1
     assert test.tail.data == 1
     assert test.head.next == None
@@ -300,7 +300,7 @@ def test_LinkedList_Class():
     assert test.head == None
     assert test.tail == None
     test.push_front(2)
-    assert str(test) == "2"
+    assert str(test) == "2 " # CHECK WHOLE LIST
     assert test.head.data == 2
     assert test.tail.data == 2
     assert test.head.next == None
@@ -313,13 +313,13 @@ def test_LinkedList_Class():
     # -- pop_back() with 2 nodes
     test.push_front(1) # initalize the 2 nodes
     test.push_back(2) # initalize the 2 nodes
-    assert str(test) == "1 2"
+    assert str(test) == "1 2 " # CHECK WHOLE LIST
     assert test.head.data == 1
     assert test.head.next == test.tail
     assert test.tail.data == 2
         # begin popping_back
     data = test.pop_back()
-    assert str(test) == "1"
+    assert str(test) == "1 " # CHECK WHOLE LIST
     assert data == 2
     assert test.head.data == 1
     assert test.tail.data == 1
@@ -341,21 +341,21 @@ def final_testing():
     assert ll.head.data == 1
     assert ll.tail.data == 1
     assert ll.get_size() == 1
-    assert str(ll) == "1"
+    assert str(ll) == "1 " # CHECK WHOLE LIST
 
     # Test push_front on non-empty list
     ll.push_front(0)
     assert ll.head.data == 0
     assert ll.tail.data == 1
     assert ll.get_size() == 2
-    assert str(ll) == "0 1"
+    assert str(ll) == "0 1 " # CHECK WHOLE LIST
 
     # Test pop_front on non-empty list
     assert ll.pop_front() == 0
     assert ll.head.data == 1
     assert ll.tail.data == 1
     assert ll.get_size() == 1
-    assert str(ll) == "1"
+    assert str(ll) == "1 " # CHECK WHOLE LIST
 
     # Test pop_back on non-empty list
     assert ll.pop_back() == 1
@@ -369,20 +369,20 @@ def final_testing():
     ll.push_front(0)
     ll.push_back(2)
     ll.push_front(-1)
-    assert str(ll) == "-1 0 1 2"
+    assert str(ll) == "-1 0 1 2 " # CHECK WHOLE LIST
     assert ll.get_size() == 4
 
     # Test pop_front and pop_back alternately
     assert ll.pop_front() == -1
     assert ll.pop_back() == 2
-    assert str(ll) == "0 1"
+    assert str(ll) == "0 1 " # CHECK WHOLE LIST
     assert ll.get_size() == 2
 
     # Test edge case with multiple elements
     ll.push_back(2)
     ll.push_back(3)
     ll.push_back(4)
-    assert str(ll) == "0 1 2 3 4"
+    assert str(ll) == "0 1 2 3 4 " # CHECK WHOLE LIST
     assert ll.get_size() == 5
 
     # Pop all elements to test stability
