@@ -19,17 +19,28 @@ def get_size(head):
 
 
 def reverse_list(head):
-    if head == None or head.next == None:
-        return head
-    
-    new_head = reverse_list(head.next)
-    head.next.next = head
-    head.next = None
-    return new_head
+    def _reverse_copy(node, prev=None):
+        if not node:
+            return prev
+        new_node = Node(node.data) # get current node
+        new_node.next = prev # link previous node after the current node
+        return _reverse_copy(node.next, new_node) # make current node, the next prev node and iterate through the whole list
+    return _reverse_copy(head)
 
 
 def palindrome(head):
-    return True
+
+    def _is_equal(node, rev_node):
+        if node == None and rev_node == None:
+            return True
+        if node == None or rev_node == None:
+            return False
+        if node.data != rev_node.data:
+            return False
+        return _is_equal(node.next, rev_node.next)
+    
+    reversed_head = reverse_list(head)
+    return _is_equal(head, reversed_head)
 
 if __name__ == "__main__":
     ##
