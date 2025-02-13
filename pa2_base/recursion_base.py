@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, data=None, next=None):
         self.data = data
-        self.next = next
+        self.next: Node = next
 
 
 def print_to_screen(head):
@@ -14,7 +14,7 @@ def print_to_screen(head):
 
 def get_size(head):
     # base case
-    if not head:
+    if head == None:
         return 0
     # inductive step
     return 1 + get_size(head.next)
@@ -26,41 +26,39 @@ def reverse_list(head):
         return head
     # inductive step
     node = reverse_list(head.next)
-    head.next.next = head # reverse the tie
-    head.next = None # sever the tie
+    head.next.next = head  # reverse the tie
+    head.next = None  # sever the tie
     return node
 
 
-
 def palindrome(head):
-    """ Returns True if the list is a palindrome,
-     otherwise False """
+    """Returns True if the list is a palindrome,
+    otherwise False"""
+
     def rec(p1, p2):
         """
-            p1: Node =  traverse from the tail
-            p2: Node =  stores head 
-            curr_node: Node =  traverse from the head
-            is_pal: bool = compares p1 and curr_node
+        p1: Node =  traverse from the tail
+        p2: Node =  stores head
+        curr_node: Node =  traverse from the head
+        is_pal: bool = compares p1 and curr_node
         """
 
         # base case
         if not p1:
             return True, p2
-        
+
         # inductive step
         is_pal, curr_node = rec(p1.next, p2)
 
         if not is_pal:
             return False, p2.next
-        
-        is_pal = (p1.data == curr_node.data)
+
+        is_pal = p1.data == curr_node.data
         return is_pal, curr_node.next
 
     # send node tvice to the rec func, in order to compare the head with the tail
     result, i = rec(head, head)
     return result
-
-
 
 
 if __name__ == "__main__":
