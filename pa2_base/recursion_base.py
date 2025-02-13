@@ -21,31 +21,42 @@ def get_size(head):
 
 
 def reverse_list(head):
-    def _reverse_copy(node, prev=None):
-        if not node:
-            return prev
-        # get current node
-        new_node = Node(node.data)
-        # link current node to the previous node
-        new_node.next = prev
-        # recursively iterate by making the current node the next prev-node
-        return _reverse_copy(node.next, new_node)
+    # base case
+    if head == None or head.next == None:
+        return head
+    # inductive step
+    node = reverse_list(head.next)
+    head.next.next = head # reverse the tie
+    head.next = None # sever the tie
+    return node
 
-    return _reverse_copy(head)
 
 
 def palindrome(head):
-    def _is_equal(node, rev_node):
-        if not node and not rev_node:
-            return True
-        if not node or not rev_node:
-            return False
-        if node.data != rev_node.data:
-            return False
-        return _is_equal(node.next, rev_node.next)
+    def rec(p1, p2):
+        """
+            p1: traverse from the tail
+            p2: stores head 
+            curr_node: traverse from the head
+            compare p1 and curr_node
+        """
 
-    reversed_head = reverse_list(head)
-    return _is_equal(head, reversed_head)
+        # base case
+        if not p1:
+            return True, p2
+        
+        # inductive step
+        is_pal, curr_node = rec(p1.next, p2)
+
+        if not is_pal:
+            return False, p2.next
+        
+        is_pal = (p1.data == curr_node.data)
+        return is_pal, curr_node.next
+
+    result, i = rec(head, head)
+    return result
+
 
 
 
