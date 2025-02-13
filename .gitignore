@@ -8,3 +8,4 @@ pa2_base/QueueStackBase/my_linked_list.py
 pa2_base/QueueStackBase/__pycache__/my_stack.cpython-313.pyc
 pa2_base/QueueStackBase/__pycache__/my_queue.cpython-313.pyc
 pa2_base/QueueStackBase/__pycache__/array_deque.cpython-313.pyc
+pa2_base/__pycache__/recursion_base.cpython-313.pyc
