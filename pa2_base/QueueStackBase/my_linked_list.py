@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, data=None, next=None):
         self.data = data
-        self.next:Node = next
+        self.next: Node = next
 
 
 class LinkedList:
@@ -43,7 +43,7 @@ class LinkedList:
         self.size -= 1
         return first_node.data
 
-    def pop_back(self):
+    def pop_back(self): # O(n)
         """Removes the item from the back of the list and returns its value."""
         if self.head == None:
             return None
@@ -65,7 +65,7 @@ class LinkedList:
         """Returns the number of items currently in the list."""
         return self.size
 
-    def __str__(self):
+    def __str__(self):  # O(n)
         """Returns a string with all the items in the list, separated by a single space."""
         return_str = ""
         current = self.head
