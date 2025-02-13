@@ -33,12 +33,14 @@ def reverse_list(head):
 
 
 def palindrome(head):
+    """ Returns True if the list is a palindrome,
+     otherwise False """
     def rec(p1, p2):
         """
-            p1: traverse from the tail
-            p2: stores head 
-            curr_node: traverse from the head
-            compare p1 and curr_node
+            p1: Node =  traverse from the tail
+            p2: Node =  stores head 
+            curr_node: Node =  traverse from the head
+            is_pal: bool = compares p1 and curr_node
         """
 
         # base case
@@ -54,6 +56,7 @@ def palindrome(head):
         is_pal = (p1.data == curr_node.data)
         return is_pal, curr_node.next
 
+    # send node tvice to the rec func, in order to compare the head with the tail
     result, i = rec(head, head)
     return result
 
