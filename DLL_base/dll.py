@@ -39,7 +39,7 @@ class DLL:
 
     def get_value(self):
         """Returns the value of the item at the current position in the list (None if not item)"""
-        if not self.current_pos:
+        if self.size == 0:
             return None
         return self.current_pos.data
 
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     dll = DLL()
 
-    # TEST insert
+    # TEST insert(value)
     dll.insert("A")
     assert str(dll) == "A "
     assert dll.current_pos.data == "A"
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     assert dll.size == 3
     assert len(dll) == 3
 
-    # testing remove
+    # testing remove()
     dll.remove()
     assert str(dll) == "B A "
     assert dll.current_pos.data == "B"
