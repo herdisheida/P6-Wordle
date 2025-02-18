@@ -1,5 +1,60 @@
 from DLL_base.dll import DLL
 
+def test_insert(dll):
+    # TEST insert(value)
+    dll.insert("A")
+    assert str(dll) == "A "
+    assert dll.current_pos.data == "A"
+    assert dll.current_pos.next.data == dll.tail.data
+    assert dll.head.next.data == "A"
+    assert dll.tail.prev.data == "A"
+    assert dll.size == 1
+    assert len(dll) == 1
+
+    dll.insert("B")
+    assert str(dll) == "B A "
+    assert dll.current_pos.data == "B"
+    assert dll.current_pos.next.data == "A"
+    assert dll.head.next.data == "B"
+    assert dll.tail.prev.data == "A"
+    assert dll.size == 2
+    assert len(dll) == 2
+
+    dll.insert("C")
+    assert str(dll) == "C B A "
+    assert dll.current_pos.data == "C"
+    assert dll.current_pos.next.data == "B"
+    assert dll.head.next.data =="C"
+    assert dll.tail.prev.data == "A"
+    assert dll.size == 3
+    assert len(dll) == 3
+
+def test_remove(dll):
+    # testing remove()
+    dll.remove()
+    assert str(dll) == "B A "
+    assert dll.current_pos.data == "B"
+    assert dll.current_pos.next.data == "A"
+    assert dll.head.next.data == "B"
+
+    dll.remove()
+    assert str(dll) == "A "
+    assert dll.current_pos.data == "A"
+    assert dll.current_pos.next.data == dll.tail.data
+    assert dll.head.next.data == "A"
+
+    dll.remove() # removing from 1 elem list
+    assert str(dll) == ""
+    assert dll.current_pos.data == dll.tail.data
+    assert dll.current_pos.next == None
+    assert dll.head.next.data == dll.tail.data
+
+    dll.remove() # remove from empty array
+    assert str(dll) == ""
+    assert dll.current_pos.data == dll.tail.data
+    assert dll.current_pos.next == None
+    assert dll.head.next.data == dll.tail.data
+
 def test_insert_and_remove():
     dll = DLL()
     
@@ -58,4 +113,8 @@ def test_insert_and_remove():
 
 
 if __name__ == "__main__":
+    dll = DLL()
+    test_insert(dll)
+    test_remove(dll)
+
     test_insert_and_remove()

@@ -134,29 +134,3 @@ if __name__ == "__main__":
     assert dll.tail.prev.data == "A"
     assert dll.size == 3
     assert len(dll) == 3
-
-    # testing remove()
-    dll.remove()
-    assert str(dll) == "B A "
-    assert dll.current_pos.data == "B"
-    assert dll.current_pos.next.data == "A"
-    assert dll.head.next.data == "B"
-
-    dll.remove()
-    assert str(dll) == "A "
-    assert dll.current_pos.data == "A"
-    assert dll.current_pos.next.data == dll.tail.data
-    assert dll.head.next.data == "A"
-
-    dll.remove() # removing from 1 elem list
-    assert str(dll) == ""
-    assert dll.current_pos.data == dll.tail.data
-    assert dll.current_pos.next == None
-    assert dll.head.next.data == dll.tail.data
-
-    dll.remove() # remove from empty array
-    assert str(dll) == ""
-    assert dll.current_pos.data == dll.tail.data
-    assert dll.current_pos.next == None
-    assert dll.head.next.data == dll.tail.data
-
