@@ -155,13 +155,16 @@ def test_get_value():
     value = dll.get_value()
     assert value == None
 
-def test_move_to_next():
+def test_move_to_next_and_move_to_prev():
     dll = DLL()
 
     # testing the empty list
     assert dll.current_pos == dll.tail
     dll.move_to_next()
     assert dll.current_pos == dll.tail
+    dll.move_to_prev
+    assert dll.current_pos == dll.tail
+
 
     assert dll.current_pos.data == None
     dll.insert("A")
@@ -170,6 +173,7 @@ def test_move_to_next():
     dll.insert("D")
     dll.insert("E")
 
+    # MOVE NEXT
     assert dll.current_pos.data == "E"
     dll.move_to_next()
     assert dll.current_pos.data == "D"
@@ -179,8 +183,23 @@ def test_move_to_next():
     assert dll.current_pos.data == "B"
     dll.move_to_next()
     assert dll.current_pos.data == "A"
+    # checking the end
     dll.move_to_next()
     assert dll.current_pos.data == "A"
+
+    # MOVE RIGHT
+    assert dll.current_pos.data == "A"
+    dll.move_to_prev()
+    assert dll.current_pos.data == "B"
+    dll.move_to_prev()
+    assert dll.current_pos.data == "C"
+    dll.move_to_prev()
+    assert dll.current_pos.data == "D"
+    dll.move_to_prev()
+    assert dll.current_pos.data == "E"
+    # checking the end
+    dll.move_to_prev()
+    assert dll.current_pos.data == "E"
 
 
 if __name__ == "__main__":
@@ -194,4 +213,4 @@ if __name__ == "__main__":
 
     test_get_value()
     
-    test_move_to_next()
+    test_move_to_next_and_move_to_prev()

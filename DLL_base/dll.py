@@ -53,7 +53,7 @@ class DLL:
     def move_to_prev(self):
         """Moves the current position one item closer to the head/header.
         Do nothing if at beginning"""
-        if self.current_pos != self.tail:
+        if self.current_pos.prev != self.head:
             self.current_pos = self.current_pos.prev
 
     def move_to_pos(self, pos):
