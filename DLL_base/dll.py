@@ -13,45 +13,42 @@ class DLL:
         self.tail.prev = self.head
         self.size = 0
 
-        self.curr = self.tail ## LATER curr
+        self.current_pos = self.tail ## LATER curr
 
     def insert(self, data):
         """Inserts an item with that value in front of the node at the current position"""
-        node = Node(data, self.curr.prev, self.curr)
+        node = Node(data, self.current_pos.prev, self.current_pos)
         if self.size == 0:
-            self.tail.prev = node
             self.head.next = node
+            self.tail.prev = node
         else:
-            self.curr.prev.next = node
-            self.curr.prev = node
-
-        self.curr = node
+            self.current_pos.prev.next = node # connect left to newNode (left->new)
+            self.current_pos.prev = node # connect right to newNode (new<-right)
+        self.current_pos = node
         self.size += 1
 
         
-        
-
     def remove(self):
         """Removes the node at the current position if there is one (otherwise does nothing)"""
         pass
 
     def get_value(self):
         """Returns the value of the item at the current position in the list (None if not item)"""
-        if not self.curr: # LATER curr
+        if not self.current_pos: # LATER curr
             return None
-        return self.curr.data
+        return self.current_pos.data
 
     def move_to_next(self):
         """Moves the current position one item closer to the tail/trailer.
         Do nothing if at end"""
-        if self.curr != self.tail:
-            self.curr = self.curr.next
+        if self.current_pos != self.tail:
+            self.current_pos = self.current_pos.next
 
     def move_to_prev(self):
         """Moves the current position one item closer to the head/header.
         Do nothing if at beginning"""
-        if self.curr != self.tail:
-            self.curr = self.curr.prev
+        if self.current_pos != self.tail:
+            self.current_pos = self.current_pos.prev
 
     def move_to_pos(self, pos):
         """Moves the current position to item #position in the list"""
@@ -62,7 +59,7 @@ class DLL:
         self.head.next = self.tail
         self.tail.prev = self.head
         self.size = 0
-        self.curr = self.tail # LATER curr
+        self.current_pos = self.tail # LATER curr
         pass
 
     def get_first_node(self):
@@ -108,21 +105,30 @@ if __name__ == "__main__":
 
     dll = DLL()
 
+    # TEST insert
     dll.insert("A")
-    print(dll.curr.data) ## "A"
-    print(dll.head.next.data) ## "A"
-    print(dll.tail.prev.data) ## "A"
-
+    assert dll.current_pos.data == "A"
+    assert dll.current_pos.next.data == dll.tail.data
+    assert dll.head.next.data == "A"
+    assert dll.tail.prev.data == "A"
+    assert dll.size == 1
+    assert len(dll) == 1
 
     dll.insert("B")
+    assert dll.current_pos.data == "B"
+    assert dll.current_pos.next.data == "A"
+    assert dll.head.next.data == "B"
+    assert dll.tail.prev.data == "A"
+    assert dll.size == 2
+    assert len(dll) == 2
+
     dll.insert("C")
-    print()
+    assert dll.current_pos.data == "C"
+    assert dll.current_pos.next.data == "B"
+    assert dll.head.next.data =="C"
+    assert dll.tail.prev.data == "A"
+    assert dll.size == 3
+    assert len(dll) == 3
 
-    print(dll.curr.data) ## "C"
-    print(dll.head.next.data) # "C"
-    print(dll.tail.prev.data) ## "A"
-
-
-    pass
 
 
