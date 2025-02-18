@@ -165,12 +165,13 @@ def test_move_to_next():
     dll.move_to_next()
     assert dll.current_pos.data == "A"
 
+
 if __name__ == "__main__":
     dll = DLL()
     test_insert(dll)
     test_remove(dll)
     test_insert_and_remove()
-    
+
     test_get_value()
     
     test_move_to_next()

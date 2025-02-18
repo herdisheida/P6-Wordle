@@ -46,13 +46,14 @@ class DLL:
     def move_to_next(self):
         """Moves the current position one item closer to the tail/trailer.
         Do nothing if at end"""
-        if self.current_pos.next != self.tail:
-            self.current_pos = self.current_pos.next
+        if self.current_pos.next == self.tail:
+            return
+        self.current_pos = self.current_pos.next
 
     def move_to_prev(self):
         """Moves the current position one item closer to the head/header.
         Do nothing if at beginning"""
-        if self.current_pos.next != self.tail or self.current_pos != self.tail:
+        if self.current_pos != self.tail:
             self.current_pos = self.current_pos.prev
 
     def move_to_pos(self, pos):
@@ -112,3 +113,5 @@ if __name__ == "__main__":
     dll.insert("C")
     dll.insert("D")
     dll.insert("E")
+
+    # testing get_value()
