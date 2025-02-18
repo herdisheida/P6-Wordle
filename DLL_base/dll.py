@@ -30,7 +30,12 @@ class DLL:
         
     def remove(self):
         """Removes the node at the current position if there is one (otherwise does nothing)"""
-        pass
+        if self.size == 0:
+            return
+        self.current_pos.prev.next = self.current_pos.next ## connect left to right
+        self.current_pos.next.prev = self.current_pos.prev ## connect right to left
+        self.current_pos = self.current_pos.next
+        self.size -= 1
 
     def get_value(self):
         """Returns the value of the item at the current position in the list (None if not item)"""
@@ -129,6 +134,13 @@ if __name__ == "__main__":
     assert dll.tail.prev.data == "A"
     assert dll.size == 3
     assert len(dll) == 3
+
+    # TEST remove
+    dll.remove()
+    assert dll.current_pos.data == "B"
+    assert dll.current_pos.next.data == "A"
+    assert dll.head.next.data == "B"
+
 
 
 
