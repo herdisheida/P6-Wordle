@@ -146,6 +146,11 @@ def test_get_value():
 def test_move_to_next():
     dll = DLL()
 
+    # testing the empty list
+    assert dll.current_pos == dll.tail
+    dll.move_to_next()
+    assert dll.current_pos == dll.tail
+
     assert dll.current_pos.data == None
     dll.insert("A")
     dll.insert("B")

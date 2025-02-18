@@ -46,7 +46,7 @@ class DLL:
     def move_to_next(self):
         """Moves the current position one item closer to the tail/trailer.
         Do nothing if at end"""
-        if self.current_pos.next == self.tail:
+        if self.current_pos.next == self.tail or self.size == 0:
             return
         self.current_pos = self.current_pos.next
 
