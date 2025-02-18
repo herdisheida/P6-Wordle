@@ -201,6 +201,43 @@ def test_move_to_next_and_move_to_prev():
     dll.move_to_prev()
     assert dll.current_pos.data == "E"
 
+def test_move_to_pos():
+    dll = DLL()
+
+    # testing empty
+    dll.move_to_pos(-1)
+    assert dll.current_pos == dll.tail
+    dll.move_to_pos(0)
+    assert dll.current_pos == dll.tail
+    dll.move_to_pos(1)
+    assert dll.current_pos == dll.tail
+
+
+    dll.insert("A")
+    dll.insert("B")
+    dll.insert("C")
+    dll.insert("D")
+    dll.insert("E")
+
+
+    dll.move_to_pos(-1)
+    assert dll.current_pos.data == "E" # keeps current pos - does nothing
+    dll.move_to_pos(0)
+    assert dll.current_pos.data == "E"
+    dll.move_to_pos(1)
+    assert dll.current_pos.data == "D"
+    dll.move_to_pos(2)
+    assert dll.current_pos.data == "C"
+    dll.move_to_pos(3)
+    assert dll.current_pos.data == "B"
+    dll.move_to_pos(4)
+    assert dll.current_pos.data == "A"
+
+    # testing out of bounds
+    dll.move_to_pos(5)
+    assert dll.current_pos.data == "A" # keeps current post - does nothing
+
+
 
 if __name__ == "__main__":
     dll = DLL()
@@ -214,3 +251,4 @@ if __name__ == "__main__":
     test_get_value()
     
     test_move_to_next_and_move_to_prev()
+    test_move_to_pos()
