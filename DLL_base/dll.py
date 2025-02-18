@@ -95,7 +95,7 @@ class DLL:
         ret_str = ""
         node = self.head.next
         while node != self.tail:
-            ret_str += f"{node.data}"
+            ret_str += f"{node.data} "
             node = node.next
         return ret_str
     
@@ -109,15 +109,16 @@ if __name__ == "__main__":
 
     # TEST insert
     dll.insert("A")
+    assert str(dll) == "A "
     assert dll.current_pos.data == "A"
     assert dll.current_pos.next.data == dll.tail.data
     assert dll.head.next.data == "A"
     assert dll.tail.prev.data == "A"
     assert dll.size == 1
     assert len(dll) == 1
-    print(dll)
 
     dll.insert("B")
+    assert str(dll) == "B A "
     assert dll.current_pos.data == "B"
     assert dll.current_pos.next.data == "A"
     assert dll.head.next.data == "B"
@@ -126,6 +127,7 @@ if __name__ == "__main__":
     assert len(dll) == 2
 
     dll.insert("C")
+    assert str(dll) == "C B A "
     assert dll.current_pos.data == "C"
     assert dll.current_pos.next.data == "B"
     assert dll.head.next.data =="C"
