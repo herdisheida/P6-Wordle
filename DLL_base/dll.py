@@ -107,7 +107,6 @@ if __name__ == "__main__":
     # create tests here if you want
 
     dll = DLL()
-
     dll.insert("A")
     dll.insert("B")
     dll.insert("C")

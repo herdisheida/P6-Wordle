@@ -1,5 +1,17 @@
 from DLL_base.dll import DLL
 
+
+def test_init():
+    dll = DLL()
+    
+    assert dll.head.next == dll.tail
+    assert dll.tail.prev == dll.head
+
+    assert dll.current_pos == dll.tail
+    assert dll.current_pos.prev == dll.head
+    assert dll.size == 0
+
+
 def test_insert(dll):
     # TEST insert(value)
     dll.insert("A")
@@ -173,6 +185,9 @@ def test_move_to_next():
 
 if __name__ == "__main__":
     dll = DLL()
+
+    test_init()
+
     test_insert(dll)
     test_remove(dll)
     test_insert_and_remove()
