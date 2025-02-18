@@ -46,13 +46,13 @@ class DLL:
     def move_to_next(self):
         """Moves the current position one item closer to the tail/trailer.
         Do nothing if at end"""
-        if self.current_pos != self.tail:
+        if self.current_pos.next != self.tail:
             self.current_pos = self.current_pos.next
 
     def move_to_prev(self):
         """Moves the current position one item closer to the head/header.
         Do nothing if at beginning"""
-        if self.current_pos != self.tail:
+        if self.current_pos.next != self.tail or self.current_pos != self.tail:
             self.current_pos = self.current_pos.prev
 
     def move_to_pos(self, pos):
@@ -107,39 +107,8 @@ if __name__ == "__main__":
 
     dll = DLL()
 
-    # TEST insert(value)
     dll.insert("A")
-    assert str(dll) == "A "
-    assert dll.current_pos.data == "A"
-    assert dll.current_pos.next.data == dll.tail.data
-    assert dll.head.next.data == "A"
-    assert dll.tail.prev.data == "A"
-    assert dll.size == 1
-    assert len(dll) == 1
-    value = dll.get_value()
-    assert value == "A"
-
     dll.insert("B")
-    assert str(dll) == "B A "
-    assert dll.current_pos.data == "B"
-    assert dll.current_pos.next.data == "A"
-    assert dll.head.next.data == "B"
-    assert dll.tail.prev.data == "A"
-    assert dll.size == 2
-    assert len(dll) == 2
-    value = dll.get_value()
-    assert value == "B"
-
     dll.insert("C")
-    assert str(dll) == "C B A "
-    assert dll.current_pos.data == "C"
-    assert dll.current_pos.next.data == "B"
-    assert dll.head.next.data =="C"
-    assert dll.tail.prev.data == "A"
-    assert dll.size == 3
-    assert len(dll) == 3
-    value = dll.get_value()
-    assert value == "C"
-
-
-    # testing get_value()
+    dll.insert("D")
+    dll.insert("E")

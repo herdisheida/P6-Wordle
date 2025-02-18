@@ -143,11 +143,34 @@ def test_get_value():
     value = dll.get_value()
     assert value == None
 
+def test_move_to_next():
+    dll = DLL()
+
+    assert dll.current_pos.data == None
+    dll.insert("A")
+    dll.insert("B")
+    dll.insert("C")
+    dll.insert("D")
+    dll.insert("E")
+
+    assert dll.current_pos.data == "E"
+    dll.move_to_next()
+    assert dll.current_pos.data == "D"
+    dll.move_to_next()
+    assert dll.current_pos.data == "C"
+    dll.move_to_next()
+    assert dll.current_pos.data == "B"
+    dll.move_to_next()
+    assert dll.current_pos.data == "A"
+    dll.move_to_next()
+    assert dll.current_pos.data == "A"
+
 if __name__ == "__main__":
     dll = DLL()
     test_insert(dll)
     test_remove(dll)
-
     test_insert_and_remove()
-
+    
     test_get_value()
+    
+    test_move_to_next()
