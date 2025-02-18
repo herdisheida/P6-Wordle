@@ -13,7 +13,7 @@ class DLL:
         self.tail.prev = self.head
         self.size = 0
 
-        self.current_pos = self.tail ## LATER curr
+        self.current_pos = self.tail
 
     def insert(self, data):
         """Inserts an item with that value in front of the node at the current position"""
@@ -39,7 +39,7 @@ class DLL:
 
     def get_value(self):
         """Returns the value of the item at the current position in the list (None if not item)"""
-        if not self.current_pos: # LATER curr
+        if not self.current_pos:
             return None
         return self.current_pos.data
 
@@ -64,7 +64,7 @@ class DLL:
         self.head.next = self.tail
         self.tail.prev = self.head
         self.size = 0
-        self.current_pos = self.tail # LATER curr
+        self.current_pos = self.tail # CHECK
         pass
 
     def get_first_node(self):
@@ -92,14 +92,11 @@ class DLL:
 
     def __str__(self):
         """Returns string with all the items in the list with a single space between them"""
-
-        ## PRINT LIST FRÁ TA
         ret_str = ""
-        node = self.head
-        while node.next != self.tail:
-            return_str += str(node.data)
+        node = self.head.next
+        while node != self.tail:
+            ret_str += f"{node.data}"
             node = node.next
-
         return ret_str
     
     
@@ -118,6 +115,7 @@ if __name__ == "__main__":
     assert dll.tail.prev.data == "A"
     assert dll.size == 1
     assert len(dll) == 1
+    print(dll)
 
     dll.insert("B")
     assert dll.current_pos.data == "B"
