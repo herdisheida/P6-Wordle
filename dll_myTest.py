@@ -110,7 +110,38 @@ def test_insert_and_remove():
     assert str(dll) == ""
     assert dll.size == 0
 
+def test_get_value():
+    dll = DLL()
+    value = dll.get_value()
+    assert value == None
+    
+    dll.remove()
+    value = dll.get_value()
+    assert value == None
 
+    dll.insert("A")
+    value = dll.get_value()
+    assert value == "A"
+
+    dll.insert("B")
+    value = dll.get_value()
+    assert value == "B"
+
+    dll.insert("C")
+    value = dll.get_value()
+    assert value == "C"
+
+    dll.remove()
+    value = dll.get_value()
+    assert value == "B"
+
+    dll.remove()
+    value = dll.get_value()
+    assert value == "A"
+
+    dll.remove()
+    value = dll.get_value()
+    assert value == None
 
 if __name__ == "__main__":
     dll = DLL()
@@ -118,3 +149,5 @@ if __name__ == "__main__":
     test_remove(dll)
 
     test_insert_and_remove()
+
+    test_get_value()

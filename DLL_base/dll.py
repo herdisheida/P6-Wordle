@@ -116,6 +116,8 @@ if __name__ == "__main__":
     assert dll.tail.prev.data == "A"
     assert dll.size == 1
     assert len(dll) == 1
+    value = dll.get_value()
+    assert value == "A"
 
     dll.insert("B")
     assert str(dll) == "B A "
@@ -125,6 +127,8 @@ if __name__ == "__main__":
     assert dll.tail.prev.data == "A"
     assert dll.size == 2
     assert len(dll) == 2
+    value = dll.get_value()
+    assert value == "B"
 
     dll.insert("C")
     assert str(dll) == "C B A "
@@ -134,3 +138,8 @@ if __name__ == "__main__":
     assert dll.tail.prev.data == "A"
     assert dll.size == 3
     assert len(dll) == 3
+    value = dll.get_value()
+    assert value == "C"
+
+
+    # testing get_value()
