@@ -44,7 +44,7 @@ class DLL:
         # else:
         #     self.current_pos = self.current_pos.next
         # self.size -= 1
-
+        # JB check pls
 
         # HELP goes to the tail when removing the end_node
         if self.current_pos == self.tail:
