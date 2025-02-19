@@ -121,7 +121,7 @@ class DLL:
                 self.remove()
             temp_node = temp_node.next
         self.current_pos = low
-        return low
+        return self.current_pos
 
 
     def sort(self): # TODO
@@ -134,20 +134,23 @@ class DLL:
 
         # self.partition(temp, self.get_last_node)
 
-        pivot = self.get_first_node()
+        low = self.get_first_node()
         high = self.get_last_node()
             
-        self.sort_inner(pivot, high)
+        self.quick_sort(low, high)
 
-    def sort_inner(self, low, high):
+    def quick_sort(self, low, high):
         
-        if low == high:
-            return
+        # base case
+        if (low and high) and (low != high) and (low != high.next):
 
-        pivot = self.partition(low, high)
+            # recursive
+            pivot = self.partition(low, high)
 
-        self.sort_inner(self.get_first_node, pivot.prev)
-        self.sort_inner(pivot.next, self.get_last_node())
+            # recursivly sort left side of "low"
+            self.quick_sort(low, pivot.prev)
+            # recursively sort right side of "low"
+            self.quick_sort(pivot.next, high)
 
 
     def __len__(self):
