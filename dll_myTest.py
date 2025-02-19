@@ -291,33 +291,72 @@ def test_partition():
     # the output order needs to be "3 4 1 5 6 "
     dll.partition(dll.get_first_node(), dll.get_last_node())
     assert str(dll) == "3 4 1 5 6 "
+    assert dll.head.next.data == 3
+    assert dll.head.next.next.data == 4
+    assert dll.get_first_node().data == 3
+    assert dll.get_last_node().data == 6
+    assert dll.tail.prev.data == 6
+    assert dll.tail.prev.prev.data == 5
 
     # testing empty
     dll = DLL()
     dll.partition(dll.get_first_node(), dll.get_last_node())
     assert str(dll) == ""
+    assert dll.head.next == dll.tail
+    assert dll.get_first_node() == None
+    assert dll.get_last_node() == None
+    assert dll.tail.prev == dll.head
 
     # testing array with 1 node
     dll.insert(1)
     dll.partition(dll.get_first_node(), dll.get_last_node())
     assert str(dll) == "1 "
+    assert dll.head.next.data == 1
+    assert dll.get_first_node().data == 1
+    assert dll.get_last_node().data == 1
+    assert dll.head.next.next == dll.tail
+    assert dll.tail.prev.prev == dll.head
 
     # testing array with 2 nodes::     3 -> 1 becomes 1 -> 3
     dll.insert(3)
     dll.partition(dll.get_first_node(), dll.get_last_node())
     assert str(dll) == "1 3 "
+    assert dll.head.next.data == 1
+    assert dll.head.next.next.data == 3
+    assert dll.tail.prev.data == 3
+    assert dll.tail.prev.prev.data == 1
+    assert dll.get_first_node().data == 1
+    assert dll.get_last_node().data == 3
+    assert dll.head.next.next.next == dll.tail
+    assert dll.tail.prev.prev.prev == dll.head
     # testing array with 2 nodes::     1 -> 3 becomes 1 -> 3
     dll = DLL()
     dll.insert(3)
     dll.insert(1)
     dll.partition(dll.get_first_node(), dll.get_last_node())
     assert str(dll) == "1 3 "
+    assert dll.head.next.data == 1
+    assert dll.head.next.next.data == 3
+    assert dll.tail.prev.data == 3
+    assert dll.tail.prev.prev.data == 1
+    assert dll.get_first_node().data == 1
+    assert dll.get_last_node().data == 3
+    assert dll.head.next.next.next == dll.tail
+    assert dll.tail.prev.prev.prev == dll.head
     # testing array with 2 nodes::     3 -> 3 becomes 3 -> 3
     dll = DLL()
     dll.insert(3)
     dll.insert(3)
     dll.partition(dll.get_first_node(), dll.get_last_node())
     assert str(dll) == "3 3 "
+    assert dll.head.next.data == 3
+    assert dll.head.next.next.data == 3
+    assert dll.tail.prev.data == 3
+    assert dll.tail.prev.prev.data == 3
+    assert dll.get_first_node().data == 3
+    assert dll.get_last_node().data == 3
+    assert dll.head.next.next.next == dll.tail
+    assert dll.tail.prev.prev.prev == dll.head
 
 
 def test_sort():

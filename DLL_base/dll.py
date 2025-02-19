@@ -1,6 +1,3 @@
-from os import remove
-
-
 class Node:
     def __init__(self, data=None, prev=None, next=None):
         self.data = data
@@ -102,14 +99,13 @@ class DLL:
             return None
         return self.tail.prev
 
-    def partition(self, low, high): # HELP skil ekki dæmið --- hvað gerir high?
-
+    def partition(self, low, high):
+        """Loops from low to high and moves all nodes smaller than low so they are ahead (left side) of the low node"""
         if self.size == 0:
             return        
-
+        
         temp_node = low.next
         while temp_node != high.next:
-            
             # check if "temp" is smaller than "low"
             if temp_node.data < low.data:
                 # put the temp node to in front of "low"
@@ -118,12 +114,8 @@ class DLL:
                 # severe the temp node from the original position
                 self.current_pos = temp_node
                 self.remove()
-        
             temp_node = temp_node.next
-
-
         self.current_pos = low
-
 
 
     def sort(self): # TODO
@@ -150,8 +142,22 @@ if __name__ == "__main__":
     # create tests here if you want
     dll = DLL()
 
-    dll.insert(1)
-    dll.insert(6)
-    dll.insert(4)
-    dll.insert(3)
-    dll.insert(5)
+    # empty sort
+    # dll.sort()
+    # assert str(dll) == ""
+
+    # dll.insert(1)
+    # dll.insert(6)
+    # dll.insert(4)
+    # dll.insert(3)
+    # dll.insert(5)
+
+    # # noraml sort
+    # dll.sort()
+    # assert str(dll) == "1 3 4 5 6 "
+
+    # # array with 1 node sort
+    # dll = DLL()
+    # dll.insert(1)
+    # dll.sort()
+    # assert str(dll) == "1 "
