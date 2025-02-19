@@ -1,3 +1,6 @@
+from functools import partial
+
+
 class Node:
     def __init__(self, data=None, prev=None, next=None):
         self.data = data
@@ -106,7 +109,7 @@ class DLL:
         # if self.size == 0:
         #     return
         
-        temp_node = low.next
+        temp_node = low
         while temp_node != high.next:
             # check if "temp" is smaller than "low"
             if temp_node.data < low.data:
@@ -118,17 +121,33 @@ class DLL:
                 self.remove()
             temp_node = temp_node.next
         self.current_pos = low
+        return low
 
 
     def sort(self): # TODO
         """Order the items in the list with any method that uses only your DLL structure"""
-        low = self.size // 2
-        temp = self.get_first_node()
-        index = 0
-        while index <= low: # FIX
-            temp = temp.next
+        # low = self.size // 2
+        # temp = self.get_first_node()
+        # index = 0
+        # while index <= low: # FIX
+        #     temp = temp.next
 
-        self.partition(temp, self.get_last_node)
+        # self.partition(temp, self.get_last_node)
+
+        pivot = self.get_first_node()
+        high = self.get_last_node()
+            
+        self.sort_inner(pivot, high)
+
+    def sort_inner(self, low, high):
+        
+        if low == high:
+            return
+
+        pivot = self.partition(low, high)
+
+        self.sort_inner(self.get_first_node, pivot.prev)
+        self.sort_inner(pivot.next, self.get_last_node())
 
 
     def __len__(self):
