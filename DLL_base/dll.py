@@ -1,3 +1,6 @@
+from os import curdir
+
+
 class Node:
     def __init__(self, data=None, prev=None, next=None):
         self.data = data
@@ -32,9 +35,14 @@ class DLL:
         """Removes the node at the current position if there is one (otherwise does nothing)"""
         if self.size == 0:
             return
+        last_node = self.get_last_node()
         self.current_pos.prev.next = self.current_pos.next ## connect left to right
         self.current_pos.next.prev = self.current_pos.prev ## connect right to left
-        self.current_pos = self.current_pos.next
+
+        if self.current_pos == last_node:
+            self.current_pos = self.current_pos.prev # current node can't be sentinel node
+        else:
+            self.current_pos = self.current_pos.next
         self.size -= 1
 
     def get_value(self):
