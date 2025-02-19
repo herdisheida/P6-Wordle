@@ -125,14 +125,7 @@ class DLL:
 
 
     def sort(self): # TODO
-        """Order the items in the list with any method that uses only your DLL structure"""
-        # low = self.size // 2
-        # temp = self.get_first_node()
-        # index = 0
-        # while index <= low: # FIX
-        #     temp = temp.next
-
-        # self.partition(temp, self.get_last_node)
+        """Order the items in the list (ascending order)"""
 
         low = self.get_first_node()
         high = self.get_last_node()
