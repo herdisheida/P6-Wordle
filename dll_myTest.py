@@ -278,7 +278,50 @@ def test_get_first_node_and_get_last_node():
     assert dll.get_first_node() == None # doesn't have any data in array
     assert dll.get_last_node() == None # doesn't have any data in array
 
+def test_partition():
+    dll = DLL()
+    # testing NORMAL
+    dll.insert(1)
+    dll.insert(6)
+    dll.insert(4)
+    dll.insert(3)
+    dll.insert(5)
+    assert str(dll) == "5 3 4 6 1 "
 
+    # the output order needs to be "3 4 1 5 6 "
+    dll.partition(dll.get_first_node(), dll.get_last_node())
+    assert str(dll) == "3 4 1 5 6 "
+
+    # testing empty
+    dll = DLL()
+    dll.partition(dll.get_first_node(), dll.get_last_node())
+    assert str(dll) == ""
+
+    # testing array with 1 node
+    dll.insert(1)
+    dll.partition(dll.get_first_node(), dll.get_last_node())
+    assert str(dll) == "1 "
+
+    # testing array with 2 nodes::     3 -> 1 becomes 1 -> 3
+    dll.insert(3)
+    dll.partition(dll.get_first_node(), dll.get_last_node())
+    assert str(dll) == "1 3 "
+    # testing array with 2 nodes::     1 -> 3 becomes 1 -> 3
+    dll = DLL()
+    dll.insert(3)
+    dll.insert(1)
+    dll.partition(dll.get_first_node(), dll.get_last_node())
+    assert str(dll) == "1 3 "
+    # testing array with 2 nodes::     3 -> 3 becomes 3 -> 3
+    dll = DLL()
+    dll.insert(3)
+    dll.insert(3)
+    dll.partition(dll.get_first_node(), dll.get_last_node())
+    assert str(dll) == "3 3 "
+
+
+def test_sort():
+    pass
 
 if __name__ == "__main__":
     dll = DLL()
@@ -295,5 +338,8 @@ if __name__ == "__main__":
     test_move_to_pos()
 
     test_get_first_node_and_get_last_node()
+
+    test_partition()
+    test_sort()
 
     print("All tests passed")

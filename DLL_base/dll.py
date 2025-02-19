@@ -1,4 +1,4 @@
-from os import curdir
+from os import remove
 
 
 class Node:
@@ -104,20 +104,25 @@ class DLL:
 
     def partition(self, low, high): # HELP skil ekki dæmið --- hvað gerir high?
 
-        # # base case
-        # if low == high:
-        #     return
+        if self.size == 0:
+            return        
+
+        temp_node = low.next
+        while temp_node != high.next:
+            
+            # check if "temp" is smaller than "low"
+            if temp_node.data < low.data:
+                # put the temp node to in front of "low"
+                self.current_pos = low
+                self.insert(temp_node.data)
+                # severe the temp node from the original position
+                self.current_pos = temp_node
+                self.remove()
         
-        # if high is None or high < low: # LATER -- þurfum kannski ekki (fáum bara valid low og high parameters)
-        #     return # INVALID high
-        
+            temp_node = temp_node.next
 
 
-        # while self.current_pos != high:
-
-        #     self.current_pos = self.current_pos.next
-        pass
-
+        self.current_pos = low
 
 
 
@@ -145,11 +150,8 @@ if __name__ == "__main__":
     # create tests here if you want
     dll = DLL()
 
-    dll.insert("A")
-    dll.insert("B")
-    dll.insert("C")
-    dll.insert("D")
-    dll.insert("E")
-
-
-
+    dll.insert(1)
+    dll.insert(6)
+    dll.insert(4)
+    dll.insert(3)
+    dll.insert(5)
