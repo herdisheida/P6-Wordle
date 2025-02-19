@@ -101,8 +101,10 @@ class DLL:
 
     def partition(self, low, high):
         """Loops from low to high and moves all nodes smaller than low so they are ahead (left side) of the low node"""
-        if self.size == 0:
-            return        
+        if low == high: # JB CHECK -- base case
+            return
+        # if self.size == 0:
+        #     return
         
         temp_node = low.next
         while temp_node != high.next:
@@ -120,7 +122,14 @@ class DLL:
 
     def sort(self): # TODO
         """Order the items in the list with any method that uses only your DLL structure"""
-        pass
+        low = self.size // 2
+        temp = self.get_first_node()
+        index = 0
+        while index <= low: # FIX
+            temp = temp.next
+
+        self.partition(temp, self.get_last_node)
+
 
     def __len__(self):
         """Returns the number of items in the list"""
@@ -143,21 +152,21 @@ if __name__ == "__main__":
     dll = DLL()
 
     # empty sort
-    # dll.sort()
-    # assert str(dll) == ""
+    dll.sort()
+    assert str(dll) == ""
 
-    # dll.insert(1)
-    # dll.insert(6)
-    # dll.insert(4)
-    # dll.insert(3)
-    # dll.insert(5)
+    dll.insert(1)
+    dll.insert(6)
+    dll.insert(4)
+    dll.insert(3)
+    dll.insert(5)
 
-    # # noraml sort
-    # dll.sort()
-    # assert str(dll) == "1 3 4 5 6 "
+    # noraml sort
+    dll.sort()
+    assert str(dll) == "1 3 4 5 6 "
 
-    # # array with 1 node sort
-    # dll = DLL()
-    # dll.insert(1)
-    # dll.sort()
-    # assert str(dll) == "1 "
+    # array with 1 node sort
+    dll = DLL()
+    dll.insert(1)
+    dll.sort()
+    assert str(dll) == "1 "
