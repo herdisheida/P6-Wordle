@@ -239,10 +239,8 @@ def test_get_first_node_and_get_last_node():
     dll = DLL()
 
     # testing the empty
-    node = dll.get_first_node()
-    assert node == None
-    node = dll.get_last_node()
-    assert node == None
+    assert dll.get_first_node() == None
+    assert dll.get_last_node() == None
 
     # testing with 1 elem in list
     dll.insert("A")

@@ -85,10 +85,25 @@ class DLL:
             return None
         return self.tail.prev
 
-    def partition(self, low, high):
-        pass
+    def partition(self, low, high): # HELP skil ekki dæmið --- hvað gerir high?
 
-    def sort(self):
+        # base case
+        if low == high:
+            return
+        
+        if high is None or high < low: # LATER -- þurfum kannski ekki (fáum bara valid low og high parameters)
+            return # INVALID high
+        
+
+
+        while self.current_pos != high:
+
+            self.current_pos = self.current_pos.next
+
+
+
+
+    def sort(self): # TODO
         """Order the items in the list with any method that uses only your DLL structure"""
         pass
 
