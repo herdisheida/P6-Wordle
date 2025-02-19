@@ -56,7 +56,7 @@ class DLL:
         if self.current_pos.prev != self.head:
             self.current_pos = self.current_pos.prev
 
-    def move_to_pos(self, pos):
+    def move_to_pos(self, pos): # JB - hægt að gera flottar
         """Moves the current position to item #position in the list.
         The first actual data item is #0"""
         if self.size != 0 and (0 <= pos < self.size):
@@ -66,22 +66,21 @@ class DLL:
                 self.current_pos = self.current_pos.next
                 index += 1
         
-    def clear(self):
+    def clear(self): # JB - dunno if right HELP
         """Clears all nodes from the list"""
         self.head.next = self.tail
         self.tail.prev = self.head
         self.size = 0
-        self.current_pos = self.tail # CHECK
-        pass
+        self.current_pos = self.tail
 
     def get_first_node(self):
-        """Returns the first Node of the list"""
+        """Returns the first Node (not the value) of the list """
         if self.size == 0:
             return None
         return self.head.next
 
     def get_last_node(self):
-        """Returns the last Node of the list"""
+        """Returns the last Node (not the value) of the list"""
         if self.size == 0:
             return None
         return self.tail.prev
@@ -111,17 +110,7 @@ class DLL:
 
 if __name__ == "__main__":
     # create tests here if you want
-
     dll = DLL()
-
-    # testing empty
-    dll.move_to_pos(-1)
-    assert dll.current_pos == dll.tail
-    dll.move_to_pos(0)
-    assert dll.current_pos == dll.tail
-    dll.move_to_pos(1)
-    assert dll.current_pos == dll.tail
-
 
     dll.insert("A")
     dll.insert("B")
@@ -130,22 +119,4 @@ if __name__ == "__main__":
     dll.insert("E")
 
 
-    dll.move_to_pos(-1)
-    assert dll.current_pos.data == "E" # keeps current pos - does nothing
-    dll.move_to_pos(0)
-    assert dll.current_pos.data == "E"
-    dll.move_to_pos(1)
-    assert dll.current_pos.data == "D"
-    dll.move_to_pos(2)
-    assert dll.current_pos.data == "C"
-    dll.move_to_pos(3)
-    assert dll.current_pos.data == "B"
-    dll.move_to_pos(4)
-    assert dll.current_pos.data == "A"
 
-    # testing out of bounds
-    dll.move_to_pos(5)
-    assert dll.current_pos.data == "A" # keeps current post - does nothing
-
-
-    # testing get_value()

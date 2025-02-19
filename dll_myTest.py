@@ -212,16 +212,12 @@ def test_move_to_pos():
     dll.move_to_pos(1)
     assert dll.current_pos == dll.tail
 
-
     dll.insert("A")
     dll.insert("B")
     dll.insert("C")
     dll.insert("D")
     dll.insert("E")
 
-
-    dll.move_to_pos(-1)
-    assert dll.current_pos.data == "E" # keeps current pos - does nothing
     dll.move_to_pos(0)
     assert dll.current_pos.data == "E"
     dll.move_to_pos(1)
@@ -236,6 +232,53 @@ def test_move_to_pos():
     # testing out of bounds
     dll.move_to_pos(5)
     assert dll.current_pos.data == "A" # keeps current post - does nothing
+    dll.move_to_pos(-1)
+    assert dll.current_pos.data == "A" # keeps current pos - does nothing
+
+def test_get_first_node_and_get_last_node():
+    dll = DLL()
+
+    # testing the empty
+    node = dll.get_first_node()
+    assert node == None
+    node = dll.get_last_node()
+    assert node == None
+
+    # testing with 1 elem in list
+    dll.insert("A")
+    assert dll.get_first_node().data == "A"
+    assert dll.get_last_node().data == "A"
+
+    # testing with >2 elem in list
+    dll.insert("B")
+    assert dll.get_first_node().data == "B"
+    assert dll.get_last_node().data == "A"
+    dll.insert("C")
+    assert dll.get_first_node().data == "C"
+    assert dll.get_last_node().data == "A"
+    dll.insert("D")
+    assert dll.get_first_node().data == "D"
+    assert dll.get_last_node().data == "A"
+    dll.insert("E")
+    assert dll.get_first_node().data == "E"
+    assert dll.get_last_node().data == "A"
+
+    # testing after removing
+    dll.remove()
+    assert dll.get_first_node().data == "D"
+    assert dll.get_last_node().data == "A"
+    dll.remove()
+    assert dll.get_first_node().data == "C"
+    assert dll.get_last_node().data == "A"
+    dll.remove()
+    assert dll.get_first_node().data == "B"
+    assert dll.get_last_node().data == "A"
+    dll.remove()
+    assert dll.get_first_node().data == "A"
+    assert dll.get_last_node().data == "A"
+    dll.remove()
+    assert dll.get_first_node() == None # doesn't have any data in array
+    assert dll.get_last_node() == None # doesn't have any data in array
 
 
 
@@ -252,3 +295,7 @@ if __name__ == "__main__":
     
     test_move_to_next_and_move_to_prev()
     test_move_to_pos()
+
+    test_get_first_node_and_get_last_node()
+
+    print("All tests passed")
