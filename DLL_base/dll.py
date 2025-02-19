@@ -33,16 +33,25 @@ class DLL:
         
     def remove(self):
         """Removes the node at the current position if there is one (otherwise does nothing)"""
-        if self.size == 0:
+        # if self.size == 0:
+        #     return
+        # last_node = self.get_last_node()
+        # self.current_pos.prev.next = self.current_pos.next ## connect left to right
+        # self.current_pos.next.prev = self.current_pos.prev ## connect right to left
+
+        # if self.current_pos == last_node:
+        #     self.current_pos = self.current_pos.prev # current node can't be sentinel node
+        # else:
+        #     self.current_pos = self.current_pos.next
+        # self.size -= 1
+
+
+        # HELP goes to the tail when removing the end_node
+        if self.current_pos == self.tail:
             return
-        last_node = self.get_last_node()
         self.current_pos.prev.next = self.current_pos.next ## connect left to right
         self.current_pos.next.prev = self.current_pos.prev ## connect right to left
-
-        if self.current_pos == last_node:
-            self.current_pos = self.current_pos.prev # current node can't be sentinel node
-        else:
-            self.current_pos = self.current_pos.next
+        self.current_pos = self.current_pos.next
         self.size -= 1
 
     def get_value(self):
@@ -95,18 +104,19 @@ class DLL:
 
     def partition(self, low, high): # HELP skil ekki dæmið --- hvað gerir high?
 
-        # base case
-        if low == high:
-            return
+        # # base case
+        # if low == high:
+        #     return
         
-        if high is None or high < low: # LATER -- þurfum kannski ekki (fáum bara valid low og high parameters)
-            return # INVALID high
+        # if high is None or high < low: # LATER -- þurfum kannski ekki (fáum bara valid low og high parameters)
+        #     return # INVALID high
         
 
 
-        while self.current_pos != high:
+        # while self.current_pos != high:
 
-            self.current_pos = self.current_pos.next
+        #     self.current_pos = self.current_pos.next
+        pass
 
 
 
