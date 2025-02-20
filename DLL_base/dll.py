@@ -1,6 +1,3 @@
-from functools import partial
-
-
 class Node:
     def __init__(self, data=None, prev=None, next=None):
         self.data = data
@@ -46,24 +43,24 @@ class DLL:
         # self.size -= 1
         # JB check pls
 
-        # HELP goes to the tail when removing the end_node
+        # CHECK curr can go to tail
         if self.current_pos == self.tail:
             return
-        self.current_pos.prev.next = self.current_pos.next ## connect left to right
+        self.current_pos.prev.next = self.current_pos.next ## connect left  to right
         self.current_pos.next.prev = self.current_pos.prev ## connect right to left
         self.current_pos = self.current_pos.next
         self.size -= 1
 
     def get_value(self):
         """Returns the value of the item at the current position in the list (None if not item)"""
-        if self.size == 0:
+        if self.current_pos == self.tail:
             return None
         return self.current_pos.data
 
     def move_to_next(self):
         """Moves the current position one item closer to the tail/trailer.
         Do nothing if at end"""
-        if self.current_pos.next == self.tail or self.size == 0:
+        if self.current_pos == self.tail: # CHECK the if-statement
             return
         self.current_pos = self.current_pos.next
 
@@ -73,9 +70,18 @@ class DLL:
         if self.current_pos.prev != self.head:
             self.current_pos = self.current_pos.prev
 
-    def move_to_pos(self, pos): # JB - hægt að gera flottar
+    def move_to_pos(self, pos): # JB - pretty?
         """Moves the current position to item #position in the list.
         The first actual data item is #0"""
+
+
+
+
+
+
+
+
+        
         if self.size != 0 and (0 <= pos < self.size):
             index = 0
             self.current_pos = self.head.next
