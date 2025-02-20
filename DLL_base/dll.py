@@ -30,20 +30,6 @@ class DLL:
         
     def remove(self):
         """Removes the node at the current position if there is one (otherwise does nothing)"""
-        # if self.size == 0:
-        #     return
-        # last_node = self.get_last_node()
-        # self.current_pos.prev.next = self.current_pos.next ## connect left to right
-        # self.current_pos.next.prev = self.current_pos.prev ## connect right to left
-
-        # if self.current_pos == last_node:
-        #     self.current_pos = self.current_pos.prev # current node can't be sentinel node
-        # else:
-        #     self.current_pos = self.current_pos.next
-        # self.size -= 1
-        # JB check pls
-
-        # CHECK curr can go to tail
         if self.current_pos == self.tail:
             return
         self.current_pos.prev.next = self.current_pos.next ## connect left  to right
@@ -73,22 +59,13 @@ class DLL:
     def move_to_pos(self, pos): # JB - pretty?
         """Moves the current position to item #position in the list.
         The first actual data item is #0"""
-
-
-
-
-
-
-
-
-        
-        if self.size != 0 and (0 <= pos < self.size):
+        if (self.size != 0) and (0 <= pos < self.size):
             index = 0
             self.current_pos = self.head.next
             while index != pos: 
                 self.current_pos = self.current_pos.next
                 index += 1
-        
+
     def clear(self): # JB - dunno if right HELP
         """Clears all nodes from the list"""
         self.head.next = self.tail
@@ -107,6 +84,10 @@ class DLL:
         if self.size == 0:
             return None
         return self.tail.prev
+    
+
+
+    
 
     def partition(self, low, high):
         """Loops from low to high and moves all nodes smaller than low so they are ahead (left side) of the low node"""
@@ -137,6 +118,7 @@ class DLL:
         high = self.get_last_node()
             
         self.quick_sort(low, high)
+        self.current_pos = low
 
     def quick_sort(self, low, high):
         

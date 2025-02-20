@@ -185,9 +185,13 @@ def test_move_to_next_and_move_to_prev():
     assert dll.current_pos.data == "A"
     # checking the end
     dll.move_to_next()
-    assert dll.current_pos.data == "A"
+    assert dll.current_pos == dll.tail # allow to go to the tail -- but not after that
+    dll.move_to_next()
+    assert dll.current_pos == dll.tail
 
-    # MOVE RIGHT
+
+    # MOVE PREV
+    dll.move_to_prev()    
     assert dll.current_pos.data == "A"
     dll.move_to_prev()
     assert dll.current_pos.data == "B"
@@ -218,6 +222,8 @@ def test_move_to_pos():
     dll.insert("D")
     dll.insert("E")
 
+    assert str(dll) == "E D C B A "
+
     dll.move_to_pos(0)
     assert dll.current_pos.data == "E"
     dll.move_to_pos(1)
@@ -230,8 +236,11 @@ def test_move_to_pos():
     assert dll.current_pos.data == "A"
 
     # testing out of bounds
+    dll.move_to_pos(10)
+    assert dll.current_pos.data == "A" # keeps current post - does nothing
     dll.move_to_pos(5)
     assert dll.current_pos.data == "A" # keeps current post - does nothing
+
     dll.move_to_pos(-1)
     assert dll.current_pos.data == "A" # keeps current pos - does nothing
 
