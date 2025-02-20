@@ -18,17 +18,18 @@ class DLL:
     def insert(self, data):
         """Inserts an item with that value in front of the node at the current position"""
         node = Node(data, self.current_pos.prev, self.current_pos)
-        self.current_pos.prev.next = node # connect left to newNode (left->new)
-        self.current_pos.prev = node # connect right to newNode (new<-right)
+        self.current_pos.prev.next = node  # connect left to newNode (left->new)
+        self.current_pos.prev = node  # connect right to newNode (new<-right)
         self.current_pos = node
         self.size += 1
 
-        
     def remove(self):
         """Removes the node at the current position if there is one (otherwise does nothing)"""
-        if self.current_pos != self.tail: # and self.current_pos is not None:
-            self.current_pos.prev.next = self.current_pos.next ## connect left  to right
-            self.current_pos.next.prev = self.current_pos.prev ## connect right to left
+        if self.current_pos != self.tail:  # and self.current_pos is not None:
+            self.current_pos.prev.next = (
+                self.current_pos.next
+            )  ## connect left  to right
+            self.current_pos.next.prev = self.current_pos.prev  ## connect right to left
             self.current_pos = self.current_pos.next
             self.size -= 1
 
@@ -59,7 +60,7 @@ class DLL:
         for x in range(pos):
             self.current_pos = self.current_pos.next
 
-    def clear(self): # HELP
+    def clear(self):
         """Clears all nodes from the list"""
         self.head.next = self.tail
         self.tail.prev = self.head
@@ -67,7 +68,7 @@ class DLL:
         self.current_pos = self.tail
 
     def get_first_node(self):
-        """Returns the first Node (not the value) of the list """
+        """Returns the first Node (not the value) of the list"""
         if self.size == 0:
             return None
         return self.head.next
@@ -78,12 +79,11 @@ class DLL:
             return None
         return self.tail.prev
 
-
     def partition(self, low, high):
         """Loops from low to high and moves all nodes smaller than low so they are ahead (left side) of the low node"""
-        if self.size == 0: # empty array
+        if self.size == 0:  # empty array
             return
-        if low == high: # 1 node in array
+        if low == high:  # 1 node in array
             self.current_pos = low
             return
 
@@ -94,39 +94,35 @@ class DLL:
             if temp.data < pivot.data:
 
                 # swappping data:
-                    # move pivot to next node
-                    # temp is moved to the left of pivot (pivot's original position)
-                pivot.data, temp.data, pivot.next.data = temp.data, pivot.next.data, pivot.data
+                # move pivot to next node
+                # temp is moved to the left of pivot (pivot's original position)
+                pivot.data, temp.data, pivot.next.data = (
+                    temp.data,
+                    pivot.next.data,
+                    pivot.data,
+                )
 
                 pivot = pivot.next
             else:
-                temp = temp.next # skip over nodes that are larger than pivot
+                temp = temp.next  # skip over nodes that are larger than pivot
         self.current_pos = pivot
-    
-
 
     def sort(self):
         """Order the items in the list (ascending order)"""
 
         low = self.get_first_node()
         high = self.get_last_node()
-            
+
         self.quick_sort(low, high)
         self.current_pos = self.head.next
 
     def quick_sort(self, low, high):
-        
-        # base case
-        # if not low or not high or low == high or low.prev == high:
-        #     return
-
         if low and high and low != high and low != high.next:
             self.partition(low, high)
             # recursivly sort left side of "pivot"
             self.quick_sort(low, self.current_pos.prev)
             # recursively sort right side of "pivot"
             self.quick_sort(self.current_pos.next, high)
-
 
     def __len__(self):
         """Returns the number of items in the list"""
@@ -140,8 +136,6 @@ class DLL:
             ret_str += f"{node.data} "
             node = node.next
         return ret_str
-    
-    
 
 
 if __name__ == "__main__":
