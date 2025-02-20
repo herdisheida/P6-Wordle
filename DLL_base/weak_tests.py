@@ -4,7 +4,7 @@ from dll import DLL
 def main():
 
     orig_stdout = sys.stdout
-    fout = open('out.txt', 'w+')
+    fout = open('DLL_base/out.txt', 'w+')
     sys.stdout = fout
 
 

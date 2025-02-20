@@ -18,37 +18,36 @@ class DLL:
     def insert(self, data):
         """Inserts an item with that value in front of the node at the current position"""
         node = Node(data, self.current_pos.prev, self.current_pos)
-        if self.size == 0:
-            self.head.next = node
-            self.tail.prev = node
-        else:
-            self.current_pos.prev.next = node # connect left to newNode (left->new)
-            self.current_pos.prev = node # connect right to newNode (new<-right)
+        # JB - þarf held ekki - það gerist nákvæmlega það sama
+        #  if self.size == 0:
+        #     self.head.next = node
+        #     self.tail.prev = node
+        # else:
+        self.current_pos.prev.next = node # connect left to newNode (left->new)
+        self.current_pos.prev = node # connect right to newNode (new<-right)
         self.current_pos = node
         self.size += 1
 
         
     def remove(self):
         """Removes the node at the current position if there is one (otherwise does nothing)"""
-        if self.current_pos == self.tail:
-            return
-        self.current_pos.prev.next = self.current_pos.next ## connect left  to right
-        self.current_pos.next.prev = self.current_pos.prev ## connect right to left
-        self.current_pos = self.current_pos.next
-        self.size -= 1
+        if self.current_pos != self.tail and self.current_pos:
+            self.current_pos.prev.next = self.current_pos.next ## connect left  to right
+            self.current_pos.next.prev = self.current_pos.prev ## connect right to left
+            self.current_pos = self.current_pos.next
+            self.size -= 1
 
     def get_value(self):
         """Returns the value of the item at the current position in the list (None if not item)"""
-        if self.current_pos == self.tail:
+        if not self.current_pos:
             return None
         return self.current_pos.data
 
     def move_to_next(self):
         """Moves the current position one item closer to the tail/trailer.
         Do nothing if at end"""
-        if self.current_pos == self.tail: # CHECK the if-statement
-            return
-        self.current_pos = self.current_pos.next
+        if self.current_pos != self.tail and self.current_pos: # CHECK the if-statement
+            self.current_pos = self.current_pos.next
 
     def move_to_prev(self):
         """Moves the current position one item closer to the head/header.
@@ -87,14 +86,13 @@ class DLL:
     
 
 
-    
+
 
     def partition(self, low, high):
         """Loops from low to high and moves all nodes smaller than low so they are ahead (left side) of the low node"""
-        if low == high: # JB CHECK -- base case
+        # JB CHECK -- base case
+        if low == high or self.size == 0:
             return
-        # if self.size == 0:
-        #     return
         
         temp_node = low
         while temp_node != high.next:

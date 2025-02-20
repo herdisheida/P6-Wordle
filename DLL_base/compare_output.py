@@ -1,7 +1,11 @@
 
-f1 = open("out.txt")
-f2 = open("expected_out.txt")
-f3 = open("out_diff.txt", "w+")
+f1 = open("DLL_base/out.txt")
+
+# f2 = open("DLL_base/expected_out.txt")
+f2 = open("DLL_base/expected_out_weak_tests.txt")
+
+f3 = open("DLL_base/out_diff.txt", "w+")
+
 
 line_number = 1
 for line1, line2 in zip(f1, f2):

@@ -95,10 +95,10 @@ def test_dll(fin):
 def main():
 
     orig_stdout = sys.stdout
-    fout = open('out.txt', 'w+')
+    fout = open('DLL_base/out.txt', 'w+')
     sys.stdout = fout
 
-    fin = open("tests.txt")
+    fin = open("DLL_base/tests.txt")
 
     test_dll(fin)
 

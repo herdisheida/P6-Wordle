@@ -1,4 +1,3 @@
-    dll = DLL()
     dll.insert("A")
     dll.insert("B")
     dll.insert("C")
