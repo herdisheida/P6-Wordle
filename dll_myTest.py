@@ -559,6 +559,44 @@ def test_all_together():
     dll.sort()
     assert str(dll) == "1 3 4 5 6 "
 
+    # Additional sorting tests
+    dll.clear()
+    dll.insert(10)
+    dll.insert(7)
+    dll.insert(2)
+    dll.insert(8)
+    dll.insert(3)
+    dll.sort()
+    assert str(dll) == "2 3 7 8 10 "
+
+    dll.clear()
+    dll.insert(5)
+    dll.insert(1)
+    dll.insert(4)
+    dll.insert(2)
+    dll.insert(3)
+    dll.sort()
+    print(dll)
+    assert str(dll) == "1 2 3 4 5 "
+
+    dll.clear()
+    dll.insert(9)
+    dll.insert(7)
+    dll.insert(5)
+    dll.insert(3)
+    dll.insert(1)
+    dll.sort()
+    assert str(dll) == "1 3 5 7 9 "
+
+    dll.clear()
+    dll.insert(4)
+    dll.insert(4)
+    dll.insert(4)
+    dll.insert(4)
+    dll.insert(4)
+    dll.sort()
+    assert str(dll) == "4 4 4 4 4 "
+
     # Test clear
     dll.clear()
     assert str(dll) == ""
@@ -572,6 +610,7 @@ def test_all_together():
     assert dll.current_pos.data == "C"
     dll.move_to_pos(-1)
     assert dll.current_pos.data == "C"
+    dll.sort()
     dll.remove()
     dll.remove()
     dll.remove()
@@ -579,8 +618,32 @@ def test_all_together():
     assert str(dll) == ""
     assert dll.size == 0
 
+
+def test_sorting_strong_test():
+    dll = DLL()
+    dll.insert(25)
+    dll.insert(24)
+    dll.insert(21)
+    dll.insert(18)
+    dll.insert(24)
+    dll.insert(12)
+    dll.insert(18)
+    dll.insert(27)
+    dll.insert(25)
+    dll.insert(29)
+    dll.insert(12)
+    dll.insert(11)
+    assert str(dll) == "11 12 29 25 27 18 12 24 18 21 24 25 "
+
+    dll.sort()
+    print(dll)
+    assert str(dll) == "11 12 12 18 18 21 24 24 25 25 27 29 "
+
+
 if __name__ == "__main__":
     dll = DLL()
+
+    test_sorting_strong_test()
 
     test_init()
 
@@ -599,5 +662,7 @@ if __name__ == "__main__":
     test_sort()
 
     test_all_together()
+
+    
 
     print("All tests passed")

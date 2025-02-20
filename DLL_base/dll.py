@@ -89,18 +89,20 @@ class DLL:
 
         pivot = low
         temp = pivot.next
-        
         while temp != high.next:
             # check if "temp" is smaller than "pivot"
             if temp.data < pivot.data:
-                # move the temp node in front of pivot
-                self.current_pos = pivot
-                self.insert(temp.data)
-                # severe the temp node from the original position
-                self.current_pos = temp
-                self.remove()
-            temp = temp.next
+
+                # swappping data:
+                    # move pivot to next node
+                    # temp is moved to the left of pivot (pivot's original position)
+                pivot.data, temp.data, pivot.next.data = temp.data, pivot.next.data, pivot.data
+
+                pivot = pivot.next
+            else:
+                temp = temp.next # skip over nodes that are larger than pivot
         self.current_pos = pivot
+    
 
 
     def sort(self):
@@ -119,7 +121,6 @@ class DLL:
         #     return
 
         if low and high and low != high and low != high.next:
-            # inductive step
             self.partition(low, high)
             # recursivly sort left side of "pivot"
             self.quick_sort(low, self.current_pos.prev)
