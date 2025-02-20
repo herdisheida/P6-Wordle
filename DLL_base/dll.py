@@ -41,7 +41,7 @@ class DLL:
     def move_to_next(self):
         """Moves the current position one item closer to the tail/trailer.
         Do nothing if at end"""
-        if self.current_pos != self.tail: # and self.current_pos is not None: # CHECK the if-statement
+        if self.current_pos != self.tail:
             self.current_pos = self.current_pos.next
 
     def move_to_prev(self):
@@ -53,18 +53,11 @@ class DLL:
     def move_to_pos(self, pos):
         """Moves the current position to item #position in the list.
         The first actual data item is #0"""
-        # if (self.size != 0) and (0 <= pos < self.size):
-        #     index = 0
-        #     self.current_pos = self.head.next
-        #     while index != pos: 
-        #         self.current_pos = self.current_pos.next
-        #         index += 1
-
         if pos < 0 or pos >= self.size:
             return
         self.current_pos = self.head.next
         for x in range(pos):
-            self.move_to_next()
+            self.current_pos = self.current_pos.next
 
     def clear(self): # HELP
         """Clears all nodes from the list"""
@@ -86,7 +79,7 @@ class DLL:
         return self.tail.prev
 
 
-    def partition(self, low, high): #  JB CHECK -- base case
+    def partition(self, low, high):
         """Loops from low to high and moves all nodes smaller than low so they are ahead (left side) of the low node"""
         if low == high or self.size == 0:
             return
@@ -122,12 +115,6 @@ class DLL:
         return self.current_pos
 
 
-
-
-
-
-
-
     def sort(self): # TODO
         """Order the items in the list (ascending order)"""
 
@@ -135,6 +122,7 @@ class DLL:
         high = self.get_last_node()
             
         self.quick_sort(low, high)
+        self.current_pos = self.get_first_node()
 
     def quick_sort(self, low, high):
         

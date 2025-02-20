@@ -68,7 +68,7 @@ A B1 A C B3 A C B2 C    -   current value: A   -   size: 9
 B5 A B1 A C B3 A C B2 C    -   current value: B5   -   size: 10
 B5 A B1 A C B3 A C B2 C    -   current value: C   -   size: 10
 A B1 A B3 A B2 B5 C C C    -   current value: B5   -   size: 10
-A A A B1 B2 B3 B5 C C C    -   current value: C   -   size: 10
+A A A B1 B2 B3 B5 C C C    -   current value: A   -   size: 10
    -   current value: None   -   size: 0
 B    -   current value: B   -   size: 1
 D B    -   current value: D   -   size: 2

@@ -368,6 +368,24 @@ def test_partition():
     assert dll.tail.prev.prev.prev == dll.head
 
 
+    # testing high and low where they're not the first and last nodes in the array
+    dll = DLL()
+    dll.insert(1)
+    dll.insert(6)
+    dll.insert(4)
+    dll.insert(3)
+    dll.insert(5)
+
+    assert str(dll) == "5 3 4 6 1 "
+    dll.partition(dll.get_first_node(), dll.get_last_node().prev.prev.prev)
+    assert str(dll) == "3 5 4 6 1 "
+    assert dll.current_pos.data == 5 # should be pointing towards the pivot (low)
+    dll.partition(dll.get_first_node().next.next, dll.get_last_node())
+    assert str(dll) == "3 5 1 4 6 "
+    assert dll.current_pos.data == 4 # should be pointing towards the pivot (low)
+    
+
+
 def test_sort():
     pass
 
