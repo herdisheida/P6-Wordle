@@ -53,7 +53,7 @@ class DLL:
     def move_to_pos(self, pos):
         """Moves the current position to item #position in the list.
         The first node with data is at position #0"""
-        if pos < 0 or pos >= self.size:
+        if pos < 0 or pos > self.size:
             return
         self.current_pos = self.head.next
         for x in range(pos):
@@ -81,41 +81,30 @@ class DLL:
 
     def partition(self, low, high):
         """Loops from low to high and moves all nodes smaller than low so they are ahead (left side) of the low node"""
-        if low == high or self.size == 0:
+        if self.size == 0: # empty array
             return
-        
+        if low == high: # 1 node in array
+            self.current_pos = low
+            return
 
-        # pivot = low
-        # low_data = low.data
-        # while pivot != high.next:
-        #     # check if "temp" is smaller than "low"
-        #     if pivot.data < low_data:
-
-        #         temp_data = pivot.data
-        #         pivot.data = low_data
-        #         pivot.prev.data = temp_data
-
-        #     pivot = pivot.next
-        # self.current_pos = low
-        # return self.current_pos
-    
-        
         pivot = low
-        while pivot != high.next:
-            # check if "temp" is smaller than "low"
-            if pivot.data < low.data:
-                # put the temp node to in front of "low"
-                self.current_pos = low
-                self.insert(pivot.data)
-                # severe the temp node from the original position
+        temp = pivot.next
+        
+        while temp != high.next:
+            # check if "temp" is smaller than "pivot"
+            if temp.data < pivot.data:
+                # move the temp node in front of pivot
                 self.current_pos = pivot
+                self.insert(temp.data)
+                # severe the temp node from the original position
+                self.current_pos = temp
                 self.remove()
-            pivot = pivot.next
-        self.current_pos = low
+            temp = temp.next
+        self.current_pos = pivot
         return self.current_pos
 
 
-    def sort(self): # TODO
+    def sort(self):
         """Order the items in the list (ascending order)"""
 
         low = self.get_first_node()
@@ -127,14 +116,15 @@ class DLL:
     def quick_sort(self, low, high):
         
         # base case
-        if (low and high) and (low != high) and (low != high.next):
+        if not low or not high or low == high or low.prev == high:
+            return
 
-            # inductive step
-            pivot = self.partition(low, high)
-            # recursivly sort left side of "low"
-            self.quick_sort(low, pivot.prev)
-            # recursively sort right side of "low"
-            self.quick_sort(pivot.next, high)
+        # inductive step
+        pivot = self.partition(low, high)
+        # recursivly sort left side of "pivot"
+        self.quick_sort(low, pivot.prev)
+        # recursively sort right side of "pivot"
+        self.quick_sort(pivot.next, high)
 
 
     def __len__(self):
@@ -155,46 +145,4 @@ class DLL:
 
 if __name__ == "__main__":
     # create tests here if you want
-    dll = DLL()
-    assert dll.head.next == dll.tail
-    assert dll.tail.prev == dll.head
-    assert dll.current_pos == dll.tail
-
-
-    # empty sort
-    dll.sort()
-    assert str(dll) == ""
-    assert dll.size == 0
-    assert dll.head.next == dll.tail
-    assert dll.tail.prev == dll.head
-    assert dll.current_pos == dll.tail
-
-    dll.insert(1)
-    dll.insert(6)
-    dll.insert(4)
-    dll.insert(3)
-    dll.insert(5)
-
-    # noraml sort
-    assert str(dll) == "5 3 4 6 1 "
-    dll.sort()
-    assert str(dll) == "3 4 1 5 6 "
-
-    # array with 1 node sort
-    dll = DLL()
-    dll.insert(1)
-    dll.sort()
-    assert str(dll) == "1 "
-    assert dll.size == 1
-    assert dll.head.next.data == 1
-    assert dll.tail.prev.data == 1
-    assert dll.current_pos.data == 1
-    # empty after removing
-    dll.remove()
-    dll.sort()
-    assert str(dll) == ""
-    assert dll.size == 0
-    assert dll.head.next == dll.tail
-    assert dll.tail.prev == dll.head
-    assert dll.current_pos == dll.tail
-
+    pass

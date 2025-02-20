@@ -1,8 +1,8 @@
 
 f1 = open("DLL_base/out.txt")
 
-# f2 = open("DLL_base/expected_out.txt")
-f2 = open("DLL_base/expected_out_weak_tests.txt")
+f2 = open("DLL_base/expected_out.txt")
+# f2 = open("DLL_base/expected_out_weak_tests.txt")
 
 f3 = open("DLL_base/out_diff.txt", "w+")
 
