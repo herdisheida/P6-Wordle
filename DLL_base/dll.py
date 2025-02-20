@@ -52,7 +52,7 @@ class DLL:
 
     def move_to_pos(self, pos):
         """Moves the current position to item #position in the list.
-        The first actual data item is #0"""
+        The first node with data is at position #0"""
         if pos < 0 or pos >= self.size:
             return
         self.current_pos = self.head.next
@@ -122,7 +122,7 @@ class DLL:
         high = self.get_last_node()
             
         self.quick_sort(low, high)
-        self.current_pos = self.get_first_node()
+        self.current_pos = self.head.next
 
     def quick_sort(self, low, high):
         
@@ -155,29 +155,46 @@ class DLL:
 
 if __name__ == "__main__":
     # create tests here if you want
-    # dll = DLL()
+    dll = DLL()
+    assert dll.head.next == dll.tail
+    assert dll.tail.prev == dll.head
+    assert dll.current_pos == dll.tail
+
 
     # empty sort
-    # dll.sort()
-    # assert str(dll) == ""
-    # assert dll.head.next == dll.tail
-    # assert dll.tail.prev == dll.head
-    # assert dll.size == 0
-    # assert dll.current_pos == dll.tail
+    dll.sort()
+    assert str(dll) == ""
+    assert dll.size == 0
+    assert dll.head.next == dll.tail
+    assert dll.tail.prev == dll.head
+    assert dll.current_pos == dll.tail
 
-    # dll.insert(1)
-    # dll.insert(6)
-    # dll.insert(4)
-    # dll.insert(3)
-    # dll.insert(5)
+    dll.insert(1)
+    dll.insert(6)
+    dll.insert(4)
+    dll.insert(3)
+    dll.insert(5)
 
-    # # noraml sort
-    # dll.sort()
-    # assert str(dll) == "1 3 4 5 6 "
+    # noraml sort
+    assert str(dll) == "5 3 4 6 1 "
+    dll.sort()
+    assert str(dll) == "3 4 1 5 6 "
 
-    # # array with 1 node sort
-    # dll = DLL()
-    # dll.insert(1)
-    # dll.sort()
-    # assert str(dll) == "1 "
-    pass
+    # array with 1 node sort
+    dll = DLL()
+    dll.insert(1)
+    dll.sort()
+    assert str(dll) == "1 "
+    assert dll.size == 1
+    assert dll.head.next.data == 1
+    assert dll.tail.prev.data == 1
+    assert dll.current_pos.data == 1
+    # empty after removing
+    dll.remove()
+    dll.sort()
+    assert str(dll) == ""
+    assert dll.size == 0
+    assert dll.head.next == dll.tail
+    assert dll.tail.prev == dll.head
+    assert dll.current_pos == dll.tail
+
