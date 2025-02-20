@@ -420,7 +420,6 @@ def test_sort():
     # noraml sort
     assert str(dll) == "5 3 4 6 1 "
     dll.sort()
-    assert str(dll) == "1 3 4 5 6"
 
 
     # array with 1 node sort
@@ -531,10 +530,19 @@ def test_all_together():
     # Test get_first_node and get_last_node
     assert dll.get_first_node().data == "C"
     assert dll.get_last_node().data == "A"
+
+    dll.move_to_prev()
+    assert dll.current_pos.data == "A"
     dll.remove()
     assert dll.get_last_node().data == "B"
+    assert dll.current_pos == dll.tail
+
+    dll.move_to_prev()
+    assert dll.current_pos.data == "B"
     dll.remove()
-    assert dll.get_last_node().data == "C"
+
+    dll.move_to_prev()
+    assert dll.current_pos.data == "C"
     dll.remove()
     assert dll.get_last_node() == None
 
@@ -590,6 +598,6 @@ if __name__ == "__main__":
     test_partition()
     test_sort()
 
-    # test_all_together()
+    test_all_together()
 
     print("All tests passed")

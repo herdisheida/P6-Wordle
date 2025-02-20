@@ -101,7 +101,6 @@ class DLL:
                 self.remove()
             temp = temp.next
         self.current_pos = pivot
-        return self.current_pos
 
 
     def sort(self):
@@ -116,15 +115,16 @@ class DLL:
     def quick_sort(self, low, high):
         
         # base case
-        if not low or not high or low == high or low.prev == high:
-            return
+        # if not low or not high or low == high or low.prev == high:
+        #     return
 
-        # inductive step
-        pivot = self.partition(low, high)
-        # recursivly sort left side of "pivot"
-        self.quick_sort(low, pivot.prev)
-        # recursively sort right side of "pivot"
-        self.quick_sort(pivot.next, high)
+        if low and high and low != high and low != high.next:
+            # inductive step
+            self.partition(low, high)
+            # recursivly sort left side of "pivot"
+            self.quick_sort(low, self.current_pos.prev)
+            # recursively sort right side of "pivot"
+            self.quick_sort(self.current_pos.next, high)
 
 
     def __len__(self):
