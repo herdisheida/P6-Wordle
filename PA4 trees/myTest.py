@@ -120,5 +120,17 @@ if __name__ == "__main__":
     bst.update(18, "HO")
     assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO} "
 
-    
+    # __setitem__ test
+        # Changing data from existing key
+    bst.__setitem__(10, "Mima")
+    assert bst.find(10) == "Mima"
+    assert bst[10] == "Mima"
+    bst[10] = "JB"
+    assert bst.find(10) == "JB"
+    assert bst[10] == "JB"
+        # Making new key with corresponding data
+    bst[100] = "OH HE MASSIVE"
+    assert bst.find(100) == "OH HE MASSIVE"
+    assert bst[100] == "OH HE MASSIVE"
+
     pass
