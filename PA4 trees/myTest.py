@@ -55,7 +55,7 @@ if __name__ == "__main__":
     assert len(bst) == 6
     bst.insert(18, "eighteen")
     assert bst.root.right.right.key == 18
-    assert str(bst) == "{3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen} "
+    assert str(bst) == "output: {3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen}"
     assert len(bst) == 7
 
     # INSERT ItemExistsException()
@@ -124,13 +124,13 @@ if __name__ == "__main__":
 
     # UPDATE test
     bst.update(10, "tinnibinni")
-    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    assert str(bst) == "output: {3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen}"
     bst.update(10, "tinni")
-    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    assert str(bst) == "output: {3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen}"
     bst.update(3, "þristur")
-    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen}"
     bst.update(18, "HO")
-    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO} "
+    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO}"
 
     # __setitem__ test
         # Changing data from existing key
@@ -152,5 +152,47 @@ if __name__ == "__main__":
     assert len(bst) == 9
 
 
+    # REMOVE test
+    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {100:OH HE MASSIVE} {200:OH EVEN BIGGEr}"
 
+    bst.remove(100)
+    assert len(bst) == 8
+    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
+    try:
+        bst.find(100)
+    except NotFoundException:
+        pass
+    else:
+        print("remove(100) : should be a NotFoundException()")
+
+
+    bst.remove(3)
+    assert len(bst) == 7
+    assert str(bst) == "output: {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
+
+    try:
+        bst.find(3)
+    except NotFoundException:
+        pass
+    else:
+        print("find(3) [what we just removed] : should be a NotFoundException()")
+
+    # remove a NONexistent key
+    try:
+        bst.remove(3)
+    except NotFoundException:
+        pass
+    else:
+        print("remove(3) AGAIN [should not be in the tree] : should be a NotFoundException()")
+        
+    try:
+        bst.find(-10)
+    except NotFoundException:
+        pass
+    else:
+        print("remove(-10) non-existent key : should be a NotFoundException()")
+
+
+
+    print("ALL TESTS PASSED")
     pass
