@@ -40,29 +40,33 @@ class BSTMap():
 
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
-        data 
-        # then change --- node.data = data
+        node = self.get_node(key)
+        node[key] = data # LATER -- works with __setitem__ ... i think
 
-    def _find_recur(self, node, key):
-        if node.key == key:
-            return node.data
+
+    #  DELETE MAYBE ?
+    # def _find_recur(self, node, key):
+    #     if node.key == key:
+    #         return node.data
         
-        if key < node.key:
-            if node.left:
-                return self._find_recur(node.left, key)
-        elif key > node.key:
-            if node.right:
-                return self._find_recur(node.right, key)
+    #     if key < node.key:
+    #         if node.left:
+    #             return self._find_recur(node.left, key)
+    #     elif key > node.key:
+    #         if node.right:
+    #             return self._find_recur(node.right, key)
         
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
-        if self.root.data == None:
-            raise NotFoundException()
+        # DELETE MAYBE
+        # if self.root.data == None:
+        #     raise NotFoundException()
         
-        data = self._find_recur(self.root, key)
-        if not data:
-            raise NotFoundException()
-        return data
+        # data = self._find_recur(self.root, key)
+        # if not data:
+        #     raise NotFoundException()
+        # return data
+        return self.get_node(key).data
     
 
     def contains(self, key):
