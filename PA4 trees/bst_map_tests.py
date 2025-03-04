@@ -1,5 +1,5 @@
 ﻿# from whatever_your_implementation_file_is_called import *
-from BST import BST_Node, BSTMap, ItemExistsException, NotFoundException
+from BST import BSTMap, ItemExistsException, NotFoundException
 
 # you can also import more than one file,
 # although if one imports the other it should

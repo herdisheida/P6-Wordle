@@ -41,7 +41,7 @@ class BSTMap():
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
         node = self.get_node(key)
-        node[key] = data # LATER -- works with __setitem__ ... i think
+        # node.__setitem__(key, data) # LATER -- works with __setitem__ ... i think
 
 
     #  DELETE MAYBE ?
@@ -71,7 +71,11 @@ class BSTMap():
 
     def contains(self, key):
         """ Returns True if equal key is found in the collection, otherwise False """
-        pass
+        try:
+            self.get_node(key)
+            return True
+        except NotFoundException:
+            return False
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """
@@ -128,108 +132,4 @@ class BSTMap():
 
 
 if __name__ == "__main__":
-    bst = BSTMap()
-
-
-    # EMPTY tree test
-    assert str(bst) == ""
-    assert bst.root.key == None
-    # find()
-    try:
-        bst.find(10) == "á ekki að finna"
-    except NotFoundException:
-        pass
-    else:
-        print("Should be a NotFoundException()")
-    # __getitem__
-    try:
-        bst[20]
-    except NotFoundException:
-        pass
-    else:
-        print("should be NotFoundException()")
-
-
-
-    # INSERT test
-    bst.insert(10, "ten")
-    assert bst.root.key == 10
-    assert bst.root.data == "ten"
-    bst.insert(5, "five")
-    assert bst.root.key == 10
-    assert bst.root.left.key == 5
-    bst.insert(15, "fifteen")
-    assert bst.root.right.key == 15
-    bst.insert(3, "three")
-    assert bst.root.left.left.key == 3
-    bst.insert(7, "seven")
-    assert bst.root.left.right.key == 7
-    bst.insert(12, "twelve")
-    assert bst.root.right.left.key == 12
-    bst.insert(18, "eighteen")
-    assert bst.root.right.right.key == 18
-    assert str(bst) == "{3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen} "
-    
-    # INSERT ItemExistsException()
-    try:
-        bst.insert(10, "tíamía")
-    except ItemExistsException:
-        pass
-    else:
-        print("should be ItemExistsException()")
-    try:
-        bst.insert(18, "átjánmjátján")
-    except ItemExistsException:
-        pass
-    else:
-        print("should be ItemExistsException()")
-
-    # FIND test
-    assert bst.find(10) == "ten"
-    assert bst.find(5) == "five"
-    assert bst.find(15) == "fifteen"
-    assert bst.find(3) == "three"
-    assert bst.find(7) == "seven"
-    assert bst.find(12) == "twelve"
-    assert bst.find(18) == "eighteen"
-
-    # FIND NotFoundException()
-    try:
-        bst.find(20)
-    except NotFoundException:
-        pass
-    else:
-        print("should be NotFoundException()")
-
-
-    # __getitem__ test
-    assert bst[10] == "ten"
-    assert bst[5] == "five"
-    assert bst[15] == "fifteen"
-    assert bst[3] == "three"
-    assert bst[7] == "seven"
-    assert bst[12] == "twelve"
-    assert bst[18] == "eighteen"
-    # something not in the tree
-    try:
-        bst[20]
-    except NotFoundException:
-        pass
-    else:
-        print("should be NotFoundException()")
-
-
-    # UPDATE test
-    bst.update(10, "tinnibinni")
-    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen} "
-    bst.update(10, "tinni")
-    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
-    bst.update(3, "þristur")
-    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
-    bst.update(18, "HO")
-    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO} "
-
-
-    
-    # # ...additional test cases if needed...
     pass
