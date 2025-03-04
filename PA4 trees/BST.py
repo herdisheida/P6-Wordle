@@ -40,8 +40,7 @@ class BSTMap():
 
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
-        pass
-        # use find
+        data 
         # then change --- node.data = data
 
     def _find_recur(self, node, key):
@@ -60,10 +59,10 @@ class BSTMap():
         if self.root.data == None:
             raise NotFoundException()
         
-        ret = self._find_recur(self.root, key)
-        if not ret:
+        data = self._find_recur(self.root, key)
+        if not data:
             raise NotFoundException()
-        return ret
+        return data
     
 
     def contains(self, key):
@@ -80,7 +79,8 @@ class BSTMap():
 
     def __getitem__(self, key):
         """ Returns the data value of the value pair with equal key """
-        pass
+        # TA -- er þetta bara nákvæmlega það sama og find -- nema bara með bandstriks dæminu
+        return self.find(key)
 
     def __len__(self):
         """ Returns the number of items in the entire data structure """
@@ -106,12 +106,22 @@ if __name__ == "__main__":
     # EMPTY tree test
     assert str(bst) == ""
     assert bst.root.key == None
+    # find()
     try:
         bst.find(10) == "á ekki að finna"
     except NotFoundException:
         pass
     else:
         print("Should be a NotFoundException()")
+    # __getitem__
+    try:
+        bst[20]
+    except NotFoundException:
+        pass
+    else:
+        print("should be NotFoundException()")
+
+
 
     # INSERT test
     bst.insert(10, "ten")
@@ -158,6 +168,23 @@ if __name__ == "__main__":
     # FIND NotFoundException()
     try:
         bst.find(20)
+    except NotFoundException:
+        pass
+    else:
+        print("should be NotFoundException()")
+
+
+    # __getitem__ test
+    assert bst[10] == "ten"
+    assert bst[5] == "five"
+    assert bst[15] == "fifteen"
+    assert bst[3] == "three"
+    assert bst[7] == "seven"
+    assert bst[12] == "twelve"
+    assert bst[18] == "eighteen"
+    # something not in the tree
+    try:
+        bst[20]
     except NotFoundException:
         pass
     else:
