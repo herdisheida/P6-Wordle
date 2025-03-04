@@ -15,7 +15,7 @@ class BSTMap():
     def __init__(self):
         self.root = BST_Node()
         self.size = 0 # TA má initalize size ?
-
+        
 
     def _insert_recur(self, node, key, data):
         if key == node.key:
@@ -38,8 +38,10 @@ class BSTMap():
         """ Adds this value pair to the collection """
         if self.root.key == None:
             self.root = BST_Node(key, data)
+            self.size += 1
         else:
             self._insert_recur(self.root, key, data)
+    
 
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """

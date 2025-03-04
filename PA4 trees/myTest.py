@@ -7,6 +7,9 @@ if __name__ == "__main__":
     # EMPTY tree test
     assert str(bst) == ""
     assert bst.root.key == None
+    assert bst.size == 0
+    assert len(bst) == 0
+
 
     # find()
     try:
@@ -33,21 +36,28 @@ if __name__ == "__main__":
     bst.insert(10, "ten")
     assert bst.root.key == 10
     assert bst.root.data == "ten"
+    assert len(bst) == 1
     bst.insert(5, "five")
     assert bst.root.key == 10
     assert bst.root.left.key == 5
+    assert len(bst) == 2
     bst.insert(15, "fifteen")
     assert bst.root.right.key == 15
+    assert len(bst) == 3
     bst.insert(3, "three")
     assert bst.root.left.left.key == 3
+    assert len(bst) == 4
     bst.insert(7, "seven")
     assert bst.root.left.right.key == 7
+    assert len(bst) == 5
     bst.insert(12, "twelve")
     assert bst.root.right.left.key == 12
+    assert len(bst) == 6
     bst.insert(18, "eighteen")
     assert bst.root.right.right.key == 18
     assert str(bst) == "{3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen} "
-    
+    assert len(bst) == 7
+
     # INSERT ItemExistsException()
     try:
         bst.insert(10, "tíamía")
@@ -70,6 +80,7 @@ if __name__ == "__main__":
     assert bst.find(7) == "seven"
     assert bst.find(12) == "twelve"
     assert bst.find(18) == "eighteen"
+    assert len(bst) == 7
 
     # FIND NotFoundException()
     try:
@@ -88,6 +99,7 @@ if __name__ == "__main__":
     assert bst[7] == "seven"
     assert bst[12] == "twelve"
     assert bst[18] == "eighteen"
+    assert len(bst) == 7
     # something not in the tree
     try:
         bst[20]
@@ -128,9 +140,17 @@ if __name__ == "__main__":
     bst[10] = "JB"
     assert bst.find(10) == "JB"
     assert bst[10] == "JB"
+    assert len(bst) == 7
         # Making new key with corresponding data
     bst[100] = "OH HE MASSIVE"
     assert bst.find(100) == "OH HE MASSIVE"
     assert bst[100] == "OH HE MASSIVE"
+    assert len(bst) == 8
+    bst[200] = "OH EVEN BIGGEr"
+    assert bst.find(200) == "OH EVEN BIGGEr"
+    assert bst[200] == "OH EVEN BIGGEr"
+    assert len(bst) == 9
+
+
 
     pass
