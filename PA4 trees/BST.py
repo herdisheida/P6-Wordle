@@ -14,6 +14,7 @@ class BST_Node():
 class BSTMap():
     def __init__(self):
         self.root = BST_Node()
+        self.size = 0 # TA má initalize size ?
 
 
     def _insert_recur(self, node, key, data):
@@ -23,11 +24,13 @@ class BSTMap():
         if key < node.key:
             if node.left == None:
                 node.left = BST_Node(key, data)
+                self.size += 1
             else:
                 self._insert_recur(node.left, key, data)
         elif key > node.key:
             if node.right == None:
                 node.right = BST_Node(key, data)
+                self.size += 1
             else:
                 self._insert_recur(node.right, key, data)
 
@@ -79,6 +82,8 @@ class BSTMap():
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """
+        
+        self.size -= 1
         pass
 
     def __setitem__(self, key, data): # LATER looks sus - bc TRY EXCEPT
@@ -95,7 +100,7 @@ class BSTMap():
 
     def __len__(self):
         """ Returns the number of items in the entire data structure """
-        pass
+        return self.size
 
 
     def _inorder_recur(self, node, ret=""):
