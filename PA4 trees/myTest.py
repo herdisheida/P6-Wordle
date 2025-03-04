@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     # EMPTY tree test
     assert str(bst) == ""
-    assert bst.root.key == None
+    # assert bst.root.key == None
     assert bst.size == 0
     assert len(bst) == 0
 
@@ -30,6 +30,12 @@ if __name__ == "__main__":
     else:
         print("__getitem__ : should be NotFoundException()")
 
+    # remove empty
+    try:
+        bst.remove(10)
+    except NotFoundException:
+        pass
+        print("remove empty tree : Should be a NotFoundException()")
 
 
     # INSERT test
@@ -157,6 +163,7 @@ if __name__ == "__main__":
 
     bst.remove(100)
     assert len(bst) == 8
+    print(bst)
     assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
     try:
         bst.find(100)

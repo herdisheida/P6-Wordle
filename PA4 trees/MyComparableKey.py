@@ -10,6 +10,7 @@ class MyComparableKey:
         """ Compares two instances of MyComparableKey and returns True if the value of self is lower, otherwise False. 
          In case of equal integers the order of the strings is used """
         # HELP er þetta  allt of sumt?
+        
         if self.int_val == other.int_val:
             if self.str_val < other.str_val:
                 return True
