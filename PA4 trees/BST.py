@@ -17,19 +17,19 @@ class BSTMap():
 
 
     def _insert_recur(self, node, key, data):
+        if key == node.key:
+            raise ItemExistsException()
+        
         if key < node.key:
             if node.left == None:
                 node.left = BST_Node(key, data)
             else:
                 self._insert_recur(node.left, key, data)
-        else:
+        elif key > node.key:
             if node.right == None:
                 node.right = BST_Node(key, data)
             else:
                 self._insert_recur(node.right, key, data)
-
-
-        return # don't insert if the data already exists 
 
     def insert(self, key, data):
         """ Adds this value pair to the collection """
@@ -41,10 +41,18 @@ class BSTMap():
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
         pass
+        # use find
+        # then change --- node.data = data
+
+    def _find_recur(self, node, key):
+        pass
 
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
-        pass
+        if self.root.key == None:
+            return None
+        self._find_recur(self.root, key)
+    
 
     def contains(self, key):
         """ Returns True if equal key is found in the collection, otherwise False """
@@ -68,26 +76,39 @@ class BSTMap():
 
     def __str__(self):
         """ Returns a string with the items ordered by key and separated by a single space """
-        return self._inorder_recur(self.root)
+        return self._inorder_recur(self.root) if self.root.data else ""
 
     def _inorder_recur(self, node, ret=""):
         if node:
             ret = self._inorder_recur(node.left, ret)
-            ret += str(node.data) + " "
+            ret += f"{{{node.key}:{node.data}}} "
             ret = self._inorder_recur(node.right, ret)
         return ret
+    
+
 
 if __name__ == "__main__":
     bst = BSTMap()
-    bst.insert(10, "ten")
-    bst.insert(5, "five")
-    bst.insert(15, "fifteen")
-    bst.insert(3, "three")
-    bst.insert(7, "seven")
-    bst.insert(12, "twelve")
-    bst.insert(18, "eighteen")
+    assert str(bst) == ""
+    assert bst.root.key == None
 
-    print(bst)  # Expected output: "three five seven ten twelve fifteen eighteen"
+    bst.insert(10, "ten")
+    assert bst.root.key == 10
+    assert bst.root.data == "ten"
+    bst.insert(5, "five")
+    assert bst.root.key == 10
+    assert bst.root.left.key == 5
+    bst.insert(15, "fifteen")
+    assert bst.root.right.key == 15
+    bst.insert(3, "three")
+    assert bst.root.left.left.key == 3
+    bst.insert(7, "seven")
+    assert bst.root.left.right.key == 7
+    bst.insert(12, "twelve")
+    assert bst.root.right.left.key == 12
+    bst.insert(18, "eighteen")
+    assert bst.root.right.right.key == 18
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen} "
     
     # # ...additional test cases if needed...
     pass
