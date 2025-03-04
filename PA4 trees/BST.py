@@ -45,13 +45,25 @@ class BSTMap():
         # then change --- node.data = data
 
     def _find_recur(self, node, key):
-        pass
-
+        if node.key == key:
+            return node.data
+        
+        if key < node.key:
+            if node.left:
+                return self._find_recur(node.left, key)
+        elif key > node.key:
+            if node.right:
+                return self._find_recur(node.right, key)
+        
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
-        if self.root.key == None:
-            return None
-        self._find_recur(self.root, key)
+        if self.root.data == None:
+            raise NotFoundException()
+        
+        ret = self._find_recur(self.root, key)
+        if not ret:
+            raise NotFoundException()
+        return ret
     
 
     def contains(self, key):
@@ -89,9 +101,19 @@ class BSTMap():
 
 if __name__ == "__main__":
     bst = BSTMap()
+
+
+    # EMPTY tree test
     assert str(bst) == ""
     assert bst.root.key == None
+    try:
+        bst.find(10) == "á ekki að finna"
+    except NotFoundException:
+        pass
+    else:
+        print("Should be a NotFoundException()")
 
+    # INSERT test
     bst.insert(10, "ten")
     assert bst.root.key == 10
     assert bst.root.data == "ten"
@@ -109,6 +131,50 @@ if __name__ == "__main__":
     bst.insert(18, "eighteen")
     assert bst.root.right.right.key == 18
     assert str(bst) == "{3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen} "
+    
+    # INSERT ItemExistsException()
+    try:
+        bst.insert(10, "tíamía")
+    except ItemExistsException:
+        pass
+    else:
+        print("should be ItemExistsException()")
+    try:
+        bst.insert(18, "átjánmjátján")
+    except ItemExistsException:
+        pass
+    else:
+        print("should be ItemExistsException()")
+
+    # FIND test
+    assert bst.find(10) == "ten"
+    assert bst.find(5) == "five"
+    assert bst.find(15) == "fifteen"
+    assert bst.find(3) == "three"
+    assert bst.find(7) == "seven"
+    assert bst.find(12) == "twelve"
+    assert bst.find(18) == "eighteen"
+
+    # FIND NotFoundException()
+    try:
+        bst.find(20)
+    except NotFoundException:
+        pass
+    else:
+        print("should be NotFoundException()")
+
+
+    # UPDATE test
+    bst.update(10, "tinnibinni")
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    bst.update(10, "tinni")
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    bst.update(3, "þristur")
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    bst.update(18, "HO")
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO} "
+
+
     
     # # ...additional test cases if needed...
     pass
