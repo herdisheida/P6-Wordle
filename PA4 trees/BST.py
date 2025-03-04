@@ -47,34 +47,13 @@ class BSTMap():
         """ Sets the data value of the value pair with equal key to data """
         node = self.get_node(key)
         node.data = data # LATER -- works with __setitem__ ... i think
-
-
-    #  DELETE MAYBE ?
-    # def _find_recur(self, node, key):
-    #     if node.key == key:
-    #         return node.data
-        
-    #     if key < node.key:
-    #         if node.left:
-    #             return self._find_recur(node.left, key)
-    #     elif key > node.key:
-    #         if node.right:
-    #             return self._find_recur(node.right, key)
         
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
-        # DELETE MAYBE
-        # if self.root.data == None:
-        #     raise NotFoundException()
-        
-        # data = self._find_recur(self.root, key)
-        # if not data:
-        #     raise NotFoundException()
-        # return data
         return self.get_node(key).data
     
 
-    def contains(self, key): # LATER looks sus - bc TRY EXCEPT
+    def contains(self, key): # LATER looks sus - má gera TRY EXCEPT
         """ Returns True if equal key is found in the collection, otherwise False """
         try:
             self.get_node(key)
@@ -82,14 +61,19 @@ class BSTMap():
         except NotFoundException:
             return False
 
+
+    def _remove_recur(self, key):
+        pass
+    
     def remove(self, key):
-        """ Removes the value pair with equal key from the collection """
-        
+        """ Removes the value pair with equal key from the collection """        
         self.size -= 1
         pass
 
-    def __setitem__(self, key, data): # LATER looks sus - bc TRY EXCEPT
-        """ Adds this value pair to the collection """
+
+    def __setitem__(self, key, data): # LATER looks sus - má gera TRY EXCEPT
+        """ Override to allow this syntax: some_bst_map[key] = data.
+         If equal key is already in the collection, update its data value """
         try:
             self.insert(key, data)
         except ItemExistsException:
@@ -105,14 +89,14 @@ class BSTMap():
         return self.size
 
 
-    def _inorder_recur(self, node, ret=""):
+    def _inorder_recur(self, node, ret="output:"):
         if node:
             ret = self._inorder_recur(node.left, ret)
-            ret += f"{{{node.key}:{node.data}}} "
+            ret += f" {{{node.key}:{node.data}}}"
             ret = self._inorder_recur(node.right, ret)
         return ret
-    
-    def __str__(self):
+
+    def __str__(self): # TA is the format correct :  output: {1:one} {2:two} etc?
         """ Returns a string with the items ordered by key and separated by a single space """
         return self._inorder_recur(self.root) if self.root.data else ""
 
