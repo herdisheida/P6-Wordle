@@ -41,7 +41,7 @@ class BSTMap():
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
         node = self.get_node(key)
-        # node.__setitem__(key, data) # LATER -- works with __setitem__ ... i think
+        node.data = data # LATER -- works with __setitem__ ... i think
 
 
     #  DELETE MAYBE ?
@@ -69,7 +69,7 @@ class BSTMap():
         return self.get_node(key).data
     
 
-    def contains(self, key):
+    def contains(self, key): # LATER looks sus - bc TRY EXCEPT
         """ Returns True if equal key is found in the collection, otherwise False """
         try:
             self.get_node(key)
@@ -81,9 +81,12 @@ class BSTMap():
         """ Removes the value pair with equal key from the collection """
         pass
 
-    def __setitem__(self, key, data):
+    def __setitem__(self, key, data): # LATER looks sus - bc TRY EXCEPT
         """ Adds this value pair to the collection """
-        pass
+        try:
+            self.insert(key, data)
+        except ItemExistsException:
+            self.update(key, data)
 
     def __getitem__(self, key):
         """ Returns the data value of the value pair with equal key """

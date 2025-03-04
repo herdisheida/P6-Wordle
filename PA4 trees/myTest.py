@@ -107,21 +107,18 @@ if __name__ == "__main__":
     assert bst.contains(18) == True
     # does not contains
     assert bst.contains(0) == False
-
-
+    assert bst.contains(50) == False
 
 
     # UPDATE test
-    # bst.update(10, "tinnibinni")
-    # assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen} "
-    # bst.update(10, "tinni")
-    # assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
-    # bst.update(3, "þristur")
-    # assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
-    # bst.update(18, "HO")
-    # assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO} "
-
+    bst.update(10, "tinnibinni")
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    bst.update(10, "tinni")
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    bst.update(3, "þristur")
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
+    bst.update(18, "HO")
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO} "
 
     
-    # # ...additional test cases if needed...
     pass
