@@ -80,15 +80,12 @@ class BSTMap():
     def __getitem__(self, key):
         """ Returns the data value of the value pair with equal key """
         # TA -- er þetta bara nákvæmlega það sama og find -- nema bara með bandstriks dæminu
-        return self.find(key)
+        return self.get_node(key).data
 
     def __len__(self):
         """ Returns the number of items in the entire data structure """
         pass
 
-    def __str__(self):
-        """ Returns a string with the items ordered by key and separated by a single space """
-        return self._inorder_recur(self.root) if self.root.data else ""
 
     def _inorder_recur(self, node, ret=""):
         if node:
@@ -97,6 +94,33 @@ class BSTMap():
             ret = self._inorder_recur(node.right, ret)
         return ret
     
+    def __str__(self):
+        """ Returns a string with the items ordered by key and separated by a single space """
+        return self._inorder_recur(self.root) if self.root.data else ""
+
+    
+
+    def _get_node_recur(self, node, key): # JB helper func? itl að minnka duplicate code
+        """ Returns the node of the value pair with equal key """
+        if node.key == key:
+            return node
+        
+        if key < node.key:
+            if node.left:
+                return self._get_node_recur(node.left, key)
+        elif key > node.key:
+            if node.right:
+                return self._get_node_recur(node.right, key)
+
+    def get_node(self, key):
+        """ Returns the data value of the value pair with equal key """
+        if self.root.data == None:
+            raise NotFoundException()
+        
+        node = self._get_node_recur(self.root, key)
+        if not node:
+            raise NotFoundException()
+        return node
 
 
 if __name__ == "__main__":
