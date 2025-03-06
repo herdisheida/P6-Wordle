@@ -18,72 +18,8 @@ class BSTMap():
     def __init__(self):
         self.root = None
         self.size = 0
-        
-
-    # def _insert_recur(self, node, key, data):
-    #     if key < node.key:
-    #         if node.left == None:
-    #             node.left = BST_Node(key, data)
-    #             self.size += 1
-    #         else:
-    #             self._insert_recur(node.left, key, data)
-    #     elif node.key < key:
-    #         if node.right == None:
-    #             node.right = BST_Node(key, data)
-    #             self.size += 1
-    #         else:
-    #             self._insert_recur(node.right, key, data)
-    #     else: # key == node.key
-    #         raise ItemExistsException()
-
-    # def insert(self, key, data):
-    #     """ Adds this value pair to the collection """
-    #     if self.root.key == None:
-    #         self.root = BST_Node(key, data)
-    #         self.size += 1
-    #     else:
-    #         self._insert_recur(self.root, key, data)
-            
 
 
-
-
-# LATER trying to refactor
-    # def _insert_recur(self, node, key, data):
-
-    #     if node == None:
-    #         new_node = BST_Node(key, data)
-    #         if self.root.key == None:
-    #             self.root = new_node
-    #         node = new_node
-    #         self.size += 1
-    #         return
-        
-    #     if key < node.key:
-    #         # if node.left == None:
-    #         #     node.left = BST_Node(key, data)
-    #         #     self.size += 1
-    #         # else:
-    #         self._insert_recur(node.left, key, data)
-    #     elif node.key < key:
-    #         # if node.right == None:
-    #         #     node.right = BST_Node(key, data)
-    #         #     self.size += 1
-    #         # else:
-    #         self._insert_recur(node.right, key, data)
-    #     else:
-    #         raise ItemExistsException()
-
-    # def insert(self, key, data):
-    #     """ Adds this value pair to the collection """
-    #     # if self.root.key == None:
-    #     #     self.root = BST_Node(key, data)
-    #     #     self.size += 1
-    #     # else:
-    #     self._insert_recur(self.root, key, data)
-
-
-# kári
     def _insert_recur(self, node, key, data):
         if node == None:
             return BST_Node(key, data)
@@ -101,26 +37,43 @@ class BSTMap():
         self.root = self._insert_recur(self.root, key, data)
         self.size += 1
 
-
-
-
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
-        self.get_node(key).data = data
+        self._get_node(key).data = data
+    
+
+    def _get_node_recur(self, node, key): # JB helper func? itl að minnka duplicate code
+        if node.key == key:
+            return node
         
+        if key < node.key:
+            if node.left:
+                return self._get_node_recur(node.left, key)
+        elif key > node.key:
+            if node.right:
+                return self._get_node_recur(node.right, key)
+            
+    def _get_node(self, key):
+        """ Returns the data value of the value pair with equal key """
+        if self.root == None:
+            raise NotFoundException()
+        
+        node = self._get_node_recur(self.root, key)
+        if not node:
+            raise NotFoundException()
+        return node
+    
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
-        return self.get_node(key).data
+        return self._get_node(key).data
     
     def contains(self, key): # LATER looks sus - má gera TRY EXCEPT?
         """ Returns True if equal key is found in the collection, otherwise False """
         try:
-            self.get_node(key)
+            self._get_node(key)
             return True
         except NotFoundException:
             return False
-
-
 
     def _find_child(self, node): # DELETE i think
         curr = node
@@ -225,7 +178,7 @@ class BSTMap():
             # hnútur með eitt barn: tengjum fram hjá
             # hnútur með tvö börn: labba endurkvæmt niður (finna þann hnút) -- víxla gildunum --- fjarlægjum hnútin sem við löbbuðum niður að
 
-        node = self.get_node(key) # node that is to be removed
+        node = self._get_node(key) # node that is to be removed
         if node.key == key:
             self._remove_recur(node)
             self.size -= 1
@@ -248,7 +201,7 @@ class BSTMap():
     def __getitem__(self, key):
         """ Returns the data value of the value pair with equal key """
         # TA -- er þetta bara nákvæmlega það sama og find -- nema bara með bandstriks dæminu
-        return self.get_node(key).data
+        return self._get_node(key).data
 
     def __len__(self):
         """ Returns the number of items in the entire data structure """
@@ -267,27 +220,6 @@ class BSTMap():
          Format: {value_of_key:value_of_data} """
         return self._inorder_recur(self.root) if self.root else ""
 
-
-    def _get_node_recur(self, node, key): # JB helper func? itl að minnka duplicate code
-        if node.key == key:
-            return node
-        
-        if key < node.key:
-            if node.left:
-                return self._get_node_recur(node.left, key)
-        elif key > node.key:
-            if node.right:
-                return self._get_node_recur(node.right, key)
-
-    def get_node(self, key):
-        """ Returns the data value of the value pair with equal key """
-        if self.root == None:
-            raise NotFoundException()
-        
-        node = self._get_node_recur(self.root, key)
-        if not node:
-            raise NotFoundException()
-        return node
 
 
 if __name__ == "__main__":
