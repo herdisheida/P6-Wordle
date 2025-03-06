@@ -202,6 +202,15 @@ class BSTMap():
             # hnútur með tvö börn: labba endurkvæmt niður (finna þann hnút) -- víxla gildunum --- fjarlægjum hnútin sem við löbbuðum niður að
         self.root = self._remove_recur(self.root, key)
 
+    def rightMost(self, original, node):
+        if ...:
+            self.rightMost()
+        else:
+            original.key, original.data = node.key, node.data
+            return self._remove_recur(node, node.key) # ???
+            
+
+
 
 
     def __setitem__(self, key, data): # LATER looks sus - má gera TRY EXCEPT?
