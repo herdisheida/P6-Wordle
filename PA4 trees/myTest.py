@@ -162,12 +162,12 @@ if __name__ == "__main__":
     # REMOVE test
     assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {100:OH HE MASSIVE} {200:OH EVEN BIGGEr}"
 
-    bst.remove(100)
-    assert len(bst) == 8
+    bst.remove(3) # remove a node with no children
     print(bst)
-    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
+    assert len(bst) == 8
+    assert str(bst) == "output: {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {100:OH HE MASSIVE} {200:OH EVEN BIGGEr}"
     try:
-        bst.find(100)
+        bst.find(3)
     except NotFoundException:
         pass
     else:

@@ -73,75 +73,19 @@ class BSTMap():
         except NotFoundException:
             return False
 
-    def _find_child(self, node): # DELETE i think
-        curr = node
-        while curr.left != None:
-            curr = curr.left
-        return curr
 
-    def _remove_recur(self, node):
-        # if node.left:
-        #     if node.left.key == key:
-        #         node.left = node.left.left
-        #         node.right = node.left.right
-        # if node.right:
-        #     if node.right.key == key:
-        #         node.right = node.right.right
-        #         node.left = node.right.left
+    def _find_leftMost(self, node, node_to_remove):
+        # find leftMost node
+        if node.left:
+            self._find_leftMost()
 
-        # if key < node.key:
-        #     if node.left:
-        #         self._remove_recur(node.left, key)
-        # elif key > node.key:
-        #     if node.right:
-        #         self._remove_recur(node.right, key)
-
-        # del_node = node
-        # # node has both children
-        # if node.left and node.right:
-        #     if node.left.key == key:
-        #         node.left.rigth = del_node.right
-        #         node.left.left = del_node
-        #     if node.right.key == key:
-        #         node.right.right = del_node.right
-        #         node.right.left = del_node.left
-
-    
-        # if key < node.key:
-        #     if node.left:
-        #         self._remove_recur(node.left, key)
-        # elif key > node.key:
-        #     if node.right:
-        #         self._remove_recur(node.right, key)
-
-        # if node.key == None:
-        #     raise NotFoundException()
+        else:
+            # node found
+            node_to_remove.key, node_to_remove.data = node.key, node.data
+            # remove the leftMost node
+            return self._remove_recur(node)
         
-        # if key < node.key:
-        #     node.left = self._remove_recur(node.left, key)
-        # elif node.key < key:
-        #     node.right = self._remove_recur(node.right, key)
-        # else: # node found
-        #     self.size -= 1
-
-        #     # if node has 1 or 0 children
-        #     if node.left == None and node.right == None:
-        #         return node
-        #     elif node.left == None:
-        #         # if node.left.key == None:
-        #         return node.right
-        #     elif node.right == None:
-        #         # if node.right.key == None:
-        #         return node.left
-
-        #     else:
-        #         # if node has 2 children
-        #         child = self._find_min(node.right)
-        #         node.key, node.data = child.key, child.data
-        #         node.right = self.remove(node.right, child.key)
-                
-        # return node
-
+    def _remove_recur(self, node):
         # node has 2 children
         if node.left and node.right:
             return self._find_leftMost(node.right, node)
@@ -154,32 +98,14 @@ class BSTMap():
         # node has 0 children
         else:
             return None
-        
-
-
-    def _find_leftMost(self, node, node_to_remove):
-        # find leftMost node
-        if node.left:
-            self._find_leftMost()
-
-        else:
-            # node found
-            node_to_remove.key, node_to_remove.data = node.key, node.data
-            # remove the leftMost node
-            return self._remove_recur(node)
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """        
-
-            # CASES
-            # lauf: tengja parent í None
-            # hnútur með eitt barn: tengjum fram hjá
-            # hnútur með tvö börn: labba endurkvæmt niður (finna þann hnút) -- víxla gildunum --- fjarlægjum hnútin sem við löbbuðum niður að
-
         node = self._get_node(key) # node that is to be removed
         if node.key == key:
-            self._remove_recur(node)
+            node = self._remove_recur(node)
             self.size -= 1
+        return node
 
 
 
