@@ -16,6 +16,7 @@ class BSTMap():
         self.root = None
         self.size = 0
 
+## ------------ INSERT ------------ ##
     def _insert_recur(self, node, key, data):
         if node is None:
             return BST_Node(key, data)
@@ -33,14 +34,17 @@ class BSTMap():
         self.root = self._insert_recur(self.root, key, data)
         self.size += 1
 
+## ------------ UPDATE ------------ ##
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
         self._get_node(key).data = data
-    
+
+## ------------ FIND ------------ ##
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
         return self._get_node(key).data
     
+## ------------ CONSTAIN ------------ ##
     def contains(self, key):
         """ Returns True if equal key is found in the collection, otherwise False """
         try:
@@ -48,13 +52,15 @@ class BSTMap():
             return True
         except NotFoundException:
             return False
-
+        
+## ------------ CONSTAIN ------------ ##
     def _find_left_most(self, node):
         # find leftMost node
         if node.left:
             return self._find_left_most(node.left)
         return node
 
+## ------------ REMOVE ------------ ##
     def _remove_recur(self, node, key):
         if node is None:
             raise NotFoundException()
@@ -62,7 +68,6 @@ class BSTMap():
             node.left = self._remove_recur(node.left, key)
         elif key > node.key:
             node.right = self._remove_recur(node.right, key)
-        
         else: # node is found
 
             # node has 1 child
@@ -75,7 +80,6 @@ class BSTMap():
             left_most_node = self._find_left_most(node.right)
             node.key, node.data = left_most_node.key, left_most_node.data
             node.right = self._remove_recur(node.right, left_most_node.key)
-
         return node
 
     def remove(self, key):
@@ -83,6 +87,7 @@ class BSTMap():
         self.root = self._remove_recur(self.root, key)
         self.size -= 1
 
+## ------------ SET ITEM ------------ ##
     def __setitem__(self, key, data):
         """ Override to allow this syntax: some_bst_map[key] = data.
          If equal key is already in the collection, update its data value """
@@ -91,15 +96,17 @@ class BSTMap():
         except ItemExistsException:
             self.update(key, data)
 
+## ------------ GET ITEM ------------ ##
     def __getitem__(self, key):
         """ Returns the data value of the value pair with equal key """
         return self._get_node(key).data
 
+## ------------ LEN ------------ ##
     def __len__(self):
         """ Returns the number of items in the entire data structure """
         return self.size
 
-
+## ------------ PRINT ------------ ##
     def _inorder_recur(self, node, ret="output:"):
         if node:
             ret = self._inorder_recur(node.left, ret)
@@ -112,8 +119,7 @@ class BSTMap():
          Format: {value_of_key:value_of_data} """
         return self._inorder_recur(self.root) if self.root else ""
 
-
-## utilify func
+## ------------ GET NODE helper func ------------ ##
     def _get_node_recur(self, node, key):
         if node is None:
             return None
@@ -130,6 +136,7 @@ class BSTMap():
         if not node:
             raise NotFoundException()
         return node
+## ------------------------------ ##
 
 
 if __name__ == "__main__":
