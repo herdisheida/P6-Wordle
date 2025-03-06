@@ -43,25 +43,23 @@ class BSTMap():
     
 
     def _get_node_recur(self, node, key): # JB helper func? itl að minnka duplicate code
+        if node == None:
+            return None
+        
         if node.key == key:
             return node
-        
-        if key < node.key:
-            if node.left:
-                return self._get_node_recur(node.left, key)
-        elif key > node.key:
-            if node.right:
-                return self._get_node_recur(node.right, key)
+        elif key < node.key:
+            return self._get_node_recur(node.left, key)
+        else: # key > node.key:
+            return self._get_node_recur(node.right, key)
             
     def _get_node(self, key):
         """ Returns the data value of the value pair with equal key """
-        if self.root == None:
-            raise NotFoundException()
-        
         node = self._get_node_recur(self.root, key)
         if not node:
             raise NotFoundException()
         return node
+
     
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
@@ -144,18 +142,20 @@ class BSTMap():
                 
         # return node
 
-
-        # node has 0 children
-        if node.left == None and node.right == None:
-            return 
+        # node has 2 children
+        if node.left and node.right:
+            return self._find_leftMost(node.right, node)
         
         # node has 1 child
-        elif node.left == None or node.right == None:
-            return
+        elif node.left:
+            return node.left
+        elif node.right:
+            return node.right
+        # node has 0 children
+        else:
+            return None
         
-        # node has 2 children
-        else: # node.left and node.right:
-            return self._find_leftMost(node.right, node)
+
 
     def _find_leftMost(self, node, node_to_remove):
         # find leftMost node
@@ -170,9 +170,7 @@ class BSTMap():
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """        
-        if self.root == None:
-            raise NotFoundException()
-        
+
             # CASES
             # lauf: tengja parent í None
             # hnútur með eitt barn: tengjum fram hjá

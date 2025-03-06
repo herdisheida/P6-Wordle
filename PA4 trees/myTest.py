@@ -35,6 +35,7 @@ if __name__ == "__main__":
         bst.remove(10)
     except NotFoundException:
         pass
+    else:
         print("remove empty tree : Should be a NotFoundException()")
 
 
