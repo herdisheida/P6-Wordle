@@ -38,26 +38,6 @@ class BSTMap():
         """ Sets the data value of the value pair with equal key to data """
         self._get_node(key).data = data
     
-
-    def _get_node_recur(self, node, key):
-        if node == None:
-            return None
-        
-        if node.key == key:
-            return node
-        elif key < node.key:
-            return self._get_node_recur(node.left, key)
-        else: # key > node.key:
-            return self._get_node_recur(node.right, key)
-            
-    def _get_node(self, key):
-        """ Returns the data value of the value pair with equal key """
-        node = self._get_node_recur(self.root, key)
-        if not node:
-            raise NotFoundException()
-        return node
-
-    
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
         return self._get_node(key).data
@@ -109,14 +89,7 @@ class BSTMap():
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """        
-        # node = self._get_node(key) # node that is to be removed
-        # if node.key == key:
-        #     node = self._remove_recur(node)
-        #     self.size -= 1
-        # return node
-
-        node = self._remove_recur(self.root, key)
-        return node
+        self._remove_recur(self.root, key)
 
 
             
@@ -149,11 +122,29 @@ class BSTMap():
             ret = self._inorder_recur(node.right, ret)
         return ret
 
-    def __str__(self): # TA is the format correct :  output: {1:one} {2:two} etc?
+    def __str__(self):
         """ Returns a string with the items ordered by key and separated by a single space.
          Format: {value_of_key:value_of_data} """
         return self._inorder_recur(self.root) if self.root else ""
 
+
+## utilify func
+    def _get_node_recur(self, node, key):
+        if node == None:
+            return None
+        if node.key == key:
+            return node
+        elif key < node.key:
+            return self._get_node_recur(node.left, key)
+        else: # key > node.key:
+            return self._get_node_recur(node.right, key)
+        
+    def _get_node(self, key):
+        """ Returns the data value of the value pair with equal key """
+        node = self._get_node_recur(self.root, key)
+        if not node:
+            raise NotFoundException()
+        return node
 
 
 if __name__ == "__main__":
