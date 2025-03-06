@@ -162,37 +162,35 @@ if __name__ == "__main__":
     # REMOVE test
     assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {100:OH HE MASSIVE} {200:OH EVEN BIGGEr}"
 
-    bst.remove(3) # remove a node with no children
-    print(bst)
+
+    # remove with 1 child
+    bst.remove(100) # remove a node with no children
     assert len(bst) == 8
-    assert str(bst) == "output: {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {100:OH HE MASSIVE} {200:OH EVEN BIGGEr}"
-    try:
-        bst.find(3)
-    except NotFoundException:
-        pass
-    else:
-        print("remove(100) : should be a NotFoundException()")
+    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
+  
 
-
-    bst.remove(3)
+    bst.remove(3) # remove a node with no children
     assert len(bst) == 7
     assert str(bst) == "output: {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
 
+    # find node that doesn't exsist
     try:
         bst.find(3)
     except NotFoundException:
         pass
     else:
-        print("find(3) [what we just removed] : should be a NotFoundException()")
+        print("remove(3) [what we just removed] : should be a NotFoundException()")
 
-    # remove a NONexistent key
+    # remove node that doesn't exist
     try:
         bst.remove(3)
     except NotFoundException:
+        assert len(bst) == 7, "size shouldn't change"
         pass
     else:
         print("remove(3) AGAIN [should not be in the tree] : should be a NotFoundException()")
-        
+
+    # find a key that doesn't exist
     try:
         bst.find(-10)
     except NotFoundException:
