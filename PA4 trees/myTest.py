@@ -62,7 +62,7 @@ def myTest():
     assert len(bst) == 6
     bst.insert(18, "eighteen")
     assert bst.root.right.right.key == 18
-    assert str(bst) == "output: {3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen}"
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:ten} {12:twelve} {15:fifteen} {18:eighteen} "
     assert len(bst) == 7
 
     # INSERT ItemExistsException()
@@ -131,13 +131,13 @@ def myTest():
 
     # UPDATE test
     bst.update(10, "tinnibinni")
-    assert str(bst) == "output: {3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen}"
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinnibinni} {12:twelve} {15:fifteen} {18:eighteen} "
     bst.update(10, "tinni")
-    assert str(bst) == "output: {3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen}"
+    assert str(bst) == "{3:three} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
     bst.update(3, "þristur")
-    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen}"
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:eighteen} "
     bst.update(18, "HO")
-    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO}"
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:tinni} {12:twelve} {15:fifteen} {18:HO} "
 
     # __setitem__ test
         # Changing data from existing key
@@ -160,18 +160,18 @@ def myTest():
 
 
     # REMOVE test
-    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {100:OH HE MASSIVE} {200:OH EVEN BIGGEr}"
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {100:OH HE MASSIVE} {200:OH EVEN BIGGEr} "
 
 
     # remove with 1 child
     bst.remove(100) # remove a node with no children
     assert len(bst) == 8
-    assert str(bst) == "output: {3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
+    assert str(bst) == "{3:þristur} {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
   
 
     bst.remove(3) # remove a node with no children
     assert len(bst) == 7
-    assert str(bst) == "output: {5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
+    assert str(bst) == "{5:five} {7:seven} {10:JB} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
 
     # find node that doesn't exsist
     try:
@@ -202,7 +202,7 @@ def myTest():
     # remove root node
     bst.remove(10)
     assert len(bst) == 6
-    assert str(bst) == "output: {5:five} {7:seven} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
+    assert str(bst) == "{5:five} {7:seven} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
 
 
 

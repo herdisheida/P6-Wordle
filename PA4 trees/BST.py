@@ -107,17 +107,17 @@ class BSTMap():
         return self.size
 
 ## ------------ PRINT ------------ ##
-    def _inorder_recur(self, node, ret="output:"):
+    def _inorder_recur(self, node, ret=""):
         if node:
             ret = self._inorder_recur(node.left, ret)
-            ret += f" {{{node.key}:{node.data}}}"
+            ret += f"{{{node.key}:{node.data}}} "
             ret = self._inorder_recur(node.right, ret)
         return ret
 
     def __str__(self):
         """ Returns a string with the items ordered by key and separated by a single space.
          Format: {value_of_key:value_of_data} """
-        return self._inorder_recur(self.root) if self.root else ""
+        return self._inorder_recur(self.root)
 
 ## ------------ GET NODE helper func ------------ ##
     def _get_node_recur(self, node, key):
