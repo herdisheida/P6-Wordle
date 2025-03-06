@@ -1,7 +1,7 @@
 from BST import BSTMap, ItemExistsException, NotFoundException
 
 
-if __name__ == "__main__":
+def myTest():
     bst = BSTMap()
 
     # EMPTY tree test
@@ -199,6 +199,95 @@ if __name__ == "__main__":
         print("remove(-10) non-existent key : should be a NotFoundException()")
 
 
+    # remove root node
+    bst.remove(10)
+    assert len(bst) == 6
+    assert str(bst) == "output: {5:five} {7:seven} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr}"
 
-    print("ALL TESTS PASSED")
-    pass
+
+
+    print("ALL MyTest passed")
+
+def COTest():
+    bst = BSTMap()
+
+    # Test inserting duplicate keys
+    bst.insert(1, "one")
+    try:
+        bst.insert(1, "one_duplicate")
+    except ItemExistsException:
+        pass
+    else:
+        print("insert : should be ItemExistsException()")
+
+    # Test updating non-existent key
+    try:
+        bst.update(2, "two")
+    except NotFoundException:
+        pass
+    else:
+        print("update : should be NotFoundException()")
+
+    # Test removing non-existent key
+    try:
+        bst.remove(2)
+    except NotFoundException:
+        pass
+    else:
+        print("remove : should be NotFoundException()")
+
+    # Test finding non-existent key
+    try:
+        bst.find(2)
+    except NotFoundException:
+        pass
+    else:
+        print("find : should be NotFoundException()")
+
+    # Test __getitem__ for non-existent key
+    try:
+        bst[2]
+    except NotFoundException:
+        pass
+    else:
+        print("__getitem__ : should be NotFoundException()")
+
+    # Test __setitem__ for updating existing key
+    bst[1] = "one_updated"
+    assert bst.find(1) == "one_updated"
+
+    # Test __setitem__ for inserting new key
+    bst[2] = "two"
+    assert bst.find(2) == "two"
+
+    # Test contains for existing and non-existing keys
+    assert bst.contains(1) == True
+    assert bst.contains(2) == True
+    assert bst.contains(3) == False
+
+    # Test removing root node
+    bst.remove(1)
+    assert bst.contains(1) == False
+
+    # Test removing node with one child
+    bst.insert(3, "three")
+    bst.insert(4, "four")
+    bst.remove(3)
+    assert bst.contains(3) == False
+    assert bst.contains(4) == True
+
+    # Test removing node with two children
+    bst.insert(5, "five")
+    bst.insert(6, "six")
+    bst.insert(7, "seven")
+    bst.remove(5)
+    assert bst.contains(5) == False
+    assert bst.contains(6) == True
+    assert bst.contains(7) == True
+
+    print("ALL COTest passed")
+    
+
+if __name__ == "__main__":
+    myTest()
+    COTest()

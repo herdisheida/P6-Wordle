@@ -16,9 +16,8 @@ class BSTMap():
         self.root = None
         self.size = 0
 
-
     def _insert_recur(self, node, key, data):
-        if node == None:
+        if node is None:
             return BST_Node(key, data)
 
         if key < node.key:
@@ -42,7 +41,7 @@ class BSTMap():
         """ Returns the data value of the value pair with equal key """
         return self._get_node(key).data
     
-    def contains(self, key): # LATER looks sus - má gera TRY EXCEPT?
+    def contains(self, key):
         """ Returns True if equal key is found in the collection, otherwise False """
         try:
             self._get_node(key)
@@ -50,54 +49,41 @@ class BSTMap():
         except NotFoundException:
             return False
 
-
-    def _find_left_most(self, node, node_to_remove):
+    def _find_left_most(self, node):
         # find leftMost node
         if node.left:
-            self._find_left_most()
+            return self._find_left_most(node.left)
         return node
 
     def _remove_recur(self, node, key):
-        if node == None:
+        if node is None:
             raise NotFoundException()
-
         if key < node.key:
             node.left = self._remove_recur(node.left, key)
-        elif node.key < key:
+        elif key > node.key:
             node.right = self._remove_recur(node.right, key)
+        
         else: # node is found
 
-            self.size -= 1
-            # node has 0 children
-            if not node.left and not node.right:
-                return None
-
             # node has 1 child
-            elif node.left:
-                return node.left
-            elif node.right:
+            if not node.left:
                 return node.right
-
-            # node has 2 children
-            else:
-                leftMost = self._find_left_most(node.right, node)
-                node.key, node.data = leftMost.key, leftMost.data
-                return self._remove_recur(leftMost)
+            elif not node.right:
+                return node.left
             
+            # node has 2 children  
+            left_most_node = self._find_left_most(node.right)
+            node.key, node.data = left_most_node.key, left_most_node.data
+            node.right = self._remove_recur(node.right, left_most_node.key)
+
         return node
 
-
     def remove(self, key):
-        """ Removes the value pair with equal key from the collection """        
-        self._remove_recur(self.root, key)
+        """ Removes the value pair with equal key from the collection """    
+        self.root = self._remove_recur(self.root, key)
+        self.size -= 1
 
-
-            
-
-
-
-
-    def __setitem__(self, key, data): # LATER looks sus - má gera TRY EXCEPT?
+    def __setitem__(self, key, data):
         """ Override to allow this syntax: some_bst_map[key] = data.
          If equal key is already in the collection, update its data value """
         try:
@@ -107,7 +93,6 @@ class BSTMap():
 
     def __getitem__(self, key):
         """ Returns the data value of the value pair with equal key """
-        # TA -- er þetta bara nákvæmlega það sama og find -- nema bara með bandstriks dæminu
         return self._get_node(key).data
 
     def __len__(self):
@@ -130,7 +115,7 @@ class BSTMap():
 
 ## utilify func
     def _get_node_recur(self, node, key):
-        if node == None:
+        if node is None:
             return None
         if node.key == key:
             return node
