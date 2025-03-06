@@ -1,3 +1,6 @@
+from os import remove
+
+
 class ItemExistsException(Exception):
     pass
 class NotFoundException(Exception):
@@ -13,33 +16,33 @@ class BST_Node():
 
 class BSTMap():
     def __init__(self):
-        self.root = BST_Node()
-        self.size = 0 # TA má initalize size ?
+        self.root = None
+        self.size = 0
         
 
-    def _insert_recur(self, node, key, data):
-        if key < node.key:
-            if node.left == None:
-                node.left = BST_Node(key, data)
-                self.size += 1
-            else:
-                self._insert_recur(node.left, key, data)
-        elif node.key < key:
-            if node.right == None:
-                node.right = BST_Node(key, data)
-                self.size += 1
-            else:
-                self._insert_recur(node.right, key, data)
-        else: # key == node.key
-            raise ItemExistsException()
+    # def _insert_recur(self, node, key, data):
+    #     if key < node.key:
+    #         if node.left == None:
+    #             node.left = BST_Node(key, data)
+    #             self.size += 1
+    #         else:
+    #             self._insert_recur(node.left, key, data)
+    #     elif node.key < key:
+    #         if node.right == None:
+    #             node.right = BST_Node(key, data)
+    #             self.size += 1
+    #         else:
+    #             self._insert_recur(node.right, key, data)
+    #     else: # key == node.key
+    #         raise ItemExistsException()
 
-    def insert(self, key, data):
-        """ Adds this value pair to the collection """
-        if self.root.key == None:
-            self.root = BST_Node(key, data)
-            self.size += 1
-        else:
-            self._insert_recur(self.root, key, data)
+    # def insert(self, key, data):
+    #     """ Adds this value pair to the collection """
+    #     if self.root.key == None:
+    #         self.root = BST_Node(key, data)
+    #         self.size += 1
+    #     else:
+    #         self._insert_recur(self.root, key, data)
             
 
 
@@ -81,25 +84,22 @@ class BSTMap():
 
 
 # kári
-    # def _insert_recur(self, node, key, data):
-    #     if node == None:
-    #         return BST_Node(key, data)
+    def _insert_recur(self, node, key, data):
+        if node == None:
+            return BST_Node(key, data)
 
-    #     if key < node.key:
-    #         node.left = self._insert_recur(node.left, key, data)
-    #     elif node.key < key:
-    #         node.right = self._insert_recur(node.right, key, data)
-    #     else: # node is found
-    #         raise ItemExistsException()
-    #     return node
+        if key < node.key:
+            node.left = self._insert_recur(node.left, key, data)
+        elif node.key < key:
+            node.right = self._insert_recur(node.right, key, data)
+        else: # node is found
+            raise ItemExistsException()
+        return node
 
-    # def insert(self, key, data):
-    #     """ Adds this value pair to the collection """
-    #     if self.root.key == None:
-    #         self.root = BST_Node(key, data)
-    #     else:
-    #         node = self._insert_recur(self.root, key, data)
-    #     self.size += 1
+    def insert(self, key, data):
+        """ Adds this value pair to the collection """
+        self.root = self._insert_recur(self.root, key, data)
+        self.size += 1
 
 
 
@@ -122,13 +122,13 @@ class BSTMap():
 
 
 
-    def _find_child(self, node):
+    def _find_child(self, node): # DELETE i think
         curr = node
         while curr.left != None:
             curr = curr.left
         return curr
 
-    def _remove_recur(self, node, key):
+    def _remove_recur(self, node):
         # if node.left:
         #     if node.left.key == key:
         #         node.left = node.left.left
@@ -163,51 +163,75 @@ class BSTMap():
         #     if node.right:
         #         self._remove_recur(node.right, key)
 
-        if node.key == None:
-            raise NotFoundException()
+        # if node.key == None:
+        #     raise NotFoundException()
         
-        if key < node.key:
-            node.left = self._remove_recur(node.left, key)
-        elif node.key < key:
-            node.right = self._remove_recur(node.right, key)
-        else: # node found
-            self.size -= 1
+        # if key < node.key:
+        #     node.left = self._remove_recur(node.left, key)
+        # elif node.key < key:
+        #     node.right = self._remove_recur(node.right, key)
+        # else: # node found
+        #     self.size -= 1
 
-            # if node has 1 or 0 children
-            if node.left == None and node.right == None:
-                return node
-            elif node.left == None:
-                # if node.left.key == None:
-                return node.right
-            elif node.right == None:
-                # if node.right.key == None:
-                return node.left
+        #     # if node has 1 or 0 children
+        #     if node.left == None and node.right == None:
+        #         return node
+        #     elif node.left == None:
+        #         # if node.left.key == None:
+        #         return node.right
+        #     elif node.right == None:
+        #         # if node.right.key == None:
+        #         return node.left
 
-            else:
-                # if node has 2 children
-                child = self._find_min(node.right)
-                node.key, node.data = child.key, child.data
-                node.right = self.remove(node.right, child.key)
+        #     else:
+        #         # if node has 2 children
+        #         child = self._find_min(node.right)
+        #         node.key, node.data = child.key, child.data
+        #         node.right = self.remove(node.right, child.key)
                 
-        return node
+        # return node
+
+
+        # node has 0 children
+        if node.left == None and node.right == None:
+            return 
+        
+        # node has 1 child
+        elif node.left == None or node.right == None:
+            return
+        
+        # node has 2 children
+        else: # node.left and node.right:
+            return self._find_leftMost(node.right, node)
+
+    def _find_leftMost(self, node, node_to_remove):
+        # find leftMost node
+        if node.left:
+            self._find_leftMost()
+
+        else:
+            # node found
+            node_to_remove.key, node_to_remove.data = node.key, node.data
+            # remove the leftMost node
+            return self._remove_recur(node)
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """        
-        if self.root.key == None:
+        if self.root == None:
             raise NotFoundException()
         
             # CASES
             # lauf: tengja parent í None
             # hnútur með eitt barn: tengjum fram hjá
             # hnútur með tvö börn: labba endurkvæmt niður (finna þann hnút) -- víxla gildunum --- fjarlægjum hnútin sem við löbbuðum niður að
-        self.root = self._remove_recur(self.root, key)
 
-    def rightMost(self, original, node):
-        if ...:
-            self.rightMost()
-        else:
-            original.key, original.data = node.key, node.data
-            return self._remove_recur(node, node.key) # ???
+        node = self.get_node(key) # node that is to be removed
+        if node.key == key:
+            self._remove_recur(node)
+            self.size -= 1
+
+
+
             
 
 
@@ -241,7 +265,7 @@ class BSTMap():
     def __str__(self): # TA is the format correct :  output: {1:one} {2:two} etc?
         """ Returns a string with the items ordered by key and separated by a single space.
          Format: {value_of_key:value_of_data} """
-        return self._inorder_recur(self.root) if self.root.data else ""
+        return self._inorder_recur(self.root) if self.root else ""
 
 
     def _get_node_recur(self, node, key): # JB helper func? itl að minnka duplicate code
@@ -257,7 +281,7 @@ class BSTMap():
 
     def get_node(self, key):
         """ Returns the data value of the value pair with equal key """
-        if self.root.data == None:
+        if self.root == None:
             raise NotFoundException()
         
         node = self._get_node_recur(self.root, key)
