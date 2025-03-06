@@ -204,6 +204,56 @@ def myTest():
     assert len(bst) == 6
     assert str(bst) == "{5:five} {7:seven} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
 
+    # setitem
+    bst[5] = "fimma"
+    assert bst[5] == "fimma"
+    assert str(bst) == "{5:fimma} {7:seven} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
+    bst[5] = ""
+    assert str(bst) == "{5:} {7:seven} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
+    bst[5] = "five"
+
+
+
+    # REMOVE all until it's empty
+    bst.remove(5)
+    assert len(bst) == 5
+    assert str(bst) == "{7:seven} {12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
+    assert bst[7] == "seven"
+    bst.remove(7)
+    assert len(bst) == 4
+    assert str(bst) == "{12:twelve} {15:fifteen} {18:HO} {200:OH EVEN BIGGEr} "
+    bst.remove(200)
+    assert len(bst) == 3
+    assert str(bst) == "{12:twelve} {15:fifteen} {18:HO} "
+    bst.remove(15)
+    assert len(bst) == 2
+    assert str(bst) == "{12:twelve} {18:HO} "
+    bst.remove(12)
+    assert len(bst) == 1
+    assert str(bst) == "{18:HO} "
+    assert bst[18] == "HO"
+    bst.remove(18)
+    assert len(bst) == 0
+    assert str(bst) == ""
+    # remove empty - after having inserted and removed
+    assert str(bst) == "", "should be empty"
+    try:
+        bst.remove(10)
+    except NotFoundException:
+        pass
+    else:
+        print("bst.remove(10) [it's empty should not] - should be a NotFoundException")
+    # getitem -- after removing everyhting
+    try:
+        print(bst[10])
+    except NotFoundException:
+        pass
+    else:
+        print("print(bst[10]) [it's empty should not] - should be a NotFoundException")
+    # setitem -- after removing everyhting
+    bst[10] = "HAHA IT WORKED"
+    assert bst[10] == "HAHA IT WORKED"
+    assert str(bst) == "{10:HAHA IT WORKED} "
 
 
     print("ALL MyTest passed")

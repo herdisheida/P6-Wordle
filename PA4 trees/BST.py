@@ -17,6 +17,11 @@ class BSTMap():
         self.size = 0
 
 ## ------------ INSERT ------------ ##
+    def insert(self, key, data):
+        """ Adds new key-data pair to the collection """
+        self.root = self._insert_recur(self.root, key, data)
+        self.size += 1
+
     def _insert_recur(self, node, key, data):
         if node is None:
             return BST_Node(key, data)
@@ -29,19 +34,14 @@ class BSTMap():
             raise ItemExistsException()
         return node
 
-    def insert(self, key, data):
-        """ Adds this value pair to the collection """
-        self.root = self._insert_recur(self.root, key, data)
-        self.size += 1
-
 ## ------------ UPDATE ------------ ##
     def update(self, key, data):
-        """ Sets the data value of the value pair with equal key to data """
+        """ Updates the data for an existing key """
         self._get_node(key).data = data
 
 ## ------------ FIND ------------ ##
     def find(self, key):
-        """ Returns the data value of the value pair with equal key """
+        """ Returns data for a given key """
         return self._get_node(key).data
     
 ## ------------ CONSTAIN ------------ ##
@@ -52,24 +52,24 @@ class BSTMap():
             return True
         except NotFoundException:
             return False
-        
-## ------------ CONSTAIN ------------ ##
-    def _find_left_most(self, node):
-        # find leftMost node
-        if node.left:
-            return self._find_left_most(node.left)
-        return node
 
 ## ------------ REMOVE ------------ ##
+    def remove(self, key):
+        """ Removes the value pair with equal key from the collection """    
+        self.root = self._remove_recur(self.root, key)
+        self.size -= 1
+
     def _remove_recur(self, node, key):
         if node is None:
             raise NotFoundException()
+        
+        # find the node to be removed
         if key < node.key:
             node.left = self._remove_recur(node.left, key)
         elif key > node.key:
             node.right = self._remove_recur(node.right, key)
-        else: # node is found
-
+        else:
+        # node is found
             # node has 1 child
             if not node.left:
                 return node.right
@@ -77,20 +77,21 @@ class BSTMap():
                 return node.left
             
             # node has 2 children  
-            left_most_node = self._find_left_most(node.right)
-            node.key, node.data = left_most_node.key, left_most_node.data
-            node.right = self._remove_recur(node.right, left_most_node.key)
+            node_min = self._find_min(node.right)
+            node.key, node.data = node_min.key, node_min.data
+            node.right = self._remove_recur(node.right, node_min.key)
         return node
 
-    def remove(self, key):
-        """ Removes the value pair with equal key from the collection """    
-        self.root = self._remove_recur(self.root, key)
-        self.size -= 1
+    def _find_min(self, node):
+        # find leftMost node
+        if node.left:
+            return self._find_min(node.left)
+        return node
 
 ## ------------ SET ITEM ------------ ##
     def __setitem__(self, key, data):
-        """ Override to allow this syntax: some_bst_map[key] = data.
-         If equal key is already in the collection, update its data value """
+        """ If equal key is in the collection, update its data value.
+         Otherwise add the value pair to the collection """
         try:
             self.insert(key, data)
         except ItemExistsException:
@@ -99,7 +100,7 @@ class BSTMap():
 ## ------------ GET ITEM ------------ ##
     def __getitem__(self, key):
         """ Returns the data value of the value pair with equal key """
-        return self._get_node(key).data
+        return self.find(key)
 
 ## ------------ LEN ------------ ##
     def __len__(self):
@@ -107,17 +108,17 @@ class BSTMap():
         return self.size
 
 ## ------------ PRINT ------------ ##
+    def __str__(self):
+        """ Returns a string with the items ordered by key and separated by a single space.
+         Format: {value_of_key:value_of_data} """
+        return self._inorder_recur(self.root)
+
     def _inorder_recur(self, node, ret=""):
         if node:
             ret = self._inorder_recur(node.left, ret)
             ret += f"{{{node.key}:{node.data}}} "
             ret = self._inorder_recur(node.right, ret)
         return ret
-
-    def __str__(self):
-        """ Returns a string with the items ordered by key and separated by a single space.
-         Format: {value_of_key:value_of_data} """
-        return self._inorder_recur(self.root)
 
 ## ------------ GET NODE helper func ------------ ##
     def _get_node_recur(self, node, key):
