@@ -111,7 +111,6 @@ def bucket_test():
 
     print("Bucket tests passed")
 
-
 def hashMap_test():
     h = HashMap()
     assert len(h) == 0
@@ -214,6 +213,22 @@ def hashMap_test():
 
     print("HashMap tests passed")
 
+def hashKey_test():
+    k1 = MyHashableKey(1, "Hello")
+    k1_copy = MyHashableKey(1, "Hello")
+
+    k2 = MyHashableKey(2, "World")
+    k2_diff = MyHashableKey(2, "Wor")
+
+    assert k1 == k1_copy, True
+    assert k1 == k2, False
+    assert k2 == k2, False
+
+
+
+
 if __name__ == "__main__":
     bucket_test()
     hashMap_test()
+
+    hashKey_test()
