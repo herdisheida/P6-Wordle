@@ -164,8 +164,17 @@ class HashMap:
         """ When the number of items in the HashMap has reached 120% of the number of buckets
          (length of array or list), it must doubling the number of buckets """
         if self.lis_size * 1.2 >= self.item_count:
-            # do rebuild
-            pass
+
+            # initalize bucket list
+            temp = self.bucket_list
+            self.lis_size *= 2
+            self.bucket_list = [Bucket() for _ in range(self.lis_size)]
+            
+            # re allocate items
+            for x in range(self.item_count):
+                temp[x]
+                pass # TODO
+
 
 
     # DELETE later - þessi klasi hefur ekki __str__ func
