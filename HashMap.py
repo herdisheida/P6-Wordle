@@ -113,7 +113,7 @@ class HashMap:
 
     def _init(self):
 
-        self.size = 0 # num of items in the entire data structure
+        self.item_count = 0 # num of items in the entire data structure
         self.lis_size = 0 # # num of buckets
 
         self.bucket_list = [Bucket() for _ in range(self.lis_size)]
@@ -158,12 +158,14 @@ class HashMap:
 
     def __len__(self):
         """ Returns the number of items in the entire data structure """
-        return self.size
+        return self.item_count
     
     def rebuild(self):
         """ When the number of items in the HashMap has reached 120% of the number of buckets
          (length of array or list), it must doubling the number of buckets """
-        pass
+        if self.lis_size * 1.2 >= self.item_count:
+            # do rebuild
+            pass
 
 
     # DELETE later - þessi klasi hefur ekki __str__ func
