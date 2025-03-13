@@ -1,0 +1,29 @@
+from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoundException
+
+
+
+def bucket_test():
+
+    b = Bucket()
+    assert b.size == 0
+
+
+    b.insert(5, "fimm")
+    b.insert(4, "fjórir")
+    b.insert(3, "þrír")
+    b.insert(2, "tveir")
+    b.insert(1, "einn")
+
+    assert b.find(1) == "einn"
+    assert b.find(2) == "tveir"
+    assert b.find(3) == "þrír"
+    assert b.find(4) == "fjórir"
+    assert b.find(5) == "fimm"
+
+    assert b.head.key == 1
+    assert b.tail.key == 5
+
+
+
+if __name__ == "__main__":
+    bucket_test()

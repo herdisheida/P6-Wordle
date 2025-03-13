@@ -1,4 +1,5 @@
-from whatever_your_implementation_file_is_called import *
+# from whatever_your_implementation_file_is_called import *
+from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoundException
 
 # READ THIS!!
 # DO NOT USE THE BUILT-IN HASH
