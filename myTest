@@ -1,4 +1,3 @@
-from os import remove
 from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoundException
 
 
@@ -6,7 +5,7 @@ from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoun
 def bucket_test():
 
     b = Bucket()
-    assert b.size == 0
+    assert len(b) == 0
     # remove empty
     try:
         b.remove(1)
@@ -20,6 +19,12 @@ def bucket_test():
     b.insert(2, "tveir")
     b.insert(1, "einn")
     assert str(b) == "{1:einn} {2:tveir} {3:þrír} {4:fjórir} {5:fimm} "
+    assert len(b) == 5
+
+    try:
+        b.insert(5, "fimmdimmalimm")
+    except ItemExistsException:
+        pass
 
     # test find - after insert
     assert b.find(1) == "einn"
@@ -44,6 +49,7 @@ def bucket_test():
     b.update(4, "fjarki")
     b.update(5, "fimma")
     assert str(b) == "{1:ás} {2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
+    assert len(b) == 5
 
     # test find - after update
     assert b.find(1) == "ás"
@@ -69,6 +75,7 @@ def bucket_test():
     assert str(b) == "{2:tvistur} {3:þristur} {4:fjarki} "
     b.remove(3) # remove middle
     assert str(b) == "{2:tvistur} {4:fjarki} "
+    assert len(b) == 2
 
     # test __setitem__
     b[1] = "new ace"
@@ -78,22 +85,134 @@ def bucket_test():
     b[4] = "fjarkalarki"
     assert str(b) == "{1:new ace} {2:twinning} {4:fjarkalarki} "
 
-
     # test __getitem__
     assert b[1] == "new ace"
     assert b[2] == "twinning"
     assert b[4] == "fjarkalarki"
+
+    # remove all
+    b.remove(1)
+    assert str(b) == "{2:twinning} {4:fjarkalarki} "
+    b.remove(2)
+    assert str(b) == "{4:fjarkalarki} "
+    b.remove(4)
+    assert str(b) == ""
+    assert len(b) == 0
+    try:
+        b.remove(10)
+    except NotFoundException:
+        pass
+    assert len(b) == 0
+
+    # insert - after removing all
+    b.insert(100000000, "senku")
+    assert str(b) == "{100000000:senku} "
+    assert len(b) == 1
 
     print("Bucket tests passed")
 
 
 def hashMap_test():
     h = HashMap()
-    print(h)
+    assert len(h) == 0
+    assert h.lis_size == 8
+    # remove empty
+    try:
+        h.remove(1)
+    except NotFoundException:
+        pass
+
+    # test insert
+    h.insert(5, "fimm")
+    h.insert(4, "fjórir")
+    h.insert(3, "þrír")
+    h.insert(2, "tveir")
+    h.insert(1, "einn")
+    assert str(h) == "{1:einn} {2:tveir} {3:þrír} {4:fjórir} {5:fimm} "
+    assert len(h) == 5
+
+    try:
+        h.insert(5, "fimmdimmalimm")
+    except ItemExistsException:
+        pass
+
+    # test find - after insert
+    assert h.find(1) == "einn"
+    assert h.find(2) == "tveir"
+    assert h.find(3) == "þrír"
+    assert h.find(4) == "fjórir"
+    assert h.find(5) == "fimm"
+
+    # test update
+    h.update(1, "ás")
+    h.update(2, "tvistur")
+    h.update(3, "þristur")
+    h.update(4, "fjarki")
+    h.update(5, "fimma")
+    assert str(h) == "{1:ás} {2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
+    assert len(h) == 5
+
+    # test find - after update
+    assert h.find(1) == "ás"
+    assert h.find(2) == "tvistur"
+    assert h.find(3) == "þristur"
+    assert h.find(4) == "fjarki"
+    assert h.find(5) == "fimma"
+
+    # test contains
+    assert h.contains(1) == True
+    assert h.contains(2) == True
+    assert h.contains(3) == True
+    assert h.contains(4) == True
+    assert h.contains(5) == True
+    assert h.contains(6) == False
+    assert h.contains("YOLO") == False
+    assert h.contains("HO") == False
+
+    # test remove
+    h.remove(1) # remove first
+    assert str(h) == "{2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
+    h.remove(5) # remove last
+    assert str(h) == "{2:tvistur} {3:þristur} {4:fjarki} "
+    h.remove(3) # remove middle
+    assert str(h) == "{2:tvistur} {4:fjarki} "
+    assert len(h) == 2
+
+    # test __setitem__
+    h[1] = "new ace"
+    assert str(h) == "{1:new ace} {2:tvistur} {4:fjarki} "
+    h[2] = "twinning"
+    assert str(h) == "{1:new ace} {2:twinning} {4:fjarki} "
+    h[4] = "fjarkalarki"
+    assert str(h) == "{1:new ace} {2:twinning} {4:fjarkalarki} "
+
+    # test __getitem__
+    assert h[1] == "new ace"
+    assert h[2] == "twinning"
+    assert h[4] == "fjarkalarki"
+
+    # remove all
+    h.remove(1)
+    assert str(h) == "{2:twinning} {4:fjarkalarki} "
+    h.remove(2)
+    assert str(h) == "{4:fjarkalarki} "
+    h.remove(4)
+    assert str(h) == ""
+    assert len(h) == 0
+    try:
+        h.remove(10)
+    except NotFoundException:
+        pass
+    assert len(h) == 0
+
+    # insert - after removing all
+    h.insert(100000000, "senku")
+    assert str(h) == "{100000000:senku} "
+    assert len(h) == 1
 
 
-    
 
+    print("HashMap tests passed")
 
 if __name__ == "__main__":
     bucket_test()

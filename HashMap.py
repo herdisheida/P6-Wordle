@@ -132,7 +132,7 @@ class HashMap:
         """ Adds this value pair to the collection """
         index = hash(key) % self.lis_size
         self.bucket_list[index].insert(key, data)
-
+        self.item_count += 1
 
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
@@ -153,10 +153,13 @@ class HashMap:
         """ Removes the value pair with equal key from the collection """
         index = hash(key) % self.lis_size
         self.bucket_list[index].remove(key)
+        self.item_count -= 1
     
     def __setitem__(self, key, data):
         """ Override to allow this syntax: some_hash_map[key] = data """
         index = hash(key) % self.lis_size
+        if not self.contains(key):
+            self.item_count += 1
         self.bucket_list[index][key] = data # ... questinable
 
     def __getitem__(self, key):
