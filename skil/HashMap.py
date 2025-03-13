@@ -1,6 +1,3 @@
-# TODO -- muna að búa til hash fall :D :D :D
-# TODO -- reyna gera fall fyrir að finna index -- alltaf sami hluturinn
-
 from skil.Bucket import Bucket  # LATER - breyta import - eyða "skil."
 
 
@@ -13,7 +10,7 @@ class HashMap:
         self.bucket_list = [Bucket() for _ in range(self.bucket_count)]
 
     def insert(self, key, data):
-        """Inserts a new key-value pair."""
+        """Adds a new key-value pair."""
         self.rebuild()
         index = self._get_bucket_index(key)
         self.bucket_list[index].insert(key, data)

@@ -1,4 +1,3 @@
-
 import random
 
 class MyHashableKey:
@@ -12,6 +11,8 @@ class MyHashableKey:
         """ Compares two instances of MyHashableKey and returns True if their values are equal, otherwise False """
         return (self.int_value, self.str_value) == (other.int_value, other.str_value)
 
+
+# TODO -- muna að búa til hash fall :D :D :D
     def __hash__(self):
         """ Returns a positive integer """
         # hash = self.int_value

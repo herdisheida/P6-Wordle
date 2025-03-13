@@ -14,23 +14,18 @@ class Node:
 
 
 class Bucket:
-    """Implement the class Bucket with a singly-linked list"""
+    """Singly-linked list implementation"""
 
     def __init__(self):
         self.head = None
         self.size = 0
 
     def insert(self, key, data):
-        """Adds this value pair to the collection"""
+        """Adds a new key-value pair"""
         if self.contains(key):
             raise ItemExistsException()
 
-        new_node = Node(key, data)
-        if self.head == None:
-            self.head = new_node
-        else:
-            new_node.next = self.head
-            self.head = new_node
+        self.head = Node(key, data, self.head)
         self.size += 1
 
     def update(self, key, data):
