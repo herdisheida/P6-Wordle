@@ -1,5 +1,7 @@
 # from whatever_your_implementation_file_is_called import *
-from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoundException
+from skil.HashMap import HashMap
+from skil.Bucket import Bucket, ItemExistsException, NotFoundException
+
 # you can also import more than one file,
 # although if one imports the other it should
 # be enough to import the top level one

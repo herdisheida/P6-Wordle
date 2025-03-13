@@ -1,5 +1,6 @@
-from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoundException
-
+from skil.Bucket import Bucket, ItemExistsException, NotFoundException
+from skil.HashMap import HashMap
+from skil.MyHashableKey import MyHashableKey
 
 
 def bucket_test():

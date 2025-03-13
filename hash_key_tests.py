@@ -1,5 +1,5 @@
 # from whatever_your_implementation_file_is_called import *
-from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoundException
+from skil.MyHashableKey import MyHashableKey
 
 # READ THIS!!
 # DO NOT USE THE BUILT-IN HASH
