@@ -15,7 +15,7 @@ def bucket_test():
     b.insert(1, "einn")
     assert str(b) == "{1:einn} {2:tveir} {3:þrír} {4:fjórir} {5:fimm} "
 
-    # test find
+    # test find - after insert
     assert b.find(1) == "einn"
     assert b.find(2) == "tveir"
     assert b.find(3) == "þrír"
@@ -38,6 +38,25 @@ def bucket_test():
     b.update(4, "fjarki")
     b.update(5, "fimma")
     assert str(b) == "{1:ás} {2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
+
+    # test find - after update
+    assert b.find(1) == "ás"
+    assert b.find(2) == "tvistur"
+    assert b.find(3) == "þristur"
+    assert b.find(4) == "fjarki"
+    assert b.find(5) == "fimma"
+
+    # test contains
+    assert b.contains(1) == True
+    assert b.contains(2) == True
+    assert b.contains(3) == True
+    assert b.contains(4) == True
+    assert b.contains(5) == True
+    assert b.contains(6) == False
+    assert b.contains("YOLO") == False
+    assert b.contains("HO") == False
+
+
 
 
 
