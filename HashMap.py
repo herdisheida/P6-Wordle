@@ -64,6 +64,17 @@ class Bucket:
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """
+        # empty list
+        if self.head == None:
+            raise NotFoundException()
+        
+        # 1 elem in list
+        if self.head.key == key:
+            del_node = self.head
+            self.head = self.head.next
+            return del_node
+        
+        # 2+ elem in list
         curr = self.head
         while curr.next != None:
 
@@ -72,16 +83,21 @@ class Bucket:
                 curr.next = curr.next.next
                 self.size -= 1
                 return del_node
+
             curr = curr.next
         raise NotFoundException()
+    
 
     def __setitem__(self, key, data):
         """ Override to allow this syntax: some_hash_map[key] = data """
-        pass
+        try:
+            self.update(key, data)
+        except NotFoundException:
+            self.insert(key, data)
 
     def __getitem__(self, key):
         """ Override to allow this syntax: my_data = some_bucket[key] """
-        pass
+        return self.find(key)
 
     def __len__(self):
         """ Override to allow this syntax: length_of_structure = len(some_bucket) """

@@ -1,3 +1,4 @@
+from os import remove
 from HashMap import HashMap, Bucket, MyHashableKey, ItemExistsException, NotFoundException
 
 
@@ -6,6 +7,11 @@ def bucket_test():
 
     b = Bucket()
     assert b.size == 0
+    # remove empty
+    try:
+        b.remove(1)
+    except NotFoundException:
+        pass
 
     # test insert
     b.insert(5, "fimm")
@@ -56,8 +62,13 @@ def bucket_test():
     assert b.contains("YOLO") == False
     assert b.contains("HO") == False
 
-
-
+    # test remove
+    b.remove(1) # remove first
+    assert str(b) == "{2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
+    b.remove(5) # remove last
+    assert str(b) == "{2:tvistur} {3:þristur} {4:fjarki} "
+    b.remove(3) # remove middle
+    assert str(b) == "{2:tvistur} {4:fjarki} "
 
 
 if __name__ == "__main__":
