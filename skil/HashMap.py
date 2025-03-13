@@ -1,5 +1,8 @@
 # TODO -- muna að búa til hash fall :D :D :D
 # TODO -- reyna gera fall fyrir að finna index -- alltaf sami hluturinn
+
+from Bucket import Bucket
+
 class HashMap:
 
     def __init__(self):
@@ -10,6 +13,7 @@ class HashMap:
  
     def insert(self, key, data):
         """ Adds this value pair to the collection """
+        self.rebuild()
         index = self._compression(key)
         self.bucket_list[index].insert(key, data)
         self.item_count += 1
@@ -63,14 +67,10 @@ class HashMap:
             
             # re allocate items
             for x in range(len(temp)):
-                
-                # curr= bucket
-                # while curr:
-                #     index = self._compression(curr.key)
-                #     self.bucket_list[index].insert(curr.key, curr.data)
-
-                
-                pass # TODO
+                node = temp[x].head
+                while node:
+                    self.insert(node.key, node.data)
+                    node = node.next
 
     def _compression(self, key):
         """ Get index """
