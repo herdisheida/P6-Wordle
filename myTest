@@ -72,8 +72,10 @@ def bucket_test():
     # test remove
     b.remove(1) # remove first
     assert str(b) == "{2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
+    assert len(b) == 4
     b.remove(5) # remove last
     assert str(b) == "{2:tvistur} {3:þristur} {4:fjarki} "
+    assert len(b) == 3
     b.remove(3) # remove middle
     assert str(b) == "{2:tvistur} {4:fjarki} "
     assert len(b) == 2
@@ -81,10 +83,13 @@ def bucket_test():
     # test __setitem__
     b[1] = "new ace"
     assert str(b) == "{1:new ace} {2:tvistur} {4:fjarki} "
+    assert len(b) == 3
     b[2] = "twinning"
     assert str(b) == "{1:new ace} {2:twinning} {4:fjarki} "
+    assert len(b) == 3
     b[4] = "fjarkalarki"
     assert str(b) == "{1:new ace} {2:twinning} {4:fjarkalarki} "
+    assert len(b) == 3
 
     # test __getitem__
     assert b[1] == "new ace"
@@ -94,8 +99,10 @@ def bucket_test():
     # remove all
     b.remove(1)
     assert str(b) == "{2:twinning} {4:fjarkalarki} "
+    assert len(b) == 2
     b.remove(2)
     assert str(b) == "{4:fjarkalarki} "
+    assert len(b) == 1
     b.remove(4)
     assert str(b) == ""
     assert len(b) == 0
@@ -172,8 +179,10 @@ def hashMap_test():
     # test remove
     h.remove(1) # remove first
     assert str(h) == "{2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
+    assert len(h) == 4
     h.remove(5) # remove last
     assert str(h) == "{2:tvistur} {3:þristur} {4:fjarki} "
+    assert len(h) == 3
     h.remove(3) # remove middle
     assert str(h) == "{2:tvistur} {4:fjarki} "
     assert len(h) == 2
@@ -181,10 +190,13 @@ def hashMap_test():
     # test __setitem__
     h[1] = "new ace"
     assert str(h) == "{1:new ace} {2:tvistur} {4:fjarki} "
+    assert len(h) == 3
     h[2] = "twinning"
     assert str(h) == "{1:new ace} {2:twinning} {4:fjarki} "
+    assert len(h) == 3
     h[4] = "fjarkalarki"
     assert str(h) == "{1:new ace} {2:twinning} {4:fjarkalarki} "
+    assert len(h) == 3
 
     # test __getitem__
     assert h[1] == "new ace"
@@ -194,8 +206,10 @@ def hashMap_test():
     # remove all
     h.remove(1)
     assert str(h) == "{2:twinning} {4:fjarkalarki} "
+    assert len(h) == 2
     h.remove(2)
     assert str(h) == "{4:fjarkalarki} "
+    assert len(h) == 1
     h.remove(4)
     assert str(h) == ""
     assert len(h) == 0

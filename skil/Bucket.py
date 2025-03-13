@@ -78,18 +78,18 @@ class Bucket:
         raise NotFoundException()
 
     def __setitem__(self, key, data):
-        """Override to allow this syntax: some_hash_map[key] = data"""
+        """Allows: some_hash_map[key] = data"""
         try:
             self.update(key, data)
         except NotFoundException:
             self.insert(key, data)
 
     def __getitem__(self, key):
-        """Override to allow this syntax: my_data = some_bucket[key]"""
+        """Allows: my_data = some_bucket[key]"""
         return self.find(key)
 
     def __len__(self):
-        """Override to allow this syntax: length_of_structure = len(some_bucket)"""
+        """Allows: length_of_structure = len(some_bucket)"""
         return self.size
 
     # DELETE - __str__ fall er ekki í verkefnalýsingunni
