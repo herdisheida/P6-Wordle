@@ -234,10 +234,13 @@ def hashKey_test():
 
     k2 = MyHashableKey(2, "World")
     k2_diff = MyHashableKey(2, "Wor")
+    
+    k3 = MyHashableKey(3, "Wor")
 
-    assert k1 == k1_copy, True
-    # assert k1 == k2, False
-    # assert k2 == k2_diff, False
+    assert k1 == k1_copy, "True: same int, same str"
+    # assert k1 == k2, "False: diff int, diff str"
+    # assert k2 == k2_diff, "False: same int, diff str"
+    # assert k3 == k2_diff, "False: diff int, same str"
 
 
 
