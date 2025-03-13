@@ -15,14 +15,7 @@ class Bucket:
 
     def __init__(self):
         self.head = None
-        self.tail = None
         self.size = 0
-
-        # self.head = Node(1, "A")
-        # self.head.next = Node(2, "B")
-        # self.head.next.next = Node(3, "C")
-        # self.tail = self.head.next.next 
-
 
     def insert(self, key, data):
         """ Adds this value pair to the collection """
@@ -31,7 +24,7 @@ class Bucket:
 
         new_node = Node(key, data)
         if self.head == None:
-            self.tail = self.head = new_node
+            self.head = new_node
         else:
             new_node.next = self.head
             self.head = new_node
@@ -64,26 +57,21 @@ class Bucket:
 
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """
-        # empty list
         if self.head == None:
             raise NotFoundException()
-        
-        # 1 elem in list
-        if self.head.key == key:
-            del_node = self.head
-            self.head = self.head.next
-            return del_node
-        
-        # 2+ elem in list
-        curr = self.head
-        while curr.next != None:
 
-            if curr.next.key == key: # key found
-                del_node = curr.next
+        if self.head.key == key:
+            self.head = self.head.next
+            self.size -= 1
+            return
+        
+        curr = self.head
+        while curr.next:
+
+            if curr.next.key == key:
                 curr.next = curr.next.next
                 self.size -= 1
-                return del_node
-
+                return
             curr = curr.next
         raise NotFoundException()
     
@@ -118,9 +106,11 @@ class Bucket:
 class HashMap:
 
     def _init(self):
-        self.size = 0
-        self.bucket_list = [Bucket() for _ in range(self.lis_size)]
 
+        self.size = 0 # num of items in the entire data structure
+        self.lis_size = 0 # # num of buckets
+
+        self.bucket_list = [Bucket() for _ in range(self.lis_size)]
 
     def insert(self, key, data):
         """ Adds this value pair to the collection """
@@ -133,6 +123,9 @@ class HashMap:
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
         pass
+        # frá kára
+        index = hash(key) % self.lis_size
+        return self.bucket_list[index]
 
     def contains(self, key):
         """ Returns True if equal key is found in the collection, otherwise False """
@@ -151,8 +144,23 @@ class HashMap:
         pass
 
     def __len__(self):
-        """ Override to allow this syntax: length_of_structure = len(some_hash_map) """
+        """ Returns the number of items in the entire data structure """
+        return self.size
+    
+    def rebuild(self):
+        """ When the number of items in the HashMap has reached 120% of the number of buckets
+         (length of array or list) it must rebuild(), doubling the number of buckets """
         pass
+
+
+    # DELETE later - þessi klasi hefur ekki __str__ func
+    def __str__(self):  # O(n)
+        """Returns a string with all the items in the list, separated by a single space."""
+        ret = ""
+        for x in self.bucket_list:
+            ret += str(x)
+        return ret
+
 
 class MyHashableKey:
 
