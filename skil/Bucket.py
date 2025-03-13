@@ -29,15 +29,16 @@ class Bucket:
         self.size += 1
 
     def update(self, key, data):
-        """Sets the data value of the value pair with equal key to data"""
+        """Updates existing key-value pair"""
         node = self._get_node(key)
         node.data = data
 
     def find(self, key):
-        """Returns the data value of the value pair with equal key"""
+        """Returns data value for a specific key"""
         return self._get_node(key).data
 
     def _get_node(self, key):
+        """Returns Node if found, raise NotFoundException otherwise"""
         curr = self.head
         while curr:
             if curr.key == key:
@@ -46,7 +47,7 @@ class Bucket:
         raise NotFoundException()
 
     def contains(self, key):
-        """Returns True if equal key is found in the collection, otherwise False"""
+        """Returns True if specific key is found in the collection, otherwise False"""
         try:
             self._get_node(key)
             return True
@@ -55,21 +56,32 @@ class Bucket:
 
     def remove(self, key):
         """Removes the value pair with equal key from the collection"""
-        if self.head == None:
-            raise NotFoundException()
+        # if self.head == None:
+        #     raise NotFoundException()
 
-        if self.head.key == key:
-            self.head = self.head.next
-            self.size -= 1
-            return
+        # if self.head.key == key:
+        #     self.head = self.head.next
+        #     self.size -= 1
+        #     return
 
-        curr = self.head
-        while curr.next:
-            if curr.next.key == key:
-                curr.next = curr.next.next
+        # curr = self.head
+        # while curr.next:
+        #     if curr.next.key == key:
+        #         curr.next = curr.next.next
+        #         self.size -= 1
+        #         return
+        #     curr = curr.next
+        # raise NotFoundException()
+        temp_head = Node(next=self.head)
+        prev, curr = temp_head, temp_head.next
+
+        while curr:
+            if curr.key == key:
+                prev.next = curr.next
+                self.head = temp_head.next
                 self.size -= 1
                 return
-            curr = curr.next
+            prev, curr = curr, curr.next
         raise NotFoundException()
 
     def __setitem__(self, key, data):

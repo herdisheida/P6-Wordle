@@ -22,7 +22,7 @@ class HashMap:
         self.bucket_list[index].update(key, data)
 
     def find(self, key):
-        """Returns value for key"""
+        """Returns data value for a specific key"""
         return self.bucket_list[self._get_bucket_index(key)].find(key)
 
     def contains(self, key):
