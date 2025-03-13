@@ -88,7 +88,12 @@ def bucket_test():
 
 
 def hashMap_test():
-    pass
+    h = HashMap()
+    print(h)
+
+
+    
+
 
 if __name__ == "__main__":
     bucket_test()

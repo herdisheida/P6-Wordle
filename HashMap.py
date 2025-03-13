@@ -13,9 +13,11 @@ class Node:
 class Bucket:
     """ Implement the class Bucket with a singly-linked list """
 
-    def __init__(self):
+    def __init__(self, node: Node=None):
         self.head = None
         self.size = 0
+
+        self.head = node # DELETE LATER
 
     def insert(self, key, data):
         """ Adds this value pair to the collection """
@@ -95,8 +97,8 @@ class Bucket:
     
 
     # DELETE - __str__ fall er ekki í verkefnalýsingunni
-    def __str__(self):  # O(n)
-        """Returns a string with all the items in the list, separated by a single space."""
+    def __str__(self):
+        """ testing BUCKET str """
         return_str = ""
         current = self.head
         while current:
@@ -111,13 +113,19 @@ class Bucket:
 # TODO -- reyna gera fall fyrir að finna index -- alltaf sami hluturinn
 class HashMap:
 
-    def _init(self):
+    def __init__(self):
 
         self.item_count = 0 # num of items in the entire data structure
-        self.lis_size = 0 # # num of buckets
+        self.lis_size = 8 # # num of buckets
 
         self.bucket_list = [Bucket() for _ in range(self.lis_size)]
         # self.bucket_list = [None for _ in range(self.lis_size)]
+
+        
+
+        # self.lis_size = 4
+        # self.item_count = 4
+        # self.bucket_list = [Bucket(Node(1, "einn", Node(2, "tveir"))), Bucket(Node(3, "þrír", Node(4, "fjórir"))), Bucket(), Bucket(Node(10, "tía", Node(14, "fjórri")))]
 
 
     def insert(self, key, data):
@@ -171,15 +179,21 @@ class HashMap:
             self.bucket_list = [Bucket() for _ in range(self.lis_size)]
             
             # re allocate items
-            for x in range(self.item_count):
-                temp[x]
+            for x in range(self.lis_size):
+                bucket = temp[x]
+                curr= bucket
+                while curr:
+                    index = hash(curr.key) % self.lis_size
+                    self.bucket_list[index].insert(curr.key, curr.data)
+
+                
                 pass # TODO
 
 
 
+    def __str__(self):
+        """ testing HASH MAP str """
     # DELETE later - þessi klasi hefur ekki __str__ func
-    def __str__(self):  # O(n)
-        """Returns a string with all the items in the list, separated by a single space."""
         ret = ""
         for x in self.bucket_list:
             ret += str(x)
