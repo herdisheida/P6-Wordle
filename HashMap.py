@@ -36,7 +36,9 @@ class Bucket:
         node.data = data
 
     def find(self, key):
-        """ Returns the data value of the value pair with equal key """
+        """ Returns the data value of the value pair with equal key
+         
+          klsdfajklsadjfkjasjl """
         return self._get_node(key).data
             
     def _get_node(self, key):
@@ -103,6 +105,10 @@ class Bucket:
         return return_str
 
 
+
+
+# TODO -- muna að búa til hash fall :D :D :D
+# TODO -- reyna gera fall fyrir að finna index -- alltaf sami hluturinn
 class HashMap:
 
     def _init(self):
@@ -111,37 +117,44 @@ class HashMap:
         self.lis_size = 0 # # num of buckets
 
         self.bucket_list = [Bucket() for _ in range(self.lis_size)]
+        # self.bucket_list = [None for _ in range(self.lis_size)]
+
 
     def insert(self, key, data):
         """ Adds this value pair to the collection """
-        pass
+        index = hash(key) % self.lis_size
+        self.bucket_list[index].insert(key, data)
+
 
     def update(self, key, data):
         """ Sets the data value of the value pair with equal key to data """
-        pass
+        index = hash(key) % self.lis_size
+        self.bucket_list[index].update(key, data)
 
     def find(self, key):
         """ Returns the data value of the value pair with equal key """
-        pass
-        # frá kára
         index = hash(key) % self.lis_size
-        return self.bucket_list[index].find()
+        return self.bucket_list[index].find(key)
 
     def contains(self, key):
         """ Returns True if equal key is found in the collection, otherwise False """
-        pass
-
+        index = hash(key) % self.lis_size
+        return self.bucket_list[index].contains(key)
+    
     def remove(self, key):
         """ Removes the value pair with equal key from the collection """
-        pass
-
+        index = hash(key) % self.lis_size
+        self.bucket_list[index].remove(key)
+    
     def __setitem__(self, key, data):
         """ Override to allow this syntax: some_hash_map[key] = data """
-        pass
+        index = hash(key) % self.lis_size
+        self.bucket_list[index][key] = data # ... questinable
 
     def __getitem__(self, key):
         """ Override to allow this syntax: my_data = some_hash_map[key """
-        pass
+        index = hash(key) % self.lis_size
+        return self.bucket_list[index][key] # ... questinable
 
     def __len__(self):
         """ Returns the number of items in the entire data structure """
@@ -149,7 +162,7 @@ class HashMap:
     
     def rebuild(self):
         """ When the number of items in the HashMap has reached 120% of the number of buckets
-         (length of array or list) it must rebuild(), doubling the number of buckets """
+         (length of array or list), it must doubling the number of buckets """
         pass
 
 
