@@ -7,21 +7,37 @@ def bucket_test():
     b = Bucket()
     assert b.size == 0
 
-
+    # test insert
     b.insert(5, "fimm")
     b.insert(4, "fjórir")
     b.insert(3, "þrír")
     b.insert(2, "tveir")
     b.insert(1, "einn")
+    assert str(b) == "{1:einn} {2:tveir} {3:þrír} {4:fjórir} {5:fimm} "
 
+    # test find
     assert b.find(1) == "einn"
     assert b.find(2) == "tveir"
     assert b.find(3) == "þrír"
     assert b.find(4) == "fjórir"
     assert b.find(5) == "fimm"
 
+    # test linking
     assert b.head.key == 1
+    assert b.head.next.key == 2
+    assert b.head.next.next.key == 3
+    assert b.head.next.next.next.key == 4
+    assert b.head.next.next.next.next.key == 5
+    assert b.head.next.next.next.next.key == b.tail.key
     assert b.tail.key == 5
+
+    # test update
+    b.update(1, "ás")
+    b.update(2, "tvistur")
+    b.update(3, "þristur")
+    b.update(4, "fjarki")
+    b.update(5, "fimma")
+    assert str(b) == "{1:ás} {2:tvistur} {3:þristur} {4:fjarki} {5:fimma} "
 
 
 

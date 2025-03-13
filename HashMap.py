@@ -1,6 +1,3 @@
-from operator import truediv
-
-
 class ItemExistsException(Exception):
     pass
 class NotFoundException(Exception):
