@@ -125,7 +125,7 @@ class HashMap:
         pass
         # frá kára
         index = hash(key) % self.lis_size
-        return self.bucket_list[index]
+        return self.bucket_list[index].find()
 
     def contains(self, key):
         """ Returns True if equal key is found in the collection, otherwise False """
