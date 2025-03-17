@@ -31,6 +31,12 @@ Note: remember to close the plot window for next run.
 """
 
 
+"""
+did not exactly work do this instead:
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip list # to see if they downloaded
+"""
 
 m = hashlib.sha256()
 length_of_list = 1000
