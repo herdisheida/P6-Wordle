@@ -20,8 +20,11 @@ class MyHashableKey:
         #     hash += ord(self.str_value[x])   
         # return hash
 
-        random.seed(self.int_value)
-        hash = random.randint()
-        for x in range(len(self.str_value)):
-            hash += ord(self.str_value[x]) + random.randint()
-        return hash
+        # random.seed(self.int_value)
+        # hash = random.randint(0, self.int_value)
+        # for x in range(len(self.str_value)):
+        #     hash += ord(self.str_value[x]) + random.randint(0, self.int_value)
+        # return hash
+
+        return hash((self.int_value, self.str_value)) 
+    

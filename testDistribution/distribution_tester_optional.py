@@ -4,6 +4,10 @@ import random
 import numpy as np
 from scipy import stats
 
+from MyHashableKey import MyHashableKey
+import string
+import math
+
 """
 IMPORTANT! READ FIRST!
 This script takes your hashfunction and tests it and plots the results to visualize how your hash performs.
@@ -17,11 +21,19 @@ In the terminal run `pip3 install matplotlib numpy scipy` and now you should be 
 Note: remember to close the plot window for next run.
 """
 
+""" OUTPUT should be
+staðalfrávik:     √(n * p * (1-p))
+z score:          [-3 : 3]
+average z score:    around 1,0000
+
+calculate staðalfrávik
+n = amount_of_hashes
+p = 1 / length_of_list (1/1000).
+"""
 
 m = hashlib.sha256()
 length_of_list = 1000
 amount_of_hashes = 1000000
-
 
 def distribution_value(my_list):
     std = np.std(my_list)
@@ -50,13 +62,49 @@ def distribution():
     my_list = [0 for _ in range(length_of_list)]
     for i in range(amount_of_hashes):
         # you can import your function and replace this function call.
-        hashed_number = hakon_hasher()
+        # hashed_number = hakon_hasher()
+
+        key = generate_random_key()
+        hashed_number = hash(key)
+
         my_list[hashed_number % length_of_list] += 1
     return my_list
+
+
+def generate_random_key():
+    # Generate random integer (0-1000 as example)
+    rand_int = random.randint(0, 1000)
+    
+    # Generate random string (length 10, ASCII letters + digits)
+    rand_str = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+    return MyHashableKey(rand_int, rand_str)
+
+
+def print_output(my_list):
+    """ my output """
+    print("-- my TEST --")
+
+    # √(n * p * (1-p))
+    n = amount_of_hashes
+    p = 1 / length_of_list
+    std = math.sqrt(n * p * (1 - p))
+    print("Standard Deviation: ", std)
+
+
+    difference = max(my_list) - min(my_list)
+    print("Difference: ", difference)              # the lower the bettter
+    print(f"Ratio: {difference / max(my_list)}")    # the closer to 0 the better (close to 1 is bad)
+
 
 
 if __name__ == "__main__":
     my_list = distribution()
     # print(my_list)
-    distribution_value(my_list)
-    plotter(my_list)
+    # distribution_value(my_list)
+    # plotter(my_list)
+
+
+    print_output(my_list)
+
+
+
