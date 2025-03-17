@@ -15,6 +15,21 @@ def remove(self, key):
     raise NotFoundException()
 
 
+def remove(self, key):
+    """Removes the value pair with equal key from the collection"""
+    prev, curr = None, self.head
+    while curr:
+        if curr.key == key:
+            if prev:
+                prev.next = curr.next
+            else:
+                self.head = curr.next  # Update head if removing the first node
+            self.size -= 1
+            return
+        prev, curr = curr, curr.next
+    raise NotFoundException()
+
+
 
 
 
@@ -22,6 +37,7 @@ def remove(self, key):
 
 def __str__(self):
     """testing BUCKET str"""
+    # DELETE
     return_str = ""
     current = self.head
     while current:
@@ -31,7 +47,7 @@ def __str__(self):
 
 def __str__(self):
     """testing HASH MAP str"""
-    # DELETE - þessi klasi hefur ekki __str__ func
+    # DELETE
     ret = ""
     for x in self.bucket_list:
         ret += str(x)
