@@ -1,5 +1,3 @@
-import random
-
 class MyHashableKey:
 
     def __init__(self, int_value, str_value):
@@ -11,43 +9,20 @@ class MyHashableKey:
         """ Compares two instances of MyHashableKey and returns True if their values are equal, otherwise False """
         return self.int_value == other.int_value and self.str_value == other.str_value
 
-
-# TODO -- muna að búa til hash fall :D :D :D
     def __hash__(self):
-        """ Returns a positive integer """
-        # hash = self.int_value
-        # for x in range(len(self.str_value)):
-        #     hash += ord(self.str_value[x])   
-        # return hash
-
-
-
-        # random.seed(self.int_value)
-        # hashed_value = random.randint(0, self.int_value)
-
-        # for digit in str(self.int_value):
-        #     hashed_value *= ord(digit)
-
-        # for char in self.str_value:
-        #     hashed_value *= ord(char)
-
-        # return hashed_value
-
-
-        # return hash((self.int_value, self.str_value))
+        """ Returns a positive integer.
+         The integer value must be the same for instances that are equal.
+         Otherwise can be any integer """
         
-
-
-
-        # use prime numbers to reduce collision 
+        # use prime numbers [33, 17] to reduce collision (all items going to the same bucket)
         hash_value = 33
 
         # mix integer into the hash
-        hash_value += (hash_value * 17) + self.int_value  # hash_value * 2^4 + int_value
+        hash_value = hash_value * 17 + self.int_value  
 
         # mix string into the hash
         for char in self.str_value:
-            hash_value += (hash_value * 17) + ord(char)  # hash_value * 2^4 + ord(char)
+            hash_value = hash_value * 17 + ord(char)  # hash_value * 2^4 + ord(char)
 
         # ensure value is non-negative
         return hash_value & 0xFFFFFFFF

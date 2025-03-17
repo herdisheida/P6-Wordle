@@ -1,4 +1,5 @@
 from skil.Bucket import Bucket  # LATER - breyta import - eyða "skil."
+# JB CHECK PLS
 
 
 class HashMap:
@@ -68,8 +69,8 @@ class HashMap:
                     node = node.next
 
     def _get_bucket_index(self, key):
-        """Get index"""
-        return hash(key) % self.bucket_count # JB - don't know if i'm dividing correctly - birta gerði eitthva comment á piazza
+        """Get bucket index according to key"""
+        return hash(key) % self.bucket_count
 
     def __str__(self):
         """testing HASH MAP str"""

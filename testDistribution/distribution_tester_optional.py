@@ -21,15 +21,7 @@ In the terminal run `pip3 install matplotlib numpy scipy` and now you should be 
 Note: remember to close the plot window for next run.
 """
 
-""" OUTPUT should be
-staðalfrávik:     √(n * p * (1-p))
-z score:          [-3 : 3]
-average z score:    around 1,0000
 
-calculate staðalfrávik
-n = amount_of_hashes
-p = 1 / length_of_list (1/1000).
-"""
 
 m = hashlib.sha256()
 length_of_list = 1000
@@ -81,20 +73,29 @@ def generate_random_key():
 
 
 def print_output(my_list):
-    """ my output """
+    """ OUTPUT should be
+    staðalfrávik:     √(n * p * (1-p))
+    z score:          [-3 : 3]
+    average z score:    around 1,0000
 
-    # √(n * p * (1-p))
+    calculate staðalfrávik
+    n = amount_of_hashes
+    p = 1 / length_of_list (1/1000).
+    """
+
     n = amount_of_hashes
     p = 1 / length_of_list
     std = math.sqrt(n * p * (1 - p))
-    print("\nPERFECT Standar Deviation: ", std)
+    print("---------------------------")
+    print("PERFECT Standar Deviation:")
+    print(std)
+    print("---------------------------\n")
 
-
-    print("\n--- MY TESTS ---")
+    print("----- MY TESTS -----")
     difference = max(my_list) - min(my_list)
     print("Difference: ", difference)               # the lower the bettter
     print(f"Ratio: {difference / max(my_list)}")    # the closer to 0 the better (close to 1 is bad)
-    print("-----------------\n")
+    print("---------------------\n")
 
 
 
