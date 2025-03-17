@@ -238,10 +238,73 @@ def hashKey_test():
     k3 = MyHashableKey(3, "Wor")
 
     assert k1 == k1_copy, "True: same int, same str"
-    # assert k1 == k2, "False: diff int, diff str"
-    # assert k2 == k2_diff, "False: same int, diff str"
-    # assert k3 == k2_diff, "False: diff int, same str"
+    assert hash(k1) != hash(k2), "False: diff int, diff str"
+    assert hash(k2) != hash(k2_diff), "False: same int, diff str"
+    assert hash(k3) != hash(k2_diff), "False: diff int, same str"
 
+    assert hash(k1) == hash(k1_copy), True
+    assert hash(k1) != hash(k2), "False"
+    
+
+    # MORE TESTS
+    # Test equality with identical keys
+    k1 = MyHashableKey(1, "Hello")
+    k1_copy = MyHashableKey(1, "Hello")
+    assert k1 == k1_copy, "True: same int, same str"
+    assert hash(k1) == hash(k1_copy), "Hashes should match for identical keys"
+
+    # Test inequality with different integer values
+    k2 = MyHashableKey(2, "Hello")
+    assert k1 != k2, "False: different int, same str"
+    assert hash(k1) != hash(k2), "Hashes should differ for different int values"
+
+    # Test inequality with different string values
+    k3 = MyHashableKey(1, "World")
+    assert k1 != k3, "False: same int, different str"
+    assert hash(k1) != hash(k3), "Hashes should differ for different str values"
+
+    # Test edge case: empty string
+    k_empty_str = MyHashableKey(1, "")
+    k_empty_str_copy = MyHashableKey(1, "")
+    assert k_empty_str == k_empty_str_copy, "True: same int, empty str"
+    assert hash(k_empty_str) == hash(k_empty_str_copy), "Hashes should match for empty str"
+
+    # Test edge case: large integer
+    k_large_int = MyHashableKey(10**10, "LargeInt")
+    k_large_int_copy = MyHashableKey(10**10, "LargeInt")
+    assert k_large_int == k_large_int_copy, "True: same large int, same str"
+    assert hash(k_large_int) == hash(k_large_int_copy), "Hashes should match for large int"
+
+    # Test edge case: special characters in string
+    k_special_chars = MyHashableKey(1, "!@#$%^&*()")
+    k_special_chars_copy = MyHashableKey(1, "!@#$%^&*()")
+    assert k_special_chars == k_special_chars_copy, "True: same int, same special chars str"
+    assert hash(k_special_chars) == hash(k_special_chars_copy), "Hashes should match for special chars str"
+
+    # Test edge case: very long string
+    long_str = "a" * 1000
+    k_long_str = MyHashableKey(1, long_str)
+    k_long_str_copy = MyHashableKey(1, long_str)
+    assert k_long_str == k_long_str_copy, "True: same int, same long str"
+    assert hash(k_long_str) == hash(k_long_str_copy), "Hashes should match for long str"
+
+    # Test edge case: different types for equality ---- nope because we're comparing keys
+    # assert k1 != 1, "False: MyHashableKey compared to int"
+    # assert k1 != "Hello", "False: MyHashableKey compared to str"
+
+    # Test edge case: negative integer
+    k_negative_int = MyHashableKey(-1, "Negative")
+    k_negative_int_copy = MyHashableKey(-1, "Negative")
+    assert k_negative_int == k_negative_int_copy, "True: same negative int, same str"
+    assert hash(k_negative_int) == hash(k_negative_int_copy), "Hashes should match for negative int"
+
+    # Test edge case: mixed case strings
+    k_mixed_case = MyHashableKey(1, "Hello")
+    k_mixed_case_diff = MyHashableKey(1, "hello")
+    assert k_mixed_case != k_mixed_case_diff, "False: same int, different case str"
+    assert hash(k_mixed_case) != hash(k_mixed_case_diff), "Hashes should differ for case-sensitive strings"
+
+    print("MyHashableKey tests passed")
 
 
 
