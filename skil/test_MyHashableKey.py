@@ -40,6 +40,66 @@ class TestMyHashableKey(unittest.TestCase):
         for i, key in enumerate(keys):
             self.assertEqual(self.hash_map.find(key), f"value{i}")
 
+    def test_myhashablekey_equality(self):
+        """Test equality of MyHashableKey instances."""
+        key1 = MyHashableKey(1, "key")
+        key2 = MyHashableKey(1, "key")
+        key3 = MyHashableKey(2, "key")
+        key4 = MyHashableKey(1, "different_key")
+        self.assertTrue(key1 == key2)
+        self.assertFalse(key1 == key3)
+        self.assertFalse(key1 == key4)
+
+    def test_myhashablekey_hash(self):
+        """Test hash consistency and uniqueness for MyHashableKey."""
+        key1 = MyHashableKey(1, "key")
+        key2 = MyHashableKey(1, "key")
+        key3 = MyHashableKey(2, "key")
+        key4 = MyHashableKey(1, "different_key")
+        self.assertEqual(hash(key1), hash(key2))  # Equal keys must have the same hash
+        self.assertNotEqual(hash(key1), hash(key3))  # Different keys should have different hashes
+        self.assertNotEqual(hash(key1), hash(key4))  # Different keys should have different hashes
+
+    def test_myhashablekey_empty_string(self):
+        """Test MyHashableKey with an empty string."""
+        key1 = MyHashableKey(1, "")
+        key2 = MyHashableKey(1, "")
+        self.assertTrue(key1 == key2)
+        self.assertEqual(hash(key1), hash(key2))
+
+    def test_myhashablekey_negative_integer(self):
+        """Test MyHashableKey with a negative integer."""
+        key1 = MyHashableKey(-1, "key")
+        key2 = MyHashableKey(-1, "key")
+        self.assertTrue(key1 == key2)
+        self.assertEqual(hash(key1), hash(key2))
+
+    def test_myhashablekey_special_characters(self):
+        """Test MyHashableKey with special characters in the string."""
+        key1 = MyHashableKey(1, "!@#$%^&*()")
+        key2 = MyHashableKey(1, "!@#$%^&*()")
+        self.assertTrue(key1 == key2)
+        self.assertEqual(hash(key1), hash(key2))
+
+    def test_myhashablekey_large_integer(self):
+        """Test MyHashableKey with a very large integer."""
+        key1 = MyHashableKey(2**31, "key")
+        key2 = MyHashableKey(2**31, "key")
+        self.assertTrue(key1 == key2)
+        self.assertEqual(hash(key1), hash(key2))
+
+    def test_myhashablekey_unicode_characters(self):
+        """Test MyHashableKey with Unicode characters in the string."""
+        key1 = MyHashableKey(1, "ключ")  # "ключ" means "key" in Russian
+        key2 = MyHashableKey(1, "ключ")
+        self.assertTrue(key1 == key2)
+        self.assertEqual(hash(key1), hash(key2))
+
+    def test_myhashablekey_self_comparison(self):
+        """Test MyHashableKey is equal to itself."""
+        key = MyHashableKey(1, "key")
+        self.assertTrue(key == key)
+
 
 if __name__ == "__main__":
     unittest.main()
