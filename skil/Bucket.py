@@ -82,13 +82,3 @@ class Bucket:
     def __len__(self):
         """Allows: length_of_structure = len(some_bucket)"""
         return self.size
-
-    # DELETE - __str__ fall er ekki í verkefnalýsingunni
-    def __str__(self):
-        """testing BUCKET str"""
-        return_str = ""
-        current = self.head
-        while current:
-            return_str += f"{{{current.key}:{current.data}}} "
-            current = current.next
-        return return_str

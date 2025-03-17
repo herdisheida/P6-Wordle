@@ -71,11 +71,3 @@ class HashMap:
     def _get_bucket_index(self, key):
         """Get bucket index according to key"""
         return hash(key) % self.bucket_count
-
-    def __str__(self):
-        """testing HASH MAP str"""
-        # DELETE - þessi klasi hefur ekki __str__ func
-        ret = ""
-        for x in self.bucket_list:
-            ret += str(x)
-        return ret
