@@ -6,21 +6,19 @@ class HashMap:
 
     def __init__(self):
         self.item_count = 0  # num of items in the entire data structure
-        self.bucket_count = 8  # num of buckets (capacity)
+        self.bucket_count = 8  # num of buckets (list capacity)
 
         self.bucket_list = [Bucket() for _ in range(self.bucket_count)]
 
     def insert(self, key, data):
         """Adds a new key-value pair."""
         self.rebuild()
-        index = self._get_bucket_index(key)
-        self.bucket_list[index].insert(key, data)
+        self.bucket_list[self._get_bucket_index(key)].insert(key, data)
         self.item_count += 1
 
     def update(self, key, data):
         """Updates existing key-value pair"""
-        index = self._get_bucket_index(key)
-        self.bucket_list[index].update(key, data)
+        self.bucket_list[self._get_bucket_index(key)].update(key, data)
 
     def find(self, key):
         """Returns data value for a specific key"""
@@ -32,8 +30,7 @@ class HashMap:
 
     def remove(self, key):
         """Removes the value pair with equal key from the collection"""
-        index = self._get_bucket_index(key)
-        self.bucket_list[index].remove(key)
+        self.bucket_list[self._get_bucket_index(key)].remove(key)
         self.item_count -= 1
 
     def __setitem__(self, key, data):

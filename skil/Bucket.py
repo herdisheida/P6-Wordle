@@ -1,7 +1,5 @@
 class ItemExistsException(Exception):
     pass
-
-
 class NotFoundException(Exception):
     pass
 
@@ -59,7 +57,7 @@ class Bucket:
         if self.head == None:
             raise NotFoundException()
 
-        if self.head.key == key: # check first node
+        if self.head.key == key:  # check first node
             self.head = self.head.next
             self.size -= 1
             return
