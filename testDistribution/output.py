@@ -181,18 +181,17 @@ nine_nine = 0
 
 
 for x in clean_numbers:
-    if x > -1.96 or x > 1.96:
+    # Check if x is within [-1.96, 1.96]
+    if -1.96 <= x <= 1.96:
         nine_five += 1
-    
-    if x > -3 or x > 3:
+    # Check if x is within [-3, 3]
+    if -3 <= x <= 3:
         nine_nine += 1
 
 
 item_count = len(clean_numbers)
 print("item count: ", item_count)
 
-print("      95% : ", nine_five)
-print("            ", nine_five/item_count * 100)
-print("      97% : ", nine_nine)
-print("            ", nine_nine/item_count * 100)
+print(f"      95% : ~{nine_five}  ({nine_five/item_count * 100}%)")
+print(f"      97% : ~{nine_nine}  ({nine_nine/item_count * 100}%)")
 
