@@ -2,23 +2,17 @@
 
 def remove(self, key):
     """Removes the value pair with equal key from the collection"""
-    if self.head == None:
-        raise NotFoundException()
+    temp_head = Node(None, None, self.head)
+    prev, curr = temp_head, temp_head.next
 
-    if self.head.key == key:
-        self.head = self.head.next
-        self.size -= 1
-        return
-
-    curr = self.head
-    while curr.next:
-        if curr.next.key == key:
-            curr.next = curr.next.next
+    while curr:
+        if curr.key == key:
+            prev.next = curr.next
+            self.head = temp_head.next
             self.size -= 1
             return
-        curr = curr.next
+        prev, curr = curr, curr.next
     raise NotFoundException()
-
 
 
 
