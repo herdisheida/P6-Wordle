@@ -40,8 +40,8 @@ def distribution_value(my_list):
     std = np.std(my_list)
     zscore = stats.zscore(my_list, axis=None)
     print(f"standard deviation: {std}")
-    print(f"Z score is: {zscore}")
-    print(f"Average zscore: {np.mean(zscore)}")
+    # print(f"Z score is: {zscore}") # LATER for now
+    # print(f"Average zscore: {np.mean(zscore)}")
     
 
     return zscore # returning for testing purpose
@@ -75,6 +75,11 @@ def distribution():
     return my_list
 
 
+
+
+
+# --------------- MY CODE appears below --------------- #
+
 def generate_random_key():
     # Generate random integer (0-1000 as example)
     rand_int = random.randint(0, 1000)
@@ -84,31 +89,33 @@ def generate_random_key():
     return MyHashableKey(rand_int, rand_str)
 
 
-def display_statistics(my_list):
-    """ Piazza TA statistics examples --- love that guy"""
-        #  OUTPUT should be
-        # staðalfrávik:     √(n * p * (1-p))
-        # z score:          [-3 : 3]
-        # average z score:    around 1,0000 (very close to 0)
+def perfect_std():
+    """ Prints out the perfect standard deviation for the given amount of hashes and length of list
+     staðalfrávik:     √(n * p * (1-p))
+     z score:          [-3 : 3]
+     average z score:    around 1,0000 (very close to 0)
 
-        # calculate staðalfrávik
-        # n = amount_of_hashes
-        # p = 1 / length_of_list (1/1000).
-
-
+     calculate staðalfrávik
+     n = amount_of_hashes
+     p = 1 / length_of_list (1/1000)
+    """
     n = amount_of_hashes
     p = 1 / length_of_list
     std = math.sqrt(n * p * (1 - p))
-    print("---------------------------")
-    print("PERFECT Standar Deviation:")
+    print("\n---------------------------")
+    print("PERFECT Standar Deviation")
     print(std)
     print("---------------------------\n")
 
-    print("----- MY TESTS -----")
+def display_statistics(my_list):
+    """ Piazza TA statistics examples --- love that guy"""
+
+    print("\n------- MY TESTS -------")
+    print("      (from TA)     ")
     difference = max(my_list) - min(my_list)
     print("Difference: ", difference)               # the lower the bettter
     print(f"Ratio: {difference / max(my_list)}")    # the closer to 0 the better (close to 1 is bad)
-    print("---------------------\n")
+    print("------------------------\n")
 
 
 
@@ -122,9 +129,4 @@ if __name__ == "__main__":
 
     assess_bucket_distribution(zscore)      # my test
 
-
     # plotter(my_list)               # set results up as graph
-
-
-
-

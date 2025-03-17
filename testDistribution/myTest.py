@@ -194,11 +194,11 @@ def assess_bucket_distribution(a_list):
 
     item_count = len(a_list)
 
-    print("----- MY TESTS -----")
+    print("\n------ BUCKET TESTS ------")
     print("item count: ", item_count)
     print(f"      95% : ~{nine_five}  ({nine_five/item_count * 100}%)")
     print(f"      97% : ~{nine_nine}  ({nine_nine/item_count * 100}%)")
-    print("---------------------\n")
+    print("--------------------------\n")
 
 
 if __name__ == "__main__":
