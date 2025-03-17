@@ -9,7 +9,7 @@ class MyHashableKey:
 
     def __eq__(self, other):
         """ Compares two instances of MyHashableKey and returns True if their values are equal, otherwise False """
-        return (self.int_value, self.str_value) == (other.int_value, other.str_value)
+        return self.int_value == other.int_value and self.str_value == other.str_value
 
 
 # TODO -- muna að búa til hash fall :D :D :D

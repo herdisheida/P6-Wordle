@@ -69,7 +69,7 @@ class HashMap:
 
     def _get_bucket_index(self, key):
         """Get index"""
-        return hash(key) % self.bucket_count
+        return hash(key) % self.bucket_count # JB - don't know if i'm dividing correctly - birta gerði eitthva comment á piazza
 
     def __str__(self):
         """testing HASH MAP str"""
