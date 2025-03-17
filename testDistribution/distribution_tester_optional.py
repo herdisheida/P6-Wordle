@@ -31,11 +31,17 @@ Note: remember to close the plot window for next run.
 """
 
 
-"""
-did not exactly work do this instead:
-    python3 -m venv .venv
-    source .venv/bin/activate
-    pip list # to see if they downloaded
+""" did not exactly work do this instead:
+
+TO CREATE and ACTIVATE ENVIRONEMNT:
+
+    python3 -m venv .venv                    # create
+    source .venv/bin/activate                # active
+    pip list                                 # to see if it's downloaded
+
+TO DEACTIVATE ENVIRONEMNT:
+    deactivate
+    rm -rf venv         # or path to enviroment
 """
 
 m = hashlib.sha256()
