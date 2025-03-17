@@ -20,11 +20,34 @@ class MyHashableKey:
         #     hash += ord(self.str_value[x])   
         # return hash
 
-        # random.seed(self.int_value)
-        # hash = random.randint(0, self.int_value)
-        # for x in range(len(self.str_value)):
-        #     hash += ord(self.str_value[x]) + random.randint(0, self.int_value)
-        # return hash
 
-        return hash((self.int_value, self.str_value)) 
-    
+
+        # random.seed(self.int_value)
+        # hashed_value = random.randint(0, self.int_value)
+
+        # for digit in str(self.int_value):
+        #     hashed_value *= ord(digit)
+
+        # for char in self.str_value:
+        #     hashed_value *= ord(char)
+
+        # return hashed_value
+
+
+        # return hash((self.int_value, self.str_value))
+        
+
+
+
+        # use prime numbers to reduce collision 
+        hash_value = 33
+
+        # mix integer into the hash
+        hash_value += (hash_value * 17) + self.int_value  # hash_value * 2^4 + int_value
+
+        # mix string into the hash
+        for char in self.str_value:
+            hash_value += (hash_value * 17) + ord(char)  # hash_value * 2^4 + ord(char)
+
+        # ensure value is non-negative
+        return hash_value & 0xFFFFFFFF

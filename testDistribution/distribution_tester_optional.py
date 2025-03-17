@@ -82,29 +82,34 @@ def generate_random_key():
 
 def print_output(my_list):
     """ my output """
-    print("-- my TEST --")
 
     # √(n * p * (1-p))
     n = amount_of_hashes
     p = 1 / length_of_list
     std = math.sqrt(n * p * (1 - p))
-    print("Standard Deviation: ", std)
+    print("\nPERFECT Standar Deviation: ", std)
 
 
+    print("\n--- MY TESTS ---")
     difference = max(my_list) - min(my_list)
-    print("Difference: ", difference)              # the lower the bettter
+    print("Difference: ", difference)               # the lower the bettter
     print(f"Ratio: {difference / max(my_list)}")    # the closer to 0 the better (close to 1 is bad)
+    print("-----------------\n")
 
 
 
 if __name__ == "__main__":
     my_list = distribution()
-    # print(my_list)
-    # distribution_value(my_list)
-    # plotter(my_list)
-
 
     print_output(my_list)
+
+
+
+
+    # print(my_list)
+    distribution_value(my_list)
+    plotter(my_list)
+
 
 
 
