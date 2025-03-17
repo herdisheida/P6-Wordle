@@ -4,9 +4,18 @@ import random
 import numpy as np
 from scipy import stats
 
+# --------------------------------------------------------------------------------------------------- #
+
+# to use my hash func
 from MyHashableKey import MyHashableKey
+# to generate random keys to test
 import string
 import math
+
+# testing bucket distribution
+from myTest import assess_bucket_distribution
+
+
 
 """
 IMPORTANT! READ FIRST!
@@ -33,6 +42,9 @@ def distribution_value(my_list):
     print(f"standard deviation: {std}")
     print(f"Z score is: {zscore}")
     print(f"Average zscore: {np.mean(zscore)}")
+    
+
+    return zscore # returning for testing purpose
 
 
 def plotter(my_list):
@@ -72,16 +84,17 @@ def generate_random_key():
     return MyHashableKey(rand_int, rand_str)
 
 
-def print_output(my_list):
-    """ OUTPUT should be
-    staðalfrávik:     √(n * p * (1-p))
-    z score:          [-3 : 3]
-    average z score:    around 1,0000
+def display_statistics(my_list):
+    """ Piazza TA statistics examples --- love that guy"""
+        #  OUTPUT should be
+        # staðalfrávik:     √(n * p * (1-p))
+        # z score:          [-3 : 3]
+        # average z score:    around 1,0000 (very close to 0)
 
-    calculate staðalfrávik
-    n = amount_of_hashes
-    p = 1 / length_of_list (1/1000).
-    """
+        # calculate staðalfrávik
+        # n = amount_of_hashes
+        # p = 1 / length_of_list (1/1000).
+
 
     n = amount_of_hashes
     p = 1 / length_of_list
@@ -100,16 +113,17 @@ def print_output(my_list):
 
 
 if __name__ == "__main__":
-    my_list = distribution()
+    my_list = distribution() # get list
 
-    print_output(my_list)
-
-
-
+    display_statistics(my_list)    # my test
 
     # print(my_list)
-    distribution_value(my_list)
-    plotter(my_list)
+    zscore = distribution_value(my_list)    # print result (standard deviation and z-score)
+
+    assess_bucket_distribution(zscore)      # my test
+
+
+    # plotter(my_list)               # set results up as graph
 
 
 

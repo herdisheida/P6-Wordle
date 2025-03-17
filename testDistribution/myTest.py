@@ -174,24 +174,32 @@ clean_numbers = [float(num) for num in str_data.split()]
 
 
 
-# ~95% of buckets should fall within [-1.96, 1.96]
-nine_five = 0
-# ~99.7% within [-3, 3]
-nine_nine = 0 
+def assess_bucket_distribution(a_list):
+    """Z-score but family friendly :D"""
+
+    # ~95% of buckets should fall within [-1.96, 1.96]
+    nine_five = 0
+    # ~99.7% within [-3, 3]
+    nine_nine = 0 
 
 
-for x in clean_numbers:
-    # Check if x is within [-1.96, 1.96]
-    if -1.96 <= x <= 1.96:
-        nine_five += 1
-    # Check if x is within [-3, 3]
-    if -3 <= x <= 3:
-        nine_nine += 1
+    for x in a_list:
+        # Check if x is within [-1.96, 1.96]
+        if -1.96 <= x <= 1.96:
+            nine_five += 1
+        # Check if x is within [-3, 3]
+        if -3 <= x <= 3:
+            nine_nine += 1
 
 
-item_count = len(clean_numbers)
-print("item count: ", item_count)
+    item_count = len(a_list)
 
-print(f"      95% : ~{nine_five}  ({nine_five/item_count * 100}%)")
-print(f"      97% : ~{nine_nine}  ({nine_nine/item_count * 100}%)")
+    print("----- MY TESTS -----")
+    print("item count: ", item_count)
+    print(f"      95% : ~{nine_five}  ({nine_five/item_count * 100}%)")
+    print(f"      97% : ~{nine_nine}  ({nine_nine/item_count * 100}%)")
+    print("---------------------\n")
 
+
+if __name__ == "__main__":
+    assess_bucket_distribution(clean_numbers)
