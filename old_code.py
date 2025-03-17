@@ -37,7 +37,6 @@ def remove(self, key):
 
 def __str__(self):
     """testing BUCKET str"""
-    # DELETE
     return_str = ""
     current = self.head
     while current:
@@ -47,7 +46,6 @@ def __str__(self):
 
 def __str__(self):
     """testing HASH MAP str"""
-    # DELETE
     ret = ""
     for x in self.bucket_list:
         ret += str(x)

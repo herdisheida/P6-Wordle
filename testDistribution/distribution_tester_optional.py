@@ -46,7 +46,9 @@ def distribution_value(my_list):
     std = np.std(my_list)
     zscore = stats.zscore(my_list, axis=None)
     print(f"standard deviation: {std}")
-    # print(f"Z score is: {zscore}") # LATER for now
+
+    # sooo long print --- so i'm commenting it out for now
+    # print(f"Z score is: {zscore}")
     # print(f"Average zscore: {np.mean(zscore)}")
     
 

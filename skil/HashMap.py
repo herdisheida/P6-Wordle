@@ -1,5 +1,4 @@
-from skil.Bucket import Bucket  # LATER - breyta import - eyða "skil."
-# JB CHECK PLS
+from Bucket import Bucket
 
 
 class HashMap:
