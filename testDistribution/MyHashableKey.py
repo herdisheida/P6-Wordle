@@ -14,16 +14,6 @@ class MyHashableKey:
          The integer value must be the same for instances that are equal.
          Otherwise can be any integer """
 
-
-
-        # hash_value = self.int_value + sum([ord(char) for char in self.str_value])
-
-        # # ensures value is positive integer
-        # return hash_value & 0xFFFFFFFF
-
-
-
-
         # use prime numbers [33, 17] to reduce collision (all items going to the same bucket)
         hash_value = 33
 
@@ -32,7 +22,7 @@ class MyHashableKey:
 
         # mix string into the hash
         for char in self.str_value:
-            hash_value = hash_value * 17 + ord(char)  # hash_value * 2^4 + ord(char)
+            hash_value = hash_value * 17 + ord(char)
 
         # ensure value is non-negative
-        return hash_value & 0xFFFFFFFF
+        return abs(hash_value)

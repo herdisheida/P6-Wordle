@@ -201,5 +201,15 @@ def assess_bucket_distribution(a_list):
     print("--------------------------\n")
 
 
+def display_statistics(my_list):
+    """ Piazza TA statistics examples --- love that guy"""
+
+    print("\n------- MY TESTS -------")
+    print("      (from TA)     ")
+    difference = max(my_list) - min(my_list)
+    print("Difference: ", difference)               # the lower the bettter
+    print(f"Ratio: {difference / max(my_list)}")    # the closer to 0 the better (close to 1 is bad)
+    print("------------------------\n")
+
 if __name__ == "__main__":
     assess_bucket_distribution(clean_numbers)

@@ -13,7 +13,7 @@ import string
 import math
 
 # testing bucket distribution
-from myTest import assess_bucket_distribution
+from myTest import assess_bucket_distribution, display_statistics
 
 
 
@@ -37,6 +37,7 @@ TO CREATE and ACTIVATE ENVIRONEMNT:
 
     python3 -m venv .venv                    # create
     source .venv/bin/activate                # active
+    python3 distribution_tester_optional.py  # run program
     pip list                                 # to see if it's downloaded
 
 TO DEACTIVATE ENVIRONEMNT:
@@ -54,9 +55,8 @@ def distribution_value(my_list):
     print(f"standard deviation: {std}")
 
     # sooo long print --- so i'm commenting it out for now
-    # print(f"Z score is: {zscore}")
-    # print(f"Average zscore: {np.mean(zscore)}")
-    
+    print(f"Z score is: {zscore}")
+    print(f"Average zscore: {np.mean(zscore)}")
 
     return zscore # returning for testing purpose
 
@@ -121,26 +121,17 @@ def perfect_std():
     print(std)
     print("---------------------------\n")
 
-def display_statistics(my_list):
-    """ Piazza TA statistics examples --- love that guy"""
-
-    print("\n------- MY TESTS -------")
-    print("      (from TA)     ")
-    difference = max(my_list) - min(my_list)
-    print("Difference: ", difference)               # the lower the bettter
-    print(f"Ratio: {difference / max(my_list)}")    # the closer to 0 the better (close to 1 is bad)
-    print("------------------------\n")
 
 
 
 if __name__ == "__main__":
     my_list = distribution() # get list
 
-    display_statistics(my_list)    # my test
-
     # print(my_list)
-    zscore = distribution_value(my_list)    # print result (standard deviation and z-score)
-
-    assess_bucket_distribution(zscore)      # my test
-
+    zscore = distribution_value(my_list)    # my test -- print result (standard deviation and z-score)
     # plotter(my_list)               # set results up as graph
+
+
+# my test
+    display_statistics(my_list)
+    assess_bucket_distribution(zscore)      # -- percentage test
