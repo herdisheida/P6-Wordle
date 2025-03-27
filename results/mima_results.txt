@@ -63,5 +63,16 @@
                 "feedback": "CCCCC"
             }
         }
+    },
+    {
+        "wordle": "HELLO",
+        "result": "Victory",
+        "score": 2,
+        "game_data": {
+            "1": {
+                "word": "HELLO",
+                "feedback": "CCCCC"
+            }
+        }
     }
 ]

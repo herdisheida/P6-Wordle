@@ -7,7 +7,7 @@ class GameMenu:
         self.wordle = None
         self.online = True
         
-        self.get_wordbank()
+        self.load_wordbank()
 
         # self.user = User()
 
@@ -44,33 +44,55 @@ class GameMenu:
 
         while not self.wordle:
             word_length = input("Choose word length: ")
-            if self.validate_input(word_length, "Word length"):
+            if self.validate_word_length(word_length):
                 break
         
         while not self.wordle:
             max_guess_count = input("Choose number of guesses: ")
-            if self.validate_input(max_guess_count, "Max guesses"):
+            if self.validate_guess_count(max_guess_count):
                 break
 
         self.wordle = Wordle("HELLO", int(max_guess_count), int(word_length)) # LATER delete the default values
 
-    def validate_input(self, user_input, check_type):
-        """Check if the user input is valid"""
-        if user_input.isdigit():
+
+    def validate_word_length(self, user_input):
+        """Validate the user input for word length"""
+        if not user_input.isdigit():
+            print(f"{Color.RED.value}Word length needs to be an integer{Color.RESET.value}\n")
+            return False
+        if 5 <= int(user_input) <= 10:
             return True
-        print(f"{Color.RED.value}{check_type} needs to be an integer{Color.RESET.value}\n")
+        print(f"{Color.RED.value}Word length needs to be between 5 and 10{Color.RESET.value}\n")
         return False
+    
+    def validate_guess_count(self, user_input):
+        """Validate the user input for guess count"""
+        if not user_input.isdigit():
+            print(f"{Color.RED.value}Guess count needs to be an integer{Color.RESET.value}\n")
+            return False
+        if 1 <= int(user_input) <= 10:
+            return True
+        print(f"{Color.RED.value}Guess count needs to be between 1 and 10{Color.RESET.value}\n")
+        return False
+
 
     def play_game(self):
         """Start the game"""
+        print("\n------- Game Start ------")
         print(f"\nPlaying with {self.wordle.word_length}-letter word")
+        print(f"Number of guesses: {self.wordle.max_guess_count}")
         print(f"Secret word: {self.wordle.wordle}")  # DELETE For debugging
         self.wordle.game_play()
         self.wordle = None # Reset the game
 
-    def get_wordbank(self):
-        pass
+    def load_wordbank(self):
+        """Create a data structure to store the words from the wordbank file"""
         # TODO
+
+    def get_word(self, word_length):
+        """Get a random word from the wordbank"""
+        # TODO
+        pass
 
 
 

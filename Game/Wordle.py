@@ -125,7 +125,6 @@ class Wordle(User):
             return True
         return False
 
-
     def print_game_history(self):
         """Print the game history,
          including the guesses and feedback"""
