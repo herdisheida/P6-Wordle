@@ -2,6 +2,7 @@ from ColorText import Color
 from Game.Guess import Guess
 
 class Wordle:
+    HISTORY_FORMAT = "{0:<5}{1:<20}{2:<20}"
 
     def __init__(self):
         self.the_wordle: str = "HELLO"
@@ -9,7 +10,7 @@ class Wordle:
         self.WORD_LENGTH: int = 5 # LATER customizable
         self.game_result: str = None
 
-        self.user_inputs: dict = {} # FX: {nr: 1, word: ["W", "O", "R", "L", "D"], feedback: "-c-C-"}
+        self.user_inputs: dict[object] = {}
         self.guess_count: int = 0
 
     def game_play(self):
@@ -25,11 +26,13 @@ class Wordle:
 
             if self.detect_victory(feedback):
                 print(f"\n{Color.GREEN.value}VICTORY!{Color.RESET.value}")
-                break
+                self.game_result = "Victory"
             
             if self.detect_defeat():
                 print(f"\n{Color.RED.value}YOU LOSE!{Color.RESET.value}")
-                break
+                self.game_result = "Defeat"
+        
+        self.print_game_history()
 
 
     def user_input(self):
@@ -41,7 +44,6 @@ class Wordle:
         if not guess.isalpha():
             print(f"{Color.RED.value}Guess needs to be string{Color.RESET.value}")
             return False
-
         if len(guess) != self.WORD_LENGTH:
             print(f"{Color.RED.value}Guess needs to have {len(self.the_wordle)} letters{Color.RESET.value}")
             return False
@@ -52,7 +54,9 @@ class Wordle:
         """Checks if guess is the correct wordly word, or close to it"""
         if guess == self.the_wordle:
             feedback = "C" * self.WORD_LENGTH
-            return f"{Color.GREEN.value}{feedback}{Color.RESET.value}"
+            colored_feedback = f"{Color.GREEN.value}{feedback}{Color.RESET.value}"
+            self.save_guess(guess, colored_feedback)
+            return colored_feedback
 
         feedback = ""
         for index in range(len(self.the_wordle)):
@@ -108,3 +112,9 @@ class Wordle:
         return False
 
 
+    def print_game_history(self):
+        print("GAME HISTORY")
+
+        print(self.HISTORY_FORMAT.format("nr", "Guess", "Feedback"))
+        for guess_nr, guess_round in self.user_inputs.items():
+            print(self.HISTORY_FORMAT.format(guess_nr, guess_round.word, guess_round.feedback))
