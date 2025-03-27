@@ -3,20 +3,22 @@ from ColorText import Color
 
 class GameMenu:
     def __init__(self):
-        self.wordle = Wordle()
+        self.wordle = None
         self.online = True
         
-        self.game_history = []
+        self.game_history = {}
         self.get_wordbank()
 
     def main_menu(self):
 
         while self.online:
+            self.print_menu()
 
             user_input = input("\n(y) Yes or (n) No : ").lower()
 
             if user_input == "y":
-                self.initalize_round()
+                self.configure_game()
+                self.play_game()
             
             elif user_input == "n":
                 self.online = False
@@ -29,16 +31,19 @@ class GameMenu:
             print("Start playing?") if not self.game_history else print("Continue playing?")
 
 
-    def initalize_round(self):
+    def configure_game(self):
         """Initialize the game, set the word length and user max guesses"""
         print("\n------- Initalize Game ------")
-        wordle_length = input("Enter the wordle word length: ")
-        max_attempts = input("Enter the maximum attempts: ")
+        word_length = input("Choose word length: ")
+        max_guess_count = input("Choose number of guesses: ")
 
-        self.wordle = Wordle(wordle="Hello", max_attempts=max_attempts, word_length=wordle_length)
-        self.wordle.game_play()
-        pass
-        # TODO
+        self.wordle = Wordle("HELLO", max_guess_count, word_length) # LATER delete the default values
+
+    def play_game(self):
+        """Start the game"""
+        print(f"\nPlaying with {self.wordle.word_length}-letter word")
+        print(f"Secret word: {self.wordle.wordle}")  # EYDA For debugging
+        return self.wordle.game_play()
 
     def get_wordbank(self):
         pass

@@ -4,9 +4,9 @@ from Game.Guess import Guess
 class Wordle:
     HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
 
-    def __init__(self, wordle: str = "HELLO", max_attempts: int = 5, word_length: int = 5): #  LATER delete the default values
+    def __init__(self, wordle: str, max_guess_count: int = 5, word_length: int = 5):
         self.wordle: str = wordle.upper()
-        self.max_attempts: int = max_attempts
+        self.max_guess_count: int = max_guess_count
         self.word_length: int = word_length
         self.game_result: str = None
 
@@ -113,7 +113,7 @@ class Wordle:
 
     def detect_defeat(self):
         """ Detect loss when guesses are finished """
-        if self.guess_count == self.max_attempts:
+        if self.guess_count == self.max_guess_count:
             return True
         return False
 
