@@ -2,12 +2,12 @@ from ColorText import Color
 from Game.Guess import Guess
 
 class Wordle:
-    HISTORY_FORMAT = "{0:<5}{1:<20}{2:<20}"
+    HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
 
-    def __init__(self):
-        self.the_wordle: str = "HELLO"
-        self.MAX_GUESS_COUNT: int = 5 # LATER customizable
-        self.WORD_LENGTH: int = 5 # LATER customizable
+    def __init__(self, wordle: str = "HELLO", max_guess_count: int = 5, word_length: int = 5): #  LATER delete the default values
+        self.wordle: str = wordle.upper()
+        self.max_guess_count: int = max_guess_count
+        self.word_length: int = word_length
         self.game_result: str = None
 
         self.game_history: dict[object] = {}
@@ -31,9 +31,11 @@ class Wordle:
             
             if self.detect_defeat():
                 print(f"\n{Color.RED.value}YOU LOSE!{Color.RESET.value}")
+                print(f"The word was: {Color.BLUE.value}{self.wordle}{Color.RESET.value}")
                 self.game_result = "Defeat"
         
         self.print_game_history()
+        self.reset_game()
         return
 
 
@@ -47,28 +49,28 @@ class Wordle:
         if not guess.isalpha():
             print(f"{Color.RED.value}Guess needs to be string{Color.RESET.value}")
             return False
-        if len(guess) != self.WORD_LENGTH:
-            print(f"{Color.RED.value}Guess needs to have {len(self.the_wordle)} letters{Color.RESET.value}")
+        if len(guess) != self.word_length:
+            print(f"{Color.RED.value}Guess needs to have {len(self.wordle)} letters{Color.RESET.value}")
             return False
         return True
 
 
     def get_feedback(self, guess: str):
         """Get feedback for user's guess"""
-        if guess == self.the_wordle:
-            feedback = "C" * self.WORD_LENGTH
+        if guess == self.wordle:
+            feedback = "C" * self.word_length
             self.save_guess(guess, feedback)
-            return self.highlight_feedback(feedback)
+            return feedback
 
         feedback = ""
-        for index in range(len(self.the_wordle)):
+        for index in range(len(self.wordle)):
 
             # correct letter + correct placement
-            if guess[index] == self.the_wordle[index]:
+            if guess[index] == self.wordle[index]:
                 feedback += "C"
 
             # correct letter + incorrect placement
-            elif guess[index] in self.the_wordle:
+            elif guess[index] in self.wordle:
                 feedback += "c"
             
             # letter not in THE wordle
@@ -104,14 +106,14 @@ class Wordle:
 
     def detect_victory(self, feedback: str):
         """ Detect victory when a guess is correct """
-        correct_feedback = "C" * self.WORD_LENGTH
+        correct_feedback = "C" * self.word_length
         if feedback == correct_feedback:
             return True
         return False
 
     def detect_defeat(self):
         """ Detect loss when guesses are finished """
-        if self.guess_count == self.MAX_GUESS_COUNT:
+        if self.guess_count == self.max_guess_count:
             return True
         return False
 
@@ -119,9 +121,16 @@ class Wordle:
     def print_game_history(self):
         """Print the game history,
          including the guesses and feedback"""
-        print("\nGAME HISTORY")
-        print(self.HISTORY_FORMAT.format("nr", "Guess", "Feedback"))
+        print("\n---------- GAME HISTORY ----------")
+        print(self.HISTORY_FORMAT.format("nr", "Guesses", "Feedbacks"))
         for guess_nr, guess_round in self.game_history.items():
             colored_feedback = self.highlight_feedback(guess_round.feedback)
             print(self.HISTORY_FORMAT.format(guess_nr, guess_round.word, colored_feedback))
+        return
+    
+    def reset_game(self):
+        """Reset the game for a new round"""
+        self.game_result = None
+        self.game_history = {}
+        self.guess_count = 0
         return
