@@ -1,14 +1,17 @@
 from ColorText import Color
 from Game.Guess import Guess
+from pathlib import Path
+import json
 
 class Wordle:
     HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
+    RESULT_FOLDER = Path("results")
 
     def __init__(self, wordle: str, max_guess_count: int = 5, word_length: int = 5):
         self.wordle: str = wordle.upper()
         self.max_guess_count: int = max_guess_count
         self.word_length: int = word_length
-        self.game_result: str = None
+        self.game_result: list = []
 
         self.game_history: dict[object] = {}
         self.guess_count: int = 0
@@ -27,14 +30,18 @@ class Wordle:
 
             if self.detect_victory(feedback):
                 print(f"\n{Color.GREEN.value}VICTORY!{Color.RESET.value}")
-                self.game_result = "Victory"
+                score = self.max_guess_count - self.guess_count
+                print(f"Score: {Color.BLUE.value}{score}{Color.RESET.value}")
+                self.game_result = ["Victory", ]
             
             if self.detect_defeat():
                 print(f"\n{Color.RED.value}YOU LOSE!{Color.RESET.value}")
+                print(f"Score: {Color.BLUE.value}0{Color.RESET.value}")
                 print(f"The word was: {Color.BLUE.value}{self.wordle}{Color.RESET.value}")
-                self.game_result = "Defeat"
+                self.game_result = ["Defeat", 0]
         
         self.print_game_history()
+        self.save_game_result()
         self.reset_game()
         return
 
@@ -127,10 +134,36 @@ class Wordle:
             colored_feedback = self.highlight_feedback(guess_round.feedback)
             print(self.HISTORY_FORMAT.format(guess_nr, guess_round.word, colored_feedback))
         return
-    
+
+    def save_game_result(self):
+        """Save the game result to a file"""
+        # username
+        username = input("Enter your username: ") # LATER add this username in the menu section
+        filename = f"{username}_results.txt"
+        file_path = self.RESULT_FOLDER / filename
+
+
+        game_data = {}
+        for guess_nr, guess_round in self.game_history.items():
+            game_data[guess_nr] = {"word": guess_round.word, "feedback": guess_round.feedback}
+
+        game = {
+            "wordle": self.wordle,
+            "result": self.game_result,
+            "game_data": game_data
+            }
+
+
+        with open(file_path, mode="a", encoding="utf-8") as file:
+            file.write(json.dumps(game, indent=4) + "\n")
+            
+
+
+        return
+
     def reset_game(self):
         """Reset the game for a new round"""
-        self.game_result = None
+        self.game_result = []
         self.game_history = {}
         self.guess_count = 0
         return
