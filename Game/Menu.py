@@ -34,15 +34,31 @@ class GameMenu:
     def configure_game(self):
         """Initialize the game, set the word length and user max guesses"""
         print("\n------- Initalize Game ------")
-        word_length = input("Choose word length: ")
-        max_guess_count = input("Choose number of guesses: ")
 
-        self.wordle = Wordle("HELLO", max_guess_count, word_length) # LATER delete the default values
+        while not self.wordle:
+            word_length = input("Choose word length: ")
+            if self.validate_input(word_length, "Word length"):
+                break
+        
+        while not self.wordle:
+            max_guess_count = input("Choose number of guesses: ")
+            if self.validate_input(max_guess_count, "Max guesses"):
+                break
+
+        self.wordle = Wordle("HELLO", int(max_guess_count), int(word_length)) # LATER delete the default values
+
+    def validate_input(self, user_input, check_type):
+        """Check if the user input is valid"""
+        if user_input.isdigit():
+            return True
+        print(f"{Color.RED.value}{check_type} needs to be an integer{Color.RESET.value}\n")
+        return False
+
 
     def play_game(self):
         """Start the game"""
         print(f"\nPlaying with {self.wordle.word_length}-letter word")
-        print(f"Secret word: {self.wordle.wordle}")  # EYDA For debugging
+        print(f"Secret word: {self.wordle.wordle}")  # DELETE For debugging
         return self.wordle.game_play()
 
     def get_wordbank(self):
@@ -52,7 +68,7 @@ class GameMenu:
 
 
 # MORE REFINED SINGLE GAME - 30%
-# [ ] User can input or select number of letters and guesses before the game begins - 5%
+# [x] User can input or select number of letters and guesses before the game begins - 5%
     # ○ Extends the "5 letters, 5 guesses" requirement
 # [ ] After finishing a game the user can select to quit or start a new game - 5%
 # [ ] Program stores word bank in a data structure - 5%
