@@ -18,51 +18,55 @@ class Wordle:
             if not self.validate_guess(guess):
                 continue
 
-            self.get_feedback(guess)
+            feedback = self.get_feedback(guess)
+            print(feedback)
 
 
-            
 
+    def user_input(self):
+        word = input("\nGuess: ").upper()
+        self.guess_count += 1
+        return word
 
     def validate_guess(self, guess):
         """Checks if the guess is formatted correctly"""
         if not guess.isalpha():
-            print(f"{Color.RED}Guess needs to be string{Color.RESET}")
+            print(f"{Color.RED.value}Guess needs to be string{Color.RESET.value}")
             return False
 
         if len(guess) != self.WORD_LENGTH:
-            print(f"{Color.RED}Guess needs to have {len(self.the_wordle)} letters{Color.RESET}")
+            print(f"{Color.RED.value}Guess needs to have {len(self.the_wordle)} letters{Color.RESET.value}")
             return False
         return True
         
 
     def get_feedback(self, guess):
         """Checks if guess is the correct wordly word, or close to it"""
+        if guess == self.the_wordle:
+            feedback = "C" * self.WORD_LENGTH
+            return f"{Color.GREEN.value}{feedback}{Color.RESET.value}"
+
         feedback = ""
-        
         for index in range(len(self.the_wordle)):
 
             # correct letter + correct placement
             if guess[index] == self.the_wordle[index]:
-                feedback += f"{Color.GREEN}C{Color.RESET}"
+                feedback += f"{Color.GREEN.value}C{Color.RESET.value}"
 
             # correct letter + incorrect placement
             elif guess[index] in self.the_wordle:
-                feedback += f"{Color.YELLOW}c{Color.RESET}"
+                feedback += f"{Color.YELLOW.value}c{Color.RESET.value}"
             
             # letter not in THE wordle
             else:
-                feedback += f"{Color.RED}-{Color.RESET}"
+                feedback += f"{Color.RED.value}-{Color.RESET.value}"
 
-
-        print(feedback)
-
-
-    def user_input(self):
-        word = input("Guess: ").upper()
-        self.guess_count += 1
-        return word
+        self.save_guess(guess, feedback)
+        return feedback
     
+
+    def save_guess(self, guess, feedback):
+        pass
 
     def display_prev_guesses(self):
         """ Display previous guesses in the round """
