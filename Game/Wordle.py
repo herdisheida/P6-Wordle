@@ -23,7 +23,7 @@ class Wordle:
             self.guess_count += 1
 
             feedback = self.get_feedback(guess)
-            print(feedback)
+            print(self.highlight_feedback(feedback))
 
             if self.detect_victory(feedback):
                 print(f"\n{Color.GREEN.value}VICTORY!{Color.RESET.value}")
@@ -51,34 +51,49 @@ class Wordle:
             print(f"{Color.RED.value}Guess needs to have {len(self.the_wordle)} letters{Color.RESET.value}")
             return False
         return True
-        
+
 
     def get_feedback(self, guess: str):
         """Get feedback for user's guess"""
         if guess == self.the_wordle:
             feedback = "C" * self.WORD_LENGTH
-            colored_feedback = f"{Color.GREEN.value}{feedback}{Color.RESET.value}"
-            self.save_guess(guess, colored_feedback)
-            return colored_feedback
+            self.save_guess(guess, feedback)
+            return self.highlight_feedback(feedback)
 
         feedback = ""
         for index in range(len(self.the_wordle)):
 
             # correct letter + correct placement
             if guess[index] == self.the_wordle[index]:
-                feedback += f"{Color.GREEN.value}C{Color.RESET.value}"
+                feedback += "C"
 
             # correct letter + incorrect placement
             elif guess[index] in self.the_wordle:
-                feedback += f"{Color.YELLOW.value}c{Color.RESET.value}"
+                feedback += "c"
             
             # letter not in THE wordle
             else:
-                feedback += f"{Color.RED.value}-{Color.RESET.value}"
+                feedback += "-"
 
         self.save_guess(guess, feedback)
         return feedback
     
+    def highlight_feedback(self, feedback: str):
+        """Highlight the correct letters in the feedback for better readability,
+         'C' is highlighted in green
+         'c' is highlighted in yellow
+         '-' is highlighted in red
+         """
+        colored_feedback = ""
+        for char in feedback:
+            if char == "C":
+                colored_feedback += f"{Color.GREEN.value}{char}{Color.RESET.value}"
+            elif char == "c":
+                colored_feedback += f"{Color.YELLOW.value}{char}{Color.RESET.value}"
+            elif char == "-":
+                colored_feedback += f"{Color.RED.value}{char}{Color.RESET.value}"
+        return colored_feedback
+
 
     def save_guess(self, guessed_word: str, feedback: str):
         """Save the guess and feedback to history"""
@@ -90,7 +105,7 @@ class Wordle:
     def detect_victory(self, feedback: str):
         """ Detect victory when a guess is correct """
         correct_feedback = "C" * self.WORD_LENGTH
-        if feedback == f"{Color.GREEN.value}{correct_feedback}{Color.RESET.value}":
+        if feedback == correct_feedback:
             return True
         return False
 
@@ -107,5 +122,6 @@ class Wordle:
         print("\nGAME HISTORY")
         print(self.HISTORY_FORMAT.format("nr", "Guess", "Feedback"))
         for guess_nr, guess_round in self.game_history.items():
-            print(self.HISTORY_FORMAT.format(guess_nr, guess_round.word, guess_round.feedback))
+            colored_feedback = self.highlight_feedback(guess_round.feedback)
+            print(self.HISTORY_FORMAT.format(guess_nr, guess_round.word, colored_feedback))
         return
