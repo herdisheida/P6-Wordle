@@ -114,8 +114,9 @@ class Wordle:
 
 
     def print_game_history(self):
-        print("GAME HISTORY")
+        print("\nGAME HISTORY")
 
         print(self.HISTORY_FORMAT.format("nr", "Guess", "Feedback"))
         for guess_nr, guess_round in self.user_inputs.items():
             print(self.HISTORY_FORMAT.format(guess_nr, guess_round.word, guess_round.feedback))
+        return

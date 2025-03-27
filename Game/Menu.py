@@ -10,20 +10,20 @@ class GameMenu:
     def main_menu(self):
 
         while self.online:
-            print("------- Wordle ------")
+            print("\n------- WORDLE ------")
             print("Start Game")
             print()
 
             user_input = input("(y) Yes or (n) No : ").lower()
 
             if user_input == "y":
-                return self.wordle.game_play()
+                self.wordle.game_play()
             
             elif user_input == "n":
-                break
+                self.online = False
 
             else:
-                print(f"{Color.RED.value}Invalid input{Color.RED.value}")
+                print(f"{Color.RED.value}Invalid input{Color.RESET.value}")
         
 
     def get_wordbank(self):
