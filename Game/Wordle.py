@@ -10,10 +10,11 @@ class Wordle:
         self.WORD_LENGTH: int = 5 # LATER customizable
         self.game_result: str = None
 
-        self.user_inputs: dict[object] = {}
+        self.game_history: dict[object] = {}
         self.guess_count: int = 0
 
     def game_play(self):
+        """Main game loop"""
         while not self.game_result:
             guess = self.user_input()
 
@@ -37,6 +38,7 @@ class Wordle:
 
 
     def user_input(self):
+        """Get user input for guess"""
         word = input("\nGuess: ").upper()
         return word
 
@@ -52,7 +54,7 @@ class Wordle:
         
 
     def get_feedback(self, guess: str):
-        """Checks if guess is the correct wordly word, or close to it"""
+        """Get feedback for user's guess"""
         if guess == self.the_wordle:
             feedback = "C" * self.WORD_LENGTH
             colored_feedback = f"{Color.GREEN.value}{feedback}{Color.RESET.value}"
@@ -79,24 +81,10 @@ class Wordle:
     
 
     def save_guess(self, guessed_word: str, feedback: str):
+        """Save the guess and feedback to history"""
         saved_guess = Guess(self.guess_count, guessed_word, feedback)
-        self.user_inputs[self.guess_count] = saved_guess
+        self.game_history[self.guess_count] = saved_guess
         return
-
-    def display_prev_guesses(self):
-        """ Display previous guesses in the round """
-        # TODO
-        pass
-
-    def display_code_with_guesses(self):
-        """ Display code with each guess, -c-C- -  """
-        # TODO
-        pass
-
-    def wrong_format(self):
-        """ Lets user know if wrong format and doesn't crash"""
-        # TODO
-        pass
 
 
     def detect_victory(self, feedback: str):
@@ -114,9 +102,10 @@ class Wordle:
 
 
     def print_game_history(self):
+        """Print the game history,
+         including the guesses and feedback"""
         print("\nGAME HISTORY")
-
         print(self.HISTORY_FORMAT.format("nr", "Guess", "Feedback"))
-        for guess_nr, guess_round in self.user_inputs.items():
+        for guess_nr, guess_round in self.game_history.items():
             print(self.HISTORY_FORMAT.format(guess_nr, guess_round.word, guess_round.feedback))
         return
