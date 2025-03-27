@@ -1,14 +1,15 @@
+from ColorText import Color
+
 class Wordle:
 
     def __init__(self):
-        self.wordle_word: str = "HELLO"
+        self.the_wordle: str = "HELLO"
         self.MAX_GUESS_COUNT: int = 5 # LATER customizable
         self.WORD_LENGTH = 5 # LATER customizable
         self.game_result: str = None
 
         self.user_inputs: dict = {} # FX: {nr: 1, word: ["W", "O", "R", "L", "D"], feedback: "-c-C-"}
         self.guess_count = 0
-
 
     def game_play(self):
         while not self.game_result:
@@ -25,12 +26,12 @@ class Wordle:
 
     def validate_guess(self, guess):
         """Checks if the guess is formatted correctly"""
-        if not isinstance(guess, str):
-            print("Guess needs to be string")
+        if not guess.isalpha():
+            print(f"{Color.RED}Guess needs to be string{Color.RESET}")
             return False
 
         if len(guess) != self.WORD_LENGTH:
-            print(f"Guess needs to have {len(self.wordle_word)} many letters")
+            print(f"{Color.RED}Guess needs to have {len(self.the_wordle)} letters{Color.RESET}")
             return False
         return True
         
@@ -38,12 +39,20 @@ class Wordle:
     def get_feedback(self, guess):
         """Checks if guess is the correct wordly word, or close to it"""
         feedback = ""
-        for index in range(len(self.wordle_word)):
+        
+        for index in range(len(self.the_wordle)):
 
-            if guess[index] == self.wordle_word[index]:
-                feedback += "C"
+            # correct letter + correct placement
+            if guess[index] == self.the_wordle[index]:
+                feedback += f"{Color.GREEN}C{Color.RESET}"
 
-            # elif gue
+            # correct letter + incorrect placement
+            elif guess[index] in self.the_wordle:
+                feedback += f"{Color.YELLOW}c{Color.RESET}"
+            
+            # letter not in THE wordle
+            else:
+                feedback += f"{Color.RED}-{Color.RESET}"
 
 
         print(feedback)

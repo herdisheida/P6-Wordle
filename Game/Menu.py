@@ -1,4 +1,4 @@
-from Wordle import Wordle
+from Game.Wordle import Wordle
 
 class GameMenu:
     def __init__(self):
