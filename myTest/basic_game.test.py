@@ -16,7 +16,7 @@ import unittest
 class TestWordleGame(unittest.TestCase):
 
     def setUp(self):
-        self.wordle = Wordle()
+        self.wordle = Wordle("HELLO", 5, 5)
         self.wordle.wordle = "HELLO"  # Set a fixed word for testing
         self.wordle.max_guess_count = 3  # Reduce guesses for quicker tests
 
