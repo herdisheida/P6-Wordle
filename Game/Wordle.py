@@ -2,8 +2,9 @@ from ColorText import Color
 from Game.Guess import Guess
 from pathlib import Path
 import json
+from Game.User import User
 
-class Wordle:
+class Wordle(User):
     HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
     RESULT_FOLDER = Path("results")
 
@@ -139,6 +140,7 @@ class Wordle:
         """Save the game result to a file"""
         # username
         username = input("Enter your username: ") # LATER add this username in the menu section
+        # username = self.get_user()
         filename = f"{username}_results.txt"
         file_path = self.RESULT_FOLDER / filename
 
@@ -154,8 +156,21 @@ class Wordle:
                 }
             }
 
-        with open(file_path, mode="a", encoding="utf-8") as file:
-            file.write(json.dumps(game, indent=4) + "\n")
+        # create the results folder if it doesn't exist
+        Path(self.RESULT_FOLDER).mkdir(parents=True, exist_ok=True)
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                all_games = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            all_games = []
+        
+        # add new game to existing games
+        all_games.append(game)
+        
+        # update the user's result file
+        with open(file_path, "w", encoding="utf-8") as file:
+            json.dump(all_games, file, indent=4)
+        
         return game
 
     def reset_game(self):

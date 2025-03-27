@@ -1,89 +1,67 @@
-{
-    "wordle": "HELLO",
-    "result": "Victory",
-    "score": 2,
-    "game_data": {
-        "1": {
-            "word": "HELLO",
-            "feedback": "CCCCC"
+[
+    {
+        "wordle": "HELLO",
+        "result": "Victory",
+        "score": 2,
+        "game_data": {
+            "1": {
+                "word": "HELLO",
+                "feedback": "CCCCC"
+            }
+        }
+    },
+    {
+        "wordle": "HELLO",
+        "result": "Victory",
+        "score": 2,
+        "game_data": {
+            "1": {
+                "word": "HELLO",
+                "feedback": "CCCCC"
+            }
+        }
+    },
+    {
+        "wordle": "HELLO",
+        "result": "Victory",
+        "score": 3,
+        "game_data": {
+            "1": {
+                "word": "HELLS",
+                "feedback": "CCCC-"
+            },
+            "2": {
+                "word": "MELLS",
+                "feedback": "-CCC-"
+            },
+            "3": {
+                "word": "DLEEE",
+                "feedback": "-cccc"
+            },
+            "4": {
+                "word": "WORLD",
+                "feedback": "-c-C-"
+            },
+            "5": {
+                "word": "SWORD",
+                "feedback": "--c--"
+            },
+            "6": {
+                "word": "TURDS",
+                "feedback": "-----"
+            },
+            "7": {
+                "word": "MURDE",
+                "feedback": "----c"
+            },
+            "8": {
+                "word": "CLIRK",
+                "feedback": "-c---"
+            },
+            "9": {
+                "word": "HELLO",
+                "feedback": "CCCCC"
+            }
         }
     }
-}
-{
-    "wordle": "HELLO",
-    "result": "DEFEAT",
-    "score": 0,
-    "game_data": {
-        "1": {
-            "word": "KITCH",
-            "feedback": "----c"
-        },
-        "2": {
-            "word": "BRICK",
-            "feedback": "-----"
-        },
-        "3": {
-            "word": "MICKS",
-            "feedback": "-----"
-        },
-        "4": {
-            "word": "HELLS",
-            "feedback": "CCCC-"
-        }
-    }
-}
-{
-    "wordle": "HELLO",
-    "result": "DEFEAT",
-    "score": 0,
-    "game_data": {
-        "1": {
-            "word": "MITCH",
-            "feedback": "----c"
-        }
-    }
-}
-{
-    "wordle": "HELLO",
-    "result": "DEFEAT",
-    "score": 0,
-    "game_data": {
-        "1": {
-            "word": "LELLO",
-            "feedback": "cCCCC"
-        }
-    }
-}
-{
-    "wordle": "HELLO",
-    "result": "DEFEAT",
-    "score": 0,
-    "game_data": {
-        "1": {
-            "word": "MATCH",
-            "feedback": "----c"
-        }
-    }
-}
-{
-    "wordle": "HELLO",
-    "result": "DEFEAT",
-    "score": 0,
-    "game_data": {
-        "1": {
-            "word": "MIMAS",
-            "feedback": "-----"
-        }
-    }
-}
-{
-    "wordle": "HELLO",
-    "result": "Victory",
-    "score": 2,
-    "game_data": {
-        "1": {
-            "word": "HELLO",
-            "feedback": "CCCCC"
-        }
-    }
-}
+]

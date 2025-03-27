@@ -1,5 +1,6 @@
 from Game.Wordle import Wordle
 from ColorText import Color
+from Game.User import User
 
 class GameMenu:
     def __init__(self):
@@ -7,6 +8,8 @@ class GameMenu:
         self.online = True
         
         self.get_wordbank()
+
+        # self.user = User()
 
     def main_menu(self):
 
