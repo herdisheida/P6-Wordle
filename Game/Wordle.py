@@ -57,7 +57,7 @@ class Wordle:
 
     def get_feedback(self, guess: str):
         """Get feedback for user's guess"""
-        if guess == self.wordle:
+        if guess.upper() == self.wordle:
             feedback = "C" * self.word_length
             self.save_guess(guess, feedback)
             return feedback

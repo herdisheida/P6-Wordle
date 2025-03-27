@@ -21,7 +21,9 @@ class TestWordleGame(unittest.TestCase):
         self.wordle.max_guess_count = 3  # Reduce guesses for quicker tests
 
     def test_display_previous_guesses(self):
+        self.wordle.guess_count = 1
         self.wordle.save_guess("HOUSE", "-c---")
+        self.wordle.guess_count = 2
         self.wordle.save_guess("HELLO", "CCCCC")
         history = self.wordle.game_history
         self.assertEqual(len(history), 2)
@@ -30,7 +32,7 @@ class TestWordleGame(unittest.TestCase):
 
     def test_feedback_display(self):
         feedback = self.wordle.get_feedback("HOLLY")
-        self.assertEqual(feedback, "C-c-C-")
+        self.assertEqual(feedback, "CcCC-")
 
     def test_invalid_format(self):
         self.assertFalse(self.wordle.validate_guess("12345"))  # Non-alphabetic
