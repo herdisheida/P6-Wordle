@@ -33,6 +33,7 @@ class Wordle:
                 self.game_result = "Defeat"
         
         self.print_game_history()
+        return
 
 
     def user_input(self):

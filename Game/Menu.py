@@ -1,19 +1,29 @@
 from Game.Wordle import Wordle
+from ColorText import Color
 
 class GameMenu:
     def __init__(self):
         self.wordle = Wordle()
+        self.online = True
 
 
     def main_menu(self):
-        print("------- Wordle ------")
-        print("Start Game")
-        print()
 
-        user_input = input("(y) Yes or (n) No : ")
+        while self.online:
+            print("------- Wordle ------")
+            print("Start Game")
+            print()
 
-        if user_input.lower() == "y":
-            return self.wordle.game_play()
+            user_input = input("(y) Yes or (n) No : ").lower()
+
+            if user_input == "y":
+                return self.wordle.game_play()
+            
+            elif user_input == "n":
+                break
+
+            else:
+                print(f"{Color.RED.value}Invalid input{Color.RED.value}")
         
 
     def get_wordbank(self):
