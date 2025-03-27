@@ -18,20 +18,22 @@ class Wordle:
 
             if not self.validate_guess(guess):
                 continue
+            self.guess_count += 1
 
             feedback = self.get_feedback(guess)
             print(feedback)
 
             if self.detect_victory(feedback):
+                print(f"\n{Color.GREEN.value}VICTORY!{Color.RESET.value}")
                 break
             
             if self.detect_defeat():
+                print(f"\n{Color.RED.value}YOU LOSE!{Color.RESET.value}")
                 break
 
 
     def user_input(self):
         word = input("\nGuess: ").upper()
-        self.guess_count += 1
         return word
 
     def validate_guess(self, guess: str):
@@ -73,7 +75,7 @@ class Wordle:
 
     def save_guess(self, guessed_word: str, feedback: str):
         saved_guess = Guess(self.guess_count, guessed_word, feedback)
-        self.user_input[self.guess_count] = saved_guess
+        self.user_inputs[self.guess_count] = saved_guess
         return
 
     def display_prev_guesses(self):
@@ -94,7 +96,8 @@ class Wordle:
 
     def detect_victory(self, feedback: str):
         """ Detect victory when a guess is correct """
-        if feedback == "C" * self.WORD_LENGTH:
+        correct_feedback = "C" * self.WORD_LENGTH
+        if feedback == f"{Color.GREEN.value}{correct_feedback}{Color.RESET.value}":
             return True
         return False
 

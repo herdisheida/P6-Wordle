@@ -8,6 +8,7 @@ class GameMenu:
     def main_menu(self):
         print("------- Wordle ------")
         print("Start Game")
+        print()
 
         user_input = input("(y) Yes or (n) No : ")
 
