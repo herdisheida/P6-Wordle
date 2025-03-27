@@ -1,10 +1,14 @@
-from Game.Wordle import Wordle
+# from Game.Wordle import Wordle
+from Game.WordleGame import WordleGame
+from Game.GameUI import GameUI
 from ColorText import Color
-from Game.User import User
+from pathlib import Path
 
 class GameMenu:
+    WORDBANK_FILE_PATH = Path("WordBank") / "wordbank.txt"
+
     def __init__(self):
-        self.wordle = None
+        self.round = None
         self.online = True
         
         self.load_wordbank()
@@ -42,17 +46,17 @@ class GameMenu:
         """Initialize the game, set the word length and user max guesses"""
         print("\n------- Initalize Game ------")
 
-        while not self.wordle:
+        while not self.round:
             word_length = input("Choose word length: ")
             if self.validate_word_length(word_length):
                 break
         
-        while not self.wordle:
+        while not self.round:
             max_guess_count = input("Choose number of guesses: ")
             if self.validate_guess_count(max_guess_count):
                 break
 
-        self.wordle = Wordle("HELLO", int(max_guess_count), int(word_length)) # LATER delete the default values
+        self.round = WordleGame("HELLO", int(max_guess_count)) # LATER delete the default values
 
 
     def validate_word_length(self, user_input):
@@ -60,7 +64,11 @@ class GameMenu:
         if not user_input.isdigit():
             print(f"{Color.RED.value}Word length needs to be an integer{Color.RESET.value}\n")
             return False
-        if 5 <= int(user_input) <= 10:
+        
+        # LATER check the longest and shortest word in the wordbank
+        shortest_word = 5
+        longest_word = 10
+        if shortest_word <= int(user_input) <= longest_word:
             return True
         print(f"{Color.RED.value}Word length needs to be between 5 and 10{Color.RESET.value}\n")
         return False
@@ -79,15 +87,18 @@ class GameMenu:
     def play_game(self):
         """Start the game"""
         print("\n------- Game Start ------")
-        print(f"\nPlaying with {self.wordle.word_length}-letter word")
-        print(f"Number of guesses: {self.wordle.max_guess_count}")
-        print(f"Secret word: {self.wordle.wordle}")  # DELETE For debugging
-        self.wordle.game_play()
-        self.wordle = None # Reset the game
+        print(f"\nPlaying with {self.round.word_length}-letter word")
+        print(f"Number of guesses: {self.round.max_guesses}")
+        print(f"Secret word: {self.round.secret_word}")  # EYDA For debugging
+        # self.round.game_play()
+        ui = GameUI(self.round)
+        ui.game_loop()
+        self.round = None # Reset the game
 
     def load_wordbank(self):
         """Create a data structure to store the words from the wordbank file"""
-        # TODO
+        with open(self.WORDBANK_FILE_PATH, mode="r", encoding="utf-8") as file:
+            self.wordbank = file.readlines()
 
     def get_word(self, word_length):
         """Get a random word from the wordbank"""

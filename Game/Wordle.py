@@ -4,16 +4,16 @@ from pathlib import Path
 import json
 from Game.User import User
 
-class Wordle(User):
+class WordleGame():
     HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
     RESULT_FOLDER = Path("results")
 
-    def __init__(self, wordle: str, max_guess_count: int = 5, word_length: int = 5):
-        self.wordle: str = wordle.upper()
-        self.max_guess_count: int = max_guess_count
-        self.word_length: int = word_length
+    def __init__(self, wordle: str, max_guess_count: int = 5):
+        self.secret_word: str = wordle.upper()
+        self.max_guesses: int = max_guess_count
+        self.word_length: int = len(wordle)
+        
         self.game_result: dict = None
-
         self.game_history: dict[object] = {}
         self.guess_count: int = 0
 
@@ -31,14 +31,14 @@ class Wordle(User):
 
             if self.detect_victory(feedback):
                 print(f"\n{Color.GREEN.value}VICTORY!{Color.RESET.value}")
-                score = (self.max_guess_count - self.guess_count) ^ 2
+                score = (self.max_guesses - self.guess_count) ^ 2
                 print(f"Score: {Color.BLUE.value}{score}{Color.RESET.value}")
                 self.game_result = {"result": "Victory", "score": score}
             
             elif self.detect_defeat():
                 print(f"\n{Color.RED.value}YOU LOSE!{Color.RESET.value}")
                 print(f"Score: {Color.BLUE.value}0{Color.RESET.value}")
-                print(f"The word was: {Color.BLUE.value}{self.wordle}{Color.RESET.value}")
+                print(f"The word was: {Color.BLUE.value}{self.secret_word}{Color.RESET.value}")
                 self.game_result = {"result": "DEFEAT", "score": 0}
         
         self.print_game_history()
@@ -58,27 +58,27 @@ class Wordle(User):
             print(f"{Color.RED.value}Guess needs to be string{Color.RESET.value}")
             return False
         if len(guess) != self.word_length:
-            print(f"{Color.RED.value}Guess needs to have {len(self.wordle)} letters{Color.RESET.value}")
+            print(f"{Color.RED.value}Guess needs to have {len(self.secret_word)} letters{Color.RESET.value}")
             return False
         return True
 
 
     def get_feedback(self, guess: str):
         """Get feedback for user's guess"""
-        if guess.upper() == self.wordle:
+        if guess.upper() == self.secret_word:
             feedback = "C" * self.word_length
             self.save_guess(guess, feedback)
             return feedback
 
         feedback = ""
-        for index in range(len(self.wordle)):
+        for index in range(len(self.secret_word)):
 
             # correct letter + correct placement
-            if guess[index] == self.wordle[index]:
+            if guess[index] == self.secret_word[index]:
                 feedback += "C"
 
             # correct letter + incorrect placement
-            elif guess[index] in self.wordle:
+            elif guess[index] in self.secret_word:
                 feedback += "c"
             
             # letter not in THE wordle
@@ -107,8 +107,7 @@ class Wordle(User):
 
     def save_guess(self, guessed_word: str, feedback: str):
         """Save the guess and feedback to history"""
-        guess_round = Guess(self.guess_count, guessed_word, feedback)
-        self.game_history[self.guess_count] = guess_round
+        self.game_history[self.guess_count] = Guess(self.guess_count, guessed_word, feedback)
         return
 
 
@@ -121,7 +120,7 @@ class Wordle(User):
 
     def detect_defeat(self):
         """ Detect loss when guesses are finished """
-        if self.guess_count == self.max_guess_count:
+        if self.guess_count == self.max_guesses:
             return True
         return False
 
@@ -144,7 +143,7 @@ class Wordle(User):
         file_path = self.RESULT_FOLDER / filename
 
         game = {
-            "wordle": self.wordle,
+            "wordle": self.secret_word,
             "result": self.game_result["result"],
             "score": self.game_result["score"],
             "game_data": {

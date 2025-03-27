@@ -5,3 +5,5 @@ Game/__pycache__/Wordle.cpython-313.pyc
 Game/__pycache__/Menu.cpython-313.pyc
 __pycache__/ColorText.cpython-313.pyc
 Game/__pycache__/Guess.cpython-313.pyc
+Game/__pycache__/GameUI.cpython-313.pyc
+Game/__pycache__/WordleGame.cpython-313.pyc

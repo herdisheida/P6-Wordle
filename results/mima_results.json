@@ -1,0 +1,32 @@
+[
+  {
+    "secret_word": "HELLO",
+    "result": {
+      "result": "Victory",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "HELLO",
+        "feedback": "CCCCC"
+      }
+    }
+  },
+  {
+    "secret_word": "HELLO",
+    "result": {
+      "result": "Defeat",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "MATCH",
+        "feedback": "----c"
+      },
+      "2": {
+        "guess": "SKELL",
+        "feedback": "--cCc"
+      }
+    }
+  }
+]

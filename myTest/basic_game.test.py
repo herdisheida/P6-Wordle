@@ -7,7 +7,7 @@ parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(parent_dir)
 
 # Now import from the `Game` folder
-from Game.Wordle import Wordle
+from Game.Wordle import WordleGame
 
 
 import unittest
@@ -16,9 +16,9 @@ import unittest
 class TestWordleGame(unittest.TestCase):
 
     def setUp(self):
-        self.wordle = Wordle("HELLO", 5, 5)
-        self.wordle.wordle = "HELLO"  # Set a fixed word for testing
-        self.wordle.max_guess_count = 3  # Reduce guesses for quicker tests
+        self.wordle = WordleGame("HELLO", 5, 5)
+        self.wordle.secret_word = "HELLO"  # Set a fixed word for testing
+        self.wordle.max_guesses = 3  # Reduce guesses for quicker tests
 
     def test_display_previous_guesses(self):
         self.wordle.guess_count = 1
