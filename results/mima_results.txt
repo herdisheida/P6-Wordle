@@ -43,3 +43,47 @@
         }
     }
 }
+{
+    "wordle": "HELLO",
+    "result": "DEFEAT",
+    "score": 0,
+    "game_data": {
+        "1": {
+            "word": "LELLO",
+            "feedback": "cCCCC"
+        }
+    }
+}
+{
+    "wordle": "HELLO",
+    "result": "DEFEAT",
+    "score": 0,
+    "game_data": {
+        "1": {
+            "word": "MATCH",
+            "feedback": "----c"
+        }
+    }
+}
+{
+    "wordle": "HELLO",
+    "result": "DEFEAT",
+    "score": 0,
+    "game_data": {
+        "1": {
+            "word": "MIMAS",
+            "feedback": "-----"
+        }
+    }
+}
+{
+    "wordle": "HELLO",
+    "result": "Victory",
+    "score": 2,
+    "game_data": {
+        "1": {
+            "word": "HELLO",
+            "feedback": "CCCCC"
+        }
+    }
+}

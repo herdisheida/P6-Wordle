@@ -58,12 +58,12 @@ class GameMenu:
         print(f"{Color.RED.value}{check_type} needs to be an integer{Color.RESET.value}\n")
         return False
 
-
     def play_game(self):
         """Start the game"""
         print(f"\nPlaying with {self.wordle.word_length}-letter word")
         print(f"Secret word: {self.wordle.wordle}")  # DELETE For debugging
-        return self.wordle.game_play()
+        self.wordle.game_play()
+        self.wordle = None # Reset the game
 
     def get_wordbank(self):
         pass
