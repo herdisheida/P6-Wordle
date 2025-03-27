@@ -6,17 +6,17 @@ class Wordle:
     def __init__(self):
         self.the_wordle: str = "HELLO"
         self.MAX_GUESS_COUNT: int = 5 # LATER customizable
-        self.WORD_LENGTH = 5 # LATER customizable
+        self.WORD_LENGTH: int = 5 # LATER customizable
         self.game_result: str = None
 
         self.user_inputs: dict = {} # FX: {nr: 1, word: ["W", "O", "R", "L", "D"], feedback: "-c-C-"}
-        self.guess_count = 0
+        self.guess_count: int = 0
 
     def game_play(self):
         while not self.game_result:
             guess = self.user_input()
 
-            if not self.validate_guess(guess):
+            if not self.validate_guess(guess: str):
                 continue
 
             feedback = self.get_feedback(guess)
@@ -34,7 +34,7 @@ class Wordle:
         self.guess_count += 1
         return word
 
-    def validate_guess(self, guess):
+    def validate_guess(self, guess: str):
         """Checks if the guess is formatted correctly"""
         if not guess.isalpha():
             print(f"{Color.RED.value}Guess needs to be string{Color.RESET.value}")
@@ -46,7 +46,7 @@ class Wordle:
         return True
         
 
-    def get_feedback(self, guess):
+    def get_feedback(self, guess: str):
         """Checks if guess is the correct wordly word, or close to it"""
         if guess == self.the_wordle:
             feedback = "C" * self.WORD_LENGTH
@@ -71,7 +71,7 @@ class Wordle:
         return feedback
     
 
-    def save_guess(self, guess, feedback):
+    def save_guess(self, guess:str, feedback: str):
         pass
 
     def display_prev_guesses(self):
@@ -90,7 +90,7 @@ class Wordle:
         pass
 
 
-    def detect_victory(self, feedback):
+    def detect_victory(self, feedback: str):
         """ Detect victory when a guess is correct """
         if feedback == "C" * self.WORD_LENGTH:
             return True
