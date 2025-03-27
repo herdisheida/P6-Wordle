@@ -6,7 +6,6 @@ class GameMenu:
         self.wordle = None
         self.online = True
         
-        self.game_history = {}
         self.get_wordbank()
 
     def main_menu(self):
@@ -14,13 +13,16 @@ class GameMenu:
         while self.online:
             self.print_menu()
 
-            user_input = input("\n(y) Yes or (n) No : ").lower()
+            user_input = input("\nEnter: ").lower()
 
-            if user_input == "y":
+            if user_input == "1":
                 self.configure_game()
                 self.play_game()
+
+            elif user_input == "2":
+                pass # TODO - See game history
             
-            elif user_input == "n":
+            elif user_input == "q":
                 self.online = False
 
             else:
@@ -28,7 +30,9 @@ class GameMenu:
         
     def print_menu(self):
             print("\n------- WORDLE ------")
-            print("Start playing?") if not self.game_history else print("Continue playing?")
+            print("(1) Play")
+            print("(2) See Game History")
+            print("\n(q) Quit")
 
 
     def configure_game(self):

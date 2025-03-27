@@ -1,0 +1,45 @@
+{
+    "wordle": "HELLO",
+    "result": "Victory",
+    "score": 2,
+    "game_data": {
+        "1": {
+            "word": "HELLO",
+            "feedback": "CCCCC"
+        }
+    }
+}
+{
+    "wordle": "HELLO",
+    "result": "DEFEAT",
+    "score": 0,
+    "game_data": {
+        "1": {
+            "word": "KITCH",
+            "feedback": "----c"
+        },
+        "2": {
+            "word": "BRICK",
+            "feedback": "-----"
+        },
+        "3": {
+            "word": "MICKS",
+            "feedback": "-----"
+        },
+        "4": {
+            "word": "HELLS",
+            "feedback": "CCCC-"
+        }
+    }
+}
+{
+    "wordle": "HELLO",
+    "result": "DEFEAT",
+    "score": 0,
+    "game_data": {
+        "1": {
+            "word": "MITCH",
+            "feedback": "----c"
+        }
+    }
+}
