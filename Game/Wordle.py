@@ -1,4 +1,5 @@
 from ColorText import Color
+from Guess import Guess
 
 class Wordle:
 
@@ -21,6 +22,11 @@ class Wordle:
             feedback = self.get_feedback(guess)
             print(feedback)
 
+            if self.detect_victory(feedback):
+                break
+            
+            if self.detect_defeat():
+                break
 
 
     def user_input(self):
@@ -83,16 +89,17 @@ class Wordle:
         # TODO
         pass
 
+
+    def detect_victory(self, feedback):
+        """ Detect victory when a guess is correct """
+        if feedback == "C" * self.WORD_LENGTH:
+            return True
+        return False
+
     def detect_defeat(self):
         """ Detect loss when guesses are finished """
-        # TODO
-        pass
-
-    def detect_victory(self):
-        """ Detect victory when a guess is correct """
-        # TODO
-        pass
-    
-
+        if self.guess_count == self.MAX_GUESS_COUNT:
+            return True
+        return False
 
 
