@@ -1,5 +1,5 @@
 from ColorText import Color
-from Guess import Guess
+from Game.Guess import Guess
 
 class Wordle:
 
@@ -16,7 +16,7 @@ class Wordle:
         while not self.game_result:
             guess = self.user_input()
 
-            if not self.validate_guess(guess: str):
+            if not self.validate_guess(guess):
                 continue
 
             feedback = self.get_feedback(guess)
@@ -71,8 +71,10 @@ class Wordle:
         return feedback
     
 
-    def save_guess(self, guess:str, feedback: str):
-        pass
+    def save_guess(self, guessed_word: str, feedback: str):
+        saved_guess = Guess(self.guess_count, guessed_word, feedback)
+        self.user_input[self.guess_count] = saved_guess
+        return
 
     def display_prev_guesses(self):
         """ Display previous guesses in the round """

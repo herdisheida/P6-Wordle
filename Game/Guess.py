@@ -1,5 +1,5 @@
 class Guess:
-    def __init__(self, nr, word, feedback):
+    def __init__(self, nr: int, word: str, feedback: str):
         self.nr = nr
         self.word = word
         self.feedback = feedback
