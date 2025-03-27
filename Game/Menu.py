@@ -12,7 +12,7 @@ class GameMenu:
         user_input = input("(y) Yes or (n) No : ")
 
         if user_input.lower() == "y":
-            self.wordle.game_play()
+            return self.wordle.game_play()
         
 
     def get_wordbank(self):

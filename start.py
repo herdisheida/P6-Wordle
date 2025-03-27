@@ -1,4 +1,4 @@
-from Menu import GameMenu
+from Game.Menu import GameMenu
 
 if __name__ == "__main__":
     game = GameMenu()
