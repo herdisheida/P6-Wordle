@@ -23,6 +23,6 @@ class WordBank:
     def add_word(self, word: str):
         """ Add a word to the word bank"""
         with open(self.WORD_BANK_FILE, mode="a") as file:
-            file.write(f"{word}\n")
-        self.words.append(word)
+            file.write(f"\n{word.upper()}")
+        self.words.append(word.upper())
         # TODO word check... maybe þurfum við?
