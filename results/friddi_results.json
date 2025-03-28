@@ -1,0 +1,31 @@
+[
+  {
+    "secret_word": "WHALE",
+    "result": {
+      "outcome": "Defeat",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "HELLO",
+        "feedback": "cccC-"
+      },
+      "2": {
+        "guess": "SHELL",
+        "feedback": "-CcCc"
+      },
+      "3": {
+        "guess": "FRELL",
+        "feedback": "--cCc"
+      },
+      "4": {
+        "guess": "PHELL",
+        "feedback": "-CcCc"
+      },
+      "5": {
+        "guess": "SKELL",
+        "feedback": "--cCc"
+      }
+    }
+  }
+]
