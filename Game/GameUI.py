@@ -1,11 +1,9 @@
-from ColorText import Color
-from pathlib import Path
-import json
 from Game.WordleGame import WordleGame
+from ColorText import Color
+
 
 class GameUI:
     GAME_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
-    RESULT_FOLDER = Path("results")
 
     def __init__(self, game: WordleGame):
         self.game = game
@@ -21,7 +19,7 @@ class GameUI:
                 print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
 
         self._display_result()
-        self._save_results()
+        self.game._save_results()
         self.game.reset()
 
     def _get_guess(self):
@@ -61,34 +59,3 @@ class GameUI:
             elif char == "-":
                 colored += f"{Color.RED.value}{char}{Color.RESET.value}"
         return colored
-
-    def _save_results(self):
-        """Save game results to file"""
-        username = input("Enter username: ") # LATER add this username in the menu section
-        file_path = self.RESULT_FOLDER / f"{username}_results.json"
-
-        data = {
-            "secret_word": self.game.secret_word,
-            "result": self.game.game_result,
-            "history": {
-                nr: {
-                    "guess": round.word,
-                    "feedback": round.feedback
-                }
-                for nr, round in self.game.game_history.items()
-            }
-        }
-
-        self.RESULT_FOLDER.mkdir(exist_ok=True)
-        
-        # get existing data and append new game to it
-        try:
-            with open(file_path, "r") as f:
-                all_games = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError):
-            all_games = []
-            
-        all_games.append(data)
-        
-        with open(file_path, "w") as f:
-            json.dump(all_games, f, indent=2)

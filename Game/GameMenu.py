@@ -3,15 +3,15 @@ from Game.GameUI import GameUI
 from pathlib import Path
 from ColorText import Color
 
-from WordBank.hash_map import WordBank
+from WordBank.WordBank import WordBank
 from Game.GameHistory import GameHistory
 
 class GameMenu:
     WORDBANK_FILE_PATH = Path("WordBank") / "wordbank.txt"
 
     def __init__(self):
-        self.round = None
         self.online = True
+        self.active_game = None
         
         self.word_bank = WordBank()
         self.game_history = GameHistory() # TODO
@@ -53,56 +53,50 @@ class GameMenu:
         """Initialize the game, set the word length and user max guesses"""
         print("\n------- Initalize Game ------")
 
-        while not self.round:
-            word_length = input("Choose word length: ")
-            if self.validate_word_length(word_length):
-                break
+        while not self.active_game:
+            try:
+                word_length = input("Choose word length: ")
+                secret_word = self._get_secret_word(word_length)
+            except ValueError as e:
+                print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
+                continue
         
-        while not self.round:
-            max_guess_count = input("Choose number of guesses: ")
-            if self.validate_guess_count(max_guess_count):
-                break
+            try:
+                max_guess_count = input("Choose number of guesses: ")
+                self.validate_guess_count(max_guess_count)
+            except ValueError as e:
+                print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
+                continue
 
-        secret_word = self.word_bank.get_random_word(length=word_length).upper()
-        secret_word = "hello" # LATER hardcode
-        self.round = WordleGame(secret_word, int(max_guess_count))
+            self.active_game = WordleGame(secret_word, int(max_guess_count))
 
 
-    def validate_word_length(self, user_input):
+    def _get_secret_word(self, word_length: int):
         """Validate the user input for word length"""
-        if not user_input.isdigit():
-            print(f"{Color.RED.value}Word length needs to be an integer{Color.RESET.value}\n")
-            return False
-        
-        # LATER check the longest and shortest word in the wordbank
-        shortest_word = 5
-        longest_word = 10
-        if shortest_word <= int(user_input) <= longest_word:
-            return True
-        print(f"{Color.RED.value}Word length needs to be between 5 and 10{Color.RESET.value}\n")
-        return False
+        if not word_length.isdigit():
+            raise ValueError("Word length needs to be an integer\n")
+        secret_word = self.word_bank.get_random_word(int(word_length))        
+        return secret_word.upper()
     
-    def validate_guess_count(self, user_input):
+    def validate_guess_count(self, guess_count: int):
         """Validate the user input for guess count"""
-        if not user_input.isdigit():
-            print(f"{Color.RED.value}Guess count needs to be an integer{Color.RESET.value}\n")
-            return False
-        if 1 <= int(user_input) <= 10:
-            return True
-        print(f"{Color.RED.value}Guess count needs to be between 1 and 10{Color.RESET.value}\n")
-        return False
-
+        if not guess_count.isdigit():
+            raise ValueError("Guess count needs to be an integer\n")
+        guess_count = int(guess_count)
+        if guess_count <= 0 or guess_count > 20:
+            raise ValueError("Guess count needs to be between 1 and 20\n")
+        return True
 
     def start_game(self):
         """Start the game"""
         print("\n------- Game Start ------")
-        print(f"Playing with {self.round.word_length}-letter word")
-        print(f"Number of guesses: {self.round.max_guesses}")
-        print(f"Secret word: {self.round.secret_word}")  # EYDA For debugging
+        print(f"Playing with {self.active_game.word_length}-letter word")
+        print(f"Number of guesses: {self.active_game.max_guesses}")
+        print(f"Secret word: {self.active_game.secret_word}")  # EYDA For debugging
         # self.round.game_play()
-        ui = GameUI(self.round)
+        ui = GameUI(self.active_game)
         ui.game_loop()
-        self.round = None # Reset the game
+        self.active_game = None # Reset the game
 
 
 

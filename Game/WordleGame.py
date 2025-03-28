@@ -1,8 +1,13 @@
 from Game.Guess import Guess
+from pathlib import Path
+import json
+
 
 class WordleGame:
+    RESULT_FOLDER = Path("results")
+
     def __init__(self, secret_word: str, max_guesses: int = 5):
-        self.secret_word = secret_word.upper()
+        self.secret_word = secret_word
         self.max_guesses = max_guesses
         self.word_length = len(secret_word)
 
@@ -61,6 +66,37 @@ class WordleGame:
 
     def _calculate_score(self):
         return (self.max_guesses - self.guess_count) ** 2
+
+    def _save_results(self):
+        """Save game results to file"""
+        username = input("Enter username: ") # LATER add this username in the menu section
+        file_path = self.RESULT_FOLDER / f"{username}_results.json"
+
+        data = {
+            "secret_word": self.secret_word,
+            "result": self.game_result,
+            "history": {
+                nr: {
+                    "guess": round.word,
+                    "feedback": round.feedback
+                }
+                for nr, round in self.game_history.items()
+            }
+        }
+
+        self.RESULT_FOLDER.mkdir(exist_ok=True)
+        
+        # get existing data and append new game to it
+        try:
+            with open(file_path, "r") as f:
+                all_games = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            all_games = []
+            
+        all_games.append(data)
+        
+        with open(file_path, "w") as f:
+            json.dump(all_games, f, indent=2)
 
     @property
     def is_game_over(self):

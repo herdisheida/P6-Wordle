@@ -7,3 +7,6 @@ __pycache__/ColorText.cpython-313.pyc
 Game/__pycache__/Guess.cpython-313.pyc
 Game/__pycache__/GameUI.cpython-313.pyc
 Game/__pycache__/WordleGame.cpython-313.pyc
+Game/__pycache__/GameMenu.cpython-313.pyc
+Game/__pycache__/GameHistory.cpython-313.pyc
+WordBank/__pycache__/WordBank.cpython-313.pyc
