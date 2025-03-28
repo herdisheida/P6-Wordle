@@ -1,0 +1,15 @@
+[
+  {
+    "secret_word": "DAB",
+    "result": {
+      "outcome": "Victory",
+      "score": 130
+    },
+    "history": {
+      "1": {
+        "guess": "DAB",
+        "feedback": "CCC"
+      }
+    }
+  }
+]

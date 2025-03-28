@@ -9,6 +9,10 @@ class GameUI:
         self.game = game
         self.history = history
 
+    def run(self):
+        """Run the game UI"""
+        self.game_loop()
+
     def game_loop(self):
         """Main game loop"""
         while not self.game.is_game_over:

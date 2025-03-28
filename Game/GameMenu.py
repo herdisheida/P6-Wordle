@@ -12,128 +12,110 @@ class GameMenu:
     def __init__(self):
         self.online = True
         self.active_game = None
-        
-        self.word_bank = WordBank()
 
-        # self.username = input("Enter username: ") # EYDA
-        # self.game_history = GameHistory(self.username)
         self.username = None
         self.game_history = None
 
+        self.word_bank = WordBank()
+
+
+    def _display_login(self):
+        """Handle user login flow"""
+        print("\n------- LOGIN -------")
+        print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}") # LATER looks weird
+
+        while self.online:
+            choice = input("\n(L)ogin | (Q)uit: ").lower()
+            if choice == "l":
+                self.hange_login()
+            elif choice == "q":
+                self.online = False
+            else:
+                self._display_error("Invalid input")
+
+    def hange_login(self) -> str:
+        """Authenticate user and initalize game history"""
+        self.username = self._get_valid_input("Enter username: ", self._validate_username)
+        self.game_history = GameHistory(self.username)
+        self.main_menu()
+    
     def _display_main_menu(self):
             """Display the main menu"""
-            print(f"\n------- {self.username.capitalize()}'s WORDLE -------")
-            print("(1) Play")
+            print(f"\n{Color.BLUE.value}------- {self.username.capitalize()}'s WORDLE -------{Color.END.value}")
+            print("(1) New Game")
             print("(2) See Game History")
-            print()
             print("(3) Logout")
             print("(q) Quit")
+
+    def main_menu(self):
+        """Main menu loop"""
+        while self.online:
+            self._display_main_menu()
+            choice = input("\nEnter: ").lower()
+
+            if choice == "1":
+                self._start_new_game()
+            elif choice == "2":
+                self.game_history.menu_loop()
+            
+            elif choice == "3":
+                return
+            elif choice == "q":
+                self.online = False
+            else:
+                self._display_error("Invalid input")
+
+    def _start_new_game(self):
+        """Configure and start a new game"""
+
+        try:
+            # configure game
+            word_length = self._get_valid_input("Enter word length: ", self._get_valid_num)
+            max_guess_count = self._get_valid_input("Enter number of guess attempts: ", self._get_valid_num)
+
+            # start game
+            print(f"\n{Color.BLUE.value}------- Game Start ------{Color.END.value}")
+            secret_word = self.word_bank.get_random_word(word_length)
+            print(f"Secret word: {Color.BLUE.value}{Color.UNDERLINE.value}{secret_word}{Color.END.value}") # EYDA DEBUG
+            self.active_game = WordleGame(secret_word, int(max_guess_count))
+            GameUI(self.active_game, self.game_history).run()
+
+        except ValueError as e:
+            self._display_error(str(e))
+        finally:
+            self.active_game = None
+
+    def _get_valid_num(self, num: int):
+        """Validate the user input for guess count"""
+        if not num.isdigit():
+            raise ValueError("Num needs to be an integer")
+        if int(num) < 1:
+            raise ValueError("Num must be greater than 0")
+        if int(num) > 20:
+            raise ValueError("Num too high (max 20)")
+        return int(num)
+
+    def _get_valid_input(self, prompt: str, validation_func: callable) -> str:
+        """Get valid input from user"""
+        while True: # FIX vtk hvort ég megi nota while True
+            user_input = input(prompt)
+            try:
+                if validation_func(user_input):
+                    return user_input
+            except ValueError as e:
+                self._display_error(str(e))
+
+    def _validate_username(self, username: str) -> bool:
+        """Validate the username"""
+        if not username:
+            raise ValueError("Username cannot be empty")
+        if len(username) > 20:
+            raise ValueError("Username too long (max 20 characters)")
+        return True
 
     def _display_error(self, message):
         """ Display error message in red """
         print(f"{Color.RED.value}{message}{Color.END.value}")
-
-    def login_loop(self):
-        """Login menu"""
-        self.username = None
-        self.game_history = None
-
-        print("\n------- LOGIN -------")
-        print("Welcome to Wordle!")
-
-        while self.online:
-            login_input = input("\nEnter (y) to login or (q) to quit: ").lower()
-
-            if login_input == "y":
-                self._switch_user()
-
-            elif login_input == "q":
-                self.online = False
-            else:
-                self._display_error("Invalid input")
-
-    def _switch_user(self) -> str:
-        """Switch user or create new user"""
-        while not self.username:
-            username = input("Enter username: ")
-            if not username:
-                self._display_error("Username cannot be empty")
-                continue
-            self.username = username
-        # Start and create game history
-        self.game_history = GameHistory(self.username)
-        self.main_loop()
-
-    def main_loop(self):
-        """Main menu loop"""
-        while self.online:
-
-            self._display_main_menu()
-
-            user_input = input("\nEnter: ").lower()
-
-            if user_input == "1":
-                self.configure_game()
-                self.start_game()
-            elif user_input == "2":
-                self.game_history.menu_loop()
-            
-            elif user_input == "3":
-                return self.login_loop()
-            elif user_input == "q":
-                self.online = False
-            else:
-                self._display_error("Invalid input")
-
-    def configure_game(self):
-        """Initialize the game, set the word length and user max guesses"""
-        print("\n------- Initalize Game ------")
-
-        while not self.active_game:
-            try:
-                word_length = input("Choose word length: ")
-                secret_word = self._get_secret_word(word_length)
-            except ValueError as e:
-                self._display_error(str(e))
-                continue
-        
-            try:
-                max_guess_count = input("Choose number of guess attempts: ")
-                self._validate_guess_count(max_guess_count)
-            except ValueError as e:
-                self._display_error(str(e))
-                continue
-
-            self.active_game = WordleGame(secret_word, int(max_guess_count))
-
-
-    def _get_secret_word(self, word_length: int):
-        """Validate the user input for word length"""
-        if not word_length.isdigit():
-            raise ValueError("Word length needs to be an integer\n")
-        secret_word = self.word_bank.get_random_word(int(word_length))
-        print(f"Secret word: {secret_word}") # EYDA DEBUG
-        return secret_word.upper()
-    
-    def _validate_guess_count(self, guess_count: int):
-        """Validate the user input for guess count"""
-        if not guess_count.isdigit():
-            raise ValueError("Guess count needs to be an integer\n")
-        guess_count = int(guess_count)
-        if guess_count <= 0 or guess_count > 20:
-            raise ValueError("Guess count needs to be between 1 and 20 (including 1 and 20)\n")
-        return True
-
-    def start_game(self):
-        """Start the game"""
-        print("\n------- Game Start ------")
-        print(f"Playing with {self.active_game.word_length}-letter word")
-        print(f"Number of guesses: {self.active_game.max_guesses}")
-        ui = GameUI(self.active_game, self.game_history)
-        ui.game_loop()
-        self.active_game = None # Reset the game
-
-
 
 # MORE REFINED SINGLE GAME - 30%
 # [x] User can input or select number of letters and guesses before the game begins - 5%
