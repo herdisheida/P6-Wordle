@@ -107,14 +107,14 @@ class GameHistory:
         file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
 
         data = {
-            "secret_word": self.secret_word,
-            "result": self.game_result,
+            "secret_word": secret_word,
+            "result": game_result,
             "history": {
                 nr: {
                     "guess": round.word,
                     "feedback": round.feedback
                 }
-                for nr, round in self.game_history.items()
+                for nr, round in game_history.items()
             }
         }
         
