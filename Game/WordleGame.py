@@ -1,6 +1,5 @@
 from Game.Guess import Guess
 from pathlib import Path
-import json
 
 
 class WordleGame:

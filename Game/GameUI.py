@@ -10,7 +10,6 @@ class GameUI:
         self.history = history
 
 
-
     def game_loop(self):
         """Main game loop"""
         while not self.game.is_game_over:
@@ -47,7 +46,7 @@ class GameUI:
         print(self.history.GAME_REPLAY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in self.game.game_history.items():
             feedback = self._colorize_feedback(round.feedback)
-            print(self.GAME_HISTORY_FORMAT.format(nr, round.word, feedback))
+            print(self.history.GAME_REPLAY_FORMAT.format(nr, round.word, feedback))
 
     def _colorize_feedback(self, feedback: str):
         """Colorize feedback string"""

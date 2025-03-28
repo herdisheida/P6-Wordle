@@ -14,10 +14,7 @@ class GameMenu:
         self.active_game = None
         
         self.word_bank = WordBank()
-        self.game_history = GameHistory() # TODO
-
-        # self.user = User()
-
+        self.game_history = GameHistory()
 
     def display_main_menu(self):
             """Display the main menu"""
@@ -91,7 +88,7 @@ class GameMenu:
         print("\n------- Game Start ------")
         print(f"Playing with {self.active_game.word_length}-letter word")
         print(f"Number of guesses: {self.active_game.max_guesses}")
-        print(f"Secret word: {self.active_game.secret_word}")  # EYDA For debugging
+        # print(f"Secret word: {self.active_game.secret_word}")  # EYDA For debugging
         # self.round.game_play()
         ui = GameUI(self.active_game, self.game_history)
         ui.game_loop()
