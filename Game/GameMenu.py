@@ -1,7 +1,7 @@
 from Game.WordleGame import WordleGame
 from Game.GameUI import GameUI
 from pathlib import Path
-from ColorText import Color
+from utilities.ColorText import Color
 
 from WordBank.WordBank import WordBank
 from Game.GameHistory import GameHistory

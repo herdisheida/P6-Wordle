@@ -1,6 +1,6 @@
 from Game.WordleGame import WordleGame
 from Game.GameHistory import GameHistory
-from ColorText import Color
+from utilities.ColorText import Color
 
 
 class GameUI:
@@ -8,7 +8,6 @@ class GameUI:
     def __init__(self, game: WordleGame, history: GameHistory):
         self.game = game
         self.history = history
-
 
     def game_loop(self):
         """Main game loop"""
@@ -45,20 +44,8 @@ class GameUI:
         print("\n---------- GAME HISTORY ----------")
         print(self.history.GAME_REPLAY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in self.game.game_history.items():
-            feedback = self._colorize_feedback(round.feedback)
+            feedback = Color._colorize_feedback(round.feedback)
             print(self.history.GAME_REPLAY_FORMAT.format(nr, round.word, feedback))
-
-    def _colorize_feedback(self, feedback: str):
-        """Colorize feedback string"""
-        colored = ""
-        for char in feedback:
-            if char == "C":
-                colored += f"{Color.GREEN.value}{char}{Color.RESET.value}"
-            elif char == "c":
-                colored += f"{Color.YELLOW.value}{char}{Color.RESET.value}"
-            elif char == "-":
-                colored += f"{Color.RED.value}{char}{Color.RESET.value}"
-        return colored
 
     def save_game(self):
         """Save game results to file"""

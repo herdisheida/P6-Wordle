@@ -1,4 +1,4 @@
-from ColorText import Color
+from utilities.ColorText import Color
 from Game.Guess import Guess
 from pathlib import Path
 import json

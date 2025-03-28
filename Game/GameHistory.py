@@ -1,4 +1,4 @@
-from ColorText import Color
+from utilities.ColorText import Color
 from pathlib import Path
 import json
 
@@ -13,7 +13,7 @@ class GameHistory:
 
         # create folder if it doesn't exist
         self.RESULTS_FOLDER.mkdir(exist_ok=True)
-        self.RESULT_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"        
+        self.RESULT_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"      
         
 
     def display_history_menu(self):
@@ -41,7 +41,6 @@ class GameHistory:
                 self.display_game_details(game_nr)
             elif user_input == "3":
                 self.display_statistics()
-                pass # TODO game statistics -- high score, average score, etc
             elif user_input == "b":
                 break
             else:
@@ -74,7 +73,9 @@ class GameHistory:
         print("\nGuesses:")
         print(self.GAME_REPLAY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in game["history"].items():
-            print(self.GAME_REPLAY_FORMAT.format(nr, round["guess"], round["feedback"]))
+            feedback = round["feedback"]
+            feedback = Color._colorize_feedback(feedback)
+            print(self.GAME_REPLAY_FORMAT.format(nr, round["guess"], feedback))
 
     def display_statistics(self):
         """Display game statistics"""
