@@ -36,7 +36,7 @@ class WordleGame:
         if feedback == "C" * self.word_length:
             self.game_result = {"result": "Victory", "score": self._calculate_score()}
         elif self.guess_count >= self.max_guesses:
-            self.game_result = {"result": "Defeat", "score": 0}
+            self.game_result = {"result": "Defeat", "score": self._calculate_score()}
             
         return feedback
 
@@ -65,7 +65,9 @@ class WordleGame:
         self.game_history[self.guess_count] = Guess(self.guess_count, guess, feedback)
 
     def _calculate_score(self):
-        return (self.max_guesses - self.guess_count) ** 2
+        """Calculate game score.
+        The score is higher the fewer guesses the player used and the longer the wordle word is"""
+        return (self.max_guesses - self.guess_count) * self.word_length
 
     def _save_results(self):
         """Save game results to file"""
