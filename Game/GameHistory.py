@@ -9,6 +9,7 @@ class GameHistory:
 
 
     def __init__(self):
+        self.username = input("Enter username: ")
         self.games = self.load_history()
 
     def display_history_menu(self):
@@ -89,11 +90,10 @@ class GameHistory:
     
     def load_history(self):
         """Load game history from file"""
-        username = input("Enter username: ") # LATER add this username in the menu section
-
+        
         # create folder if it doesn't exist
         self.RESULTS_FOLDER.mkdir(exist_ok=True)
-        file_path = self.RESULTS_FOLDER / f"{username}_results.json"
+        file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
 
         try:
             with open(file_path, "r") as f:
@@ -102,10 +102,9 @@ class GameHistory:
             all_games = []
         return all_games
 
-    def save_game(self, username: str, secret_word: str, game_result: dict, game_history: dict):
+    def save_game(self, secret_word: str, game_result: dict, game_history: dict):
         """Save game results to file"""
-        username = input("Enter username: ") # LATER add this username in the menu section
-        file_path = self.RESULTS_FOLDER / f"{username}_results.json"
+        file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
 
         data = {
             "secret_word": self.secret_word,

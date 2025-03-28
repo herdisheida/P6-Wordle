@@ -63,9 +63,7 @@ class GameUI:
 
     def save_game(self):
         """Save game results to file"""
-        username = input("Enter username: ")
         self.history.save_game(
-            username = username,
             secret_word = self.game.secret_word,
             game_result = self.game.game_result,
             game_history = self.game.game_history
