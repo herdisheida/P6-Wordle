@@ -12,14 +12,17 @@ class GameMenu:
     def __init__(self):
         self.online = True
         self.active_game = None
-
         self.username = None
         self.game_history = None
 
         self.word_bank = WordBank()
 
+    def run(self):
+        """Run the game menu"""
+        self._login()
+        print(f"\n{Color.BLUE.value}Goodbye!{Color.END.value}")
 
-    def _display_login(self):
+    def _login(self):
         """Handle user login flow"""
         print("\n------- LOGIN -------")
         print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}") # LATER looks weird
@@ -27,43 +30,42 @@ class GameMenu:
         while self.online:
             choice = input("\n(L)ogin | (Q)uit: ").lower()
             if choice == "l":
-                self.hange_login()
+                self._handle_login()
             elif choice == "q":
                 self.online = False
             else:
                 self._display_error("Invalid input")
 
-    def hange_login(self) -> str:
+    def _handle_login(self) -> str:
         """Authenticate user and initalize game history"""
         self.username = self._get_valid_input("Enter username: ", self._validate_username)
         self.game_history = GameHistory(self.username)
-        self.main_menu()
+        self._main_menu()
     
     def _display_main_menu(self):
             """Display the main menu"""
             print(f"\n{Color.BLUE.value}------- {self.username.capitalize()}'s WORDLE -------{Color.END.value}")
             print("(1) New Game")
             print("(2) See Game History")
-            print("(3) Logout")
-            print("(q) Quit")
+            print("(3) Add Word to Word Bank")
 
-    def main_menu(self):
+            print("(L) Logout")
+            print("(Q) Quit")
+
+    def _main_menu(self):
         """Main menu loop"""
         while self.online:
             self._display_main_menu()
             choice = input("\nEnter: ").lower()
 
-            if choice == "1":
-                self._start_new_game()
-            elif choice == "2":
-                self.game_history.menu_loop()
-            
-            elif choice == "3":
-                return
-            elif choice == "q":
-                self.online = False
-            else:
-                self._display_error("Invalid input")
+
+            match choice:
+                case "1": self._start_new_game()
+                case "2": self.game_history.menu_loop()
+                case "3": self.add_word_to_wordbank()
+                case "l": return # return to login
+                case "q": self.online = False
+                case _: self._display_error("Invalid input")
 
     def _start_new_game(self):
         """Configure and start a new game"""
