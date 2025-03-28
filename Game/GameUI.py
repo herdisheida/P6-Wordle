@@ -39,7 +39,7 @@ class GameUI:
         if self.game.game_result["result"] == "Victory":
             print(f"\n{Color.GREEN.value}VICTORY! Score: {self.game.game_result['score']}{Color.RESET.value}")
         else:
-            print(f"\n{Color.RED.value}DEFEAT! Word was: {self.game.secret_word}{Color.RESET.value}")
+            print(f"\n{Color.RED.value}GAME OVER! Word was: {self.game.secret_word}{Color.RESET.value}")
         self._print_history()
 
     def _print_history(self):

@@ -1,8 +1,10 @@
-# from Game.Wordle import Wordle
 from Game.WordleGame import WordleGame
 from Game.GameUI import GameUI
-from ColorText import Color
 from pathlib import Path
+from ColorText import Color
+
+from WordBank.hash_map import WordBank
+from Game.GameHistory import GameHistory
 
 class GameMenu:
     WORDBANK_FILE_PATH = Path("WordBank") / "wordbank.txt"
@@ -11,20 +13,30 @@ class GameMenu:
         self.round = None
         self.online = True
         
-        self.load_wordbank()
+        self.word_bank = WordBank()
+        self.game_history = GameHistory() # TODO
 
         # self.user = User()
 
-    def main_menu(self):
 
+    def display_menu(self):
+            """Display the main menu"""
+            print("\n------- WORDLE ------")
+            print("(1) Play")
+            print("(2) See Game History")
+            print("\n(q) Quit")
+
+    def main_loop(self):
+        """Main menu loop"""
+        self.load_wordbank()
         while self.online:
-            self.print_menu()
+            self.display_menu()
 
             user_input = input("\nEnter: ").lower()
 
             if user_input == "1":
                 self.configure_game()
-                self.play_game()
+                self.start_game()
 
             elif user_input == "2":
                 pass # TODO - See game history
@@ -35,11 +47,6 @@ class GameMenu:
             else:
                 print(f"{Color.RED.value}Invalid input{Color.RESET.value}")
         
-    def print_menu(self):
-            print("\n------- WORDLE ------")
-            print("(1) Play")
-            print("(2) See Game History")
-            print("\n(q) Quit")
 
 
     def configure_game(self):
@@ -56,7 +63,9 @@ class GameMenu:
             if self.validate_guess_count(max_guess_count):
                 break
 
-        self.round = WordleGame("HELLO", int(max_guess_count)) # LATER delete the default values
+        secret_word = self.word_bank.get_random_word(length=word_length).upper()
+        secret_word = "hello" # LATER hardcode
+        self.round = WordleGame(secret_word, int(max_guess_count))
 
 
     def validate_word_length(self, user_input):
@@ -84,7 +93,7 @@ class GameMenu:
         return False
 
 
-    def play_game(self):
+    def start_game(self):
         """Start the game"""
         print("\n------- Game Start ------")
         print(f"Playing with {self.round.word_length}-letter word")
@@ -94,6 +103,9 @@ class GameMenu:
         ui = GameUI(self.round)
         ui.game_loop()
         self.round = None # Reset the game
+
+
+
 
     def load_wordbank(self):
         """Create a data structure to store the words from the wordbank file"""
@@ -110,7 +122,7 @@ class GameMenu:
 # MORE REFINED SINGLE GAME - 30%
 # [x] User can input or select number of letters and guesses before the game begins - 5%
     # ○ Extends the "5 letters, 5 guesses" requirement
-# [ ] After finishing a game the user can select to quit or start a new game - 5%
+# [x] After finishing a game the user can select to quit or start a new game - 5%
 # [ ] Program stores word bank in a data structure - 5%
 # [ ] Program randomly selects word from word bank - 5%
 # [ ] The word bank is stored in and read from a file - 10%

@@ -1,4 +1,3 @@
-from ColorText import Color
 from Game.Guess import Guess
 
 class WordleGame:
