@@ -45,24 +45,24 @@ class GameMenu:
             login_input = input("\nEnter (y) to login or (q) to quit: ").lower()
 
             if login_input == "y":
-                self._fetch_username()
-                # Start and create game history
-                self.game_history = GameHistory(self.username)
-                self.main_loop()
+                self._switch_user()
 
             elif login_input == "q":
                 self.online = False
             else:
                 self._display_error("Invalid input")
 
-    def _fetch_username(self) -> str:
-        """Get username from user"""
+    def _switch_user(self) -> str:
+        """Switch user or create new user"""
         while not self.username:
             username = input("Enter username: ")
             if not username:
                 self._display_error("Username cannot be empty")
                 continue
             self.username = username
+        # Start and create game history
+        self.game_history = GameHistory(self.username)
+        self.main_loop()
 
     def main_loop(self):
         """Main menu loop"""
