@@ -21,7 +21,7 @@ class GameUI:
 
         self._display_result()
         self.save_game()
-        self.game.reset()
+        # self.game.reset() # LATER
 
     def _get_guess(self):
         """Get and validate user input"""
@@ -29,15 +29,21 @@ class GameUI:
 
     def _display_feedback(self, feedback: str):
         """Show colored feedback"""
-        print("Feedback: " + self._colorize_feedback(feedback))
+        print("Feedback: " + Color._colorize_feedback(feedback))
 
     def _display_result(self):
         """Show win/loss message"""
-        if self.game.game_result["outcome"] == "Victory":
-            print(f"\n{Color.GREEN.value}VICTORY! Score: {self.game.game_result['score']}{Color.END.value}")
-        else:
-            print(f"\n{Color.RED.value}GAME OVER! Word was: {self.game.secret_word}{Color.END.value}")
         self._print_history()
+        
+        if self.game.game_result["outcome"] == "Victory":
+            print(f"\n{Color.GREEN.value}{Color.BOLD.value}VICTORY!{Color.END.value}")
+            print(f"Score: {Color.BLUE.value}{self.game.game_result['score']}{Color.END.value}")
+        else:
+            print(f"\n{Color.RED.value}{Color.BOLD.value}GAME OVER!{Color.END.value}")
+            print(f"Word was: {Color.BLUE.value}{Color.UNDERLINE.value}{self.game.secret_word}{Color.END.value}")
+        
+        input(self.history.SCREEN_PAUSE)
+
 
     def _print_history(self):
         """Show guess history for game round"""

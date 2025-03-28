@@ -73,7 +73,8 @@ class GameMenu:
         """Validate the user input for word length"""
         if not word_length.isdigit():
             raise ValueError("Word length needs to be an integer\n")
-        secret_word = self.word_bank.get_random_word(int(word_length))        
+        secret_word = self.word_bank.get_random_word(int(word_length))
+        print(f"Secret word: {secret_word}") # EYDA DEBUG
         return secret_word.upper()
     
     def validate_guess_count(self, guess_count: int):
@@ -90,8 +91,6 @@ class GameMenu:
         print("\n------- Game Start ------")
         print(f"Playing with {self.active_game.word_length}-letter word")
         print(f"Number of guesses: {self.active_game.max_guesses}")
-        # print(f"Secret word: {self.active_game.secret_word}")  # EYDA For debugging
-        # self.round.game_play()
         ui = GameUI(self.active_game, self.game_history)
         ui.game_loop()
         self.active_game = None # Reset the game

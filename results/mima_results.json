@@ -73,5 +73,123 @@
         "feedback": "-c--c"
       }
     }
+  },
+  {
+    "secret_word": "AFK",
+    "result": {
+      "outcome": "Defeat",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "S\u00d3L",
+        "feedback": "---"
+      },
+      "2": {
+        "guess": "WAT",
+        "feedback": "-c-"
+      },
+      "3": {
+        "guess": "ACK",
+        "feedback": "C-C"
+      },
+      "4": {
+        "guess": "ASK",
+        "feedback": "C-C"
+      },
+      "5": {
+        "guess": "ALK",
+        "feedback": "C-C"
+      }
+    }
+  },
+  {
+    "secret_word": "SUS",
+    "result": {
+      "outcome": "Victory",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "AND",
+        "feedback": "---"
+      },
+      "2": {
+        "guess": "SIN",
+        "feedback": "C--"
+      },
+      "3": {
+        "guess": "BAN",
+        "feedback": "---"
+      },
+      "4": {
+        "guess": "TAN",
+        "feedback": "---"
+      },
+      "5": {
+        "guess": "EAR",
+        "feedback": "---"
+      },
+      "6": {
+        "guess": "DIR",
+        "feedback": "---"
+      },
+      "7": {
+        "guess": "SON",
+        "feedback": "C--"
+      },
+      "8": {
+        "guess": "SEN",
+        "feedback": "C--"
+      },
+      "9": {
+        "guess": "HIC",
+        "feedback": "---"
+      },
+      "10": {
+        "guess": "LIK",
+        "feedback": "---"
+      },
+      "11": {
+        "guess": "ZIK",
+        "feedback": "---"
+      },
+      "12": {
+        "guess": "MIC",
+        "feedback": "---"
+      },
+      "13": {
+        "guess": "SIN",
+        "feedback": "C--"
+      },
+      "14": {
+        "guess": "SSS",
+        "feedback": "CcC"
+      },
+      "15": {
+        "guess": "SOS",
+        "feedback": "C-C"
+      },
+      "16": {
+        "guess": "SDF",
+        "feedback": "C--"
+      },
+      "17": {
+        "guess": "SSS",
+        "feedback": "CcC"
+      },
+      "18": {
+        "guess": "SAS",
+        "feedback": "C-C"
+      },
+      "19": {
+        "guess": "SIS",
+        "feedback": "C-C"
+      },
+      "20": {
+        "guess": "SUS",
+        "feedback": "CCC"
+      }
+    }
   }
 ]

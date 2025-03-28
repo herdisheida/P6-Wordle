@@ -27,5 +27,18 @@
         "feedback": "CCCCC"
       }
     }
+  },
+  {
+    "secret_word": "DAB",
+    "result": {
+      "outcome": "Defeat",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "SON",
+        "feedback": "---"
+      }
+    }
   }
 ]
