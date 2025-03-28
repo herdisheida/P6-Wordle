@@ -19,3 +19,10 @@ class WordBank:
         if not filtered:
             raise ValueError("No word found with that length\n")
         return random.choice(filtered)
+    
+    def add_word(self, word: str):
+        """ Add a word to the word bank"""
+        with open(self.WORD_BANK_FILE, mode="a") as file:
+            file.write(f"{word}\n")
+        self.words.append(word)
+        # TODO word check... maybe þurfum við?
