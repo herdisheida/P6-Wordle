@@ -100,26 +100,13 @@ class GameMenu:
 
 
 
-
-    def load_wordbank(self):
-        """Create a data structure to store the words from the wordbank file"""
-        with open(self.WORDBANK_FILE_PATH, mode="r", encoding="utf-8") as file:
-            self.wordbank = file.readlines()
-
-    def get_word(self, word_length):
-        """Get a random word from the wordbank"""
-        # TODO
-        pass
-
-
-
 # MORE REFINED SINGLE GAME - 30%
 # [x] User can input or select number of letters and guesses before the game begins - 5%
     # ○ Extends the "5 letters, 5 guesses" requirement
 # [x] After finishing a game the user can select to quit or start a new game - 5%
-# [ ] Program stores word bank in a data structure - 5%
-# [ ] Program randomly selects word from word bank - 5%
-# [ ] The word bank is stored in and read from a file - 10%
+# [x] Program stores word bank in a data structure - 5%
+# [x] Program randomly selects word from word bank - 5%
+# [x] The word bank is stored in and read from a file - 10%
 
 # 3. CONNECTED SERIES OF GAMES - 30% (that makes 110%)
 # [ ] Keep track of wins and losses throughout the run (store in classes/variables) - 5%
