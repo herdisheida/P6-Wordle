@@ -1,7 +1,6 @@
 from Game.Guess import Guess
 from pathlib import Path
 import json
-from Game.GameHistory import GameHistory
 
 
 class WordleGame:
@@ -35,9 +34,9 @@ class WordleGame:
         self._save_guess(guess, feedback)
         
         if feedback == "C" * self.word_length:
-            self.game_result = {"result": "Victory", "score": self._calculate_score()}
+            self.game_result = {"outcome": "Victory", "score": self._calculate_score()}
         elif self.guess_count >= self.max_guesses:
-            self.game_result = {"result": "Defeat", "score": self._calculate_score()}
+            self.game_result = {"outcome": "Defeat", "score": self._calculate_score()}
             
         return feedback
 

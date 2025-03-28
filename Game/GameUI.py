@@ -4,7 +4,6 @@ from ColorText import Color
 
 
 class GameUI:
-    GAME_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
 
     def __init__(self, game: WordleGame, history: GameHistory):
         self.game = game
@@ -36,7 +35,7 @@ class GameUI:
 
     def _display_result(self):
         """Show win/loss message"""
-        if self.game.game_result["result"] == "Victory":
+        if self.game.game_result["outcome"] == "Victory":
             print(f"\n{Color.GREEN.value}VICTORY! Score: {self.game.game_result['score']}{Color.RESET.value}")
         else:
             print(f"\n{Color.RED.value}GAME OVER! Word was: {self.game.secret_word}{Color.RESET.value}")
@@ -45,7 +44,7 @@ class GameUI:
     def _print_history(self):
         """Show guess history for game round"""
         print("\n---------- GAME HISTORY ----------")
-        print(self.GAME_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
+        print(self.history.GAME_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in self.game.game_history.items():
             feedback = self._colorize_feedback(round.feedback)
             print(self.GAME_HISTORY_FORMAT.format(nr, round.word, feedback))

@@ -4,9 +4,18 @@ import json
 
 class GameHistory:
     RESULTS_FOLDER = Path("results")
+    GAME_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
 
     def __init__(self):
         self.games = self.load_history()
+
+    def display_history_menu(self):
+        """Display the history menu"""
+        print("\n------- GAME HISTORY ------")
+        print("(1) See all games")
+        print("(2) See game details")
+        print("(3) See game statistics")
+        print("\n(b) Back")
 
     def menu_loop(self):
         """History menu loop"""
@@ -15,7 +24,7 @@ class GameHistory:
             user_input = input("\nEnter: ").lower()
 
             if user_input == "1":
-                pass # TODO all games -- list of games, scores, etc
+                self.display_all_games() # TODO all games -- list of games, scores, etc
             elif user_input == "2":
                 pass # TODO game details -- guess history, feedback, etc
             elif user_input == "3":
@@ -25,13 +34,16 @@ class GameHistory:
             else:
                 print(f"{Color.RED.value}Invalid input{Color.RESET.value}")
 
-    def display_history_menu(self):
-        """Display the history menu"""
-        print("\n------- GAME HISTORY ------")
-        print("(1) See all games")
-        print("(2) See game details")
-        print("(3) See game statistics")
-        print("\n(b) Back")
+    def display_all_games(self):
+        """Display all games in history"""
+        if not self.game:
+            print("No games to display")
+            return
+        
+        print("\n------- ALL GAMES ------")
+        print(self.GAME_HISTORY_FORMAT.format("Nr", "Secret Word", "Outcome"))
+        for game in self.games:
+            print(game["secret_word"], game["result"]["outcome"])
 
 
     def load_history(self):
@@ -48,7 +60,6 @@ class GameHistory:
         except (FileNotFoundError, json.JSONDecodeError):
             all_games = []
         return all_games
-
 
     def save_game(self, username: str, secret_word: str, game_result: dict, game_history: dict):
         """Save game results to file"""
