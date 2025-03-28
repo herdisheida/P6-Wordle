@@ -1,9 +1,5 @@
 # THE WORDLE 
-*the game*
-
-## Author
-name: Herdís Heiða Jing Guðjohnsen \
-kt. 291005-3570
+*name: Herdís Heiða Jing Guðjohnsen*
 
 ## Getting Started  
 ### Prerequisites  
