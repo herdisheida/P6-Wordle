@@ -4,7 +4,9 @@ import json
 
 class GameHistory:
     RESULTS_FOLDER = Path("results")
-    GAME_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
+    GAME_REPLAY_FORMAT = " {0:<5}{1:<20}{2:<20}" # nr, guesses, feedback
+    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<20}{2:<20}{3:<10}" # nr, secret_word, outcome, score
+
 
     def __init__(self):
         self.games = self.load_history()
@@ -41,10 +43,9 @@ class GameHistory:
     def display_all_games(self):
         """Display all games in history"""        
         print("\n------- ALL GAMES ------")
-        print(self.GAME_HISTORY_FORMAT.format("Nr", "Secret Word", "Outcome"))
-        for game in self.games:
-            print(game["secret_word"], game["result"]["outcome"])
-
+        print(self.GAME_HISTORY_LIST_FORMAT.format("Nr", "Secret Word", "Outcome", "Score"))
+        for nr, game in enumerate(self.games, 1):
+            print(self.GAME_HISTORY_LIST_FORMAT.format(nr, game["secret_word"], game["result"]["outcome"], game["result"]["score"]))
 
     def load_history(self):
         """Load game history from file"""

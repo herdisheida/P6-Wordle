@@ -44,7 +44,7 @@ class GameUI:
     def _print_history(self):
         """Show guess history for game round"""
         print("\n---------- GAME HISTORY ----------")
-        print(self.history.GAME_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
+        print(self.history.GAME_REPLAY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in self.game.game_history.items():
             feedback = self._colorize_feedback(round.feedback)
             print(self.GAME_HISTORY_FORMAT.format(nr, round.word, feedback))
