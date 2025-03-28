@@ -1,12 +1,16 @@
 from Game.WordleGame import WordleGame
+from Game.GameHistory import GameHistory
 from ColorText import Color
 
 
 class GameUI:
     GAME_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"
 
-    def __init__(self, game: WordleGame):
+    def __init__(self, game: WordleGame, history: GameHistory):
         self.game = game
+        self.history = history
+
+
 
     def game_loop(self):
         """Main game loop"""
@@ -19,14 +23,12 @@ class GameUI:
                 print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
 
         self._display_result()
-        self.game._save_results()
+        self.save_game()
         self.game.reset()
 
     def _get_guess(self):
         """Get and validate user input"""
         return input("\nGuess: ").upper()
-        
-
 
     def _display_feedback(self, feedback: str):
         """Show colored feedback"""
@@ -59,3 +61,13 @@ class GameUI:
             elif char == "-":
                 colored += f"{Color.RED.value}{char}{Color.RESET.value}"
         return colored
+
+    def save_game(self):
+        """Save game results to file"""
+        username = input("Enter username: ")
+        self.history.save_game(
+            username = username,
+            secret_word = self.game.secret_word,
+            game_result = self.game.game_result,
+            game_history = self.game.game_history
+        )

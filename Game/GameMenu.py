@@ -19,34 +19,33 @@ class GameMenu:
         # self.user = User()
 
 
-    def display_menu(self):
+    def display_main_menu(self):
             """Display the main menu"""
             print("\n------- WORDLE ------")
             print("(1) Play")
             print("(2) See Game History")
             print("\n(q) Quit")
 
+    def display_error(self, message):
+        """ Display error message in red """
+        print(f"{Color.RED.value}{message}{Color.RESET.value}")
+
     def main_loop(self):
         """Main menu loop"""
-        self.load_wordbank()
         while self.online:
-            self.display_menu()
+            self.display_main_menu()
 
             user_input = input("\nEnter: ").lower()
 
             if user_input == "1":
                 self.configure_game()
                 self.start_game()
-
             elif user_input == "2":
-                pass # TODO - See game history
-            
+                self.game_history.menu_loop()
             elif user_input == "q":
                 self.online = False
-
             else:
-                print(f"{Color.RED.value}Invalid input{Color.RESET.value}")
-        
+                self.display_error("Invalid input")    
 
 
     def configure_game(self):
@@ -58,14 +57,14 @@ class GameMenu:
                 word_length = input("Choose word length: ")
                 secret_word = self._get_secret_word(word_length)
             except ValueError as e:
-                print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
+                self.display_error(str(e))
                 continue
         
             try:
                 max_guess_count = input("Choose number of guesses: ")
                 self.validate_guess_count(max_guess_count)
             except ValueError as e:
-                print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
+                self.display_error(str(e))
                 continue
 
             self.active_game = WordleGame(secret_word, int(max_guess_count))
@@ -94,7 +93,7 @@ class GameMenu:
         print(f"Number of guesses: {self.active_game.max_guesses}")
         print(f"Secret word: {self.active_game.secret_word}")  # EYDA For debugging
         # self.round.game_play()
-        ui = GameUI(self.active_game)
+        ui = GameUI(self.active_game, self.game_history)
         ui.game_loop()
         self.active_game = None # Reset the game
 
