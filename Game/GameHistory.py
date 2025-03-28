@@ -8,15 +8,17 @@ class GameHistory:
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<20}{2:<20}{3:<10}" # nr, secret_word, outcome, score
 
 
-    def __init__(self):
-        self.username = input("Enter username: ")
-        self.games = self.load_history()
+    def __init__(self, username: str):
+        self.username = username
+
+        # create folder if it doesn't exist
         self.RESULTS_FOLDER.mkdir(exist_ok=True)
-        self.RESULT_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"
+        self.RESULT_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"        
         
 
     def display_history_menu(self):
         """Display the history menu"""
+        # load game history
         print("\n------- GAME HISTORY ------")
         print("(1) See all games")
         print("(2) See game details")
@@ -25,6 +27,8 @@ class GameHistory:
 
     def menu_loop(self):
         """History menu loop"""
+        self.games = self.load_history()
+
         while self.games:
             self.display_history_menu()
 
@@ -93,12 +97,8 @@ class GameHistory:
     
     def load_history(self):
         """Load game history from file"""
-        
-        # create folder if it doesn't exist
-        file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
-
         try:
-            with open(file_path, "r") as f:
+            with open(self.RESULT_PATH, "r") as f:
                 all_games = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             all_games = []

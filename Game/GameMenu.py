@@ -14,7 +14,9 @@ class GameMenu:
         self.active_game = None
         
         self.word_bank = WordBank()
-        self.game_history = GameHistory()
+
+        self.username = input("Enter username: ")
+        self.game_history = GameHistory(self.username)
 
     def display_main_menu(self):
             """Display the main menu"""

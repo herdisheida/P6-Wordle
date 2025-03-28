@@ -1,0 +1,77 @@
+[
+  {
+    "secret_word": "TIKTOK",
+    "result": {
+      "outcome": "Victory",
+      "score": 24
+    },
+    "history": {
+      "1": {
+        "guess": "SMILED",
+        "feedback": "--c---"
+      },
+      "2": {
+        "guess": "MICKYS",
+        "feedback": "-C-c--"
+      },
+      "3": {
+        "guess": "STRING",
+        "feedback": "-c-c--"
+      },
+      "4": {
+        "guess": "TICKLE",
+        "feedback": "CC-c--"
+      },
+      "5": {
+        "guess": "TICKET",
+        "feedback": "CC-c-c"
+      },
+      "6": {
+        "guess": "TIKTOK",
+        "feedback": "CCCCCC"
+      }
+    }
+  },
+  {
+    "secret_word": "BAE",
+    "result": {
+      "outcome": "Defeat",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "CAR",
+        "feedback": "-C-"
+      }
+    }
+  },
+  {
+    "secret_word": "JOKER",
+    "result": {
+      "outcome": "Defeat",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "DONKS",
+        "feedback": "-C-c-"
+      },
+      "2": {
+        "guess": "BRICK",
+        "feedback": "-c--c"
+      },
+      "3": {
+        "guess": "KITCH",
+        "feedback": "c----"
+      },
+      "4": {
+        "guess": "STICK",
+        "feedback": "----c"
+      },
+      "5": {
+        "guess": "HELLO",
+        "feedback": "-c--c"
+      }
+    }
+  }
+]
