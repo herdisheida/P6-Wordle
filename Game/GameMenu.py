@@ -15,24 +15,60 @@ class GameMenu:
         
         self.word_bank = WordBank()
 
-        self.username = input("Enter username: ")
-        self.game_history = GameHistory(self.username)
+        # self.username = input("Enter username: ") # EYDA
+        # self.game_history = GameHistory(self.username)
+        self.username = None
+        self.game_history = None
 
-    def display_main_menu(self):
+    def _display_main_menu(self):
             """Display the main menu"""
             print("\n------- WORDLE ------")
             print("(1) Play")
             print("(2) See Game History")
-            print("\n(q) Quit")
+            print()
+            print("(3) Logout")
+            print("(q) Quit")
 
-    def display_error(self, message):
+    def _display_error(self, message):
         """ Display error message in red """
         print(f"{Color.RED.value}{message}{Color.END.value}")
+
+    def login_loop(self):
+        """Login menu"""
+        self.username = None
+        self.game_history = None
+
+        print("\n------- LOGIN -------")
+        print("Welcome to Wordle!")
+
+        while self.online:
+            login_input = input("\nEnter (y) to login or (q) to quit: ").lower()
+
+            if login_input == "y":
+                self._fetch_username()
+                # Start and create game history
+                self.game_history = GameHistory(self.username)
+                self.main_loop()
+
+            elif login_input == "q":
+                self.online = False
+            else:
+                self._display_error("Invalid input")
+
+    def _fetch_username(self) -> str:
+        """Get username from user"""
+        while not self.username:
+            username = input("Enter username: ")
+            if not username:
+                self._display_error("Username cannot be empty")
+                continue
+            self.username = username
 
     def main_loop(self):
         """Main menu loop"""
         while self.online:
-            self.display_main_menu()
+
+            self._display_main_menu()
 
             user_input = input("\nEnter: ").lower()
 
@@ -41,11 +77,13 @@ class GameMenu:
                 self.start_game()
             elif user_input == "2":
                 self.game_history.menu_loop()
+            
+            elif user_input == "3":
+                return self.login_loop()
             elif user_input == "q":
                 self.online = False
             else:
-                self.display_error("Invalid input")    
-
+                self._display_error("Invalid input")
 
     def configure_game(self):
         """Initialize the game, set the word length and user max guesses"""
@@ -56,14 +94,14 @@ class GameMenu:
                 word_length = input("Choose word length: ")
                 secret_word = self._get_secret_word(word_length)
             except ValueError as e:
-                self.display_error(str(e))
+                self._display_error(str(e))
                 continue
         
             try:
                 max_guess_count = input("Choose number of guess attempts: ")
-                self.validate_guess_count(max_guess_count)
+                self._validate_guess_count(max_guess_count)
             except ValueError as e:
-                self.display_error(str(e))
+                self._display_error(str(e))
                 continue
 
             self.active_game = WordleGame(secret_word, int(max_guess_count))
@@ -77,7 +115,7 @@ class GameMenu:
         print(f"Secret word: {secret_word}") # EYDA DEBUG
         return secret_word.upper()
     
-    def validate_guess_count(self, guess_count: int):
+    def _validate_guess_count(self, guess_count: int):
         """Validate the user input for guess count"""
         if not guess_count.isdigit():
             raise ValueError("Guess count needs to be an integer\n")
@@ -114,7 +152,7 @@ class GameMenu:
         # ■ # of games before loss (or total score of those games), etc.
 # [ ] Scores/highscores stored so that they live between runs of the program - 5%
 # [ ] Allow words to be added to the word bank (and file) through the program itself - 5%
-# [ ] Allow user to see their history of games/scores - 5%
+# [x] Allow user to see their history of games/scores - 5%
 # [ ] Allow save/profile for multiple users - 5%
     # ○ Students figure out how best to accomplish this
     # ○ Don't need password login, but switching/selecting users
