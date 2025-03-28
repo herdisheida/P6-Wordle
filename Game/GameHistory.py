@@ -32,6 +32,7 @@ class GameHistory:
                 game_nr = input("Enter game number: ")
                 self.display_game_details(game_nr)
             elif user_input == "3":
+                self.display_statistics()
                 pass # TODO game statistics -- high score, average score, etc
             elif user_input == "b":
                 break
@@ -67,6 +68,25 @@ class GameHistory:
         for nr, round in game["history"].items():
             print(self.GAME_REPLAY_FORMAT.format(nr, round["guess"], round["feedback"]))
 
+    def display_statistics(self):
+        """Display game statistics"""
+        print("\n------- GAME STATISTICS ------")
+        print(f"Total games: {len(self.games)}")
+        print(f"Total victories: {len([game for game in self.games if game['result']['outcome'] == 'Victory'])}")
+        print(f"Total defeats: {len([game for game in self.games if game['result']['outcome'] == 'Defeat'])}")
+        print(f"Average score: {self._calculate_average_score()}")
+        print(f"High score: {self._calculate_high_score()}")
+
+    def _calculate_average_score(self):
+        """Calculate and return average score for all games"""
+        total_score = sum([game["result"]["score"] for game in self.games])
+        avg = total_score / len(self.games)
+        return round(avg, 2)
+    
+    def _calculate_high_score(self):
+        """Calculate and return high score from all games"""
+        return max([game["result"]["score"] for game in self.games])
+    
     def load_history(self):
         """Load game history from file"""
         username = input("Enter username: ") # LATER add this username in the menu section

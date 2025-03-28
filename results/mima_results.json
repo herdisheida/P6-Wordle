@@ -3,7 +3,7 @@
     "secret_word": "HELLO",
     "result": {
       "outcome": "Victory",
-      "score": 0
+      "score": 10
     },
     "history": {
       "1": {
@@ -16,7 +16,7 @@
     "secret_word": "HELLO",
     "result": {
       "outcome": "Defeat",
-      "score": 0
+      "score": 20
     },
     "history": {
       "1": {
