@@ -22,7 +22,7 @@ class GameMenu:
 
     def _display_main_menu(self):
             """Display the main menu"""
-            print("\n------- WORDLE ------")
+            print(f"\n------- {self.username.capitalize()}'s WORDLE -------")
             print("(1) Play")
             print("(2) See Game History")
             print()
@@ -153,6 +153,6 @@ class GameMenu:
 # [ ] Scores/highscores stored so that they live between runs of the program - 5%
 # [ ] Allow words to be added to the word bank (and file) through the program itself - 5%
 # [x] Allow user to see their history of games/scores - 5%
-# [ ] Allow save/profile for multiple users - 5%
+# [x] Allow save/profile for multiple users - 5%
     # ○ Students figure out how best to accomplish this
     # ○ Don't need password login, but switching/selecting users

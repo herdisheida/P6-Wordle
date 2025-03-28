@@ -49,7 +49,7 @@ class GameHistory:
                 print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
         if not self.games:
-            print(f"{Color.RED.value}User hasn't played any games{Color.END.value}")
+            print(f"{Color.RED.value}User ({self.username}) hasn't played any games{Color.END.value}")
             input(self.SCREEN_PAUSE)
 
     def display_all_games(self):
