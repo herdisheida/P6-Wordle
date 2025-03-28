@@ -1,17 +1,16 @@
-# Project Title  
-*The Wordle*  
+# THE WORDLE 
+*EXPLAIN ! # TODO*  
 
-## 🚀 Getting Started  
-### Prerequisites  
-- List software/tools needed (e.g., Python 3.8+, Node.js, etc.).  
-- Dependencies (e.g., `pip install -r requirements.txt`).  
+## Author
+name: Herdís Heiða Jing Guðjohnsen
+kt. 291005-3570
 
+## Getting Started  
 ### Prerequisites  
 - Python 3.4+ (for `pathlib` support)  
 
-## Usage
+### Usage
 ```bash
-cd [/PA6_wordle]
+cd <your-project-folder>
 python3 start.py
 ```
-
