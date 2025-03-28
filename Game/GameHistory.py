@@ -19,8 +19,9 @@ class GameHistory:
 
     def menu_loop(self):
         """History menu loop"""
-        while True:
+        while self.games:
             self.display_history_menu()
+
             user_input = input("\nEnter: ").lower()
 
             if user_input == "1":
@@ -34,12 +35,11 @@ class GameHistory:
             else:
                 print(f"{Color.RED.value}Invalid input{Color.RESET.value}")
 
+        if not self.games:
+            print(f"{Color.RED.value}User hasn't played any games{Color.RESET.value}")
+
     def display_all_games(self):
-        """Display all games in history"""
-        if not self.game:
-            print("No games to display")
-            return
-        
+        """Display all games in history"""        
         print("\n------- ALL GAMES ------")
         print(self.GAME_HISTORY_FORMAT.format("Nr", "Secret Word", "Outcome"))
         for game in self.games:
@@ -51,8 +51,8 @@ class GameHistory:
         username = input("Enter username: ") # LATER add this username in the menu section
 
         # create folder if it doesn't exist
-        self.RESULT_FOLDER.mkdir(exist_ok=True)
-        file_path = self.RESULT_FOLDER / f"{username}_results.json"
+        self.RESULTS_FOLDER.mkdir(exist_ok=True)
+        file_path = self.RESULTS_FOLDER / f"{username}_results.json"
 
         try:
             with open(file_path, "r") as f:
@@ -64,7 +64,7 @@ class GameHistory:
     def save_game(self, username: str, secret_word: str, game_result: dict, game_history: dict):
         """Save game results to file"""
         username = input("Enter username: ") # LATER add this username in the menu section
-        file_path = self.RESULT_FOLDER / f"{username}_results.json"
+        file_path = self.RESULTS_FOLDER / f"{username}_results.json"
 
         data = {
             "secret_word": self.secret_word,
