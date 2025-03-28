@@ -21,11 +21,13 @@ class GameHistory:
         """Display the history menu"""
         # load game history
         print("\n------- GAME HISTORY -------")
-        print(f"User: {self.username}")
-        print("\n(1) See all games")
+        print(f"User: {self.username}\n")
+        
+        print("(1) See all games")
         print("(2) See game details")
         print("(3) See game statistics")
-        print("\n(b) Back")
+
+        print("\n(B) Back")
 
     def menu_loop(self):
         """History menu loop"""
