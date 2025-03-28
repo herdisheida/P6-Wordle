@@ -11,6 +11,9 @@ class GameHistory:
     def __init__(self):
         self.username = input("Enter username: ")
         self.games = self.load_history()
+        self.RESULTS_FOLDER.mkdir(exist_ok=True)
+        self.RESULT_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"
+        
 
     def display_history_menu(self):
         """Display the history menu"""
@@ -92,7 +95,6 @@ class GameHistory:
         """Load game history from file"""
         
         # create folder if it doesn't exist
-        self.RESULTS_FOLDER.mkdir(exist_ok=True)
         file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
 
         try:
@@ -104,7 +106,7 @@ class GameHistory:
 
     def save_game(self, secret_word: str, game_result: dict, game_history: dict):
         """Save game results to file"""
-        file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
+        # file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
 
         data = {
             "secret_word": secret_word,
@@ -121,6 +123,6 @@ class GameHistory:
         # get existing data and add new game to it
         all_games = self.load_history()
         all_games.append(data)
-        with open(file_path, "w") as f:
+        with open(self.RESULT_PATH, "w") as f:
             json.dump(all_games, f, indent=2)
     

@@ -58,7 +58,7 @@ class GameMenu:
                 continue
         
             try:
-                max_guess_count = input("Choose number of guesses: ")
+                max_guess_count = input("Choose number of guess attempts: ")
                 self.validate_guess_count(max_guess_count)
             except ValueError as e:
                 self.display_error(str(e))
