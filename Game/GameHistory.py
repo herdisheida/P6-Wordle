@@ -4,9 +4,10 @@ import json
 
 class GameHistory:
     RESULTS_FOLDER = Path("results")
-    GAME_REPLAY_FORMAT = " {0:<5}{1:<20}{2:<20}" # nr, guesses, feedback
-    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<20}{2:<20}{3:<10}" # nr, secret_word, outcome, score
+    GUESS_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}" # nr, guesses, feedback
+    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
 
+    SCREEN_PAUSE = "\nEnter to continue..."
 
     def __init__(self, username: str):
         self.username = username
@@ -19,8 +20,9 @@ class GameHistory:
     def display_history_menu(self):
         """Display the history menu"""
         # load game history
-        print("\n------- GAME HISTORY ------")
-        print("(1) See all games")
+        print("\n------- GAME HISTORY -------")
+        print(f"User: {self.username}")
+        print("\n(1) See all games")
         print("(2) See game details")
         print("(3) See game statistics")
         print("\n(b) Back")
@@ -48,13 +50,20 @@ class GameHistory:
 
         if not self.games:
             print(f"{Color.RED.value}User hasn't played any games{Color.RESET.value}")
+            input(self.SCREEN_PAUSE)
 
     def display_all_games(self):
         """Display all games in history"""        
-        print("\n------- ALL GAMES ------")
-        print(self.GAME_HISTORY_LIST_FORMAT.format("Nr", "Secret Word", "Outcome", "Score"))
+        print("\n----------- ALL GAMES ----------")
+        print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Outcome"))
         for nr, game in enumerate(self.games, 1):
-            print(self.GAME_HISTORY_LIST_FORMAT.format(nr, game["secret_word"], game["result"]["outcome"], game["result"]["score"]))
+            # colorize outcome
+            outcome = game["result"]["outcome"]
+            color = Color.GREEN.value if outcome == "Victory" else Color.RED.value
+            colored_outcome = f"{color}{outcome}{Color.RESET.value}"
+
+            print(self.GAME_HISTORY_LIST_FORMAT.format(nr, game["result"]["score"], game["secret_word"], colored_outcome))
+        input(self.SCREEN_PAUSE)
 
     def display_game_details(self, game_nr: int):
         """Display details for a specific game"""
@@ -70,12 +79,12 @@ class GameHistory:
         print(f"Result: {game['result']['outcome']}")   
         print(f"Score: {game['result']['score']}")
 
-        print("\nGuesses:")
-        print(self.GAME_REPLAY_FORMAT.format("Nr", "Guess", "Feedback"))
+        print("\nGame rounds:")
+        print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in game["history"].items():
-            feedback = round["feedback"]
-            feedback = Color._colorize_feedback(feedback)
-            print(self.GAME_REPLAY_FORMAT.format(nr, round["guess"], feedback))
+            print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color._colorize_feedback(round["feedback"])))
+
+        input(self.SCREEN_PAUSE)
 
     def display_statistics(self):
         """Display game statistics"""
@@ -85,6 +94,8 @@ class GameHistory:
         print(f"Total defeats: {len([game for game in self.games if game['result']['outcome'] == 'Defeat'])}")
         print(f"Average score: {self._calculate_average_score()}")
         print(f"High score: {self._calculate_high_score()}")
+
+        input(self.SCREEN_PAUSE)
 
     def _calculate_average_score(self):
         """Calculate and return average score for all games"""
@@ -107,8 +118,6 @@ class GameHistory:
 
     def save_game(self, secret_word: str, game_result: dict, game_history: dict):
         """Save game results to file"""
-        # file_path = self.RESULTS_FOLDER / f"{self.username}_results.json"
-
         data = {
             "secret_word": secret_word,
             "result": game_result,

@@ -5,6 +5,7 @@ class Color(Enum):
     YELLOW = "\033[33m"
     BLUE = "\033[34m"
     RESET = "\033[0m"
+    BOLD = '\033[1m'
 
     @staticmethod
     def _colorize_feedback(feedback: str):
