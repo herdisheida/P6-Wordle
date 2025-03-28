@@ -27,9 +27,10 @@ class GameHistory:
             user_input = input("\nEnter: ").lower()
 
             if user_input == "1":
-                self.display_all_games() # TODO all games -- list of games, scores, etc
+                self.display_all_games()
             elif user_input == "2":
-                pass # TODO game details -- guess history, feedback, etc
+                game_nr = input("Enter game number: ")
+                self.display_game_details(game_nr)
             elif user_input == "3":
                 pass # TODO game statistics -- high score, average score, etc
             elif user_input == "b":
@@ -46,6 +47,25 @@ class GameHistory:
         print(self.GAME_HISTORY_LIST_FORMAT.format("Nr", "Secret Word", "Outcome", "Score"))
         for nr, game in enumerate(self.games, 1):
             print(self.GAME_HISTORY_LIST_FORMAT.format(nr, game["secret_word"], game["result"]["outcome"], game["result"]["score"]))
+
+    def display_game_details(self, game_nr: int):
+        """Display details for a specific game"""
+        try:
+            game_nr = int(game_nr) - 1
+            game = self.games[game_nr]
+        except (IndexError, ValueError):
+            print(f"{Color.RED.value}Invalid game number{Color.RESET.value}")
+            return
+        
+        print("\n------- GAME DETAILS ------")
+        print(f"Secret Word: {game['secret_word']}")
+        print(f"Result: {game['result']['outcome']}")   
+        print(f"Score: {game['result']['score']}")
+
+        print("\nGuesses:")
+        print(self.GAME_REPLAY_FORMAT.format("Nr", "Guess", "Feedback"))
+        for nr, round in game["history"].items():
+            print(self.GAME_REPLAY_FORMAT.format(nr, round["guess"], round["feedback"]))
 
     def load_history(self):
         """Load game history from file"""
