@@ -30,15 +30,15 @@ class WordleGame():
             print(self.highlight_feedback(feedback))
 
             if self.detect_victory(feedback):
-                print(f"\n{Color.GREEN.value}VICTORY!{Color.RESET.value}")
+                print(f"\n{Color.GREEN.value}VICTORY!{Color.END.value}")
                 score = (self.max_guesses - self.guess_count) ^ 2
-                print(f"Score: {Color.BLUE.value}{score}{Color.RESET.value}")
+                print(f"Score: {Color.BLUE.value}{score}{Color.END.value}")
                 self.game_result = {"result": "Victory", "score": score}
             
             elif self.detect_defeat():
-                print(f"\n{Color.RED.value}YOU LOSE!{Color.RESET.value}")
-                print(f"Score: {Color.BLUE.value}0{Color.RESET.value}")
-                print(f"The word was: {Color.BLUE.value}{self.secret_word}{Color.RESET.value}")
+                print(f"\n{Color.RED.value}YOU LOSE!{Color.END.value}")
+                print(f"Score: {Color.BLUE.value}0{Color.END.value}")
+                print(f"The word was: {Color.BLUE.value}{self.secret_word}{Color.END.value}")
                 self.game_result = {"result": "DEFEAT", "score": 0}
         
         self.print_game_history()
@@ -55,10 +55,10 @@ class WordleGame():
     def validate_guess(self, guess: str):
         """Checks if the guess is formatted correctly"""
         if not guess.isalpha():
-            print(f"{Color.RED.value}Guess needs to be string{Color.RESET.value}")
+            print(f"{Color.RED.value}Guess needs to be string{Color.END.value}")
             return False
         if len(guess) != self.word_length:
-            print(f"{Color.RED.value}Guess needs to have {len(self.secret_word)} letters{Color.RESET.value}")
+            print(f"{Color.RED.value}Guess needs to have {len(self.secret_word)} letters{Color.END.value}")
             return False
         return True
 
@@ -97,11 +97,11 @@ class WordleGame():
         colored_feedback = ""
         for char in feedback:
             if char == "C":
-                colored_feedback += f"{Color.GREEN.value}{char}{Color.RESET.value}"
+                colored_feedback += f"{Color.GREEN.value}{char}{Color.END.value}"
             elif char == "c":
-                colored_feedback += f"{Color.YELLOW.value}{char}{Color.RESET.value}"
+                colored_feedback += f"{Color.YELLOW.value}{char}{Color.END.value}"
             elif char == "-":
-                colored_feedback += f"{Color.RED.value}{char}{Color.RESET.value}"
+                colored_feedback += f"{Color.RED.value}{char}{Color.END.value}"
         return colored_feedback
 
 

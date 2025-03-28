@@ -4,7 +4,7 @@ class Color(Enum):
     GREEN = "\033[32m"
     YELLOW = "\033[33m"
     BLUE = "\033[34m"
-    RESET = "\033[0m"
+    END = "\033[0m"
     BOLD = '\033[1m'
 
     @staticmethod
@@ -13,9 +13,9 @@ class Color(Enum):
         colored = ""
         for char in feedback:
             if char == "C":
-                colored += f"{Color.GREEN.value}{char}{Color.RESET.value}"
+                colored += f"{Color.GREEN.value}{char}{Color.END.value}"
             elif char == "c":
-                colored += f"{Color.YELLOW.value}{char}{Color.RESET.value}"
+                colored += f"{Color.YELLOW.value}{char}{Color.END.value}"
             elif char == "-":
-                colored += f"{Color.RED.value}{char}{Color.RESET.value}"
+                colored += f"{Color.RED.value}{char}{Color.END.value}"
         return colored

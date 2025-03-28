@@ -27,7 +27,7 @@ class GameMenu:
 
     def display_error(self, message):
         """ Display error message in red """
-        print(f"{Color.RED.value}{message}{Color.RESET.value}")
+        print(f"{Color.RED.value}{message}{Color.END.value}")
 
     def main_loop(self):
         """Main menu loop"""

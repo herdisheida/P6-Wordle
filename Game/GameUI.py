@@ -17,7 +17,7 @@ class GameUI:
                 feedback = self.game.submit_guess(guess)
                 self._display_feedback(feedback)
             except ValueError as e:
-                print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
+                print(f"{Color.RED.value}{str(e)}{Color.END.value}")
 
         self._display_result()
         self.save_game()
@@ -34,9 +34,9 @@ class GameUI:
     def _display_result(self):
         """Show win/loss message"""
         if self.game.game_result["outcome"] == "Victory":
-            print(f"\n{Color.GREEN.value}VICTORY! Score: {self.game.game_result['score']}{Color.RESET.value}")
+            print(f"\n{Color.GREEN.value}VICTORY! Score: {self.game.game_result['score']}{Color.END.value}")
         else:
-            print(f"\n{Color.RED.value}GAME OVER! Word was: {self.game.secret_word}{Color.RESET.value}")
+            print(f"\n{Color.RED.value}GAME OVER! Word was: {self.game.secret_word}{Color.END.value}")
         self._print_history()
 
     def _print_history(self):

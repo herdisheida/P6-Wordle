@@ -46,10 +46,10 @@ class GameHistory:
             elif user_input == "b":
                 break
             else:
-                print(f"{Color.RED.value}Invalid input{Color.RESET.value}")
+                print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
         if not self.games:
-            print(f"{Color.RED.value}User hasn't played any games{Color.RESET.value}")
+            print(f"{Color.RED.value}User hasn't played any games{Color.END.value}")
             input(self.SCREEN_PAUSE)
 
     def display_all_games(self):
@@ -60,7 +60,7 @@ class GameHistory:
             # colorize outcome
             outcome = game["result"]["outcome"]
             color = Color.GREEN.value if outcome == "Victory" else Color.RED.value
-            colored_outcome = f"{color}{outcome}{Color.RESET.value}"
+            colored_outcome = f"{color}{outcome}{Color.END.value}"
 
             print(self.GAME_HISTORY_LIST_FORMAT.format(nr, game["result"]["score"], game["secret_word"], colored_outcome))
         input(self.SCREEN_PAUSE)
@@ -71,7 +71,7 @@ class GameHistory:
             game_nr = int(game_nr) - 1
             game = self.games[game_nr]
         except (IndexError, ValueError):
-            print(f"{Color.RED.value}Invalid game number{Color.RESET.value}")
+            print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
         
         print("\n------- GAME DETAILS ------")
