@@ -1,0 +1,19 @@
+[
+  {
+    "secret_word": "HELLO",
+    "result": {
+      "result": "Victory",
+      "score": 64
+    },
+    "history": {
+      "1": {
+        "guess": "GILLA",
+        "feedback": "--CC-"
+      },
+      "2": {
+        "guess": "HELLO",
+        "feedback": "CCCCC"
+      }
+    }
+  }
+]

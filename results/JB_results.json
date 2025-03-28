@@ -1,0 +1,15 @@
+[
+  {
+    "secret_word": "HELLO",
+    "result": {
+      "result": "Victory",
+      "score": 0
+    },
+    "history": {
+      "1": {
+        "guess": "HELLO",
+        "feedback": "CCCCC"
+      }
+    }
+  }
+]

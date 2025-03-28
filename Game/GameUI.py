@@ -13,12 +13,12 @@ class GameUI:
     def game_loop(self):
         """Main game loop"""
         while not self.game.is_game_over:
+            guess = self._get_guess()
             try:
-                guess = self._get_guess()
                 feedback = self.game.submit_guess(guess)
                 self._display_feedback(feedback)
             except ValueError as e:
-                print(f"{Color.RED}{str(e)}{Color.RESET}")
+                print(f"{Color.RED.value}{str(e)}{Color.RESET.value}")
 
         self._display_result()
         self._save_results()
@@ -26,12 +26,9 @@ class GameUI:
 
     def _get_guess(self):
         """Get and validate user input"""
-        while True:
-            guess = input("\nGuess: ").strip().upper()
-            valid, msg = self.game.validate_guess(guess)
-            if valid:
-                return guess
-            print(f"{Color.RED}{msg}{Color.RESET}")
+        return input("\nGuess: ").upper()
+        
+
 
     def _display_feedback(self, feedback: str):
         """Show colored feedback"""

@@ -87,7 +87,7 @@ class GameMenu:
     def play_game(self):
         """Start the game"""
         print("\n------- Game Start ------")
-        print(f"\nPlaying with {self.round.word_length}-letter word")
+        print(f"Playing with {self.round.word_length}-letter word")
         print(f"Number of guesses: {self.round.max_guesses}")
         print(f"Secret word: {self.round.secret_word}")  # EYDA For debugging
         # self.round.game_play()

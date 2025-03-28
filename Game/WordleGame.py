@@ -1,5 +1,4 @@
-from pathlib import Path
-import json
+from ColorText import Color
 from Game.Guess import Guess
 
 class WordleGame:
@@ -22,7 +21,6 @@ class WordleGame:
 
     def submit_guess(self, guess: str):
         """Process a guess and return feedback"""
-        guess = guess.upper()
         valid, msg = self.validate_guess(guess)
         if not valid:
             raise ValueError(msg)
