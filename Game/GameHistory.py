@@ -98,8 +98,8 @@ class GameHistory:
     def load_history(self):
         """Load game history from file"""
         try:
-            with open(self.RESULT_PATH, "r") as f:
-                all_games = json.load(f)
+            with open(self.RESULT_PATH, "r") as file:
+                all_games = json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             all_games = []
         return all_games
@@ -123,6 +123,6 @@ class GameHistory:
         # get existing data and add new game to it
         all_games = self.load_history()
         all_games.append(data)
-        with open(self.RESULT_PATH, "w") as f:
-            json.dump(all_games, f, indent=2)
+        with open(self.RESULT_PATH, "w") as file:
+            json.dump(all_games, file, indent=2)
     
