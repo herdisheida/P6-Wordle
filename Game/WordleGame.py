@@ -33,9 +33,9 @@ class WordleGame:
         self._save_guess(guess, feedback)
         
         if feedback == "C" * self.word_length:
-            self.game_result = {"outcome": "Victory", "score": self._calculate_score()}
+            self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")}
         elif self.guess_count >= self.max_guesses:
-            self.game_result = {"outcome": "Defeat", "score": self._calculate_score()}
+            self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")}
             
         return feedback
 
@@ -63,10 +63,16 @@ class WordleGame:
         """Store guess in history"""
         self.game_history[self.guess_count] = Guess(self.guess_count, guess, feedback)
 
-    def _calculate_score(self):
+    def _calculate_score(self, outcome: str):
         """Calculate game score.
         The score is higher the fewer guesses the player used and the longer the wordle word is"""
-        return (self.max_guesses - self.guess_count) * self.word_length
+        guesses_left = self.max_guesses - self.guess_count
+        if outcome == "Victory":            
+            if guesses_left == 0:
+                return 1
+            else:
+                return self.word_length * guesses_left
+        return -1 # Defeat
 
     @property
     def is_game_over(self):

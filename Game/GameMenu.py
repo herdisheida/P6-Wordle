@@ -83,7 +83,7 @@ class GameMenu:
             raise ValueError("Guess count needs to be an integer\n")
         guess_count = int(guess_count)
         if guess_count <= 0 or guess_count > 20:
-            raise ValueError("Guess count needs to be between 1 and 20\n")
+            raise ValueError("Guess count needs to be between 1 and 20 (including 1 and 20)\n")
         return True
 
     def start_game(self):
