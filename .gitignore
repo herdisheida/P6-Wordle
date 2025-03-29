@@ -93,3 +93,5 @@ ui_layer/__pycache__/GameMenu.cpython-313.pyc
 ui_layer/__pycache__/GameUI.cpython-313.pyc
 storage_layer/__pycache__/GameHistory.cpython-313.pyc
 logic_layer/__pycache__/WordleGame.cpython-313.pyc
+ui_layer/__pycache__/GameUI.cpython-313.pyc
+ui_layer/__pycache__/GameMenu.cpython-313.pyc

@@ -5,7 +5,7 @@ class GameSeries:
 
         self.series_list = [] # list of WordleGame objects
         self.total_score = 0
-        self.curr_sreak = 0
+        self.curr_streak = 0
         self.longest_streak = 0
 
     def add_game(self, game: dict):
