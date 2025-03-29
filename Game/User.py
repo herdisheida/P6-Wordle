@@ -1,6 +1,8 @@
 from pathlib import Path
 import json
 
+
+# EYDA nota ekki klasa fyrir user
 class User:
     RESULT_FOLDER = Path("results")
 

@@ -157,8 +157,28 @@ class GameMenu:
         # ■ length of word
         # ■ # of games before loss (or total score of those games), etc.
 # [ ] Scores/highscores stored so that they live between runs of the program - 5%
-# [ ] Allow words to be added to the word bank (and file) through the program itself - 5%
+# [x] Allow words to be added to the word bank (and file) through the program itself - 5%
 # [x] Allow user to see their history of games/scores - 5%
 # [x] Allow save/profile for multiple users - 5%
     # ○ Students figure out how best to accomplish this
     # ○ Don't need password login, but switching/selecting users
+
+
+
+
+# TODO 'connected' series of games (not singular instance)
+    # add calass variables:
+        # wins
+        # losses
+        # scores ( scoring series of games --- breyta kerfinu ugghhh)
+        # high score
+        # games played
+
+    # FIX :
+        # user see history games/scores -- lookar öðruvísi í series of games
+        # let user choose to continue playing game:
+            # if played 1's = single game instance, else = series of connected games
+
+
+# IDEAS
+    # make class for SeriesOfGames, save stuff their...? 
