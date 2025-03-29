@@ -26,8 +26,6 @@ class GameUI:
                 continue
             
         self._display_result()
-        # self._save_game_series() # EYDA
-        # self.games.reset_game() # EYDA reset game (þarf ekki því ég bí alltaf til nýtt game object)
 
     def _get_guess(self):
         """Get and validate user input"""
@@ -58,15 +56,3 @@ class GameUI:
         for nr, round in self.game.guess_history.items():
             feedback = Color.colorize_feedback(round.feedback)
             print(self.history.GUESS_HISTORY_FORMAT.format(nr, round.word, feedback))
-
-    def _save_game(self): # EYDA old save game
-        """Trigger saving game"""
-        self.history.save_game_series(
-            secret_word = self.game.secret_word,
-            game_result = self.game.game_result,
-            game_history = self.game.guess_history
-        )
-
-    def _save_game_series(self): # EYDA not ekki lengur
-        """Trigger saving game"""
-        self.history.save_game_series(self.game.game_series)

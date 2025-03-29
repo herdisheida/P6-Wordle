@@ -22,7 +22,7 @@ class GameMenu:
         """Handle user login flow"""
         while self.online:
             print("\n------- LOGIN -------")
-            print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}") # LATER UI weird
+            print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}")
             choice = input("\n(L)ogin | (Q)uit: ").lower()
             match choice:
                 case "l": self._handle_login()
@@ -68,28 +68,25 @@ class GameMenu:
         max_guess_count = int(self._get_valid_input("Enter number of guess attempts: ", self._get_valid_attempts))
         series = GameSeries(word_length, max_guess_count)
 
-        while True: # TODO breya while true
+        while self.online:
             print(f"\n{Color.BLUE.value} -- New Game -- {Color.END.value}")
         
             try:
                 # configure game
                 secret_word = self.word_bank.get_random_word(word_length)
-
-                # secret_word = "HELLO" # EYDA debug
+                secret_word = "HELLO" # EYDA debug
 
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
-                GameUI(active_game, series, self.game_history).run() # FIX vtk hvort ég ætli að hafa game_history sem argument
+                GameUI(active_game, series, self.game_history).run()
                 series.add_game(active_game)
 
                 if not self._continue_playing():
                     break
-
             except ValueError as e:
                 self._display_error(str(e))
-        
+
         self.game_history.save_game_series(series)
-            
 
     def _continue_playing(self):
         """Check if user wants to keep playing"""
@@ -173,20 +170,18 @@ class GameMenu:
 # [x] User can input or select number of letters and guesses before the game begins - 5%
     # ○ Extends the "5 letters, 5 guesses" requirement
 # [x] After finishing a game the user can select to quit or start a new game - 5%
-        # TODO i can only let them play again, not continue the game...
 # [x] Program stores word bank in a data structure - 5%
 # [x] Program randomly selects word from word bank - 5%
 # [x] The word bank is stored in and read from a file - 10%
 
 # 3. CONNECTED SERIES OF GAMES - 30% (that makes 110%)
 # [x] Keep track of wins and losses throughout the run (store in classes/variables) - 5%
-        # TODO i only have that in a file
 # [x] Find a way to score series of games and keep track of high scores - 5%
     # ○ Total scores can for example be affected by (but not limited by):
         # ■ # of wrong guesses per word
         # ■ length of word
         # ■ # of games before loss (or total score of those games), etc.
-# [ ] Scores/highscores stored so that they live between runs of the program - 5%
+# [x] Scores/highscores stored so that they live between runs of the program - 5%
 # [x] Allow words to be added to the word bank (and file) through the program itself - 5%
 # [x] Allow user to see their history of games/scores - 5%
 # [x] Allow save/profile for multiple users - 5%
@@ -199,7 +194,6 @@ class GameMenu:
 # TODO 'connected' series of games (not singular instance)
     # add calass variables:
         # [x] scores ( scoring series of games --- breyta kerfinu ugghhh)
-        # [ ] games played
 
     # FIX :
         # [x] user see history games/scores -- lookar öðruvísi í series of games

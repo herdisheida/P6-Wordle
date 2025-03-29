@@ -3,30 +3,21 @@ from storage_layer.GameHistory_storage import GameHistory_Storage
 
 class GameHistoryUI:
     """Class to handle game history user interface"""
-    # RESULTS_FOLDER = Path("./storage_layer/results")
-
-    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<20}{2:<20}" # nr, guesses, feedback
-    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
+    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<20}{2:<20}" # guess nr, guesses, feedback
+    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # series nr, score, secret_word, result
     SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
     def __init__(self, username: str):
         self.username = username
         self.storage = GameHistory_Storage(username)
 
-        # create folder if it doesn't exist
-        # self.RESULTS_FOLDER.mkdir(exist_ok=True) # EYDA þarf þetta ?
-        # self.RESULT_FILE_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"      
-
-
     def display_history_menu(self):
         """Display the history menu"""
         print("\n------- GAME HISTORY -------")
         print(f"User: {self.username}\n")
-
         print("(1) See all games")
         print("(2) See game details")
         print("(3) See game statistics")
-
         print("\n(B) Back")
 
     def history_menu(self):
@@ -51,19 +42,23 @@ class GameHistoryUI:
     def display_all_games(self):
         """Display all games in history"""        
         print("\n----------- ALL GAMES ----------")
+        print(f"Total Series: {len(self.series_list)}\n")
+
         print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Result"))
 
         for series_nr, games in enumerate(self.series_list, 1):
             for round_nr, round in enumerate(games["game_list"], 1):
-
                 # colorize outcome
                 result = f"{Color.GREEN.value}Victory{Color.END.value}" if round["is_victory"] else f"{Color.RED.value}Defeat{Color.END.value}"
-
                 # get game series nr
                 nr = series_nr if round_nr == 1 else ""
                 print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], result))
-                if nr == "":
-                    print()
+
+                if nr == "": # print empty for new game series
+                    choice = input(f"\n{Color.GRAY.value}(B) back | (Enter) next...{Color.END.value}\n").lower()
+
+                    if choice == "b":
+                        return
 
         input(self.SCREEN_PAUSE)
 
