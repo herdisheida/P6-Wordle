@@ -1,60 +1,50 @@
 [
   {
-    "total_score": -30,
+    "total_score": -6,
     "curr_streak": 0,
     "longest_streak": 0,
-    "series_list": [
+    "game_list": [
       {
-        "secret_word": "LEMON",
+        "secret_word": "AFK",
         "is_victory": false,
-        "score": -15,
+        "score": -3,
         "history": {
           "1": {
-            "guess": "HELLO",
-            "feedback": "-Cc-c"
-          },
-          "2": {
-            "guess": "WORLD",
-            "feedback": "-c-c-"
-          },
-          "3": {
-            "guess": "MANDY",
-            "feedback": "c-c--"
-          },
-          "4": {
-            "guess": "KITCH",
-            "feedback": "-----"
-          },
-          "5": {
-            "guess": "MONKE",
-            "feedback": "ccc-c"
+            "guess": "HEL",
+            "feedback": "---"
           }
         }
       },
       {
-        "secret_word": "RAISE",
+        "secret_word": "BAE",
         "is_victory": false,
-        "score": -15,
+        "score": -3,
         "history": {
           "1": {
-            "guess": "WHOAH",
-            "feedback": "---c-"
+            "guess": "SUS",
+            "feedback": "---"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -6,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "FLAME",
+        "is_victory": false,
+        "score": 0,
+        "history": {
+          "1": {
+            "guess": "HELLO",
+            "feedback": "-cc--"
           },
           "2": {
-            "guess": "LOLLY",
-            "feedback": "-----"
-          },
-          "3": {
-            "guess": "WORLD",
-            "feedback": "--c--"
-          },
-          "4": {
-            "guess": "LEMON",
-            "feedback": "-c---"
-          },
-          "5": {
-            "guess": "SADIE",
-            "feedback": "cC-cC"
+            "guess": "WHATS",
+            "feedback": "--C--"
           }
         }
       }

@@ -31,9 +31,9 @@ class GameHistory:
 
     def history_menu(self):
         """History menu loop"""
-        self.games = self.load_history()
+        self.series_list = self.load_history()
 
-        while self.games:
+        while self.series_list:
             self.display_history_menu()
             choice = input("\nEnter: ").lower()
 
@@ -44,7 +44,7 @@ class GameHistory:
                 case "b": break
                 case _: print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
-        if not self.games:
+        if not self.series_list:
             print(f"{Color.RED.value}User ({self.username}) hasn't played any games{Color.END.value}")
             input(self.SCREEN_PAUSE)
 
@@ -53,7 +53,7 @@ class GameHistory:
         print("\n----------- ALL GAMES ----------")
         print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Outcome"))
 
-        for series_nr, game in enumerate(self.games, 1):
+        for series_nr, game in enumerate(self.series_list, 1):
             for round_nr, round in enumerate(game, 1):
                 # colorize outcome
                 outcome = round["result"]["outcome"]
@@ -71,7 +71,7 @@ class GameHistory:
     def display_game_details(self, game_nr: int):
         """Display details for a specific game"""
         try:
-            game_series = self.games[int(game_nr) - 1]
+            game_series = self.series_list[int(game_nr) - 1]
         except (IndexError, ValueError):
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
@@ -105,28 +105,42 @@ class GameHistory:
         # print(f"High score: {self._calculate_high_score()}")
 
         # TODO fix this so it works with list of the game series
+            
+        total_games = 0
+        victory_count = 0
+        for game in self.series_list:
+            total_games += len(game["game_list"])
+            victory_count += len([game for game in game["game_list"] if game["is_victory"]])
 
         print("\n------- GAME STATISTICS ------")
-        print(f"Total series: {len(self.games)}")
-        print(f"Total games {len[round]}")
-        print(f"Total victories: {len([round for round in game if round['result']['outcome'] == 'Victory'])}")
-        print(f"Total defeats: {len([round for round in game if round['result']['outcome'] == 'Defeat'])}")
-        print(f"Average score: {self._calculate_average_score()}")
-        print(f"High score: {self._calculate_high_score()}")
+        print(f"Total series:    {len(self.series_list)}")
+        print(f"Total games      {total_games}\n")
+
+        print(f"Total victories: {victory_count}")
+        print(f"Total defeats:   {total_games - victory_count}\n")
+
+        print(f"Average score:   {self._calculate_average_score()}")
+        print(f"High score:      {self._calculate_high_score()}\n")
+        print(f"Current streak:  {self.series_list[-1]["curr_streak"]}")
+        print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}")
 
         input(self.SCREEN_PAUSE)
 
 
-
     def _calculate_average_score(self):
         """Calculate and return average score for all games"""
-        total_score = sum([game["result"]["score"] for game in self.games])
-        avg = total_score / len(self.games)
+        total_score = sum([game["total_score"] for game in self.series_list])
+        avg = total_score / len(self.series_list)
         return round(avg, 2)
     
     def _calculate_high_score(self):
         """Calculate and return high score from all games"""
-        return max([game["result"]["score"] for game in self.games])
+        high_score = 0
+        for game in self.series_list:
+            score = max([game["score"] for game in game["game_list"]])
+            if score > high_score:
+                high_score = score
+        return high_score
     
     def load_history(self):
         """Load game history from file"""
@@ -138,7 +152,7 @@ class GameHistory:
         return all_games
     
     def save_game_series(self, series: list[WordleGame]):
-    """Save game series results to file"""
+        """Save game series results to file"""
         series_list = []
         
         # get all games in the series
@@ -162,13 +176,13 @@ class GameHistory:
             "total_score": series.total_score,
             "curr_streak": series.curr_streak,
             "longest_streak": series.longest_streak,
-            "series_list": series_list
+            "game_list": series_list
         }        
 
         # get existing user series history and add new game to it
-        all_games = self.load_history()
-        all_games.append(game_series)
+        all_series = self.load_history()
+        all_series.append(game_series)
 
         # save to file
         with open(self.RESULT_FILE_PATH, "w") as file:
-            json.dump(all_games, file, indent=2)
+            json.dump(all_series, file, indent=2)
