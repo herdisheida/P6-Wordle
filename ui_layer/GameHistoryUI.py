@@ -13,8 +13,7 @@ class GameHistoryUI:
 
     def display_history_menu(self):
         """Display the history menu"""
-        print("\n------- GAME HISTORY -------")
-        print(f"User: {self.username}\n")
+        print(f"\n------- {self.username}'s HISTORY -------")
         print("(1) See all games")
         print("(2) See game details")
         print("(3) See game statistics")
@@ -40,7 +39,7 @@ class GameHistoryUI:
 
 
     def _display_all_games(self):
-        """Display all games in history"""        
+        """Display all games series in user's history"""        
         print("\n----------- ALL GAMES ----------")
         print(f"Total Series: {len(self.series_list)}\n")
 
