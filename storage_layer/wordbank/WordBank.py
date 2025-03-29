@@ -18,6 +18,12 @@ class WordBank:
             raise ValueError(f"No word found with {length}-letters\n")
         return random.choice(filtered).upper()
     
+    def get_max_min_word_length(self) -> tuple[int, int]:
+        """Get the max and min word length from the word bank"""
+        min_length = min(len(word) for word in self.words)
+        max_length = max(len(word) for word in self.words)
+        return min_length, max_length
+    
     def add_word(self, word: str):
         """ Add a word to the word bank"""
         self._validate_word(word)
