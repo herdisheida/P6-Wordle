@@ -14,7 +14,7 @@ class WordleGame:
         self.game_history = {}
         self.guess_count = 0
 
-    def submit_guess(self, guess: str):
+    def submit_guess(self, guess: str) -> str:
         """Process a guess and return feedback"""
         valid, msg = self._validate_guess(guess)
         if not valid:
@@ -24,13 +24,13 @@ class WordleGame:
         feedback = self._calculate_feedback(guess)
         self._save_guess(guess, feedback)
         
-        if feedback == ["C"] * self.word_length:
+        if feedback == "C" * self.word_length:
             self.game_result = {"outcome": "Victory", "score": self._calculate_score()}
         elif self.guess_count >= self.max_guesses:
             self.game_result = {"outcome": "Defeat", "score": self._calculate_score()}
         return feedback
     
-    def _validate_guess(self, guess: str):
+    def _validate_guess(self, guess: str) -> tuple[bool, str]:
         """Validate guess format (pure logic)"""
         if not guess.isalpha():
             return False, "Guess needs to be alphabetic"
@@ -38,7 +38,7 @@ class WordleGame:
             return False, f"Guess needs {self.word_length} letters"
         return True, ""
 
-    def _calculate_feedback(self, guess: str) -> list:
+    def _calculate_feedback(self, guess: str) -> str:
         """Generate feedback string (C/c/-)"""
         secret_word = list(self.secret_word)
         guess_letters = list(guess)
@@ -67,13 +67,13 @@ class WordleGame:
                 secret_word[secret_word.index(curr_char)] = None
 
         self._save_guess(guess, feedback)
-        return feedback
+        return "".join(feedback)
 
     def _save_guess(self, guess: str, feedback: str):
         """Store guess in history"""
         self.game_history[self.guess_count] = Guess(self.guess_count, guess, feedback)
 
-    def _calculate_score(self):
+    def _calculate_score(self) -> int:
         """Calculate game score.
         The score is higher the fewer guesses the player used and the longer the wordle word is"""
         base_score = 100
@@ -82,7 +82,7 @@ class WordleGame:
         return base_score + word_bonus - guess_penalty
 
     @property
-    def is_game_over(self):
+    def is_game_over(self) -> bool:
         return self.game_result is not None
 
     def reset(self):

@@ -91,7 +91,7 @@ class GameMenu:
         except ValueError as e:
             self._display_error(str(e))
 
-    def _get_valid_num(self, num: int):
+    def _get_valid_num(self, num: int) -> int:
         """Validate the user input for guess count"""
         if not num.isdigit():
             raise ValueError("Num needs to be an integer")
