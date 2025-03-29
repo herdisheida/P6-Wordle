@@ -3,7 +3,7 @@ from ui_layer.ColorText import Color
 from logic_layer.WordleGame import WordleGame
 from logic_layer.GameSeries import GameSeries
 from storage_layer.wordbank.WordBank import WordBank
-from storage_layer.GameHistory import GameHistory
+from storage_layer.GameHistory import GameHistory_storage
 
 class GameMenu:
     def __init__(self):
@@ -32,7 +32,7 @@ class GameMenu:
     def _handle_login(self) -> str:
         """Authenticate user and initalize game history"""
         self.username = self._get_valid_input("Enter username: ", self._validate_username)
-        self.game_history = GameHistory(self.username)
+        self.game_history = GameHistory_storage(self.username)
         self._main_menu()
     
     def _display_main_menu(self):
@@ -76,8 +76,6 @@ class GameMenu:
                 secret_word = self.word_bank.get_random_word(word_length)
 
                 # secret_word = "HELLO" # EYDA debug
-                # print(f"Secret word: {Color.BLUE.value}{Color.UNDERLINE.value}{secret_word}{Color.END.value}") # EYDA DEBUG
-                # GameUI(active_game, self.game_history).run() # TODO breyta
 
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
@@ -174,16 +172,16 @@ class GameMenu:
 # 2. MORE REFINED SINGLE GAME - 30%
 # [x] User can input or select number of letters and guesses before the game begins - 5%
     # ○ Extends the "5 letters, 5 guesses" requirement
-# [ ] After finishing a game the user can select to quit or start a new game - 5%
+# [x] After finishing a game the user can select to quit or start a new game - 5%
         # TODO i can only let them play again, not continue the game...
 # [x] Program stores word bank in a data structure - 5%
 # [x] Program randomly selects word from word bank - 5%
 # [x] The word bank is stored in and read from a file - 10%
 
 # 3. CONNECTED SERIES OF GAMES - 30% (that makes 110%)
-# [ ] Keep track of wins and losses throughout the run (store in classes/variables) - 5%
+# [x] Keep track of wins and losses throughout the run (store in classes/variables) - 5%
         # TODO i only have that in a file
-# [ ] Find a way to score series of games and keep track of high scores - 5%
+# [x] Find a way to score series of games and keep track of high scores - 5%
     # ○ Total scores can for example be affected by (but not limited by):
         # ■ # of wrong guesses per word
         # ■ length of word
@@ -200,21 +198,18 @@ class GameMenu:
 
 # TODO 'connected' series of games (not singular instance)
     # add calass variables:
-        # wins
-        # losses
-        # scores ( scoring series of games --- breyta kerfinu ugghhh)
-        # high score
-        # games played
+        # [x] scores ( scoring series of games --- breyta kerfinu ugghhh)
+        # [ ] games played
 
     # FIX :
-        # user see history games/scores -- lookar öðruvísi í series of games
-        # let user choose to continue playing game:
-            # if played 1's = single game instance, else = series of connected games
+        # [x] user see history games/scores -- lookar öðruvísi í series of games
+        # [x] let user choose to continue playing game:
+            # [x] if played 1's = single game instance, else = series of connected games
 
 # TODO
-    # the feedback is not good enough
-    # when lette is correct stop showing that letter as yellow in other places
+    # [x] the feedback is not good enough
+    # [x] when lette is correct stop showing that letter as yellow in other places
 
 
 # IDEAS
-    # make class for SeriesOfGames, save stuff their...?
+    # [x] make class for SeriesOfGames, save stuff their...?
