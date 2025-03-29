@@ -10,9 +10,9 @@ class GameSeries:
     def add_game(self, game: dict):
         """Add a game to the series"""
         self.game_series.append(game)
-        self.total_score += game["score"]
+        self.total_score += game.score
 
-        if game["outcome"] == "Victory":
+        if game.is_victory:
             self.curr_streak += 1
         else:
             self.curr_streak = 0
@@ -20,4 +20,4 @@ class GameSeries:
     @property
     def longest_streak(self):
         """Get the longest winning streak"""
-        return max([game["streak"] for game in self.game_series], default=0)
+        return max([game["curr_streak"] for game in self.game_series], default=0)

@@ -81,18 +81,16 @@ class GameMenu:
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
                 GameUI(active_game, series, self.game_history).run() # FIX vtk hvort ég ætli að hafa game_history sem argument
-                series.add_game(active_game.game_result)
+                series.add_game(active_game)
 
 
                 if not self._ask_continue_playing():
-                    self.game_history.save_series(series)
                     break
 
             except ValueError as e:
                 self._display_error(str(e))
         
-        self.game_history.save_series(series)
-
+        self.game_history.save_game_series(series)
             
 
     def _ask_continue_playing(self):
