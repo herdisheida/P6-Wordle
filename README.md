@@ -14,7 +14,8 @@ Wordle is a daily word-guessing game where the goal is to deduce the hidden word
 
 
 ## Usage
+Go to the Game folder and run the program in start.py file
 ```bash
-cd <your-project-folder>
+cd Game
 python3 start.py
 ```
