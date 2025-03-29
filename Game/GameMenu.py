@@ -181,4 +181,4 @@ class GameMenu:
 
 
 # IDEAS
-    # make class for SeriesOfGames, save stuff their...? 
+    # make class for SeriesOfGames, save stuff their...?

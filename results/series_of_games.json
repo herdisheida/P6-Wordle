@@ -1,0 +1,32 @@
+
+[
+    {
+        "highscore": 20,
+        "wins": 2,
+        "losses": 1,
+        "total_games": 3,
+        "total_score": 140,
+
+        "game": {
+            "secret_word": "LEMON",
+            "result": {
+                "outcome": "Victory",
+                "score": 20
+            },
+            "history": {
+                "1": {
+                    "guess": "LINTS",
+                    "feedback": "C-c--"
+                },
+                "2": {
+                    "guess": "MITCH",
+                    "feedback": "c----"
+                },
+                "3": {
+                    "guess": "LEMON",
+                    "feedback": "CCCCC"
+                }
+            }
+        }
+    }
+]
