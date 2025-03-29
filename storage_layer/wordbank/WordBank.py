@@ -14,6 +14,8 @@ class WordBank:
     def get_random_word(self, length: int) -> str:
         """Get a random word from the Word Bank with specific length"""
         filtered = [word for word in self.words if len(word) == int(length)]
+        if not filtered:
+            raise ValueError(f"No words found with length {length}")
         return random.choice(filtered).upper()
     
     def get_max_min_word_length(self) -> tuple[int, int]:
