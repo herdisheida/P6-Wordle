@@ -1,10 +1,9 @@
-from Game.WordleGame import WordleGame
-from Game.GameUI import GameUI
+from Game.ui_layer.GameUI import GameUI
+from Game.logic_layer.ColorText import Color
+from Game.logic_layer.WordleGame import WordleGame
+from Game.storage_layer.wordbank.WordBank import WordBank
+from Game.storage_layer.GameHistory import GameHistory
 from pathlib import Path
-from utilities.ColorText import Color
-
-from WordBank.WordBank import WordBank
-from Game.GameHistory import GameHistory
 
 class GameMenu:
     WORDBANK_FILE_PATH = Path("WordBank") / "wordbank.txt"

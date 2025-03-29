@@ -1,6 +1,6 @@
-from Game.WordleGame import WordleGame
-from Game.GameHistory import GameHistory
-from utilities.ColorText import Color
+from Game.logic_layer.ColorText import Color
+from Game.logic_layer.WordleGame import WordleGame
+from Game.storage_layer.GameHistory import GameHistory
 
 
 class GameUI:
@@ -29,7 +29,7 @@ class GameUI:
 
     def _display_feedback(self, feedback: str):
         """Show colored feedback"""
-        print("Feedback: " + Color._colorize_feedback(feedback))
+        print("Feedback: " + Color.colorize_feedback(feedback))
 
     def _display_result(self):
         """Show win/loss message"""
@@ -50,7 +50,7 @@ class GameUI:
         print("\n---------- GAME HISTORY ----------")
         print(self.history.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in self.game.game_history.items():
-            feedback = Color._colorize_feedback(round.feedback)
+            feedback = Color.colorize_feedback(round.feedback)
             print(self.history.GUESS_HISTORY_FORMAT.format(nr, round.word, feedback))
 
     def _save_game(self):

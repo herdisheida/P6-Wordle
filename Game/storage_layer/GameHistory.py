@@ -1,4 +1,4 @@
-from utilities.ColorText import Color
+from Game.logic_layer.ColorText import Color
 from pathlib import Path
 import json
 
@@ -76,7 +76,7 @@ class GameHistory:
         print("\nGame rounds:")
         print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
         for nr, round in game["history"].items():
-            print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color._colorize_feedback(round["feedback"])))
+            print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color.colorize_feedback(round["feedback"])))
 
         input(self.SCREEN_PAUSE)
 

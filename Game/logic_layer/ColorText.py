@@ -1,4 +1,5 @@
 from enum import Enum
+
 class Color(Enum):
     RED = "\033[31m"
     GREEN = "\033[32m"
@@ -9,9 +10,8 @@ class Color(Enum):
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-
     @staticmethod
-    def _colorize_feedback(feedback: str):
+    def colorize_feedback(feedback: str):
         """Colorize feedback string"""
         colored = ""
         for char in feedback:

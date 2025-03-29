@@ -8,7 +8,7 @@ sys.path.append(parent_dir)
 
 # Now import from the `Game` folder
 from Game.WordleGame import WordleGame
-from Game.GameUI import GameUI
+from Game.ui_layer.GameUI import GameUI
 
 
 import unittest

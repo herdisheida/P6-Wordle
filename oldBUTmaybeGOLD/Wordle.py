@@ -1,8 +1,9 @@
-from utilities.ColorText import Color
-from Game.Guess import Guess
+from Game.ui_layer
+from Game.logic_layer.ColorText import Color
+from Game.logic_layer.Guess import Guess
 from pathlib import Path
 import json
-from Game.User import User
+from oldBUTmaybeGOLD.User import User
 
 class WordleGame():
     HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}"

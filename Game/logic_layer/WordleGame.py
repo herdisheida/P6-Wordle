@@ -1,4 +1,4 @@
-from Game.Guess import Guess
+from Game.logic_layer.Guess import Guess
 from pathlib import Path
 
 
