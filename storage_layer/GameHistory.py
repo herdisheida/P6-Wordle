@@ -5,7 +5,7 @@ import json
 class GameHistory:
     RESULTS_FOLDER = Path("./storage_layer/results")
 
-    GUESS_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}" # nr, guesses, feedback
+    GUESS_HISTORY_FORMAT = "  {0:<8}{1:<20}{2:<20}" # nr, guesses, feedback
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
     SCREEN_PAUSE = "\nEnter to continue..."
 
@@ -51,34 +51,46 @@ class GameHistory:
         """Display all games in history"""        
         print("\n----------- ALL GAMES ----------")
         print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Outcome"))
-        for nr, game in enumerate(self.games, 1):
-            # colorize outcome
-            outcome = game["result"]["outcome"]
-            color = Color.GREEN.value if outcome == "Victory" else Color.RED.value
-            colored_outcome = f"{color}{outcome}{Color.END.value}"
 
-            print(self.GAME_HISTORY_LIST_FORMAT.format(nr, game["result"]["score"], game["secret_word"], colored_outcome))
+        for series_nr, game in enumerate(self.games, 1):
+            for round_nr, round in enumerate(game, 1):
+                # colorize outcome
+                outcome = round["result"]["outcome"]
+                color = Color.GREEN.value if outcome == "Victory" else Color.RED.value
+                colored_outcome = f"{color}{outcome}{Color.END.value}"
+
+                # get game series nr
+                nr = series_nr if round_nr == 1 else ""
+                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["result"]["score"], round["secret_word"], colored_outcome))
+                if nr == "":
+                    print()
+
         input(self.SCREEN_PAUSE)
 
     def display_game_details(self, game_nr: int):
         """Display details for a specific game"""
         try:
-            game_nr = int(game_nr) - 1
-            game = self.games[game_nr]
+            game_series = self.games[int(game_nr) - 1]
         except (IndexError, ValueError):
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
-        
-        print("\n------- GAME DETAILS ------")
-        print(f"Secret Word: {game['secret_word']}")
-        print(f"Result: {game['result']['outcome']}")   
-        print(f"Score: {game['result']['score']}")
+         
+        print(f"\n------- GAME SERIES {game_nr} ------")
+        for count in range(len(game_series)):
+            game = game_series[count]
+            print(f"{Color.BLUE.value}GAME: {count}{Color.END.value}")
 
-        print("\nGame rounds:")
-        print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
-        for nr, round in game["history"].items():
-            print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color.colorize_feedback(round["feedback"])))
+            print(f" Secret Word: {game['secret_word']}")
+            print(f" Result: {game['result']['outcome']}")   
+            print(f" Score: {game['result']['score']}")
 
+            print("\n Game rounds:")
+            print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
+            for nr, round in game["history"].items():
+                print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color.colorize_feedback(round["feedback"])))
+                print()
+
+            # input("\nEnter for next game...\n")
         input(self.SCREEN_PAUSE)
 
     def display_statistics(self):
@@ -136,11 +148,6 @@ class GameHistory:
         game_series_list = []
         for game in game_series:
 
-                # "secret_word": self.secret_word,
-                # "game_result": self.game_result,
-                # "game_round_history": self.game_round_history
-
-
             data = {
                 "secret_word": game["secret_word"],
                 "result": game["game_result"],
@@ -156,6 +163,6 @@ class GameHistory:
 
         # get existing data and add new game to it
         all_games = self.load_history()
-        all_games.append(data)
+        all_games.append(game_series_list)
         with open(self.RESULT_FILE_PATH, "w") as file:
             json.dump(all_games, file, indent=2)

@@ -27,10 +27,10 @@ class WordleGame:
         
         if feedback == "C" * self.word_length:
             self.game_result = {"outcome": "Victory", "score": self._calculate_score()}
+            self._add_game_to_series()
         elif self.guess_count >= self.max_guesses:
             self.game_result = {"outcome": "Defeat", "score": self._calculate_score()}
-
-        self._add_game_to_series()
+            self._add_game_to_series()
         return feedback
     
     def _validate_guess(self, guess: str) -> tuple[bool, str]:
