@@ -7,14 +7,10 @@ class WordleGame:
         self.max_guesses = max_guesses
         self.word_length = len(secret_word)
 
-        self.game_result = None  # outcome, score
-        self.is_victory = None
-        self.score = 0
-
         self.game_round_history = {} # guesses & feedbacks for each round in a single game instance
         self.guess_count = 0
-
-        self.game_series = None
+        self.is_victory = None
+        self.score = 0
 
     def submit_guess(self, guess: str) -> str:
         """Process a guess and return feedback"""
@@ -30,12 +26,12 @@ class WordleGame:
             self.is_victory = True
             self.score = self._calculate_score()
             # self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")} # EYDA setti kóða í variable
-            self._save_game()
+            # self._save_game()
         elif self.guess_count >= self.max_guesses:
             self.is_victory = False
             self.score = self._calculate_score()
             # self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")} # EYDA setti kóða í class variable
-            self._save_game()
+            # self._save_game()
         return feedback
     
     def _validate_guess(self, guess: str) -> tuple[bool, str]:
@@ -93,21 +89,21 @@ class WordleGame:
         guess_penalty = (self.max_guesses - self.guess_count + 1) * 5
         return word_bonus - guess_penalty
 
-    def _save_game(self):
-        """Store game in game series variable"""
-        self.game_series = {
-                "secret_word": self.secret_word,
-                "game_result": self.game_result,
-                "game_round_history": self.game_round_history
-                }
+    # def _save_game(self): # EYDA ég held ég þarf ekki
+    #     """Store game in game series variable"""
+    #     self.game_series = {
+    #             "secret_word": self.secret_word,
+    #             "game_result": self.game_result,
+    #             "game_round_history": self.game_round_history
+    #             }
 
     @property
     def is_game_over(self) -> bool:
-        return self.outcome is not None
+        return self.is_victory is not None
 
     def reset_game(self):
         """Reset game state"""
-        self.game_result = None
+        self.is_victory = None
+        self.score = 0
         self.game_round_history = {}
         self.guess_count = 0
-        self.game_series = None

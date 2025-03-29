@@ -90,6 +90,8 @@ class GameMenu:
 
             except ValueError as e:
                 self._display_error(str(e))
+        
+        self.game_history.save_series(series)
 
             
 
