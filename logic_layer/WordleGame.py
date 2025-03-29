@@ -80,14 +80,16 @@ class WordleGame:
     def _calculate_score(self) -> int:
         """Calculate game score.
         The score is higher the fewer guesses the player used and the longer the wordle word is"""
+        # user lost
         if not self.is_victory:
-            return -5 * self.guess_count
+            return self.guess_count * -3
         
-        word_bonus = 2 * self.word_length
+        # user won using all guesses
         if self.max_guesses == self.guess_count:
-            return 50 + word_bonus
-        guess_penalty = (self.max_guesses - self.guess_count + 1) * 5
-        return word_bonus - guess_penalty
+            return self.word_length - self.guess_count + 1
+        
+        # user won using fewer guesses
+        return self.word_length * 2 + (self.max_guesses - self.guess_count) * 2
 
     # def _save_game(self): # EYDA ég held ég þarf ekki
     #     """Store game in game series variable"""
