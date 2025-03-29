@@ -13,7 +13,6 @@ Wordle is a daily word-guessing game where the goal is to deduce the hidden word
 * Word length (MAX 20)
 * Guess attempts (MAX 20)
 * Wordbank words
-* Amount of games in connected series (MAX 5)
 
 ## Feedback Symbols  
 * 🟩 C = Correct letter & position  
