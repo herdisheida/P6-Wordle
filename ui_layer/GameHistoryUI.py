@@ -3,7 +3,7 @@ from storage_layer.GameHistory_storage import GameHistory_Storage
 
 class GameHistoryUI:
     """Class to handle game history user interface"""
-    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<20}{2:<20}" # guess nr, guesses, feedback
+    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<15}{2:<15}" # guess nr, guesses, feedback
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # series nr, score, secret_word, result
     SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
@@ -32,14 +32,14 @@ class GameHistoryUI:
             choice = input("\nEnter: ").lower()
 
             match choice:
-                case "1": self.display_all_games()
-                case "2": self.display_game_details(input("Enter series nr: "))
-                case "3": self.display_statistics()
+                case "1": self._display_all_games()
+                case "2": self._display_game_details(input("Enter series nr: "))
+                case "3": self._display_statistics()
                 case "b": break
                 case _: print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
 
-    def display_all_games(self):
+    def _display_all_games(self):
         """Display all games in history"""        
         print("\n----------- ALL GAMES ----------")
         print(f"Total Series: {len(self.series_list)}\n")
@@ -48,21 +48,20 @@ class GameHistoryUI:
 
         for series_nr, games in enumerate(self.series_list, 1):
             for round_nr, round in enumerate(games["game_list"], 1):
-                # colorize outcome
-                result = f"{Color.GREEN.value}Victory{Color.END.value}" if round["is_victory"] else f"{Color.RED.value}Defeat{Color.END.value}"
-                # get game series nr
-                nr = series_nr if round_nr == 1 else ""
-                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], result))
+    
+                nr = series_nr if round_nr == 1 else "" # print series nr for first game only
+                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], self._color_result(round["is_victory"])))
 
-                if nr == "": # print empty for new game series
+                # only show one series at a time
+                if nr == "":
+                    # ask if user wants to see more series
                     choice = input(f"\n{Color.GRAY.value}(B) back | (Enter) next...{Color.END.value}\n").lower()
-
                     if choice == "b":
                         return
 
         input(self.SCREEN_PAUSE)
 
-    def display_game_details(self, game_nr: int):
+    def _display_game_details(self, game_nr: int):
         """Display details for a specific game series"""
         try:
             a_series = self.series_list[int(game_nr) - 1]
@@ -77,7 +76,7 @@ class GameHistoryUI:
             print(f"{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
             print(f"  Secret Word: {game['secret_word']}")
-            print(f"  Result: {game['is_victory']}")   
+            print(f"  Result: {self._color_result(game['is_victory'])}")   
             print(f"  Score: {game['score']}")
 
             print("\n  Game rounds:")
@@ -88,7 +87,12 @@ class GameHistoryUI:
 
         input(self.SCREEN_PAUSE)
 
-    def display_statistics(self):
+    def _color_result(self, result: str):
+        """Colorize game result"""
+        colored = f"{Color.GREEN.value}Victory{Color.END.value}" if result else f"{Color.RED.value}Defeat{Color.END.value}"
+        return colored
+
+    def _display_statistics(self):
         """Display game statistics"""
 
         total_games = 0
