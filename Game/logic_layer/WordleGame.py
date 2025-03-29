@@ -14,17 +14,9 @@ class WordleGame:
         self.game_history = {}
         self.guess_count = 0
 
-    def validate_guess(self, guess: str):
-        """Validate guess format (pure logic)"""
-        if not guess.isalpha():
-            return False, "Guess needs to be alphabetic"
-        if len(guess) != self.word_length:
-            return False, f"Guess needs {self.word_length} letters"
-        return True, ""
-
     def submit_guess(self, guess: str):
         """Process a guess and return feedback"""
-        valid, msg = self.validate_guess(guess)
+        valid, msg = self._validate_guess(guess)
         if not valid:
             raise ValueError(msg)
 
@@ -36,14 +28,21 @@ class WordleGame:
             self.game_result = {"outcome": "Victory", "score": self._calculate_score()}
         elif self.guess_count >= self.max_guesses:
             self.game_result = {"outcome": "Defeat", "score": self._calculate_score()}
-            
         return feedback
+    
+    def _validate_guess(self, guess: str):
+        """Validate guess format (pure logic)"""
+        if not guess.isalpha():
+            return False, "Guess needs to be alphabetic"
+        if len(guess) != self.word_length:
+            return False, f"Guess needs {self.word_length} letters"
+        return True, ""
 
     def _calculate_feedback(self, guess: str):
         """Generate feedback string (C/c/-)"""
         feedback = ""
-        for index in range(len(self.secret_word)):
 
+        for index in range(len(self.secret_word)):
             # Correct position
             if guess[index] == self.secret_word[index]:
                 feedback += "C"
