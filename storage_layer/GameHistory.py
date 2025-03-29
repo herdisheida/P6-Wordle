@@ -75,10 +75,10 @@ class GameHistory:
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
          
-        print(f"\n------- GAME SERIES {game_nr} ------")
-        for count in range(len(game_series)):
-            game = game_series[count]
-            print(f"{Color.BLUE.value}GAME: {count}{Color.END.value}")
+        print(f"\n\n------- GAME SERIES nr.{game_nr} ------")
+        for i in range(len(game_series)):
+            game = game_series[i]
+            print(f"{Color.BLUE.value}GAME: {i}{Color.END.value}")
 
             print(f" Secret Word: {game['secret_word']}")
             print(f" Result: {game['result']['outcome']}")   
@@ -95,14 +95,28 @@ class GameHistory:
 
     def display_statistics(self):
         """Display game statistics"""
+
+
+        # print("\n------- GAME STATISTICS ------")
+        # print(f"Total games: {len(self.games)}")
+        # print(f"Total victories: {len([game for game in self.games if game['result']['outcome'] == 'Victory'])}")
+        # print(f"Total defeats: {len([game for game in self.games if game['result']['outcome'] == 'Defeat'])}")
+        # print(f"Average score: {self._calculate_average_score()}")
+        # print(f"High score: {self._calculate_high_score()}")
+
+        # TODO fix this so it works with list of the game series
+
         print("\n------- GAME STATISTICS ------")
-        print(f"Total games: {len(self.games)}")
-        print(f"Total victories: {len([game for game in self.games if game['result']['outcome'] == 'Victory'])}")
-        print(f"Total defeats: {len([game for game in self.games if game['result']['outcome'] == 'Defeat'])}")
+        print(f"Total series: {len(self.games)}")
+        print(f"Total games {len[round]}")
+        print(f"Total victories: {len([round for round in game if round['result']['outcome'] == 'Victory'])}")
+        print(f"Total defeats: {len([round for round in game if round['result']['outcome'] == 'Defeat'])}")
         print(f"Average score: {self._calculate_average_score()}")
         print(f"High score: {self._calculate_high_score()}")
 
         input(self.SCREEN_PAUSE)
+
+
 
     def _calculate_average_score(self):
         """Calculate and return average score for all games"""
@@ -147,7 +161,7 @@ class GameHistory:
     #     """Save game results to file"""
         game_series_list = []
         for game in game_series:
-
+            
             data = {
                 "secret_word": game["secret_word"],
                 "result": game["game_result"],
