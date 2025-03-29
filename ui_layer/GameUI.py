@@ -56,7 +56,7 @@ class GameUI:
         """Show guess history for game round"""
         print("\n---------- GAME HISTORY ----------")
         print(self.history.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
-        for nr, round in self.games.game_round_history.items():
+        for nr, round in self.games.guess_history.items():
             feedback = Color.colorize_feedback(round.feedback)
             print(self.history.GUESS_HISTORY_FORMAT.format(nr, round.word, feedback))
 
@@ -65,7 +65,7 @@ class GameUI:
         self.history.save_game_series(
             secret_word = self.games.secret_word,
             game_result = self.games.game_result,
-            game_history = self.games.game_round_history
+            game_history = self.games.guess_history
         )
 
     def _save_game_series(self): # FIX

@@ -7,7 +7,7 @@ class WordleGame:
         self.max_guesses = max_guesses
         self.word_length = len(secret_word)
 
-        self.game_round_history = {} # guesses & feedbacks for each round in a single game instance
+        self.guess_history = {} # guesses & feedbacks for each round in a single game instance
         self.guess_count = 0
         self.is_victory = None
         self.score = 0
@@ -75,7 +75,7 @@ class WordleGame:
 
     def _save_guess(self, guess: str, feedback: str):
         """Store guess in history"""
-        self.game_round_history[self.guess_count] = Guess(self.guess_count, guess, feedback)
+        self.guess_history[self.guess_count] = Guess(self.guess_count, guess, feedback)
 
     def _calculate_score(self) -> int:
         """Calculate game score.
@@ -105,5 +105,5 @@ class WordleGame:
         """Reset game state"""
         self.is_victory = None
         self.score = 0
-        self.game_round_history = {}
+        self.guess_history = {}
         self.guess_count = 0

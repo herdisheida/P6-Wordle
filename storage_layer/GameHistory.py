@@ -156,25 +156,38 @@ class GameHistory:
     #     with open(self.RESULT_FILE_PATH, "w") as file:
     #         json.dump(all_games, file, indent=2)
     
-    def save_game_series(self, game_series: list):
+    def save_game_series(self, series: list):
     #     """Save game series results to file"""
-        game_series_list = []
-        for game in game_series:
+        series_list = []
+        
+        # get all games in the series
+        for game in series.series_list:
             data = {
-                "secret_word": game["secret_word"],
-                "result": game["game_result"],
+                "secret_word": game.secret_word,
+                "is_victory": game.is_victory,
+                "score": game.score,
                 "history": {
                     nr: {
                         "guess": round.word,
                         "feedback": round.feedback
                     }
-                    for nr, round in game["game_round_history"].items()
+                    for nr, round in game.guess_history.items()
+                    }
                 }
-            }
-            game_series_list.append(data)
+            series_list.append(data)
 
-        # get existing data and add new game to it
+        # create game series data
+        game_series = {
+            "total_score": series.total_score,
+            "curr_streak": series.curr_streak,
+            "longest_streak": series.longest_streak,
+            "series_list": series_list
+        }        
+
+        # get existing user series history and add new game to it
         all_games = self.load_history()
-        all_games.append(game_series_list)
+        all_games.append(game_series)
+
+        # save to file
         with open(self.RESULT_FILE_PATH, "w") as file:
             json.dump(all_games, file, indent=2)

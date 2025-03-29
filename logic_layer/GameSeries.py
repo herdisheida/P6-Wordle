@@ -3,13 +3,13 @@ class GameSeries:
         self.word_length = word_length
         self.max_guesses = max_guesses
 
-        self.game_series = [] # list of WordleGame objects
+        self.series_list = [] # list of WordleGame objects
         self.total_score = 0
         self.curr_sreak = 0
 
     def add_game(self, game: dict):
         """Add a game to the series"""
-        self.game_series.append(game)
+        self.series_list.append(game)
         self.total_score += game.score
 
         if game.is_victory:
@@ -20,4 +20,4 @@ class GameSeries:
     @property
     def longest_streak(self):
         """Get the longest winning streak"""
-        return max([game["curr_streak"] for game in self.game_series], default=0)
+        return max([game["curr_streak"] for game in self.series_list], default=0)
