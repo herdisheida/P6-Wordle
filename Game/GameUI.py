@@ -9,12 +9,8 @@ class GameUI:
         self.game = game
         self.history = history
 
-    def run(self):
-        """Run the game UI"""
-        self.game_loop()
-
     def game_loop(self):
-        """Main game loop"""
+        """Handle user guess flow"""
         while not self.game.is_game_over:
             guess = self._get_guess()
             try:
@@ -24,8 +20,8 @@ class GameUI:
                 print(f"{Color.RED.value}{str(e)}{Color.END.value}")
 
         self._display_result()
-        self.save_game()
-        # self.game.reset() # LATER
+        self._save_game()
+        self.game.reset()
 
     def _get_guess(self):
         """Get and validate user input"""
@@ -57,8 +53,8 @@ class GameUI:
             feedback = Color._colorize_feedback(round.feedback)
             print(self.history.GUESS_HISTORY_FORMAT.format(nr, round.word, feedback))
 
-    def save_game(self):
-        """Save game results to file"""
+    def _save_game(self):
+        """Trigger saving game"""
         self.history.save_game(
             secret_word = self.game.secret_word,
             game_result = self.game.game_result,

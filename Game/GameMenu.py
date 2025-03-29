@@ -58,8 +58,8 @@ class GameMenu:
 
             match choice:
                 case "1": self._start_new_game()
-                case "2": self.game_history.menu_loop()
-                case "3": self.add_word_to_wordbank()
+                case "2": self.game_history.history_menu()
+                case "3": self._add_word_to_wordbank()
                 case "l": return # return to login
                 case "q": self.online = False
                 case _: self._display_error("Invalid input")
@@ -84,7 +84,7 @@ class GameMenu:
         finally:
             self.active_game = None
 
-    def add_word_to_wordbank(self):
+    def _add_word_to_wordbank(self):
         """Add a word to the word bank"""
         new_word = input("Enter a new word: ").upper()
         try:

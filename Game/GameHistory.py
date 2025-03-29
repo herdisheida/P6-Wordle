@@ -29,14 +29,14 @@ class GameHistory:
 
         print("\n(B) Back")
 
-    def menu_loop(self):
+    def history_menu(self):
         """History menu loop"""
         self.games = self.load_history()
 
         while self.games:
             self.display_history_menu()
             choice = input("\nEnter: ").lower()
-            
+
             match choice:
                 case "1": self.display_all_games()
                 case "2": self.display_game_details(input("Enter game number: "))
