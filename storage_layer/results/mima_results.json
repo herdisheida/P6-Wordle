@@ -1,44 +1,65 @@
 [
   {
-    "total_score": -18,
+    "total_score": -1,
     "curr_streak": 0,
     "longest_streak": 0,
     "game_list": [
       {
-        "secret_word": "QUICK",
-        "is_victory": false,
-        "score": -9,
+        "secret_word": "TO",
+        "is_victory": true,
+        "score": 8,
         "history": {
           "1": {
-            "guess": "WORLD",
-            "feedback": "-----"
-          },
-          "2": {
-            "guess": "MATCH",
-            "feedback": "---C-"
-          },
-          "3": {
-            "guess": "CANDY",
-            "feedback": "c----"
+            "guess": "TO",
+            "feedback": "CC"
           }
         }
       },
       {
-        "secret_word": "RHYME",
+        "secret_word": "TO",
         "is_victory": false,
         "score": -9,
         "history": {
           "1": {
-            "guess": "YOHOO",
-            "feedback": "c-c--"
+            "guess": "HA",
+            "feedback": "--"
           },
           "2": {
-            "guess": "WHATS",
-            "feedback": "-C---"
+            "guess": "OH",
+            "feedback": "c-"
           },
           "3": {
-            "guess": "ROUGH",
-            "feedback": "C---c"
+            "guess": "DO",
+            "feedback": "-C"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 10,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "JUJUTSUKAISEN",
+        "is_victory": true,
+        "score": 13,
+        "history": {
+          "1": {
+            "guess": "JUJUTSUKAISEN",
+            "feedback": "CCCCCCCCCCCCC"
+          }
+        }
+      },
+      {
+        "secret_word": "JUJUTSUKAISEN",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "DDDDDDDDDDDDD",
+            "feedback": "-------------"
           }
         }
       }

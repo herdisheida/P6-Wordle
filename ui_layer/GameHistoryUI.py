@@ -52,7 +52,7 @@ class GameHistoryUI:
                 print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], Color._color_result(round["is_victory"])))
 
                 # only show one series at a time
-                if nr == "":
+                if nr == "" and series_nr != len(self.series_list):
                     # ask if user wants to see more series
                     choice = input(f"\n{Color.GRAY.value}(B) back | (Enter) next...{Color.END.value}\n").lower()
                     if choice == "b":
