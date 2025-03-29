@@ -26,10 +26,10 @@ class WordleGame:
         self._save_guess(guess, feedback)
         
         if feedback == "C" * self.word_length:
-            self.game_result = {"outcome": "Victory", "score": self._calculate_score()}
+            self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")}
             self._add_game_to_series()
         elif self.guess_count >= self.max_guesses:
-            self.game_result = {"outcome": "Defeat", "score": self._calculate_score()}
+            self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")}
             self._add_game_to_series()
         return feedback
     
@@ -76,13 +76,16 @@ class WordleGame:
         """Store guess in history"""
         self.game_round_history[self.guess_count] = Guess(self.guess_count, guess, feedback)
 
-    def _calculate_score(self) -> int:
+    def _calculate_score(self, outcome: str) -> int:
         """Calculate game score.
         The score is higher the fewer guesses the player used and the longer the wordle word is"""
-        base_score = 100
-        word_bonus = self.word_length * 10
-        guess_penalty = (self.guess_count - 1) * 10
-        return base_score + word_bonus - guess_penalty
+        if outcome == "Defeat":
+            return -5 * self.guess_count
+        word_bonus = 2 * self.word_length
+        if self.max_guesses == self.guess_count:
+            return 50 + word_bonus
+        guess_penalty = (self.max_guesses - self.guess_count + 1) * 5
+        return word_bonus - guess_penalty
 
     def _add_game_to_series(self):
         self.game_series.append({
@@ -93,7 +96,7 @@ class WordleGame:
 
     @property
     def is_game_over(self) -> bool:
-        return self.game_result is not None
+        return len(self.game_series) == 5
 
     def reset(self):
         """Reset game state"""

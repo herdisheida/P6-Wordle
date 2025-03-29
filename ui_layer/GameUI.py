@@ -4,7 +4,6 @@ from storage_layer.GameHistory import GameHistory
 
 
 class GameUI:
-
     def __init__(self, game: WordleGame, history: GameHistory):
         self.games = game
         self.history = history
@@ -24,7 +23,6 @@ class GameUI:
                 print(f"{Color.RED.value}{str(e)}{Color.END.value}")
         
         self._display_result()
-        # self._save_game() # FIX
         self._save_game_series()
         self.games.reset()
 
@@ -68,5 +66,4 @@ class GameUI:
 
     def _save_game_series(self): # FIX
         """Trigger saving game"""
-
         self.history.save_game(self.games.game_series)
