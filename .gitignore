@@ -20,3 +20,8 @@ Game/logic_layer/__pycache__/Guess.cpython-313.pyc
 Game/logic_layer/__pycache__/ColorText.cpython-313.pyc
 Game/storage_layer/__pycache__/GameHistory.cpython-313.pyc
 Game/ui_layer/__pycache__/GameUI.cpython-313.pyc
+logic_layer/__pycache__/WordleGame.cpython-313.pyc
+storage_layer/wordbank/__pycache__/WordBank.cpython-313.pyc
+storage_layer/wordbank/__pycache__/WordBank.cpython-313.pyc
+storage_layer/wordbank/__pycache__/WordBank.cpython-313.pyc
+logic_layer/__pycache__/WordleGame.cpython-313.pyc

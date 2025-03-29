@@ -24,7 +24,7 @@ class WordleGame:
         feedback = self._calculate_feedback(guess)
         self._save_guess(guess, feedback)
         
-        if feedback == "C" * self.word_length:
+        if feedback == ["C"] * self.word_length:
             self.game_result = {"outcome": "Victory", "score": self._calculate_score()}
         elif self.guess_count >= self.max_guesses:
             self.game_result = {"outcome": "Defeat", "score": self._calculate_score()}
@@ -38,22 +38,22 @@ class WordleGame:
             return False, f"Guess needs {self.word_length} letters"
         return True, ""
 
-    def _calculate_feedback(self, guess: str):
+    def _calculate_feedback(self, guess: str) -> list:
         """Generate feedback string (C/c/-)"""
-        feedback = ""
+        # feedback = "" # EYDA
 
-        for index in range(len(self.secret_word)):
-            # Correct position
-            if guess[index] == self.secret_word[index]:
-                feedback += "C"
+        # for index in range(len(self.secret_word)):
+        #     # Correct position
+        #     if guess[index] == self.secret_word[index]:
+        #         feedback += "C"
 
-            # Correct letter in wrong position
-            elif guess[index] in self.secret_word:
-                feedback += "c"
+        #     # Correct letter in wrong position
+        #     elif guess[index] in self.secret_word:
+        #         feedback += "c"
             
-            # Incorrect letter
-            else:
-                feedback += "-"
+        #     # Incorrect letter
+        #     else:
+        #         feedback += "-"
 
         guessed_letter = [] # correctly guessed letters
         feedback = []
@@ -62,16 +62,23 @@ class WordleGame:
             if guess[index] == self.secret_word[index]:
                 feedback.append("C")
                 guessed_letter.append(guess[index])
+            else:
+                feedback.append("-")
 
         for index in range(len(self.secret_word)):
             char = guess[index]
+            if char == self.secret_word[index]:
+                continue
+
             if char in self.secret_word:
                 # don't show C if letter has been guessed
-                if guessed_letter.count(char) < self.secret_word.count(char):
-                    feedback.insert(index, "C")
-    
+                if guessed_letter.count(char) >= self.secret_word.count(char):
+                    feedback[index] = "-"
+                else:
+                    feedback[index] = "c"
+                    guessed_letter.append(char)
             else:
-                feedback.insert(index, "-")
+                feedback[index] = "-"
 
 
         self._save_guess(guess, feedback)
