@@ -29,12 +29,10 @@ class GameMenu:
 
         while self.online:
             choice = input("\n(L)ogin | (Q)uit: ").lower()
-            if choice == "l":
-                self._handle_login()
-            elif choice == "q":
-                self.online = False
-            else:
-                self._display_error("Invalid input")
+            match choice:
+                case "l": self._handle_login()
+                case "q": self.online = False
+                case _: self._display_error("Invalid input")
 
     def _handle_login(self) -> str:
         """Authenticate user and initalize game history"""
