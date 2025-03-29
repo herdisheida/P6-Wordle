@@ -179,6 +179,10 @@ class GameMenu:
         # let user choose to continue playing game:
             # if played 1's = single game instance, else = series of connected games
 
+# TODO
+    # the feedback is not good enough
+    # when
+
 
 # IDEAS
     # make class for SeriesOfGames, save stuff their...?
