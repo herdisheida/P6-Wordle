@@ -181,7 +181,7 @@ class GameMenu:
 
 # TODO
     # the feedback is not good enough
-    # when
+    # when lette is correct stop showing that letter as yellow in other places
 
 
 # IDEAS
