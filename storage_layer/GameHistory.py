@@ -95,17 +95,7 @@ class GameHistory:
 
     def display_statistics(self):
         """Display game statistics"""
-
-
-        # print("\n------- GAME STATISTICS ------")
-        # print(f"Total games: {len(self.games)}")
-        # print(f"Total victories: {len([game for game in self.games if game['result']['outcome'] == 'Victory'])}")
-        # print(f"Total defeats: {len([game for game in self.games if game['result']['outcome'] == 'Defeat'])}")
-        # print(f"Average score: {self._calculate_average_score()}")
-        # print(f"High score: {self._calculate_high_score()}")
-
-        # TODO fix this so it works with list of the game series
-            
+                    
         total_games = 0
         victory_count = 0
         for game in self.series_list:
