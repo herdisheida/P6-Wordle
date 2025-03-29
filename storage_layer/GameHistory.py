@@ -32,6 +32,9 @@ class GameHistory:
     def history_menu(self):
         """History menu loop"""
         self.series_list = self.load_history()
+        if not self.series_list:
+            print(f"{Color.RED.value}User ({self.username}) hasn't played any games{Color.END.value}")
+            input(self.SCREEN_PAUSE)
 
         while self.series_list:
             self.display_history_menu()
@@ -44,25 +47,21 @@ class GameHistory:
                 case "b": break
                 case _: print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
-        if not self.series_list:
-            print(f"{Color.RED.value}User ({self.username}) hasn't played any games{Color.END.value}")
-            input(self.SCREEN_PAUSE)
 
     def display_all_games(self):
         """Display all games in history"""        
         print("\n----------- ALL GAMES ----------")
         print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Outcome"))
 
-        for series_nr, game in enumerate(self.series_list, 1):
-            for round_nr, round in enumerate(game, 1):
+        for series_nr, games in enumerate(self.series_list, 1):
+            for round_nr, round in enumerate(games["game_list"], 1):
+
                 # colorize outcome
-                outcome = round["result"]["outcome"]
-                color = Color.GREEN.value if outcome == "Victory" else Color.RED.value
-                colored_outcome = f"{color}{outcome}{Color.END.value}"
+                outcome = f"{Color.GREEN.value}Victory{Color.END.value}" if round["is_victory"] else f"{Color.RED.value}Defeat{Color.END.value}"
 
                 # get game series nr
                 nr = series_nr if round_nr == 1 else ""
-                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["result"]["score"], round["secret_word"], colored_outcome))
+                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], outcome))
                 if nr == "":
                     print()
 
@@ -95,7 +94,7 @@ class GameHistory:
 
     def display_statistics(self):
         """Display game statistics"""
-                    
+
         total_games = 0
         victory_count = 0
         for game in self.series_list:
@@ -115,7 +114,6 @@ class GameHistory:
         print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}")
 
         input(self.SCREEN_PAUSE)
-
 
     def _calculate_average_score(self):
         """Calculate and return average score for all games"""
