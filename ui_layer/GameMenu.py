@@ -69,6 +69,7 @@ class GameMenu:
             word_length = self._get_valid_input("Enter word length: ", self._get_valid_num)
             max_guess_count = self._get_valid_input("Enter number of guess attempts: ", self._get_valid_num)
             secret_word = self.word_bank.get_random_word(word_length)
+            secret_word = "HELLO" # EYDA debug
 
             # start game
             print(f"\n{Color.BLUE.value}------- Game Start ------{Color.END.value}")

@@ -76,7 +76,6 @@ class WordleGame:
                     feedback[index] = "-"
                 else:
                     feedback[index] = "c"
-                    guessed_letter.append(char)
             else:
                 feedback[index] = "-"
 
