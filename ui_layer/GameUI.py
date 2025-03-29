@@ -42,7 +42,7 @@ class GameUI:
         """Show win/loss message"""
         self._print_history()
         
-        if self.games.game_result["outcome"] == "Victory":
+        if self.games.is_victory:
             print(f"\n{Color.GREEN.value}{Color.BOLD.value}VICTORY!{Color.END.value}")
             print(f"Score: {Color.BLUE.value}{self.games.game_result['score']}{Color.END.value}")
         else:
