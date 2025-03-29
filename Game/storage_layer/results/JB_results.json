@@ -1,0 +1,23 @@
+[
+  {
+    "secret_word": "ZOOMS",
+    "result": {
+      "outcome": "Victory",
+      "score": 130
+    },
+    "history": {
+      "1": {
+        "guess": "MOONS",
+        "feedback": "cCC-C"
+      },
+      "2": {
+        "guess": "DOOMS",
+        "feedback": "-CCCC"
+      },
+      "3": {
+        "guess": "ZOOMS",
+        "feedback": "CCCCC"
+      }
+    }
+  }
+]

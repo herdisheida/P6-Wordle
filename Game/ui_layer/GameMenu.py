@@ -1,8 +1,8 @@
-from Game.ui_layer.GameUI import GameUI
-from Game.logic_layer.ColorText import Color
-from Game.logic_layer.WordleGame import WordleGame
-from Game.storage_layer.wordbank.WordBank import WordBank
-from Game.storage_layer.GameHistory import GameHistory
+from ui_layer.GameUI import GameUI
+from logic_layer.ColorText import Color
+from logic_layer.WordleGame import WordleGame
+from storage_layer.wordbank.WordBank import WordBank
+from storage_layer.GameHistory import GameHistory
 from pathlib import Path
 
 class GameMenu:
@@ -23,10 +23,9 @@ class GameMenu:
 
     def _login(self):
         """Handle user login flow"""
-        print("\n------- LOGIN -------")
-        print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}") # LATER UI weird
-
         while self.online:
+            print("\n------- LOGIN -------")
+            print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}") # LATER UI weird
             choice = input("\n(L)ogin | (Q)uit: ").lower()
             match choice:
                 case "l": self._handle_login()
@@ -44,10 +43,9 @@ class GameMenu:
             print(f"\n{Color.BLUE.value}------- {self.username.capitalize()}'s WORDLE -------{Color.END.value}")
             print("(1) New Game")
             print("(2) See Game History")
-            print("(3) Add Word to Word Bank")
-
-            print("(L) Logout")
-            print("(Q) Quit")
+            print("(3) Add Word to Word Bank\n")
+            print("(L)ogout")
+            print("(Q)uit")
 
     def _main_menu(self):
         """Main menu loop"""

@@ -1,9 +1,11 @@
-from Game.logic_layer.ColorText import Color
+from logic_layer.ColorText import Color
 from pathlib import Path
 import json
 
 class GameHistory:
-    RESULTS_FOLDER = Path("results")
+    # RESULTS_FOLDER = Path("Game") / "storage_layer" / "results"
+    RESULTS_FOLDER = Path("./storage_layer/results")
+
     GUESS_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}" # nr, guesses, feedback
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
     SCREEN_PAUSE = "\nEnter to continue..."

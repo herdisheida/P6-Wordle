@@ -1,6 +1,6 @@
-from Game.logic_layer.ColorText import Color
-from Game.logic_layer.WordleGame import WordleGame
-from Game.storage_layer.GameHistory import GameHistory
+from logic_layer.ColorText import Color
+from logic_layer.WordleGame import WordleGame
+from storage_layer.GameHistory import GameHistory
 
 
 class GameUI:
@@ -8,6 +8,10 @@ class GameUI:
     def __init__(self, game: WordleGame, history: GameHistory):
         self.game = game
         self.history = history
+
+    def run(self):
+        """Run the game UI"""
+        self.game_loop()
 
     def game_loop(self):
         """Handle user guess flow"""
