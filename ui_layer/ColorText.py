@@ -13,7 +13,7 @@ class Color(Enum):
     GRAY = "\033[90m"
 
     @staticmethod
-    def colorize_feedback(feedback: str):
+    def colorize_feedback(feedback: str) -> str:
         """Colorize feedback string"""
         colored = ""
         for char in feedback:
@@ -24,3 +24,8 @@ class Color(Enum):
             elif char == "-":
                 colored += f"{Color.RED.value}{char}{Color.END.value}"
         return colored
+    
+    @staticmethod
+    def _color_result(result: str) -> str:
+        """Colorize game result"""
+        return f"{Color.GREEN.value}Victory{Color.END.value}" if result else f"{Color.RED.value}Defeat{Color.END.value}"

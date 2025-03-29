@@ -7,7 +7,7 @@
       {
         "secret_word": "AFK",
         "is_victory": false,
-        "score": -3,
+        "score": 1,
         "history": {
           "1": {
             "guess": "HEL",
@@ -29,14 +29,14 @@
     ]
   },
   {
-    "total_score": -6,
+    "total_score": 0,
     "curr_streak": 0,
     "longest_streak": 0,
     "game_list": [
       {
         "secret_word": "FLAME",
         "is_victory": false,
-        "score": 0,
+        "score": 1,
         "history": {
           "1": {
             "guess": "HELLO",

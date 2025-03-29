@@ -50,7 +50,7 @@ class GameHistoryUI:
             for round_nr, round in enumerate(games["game_list"], 1):
     
                 nr = series_nr if round_nr == 1 else "" # print series nr for first game only
-                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], self._color_result(round["is_victory"])))
+                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], Color._color_result(round["is_victory"])))
 
                 # only show one series at a time
                 if nr == "":
@@ -76,7 +76,7 @@ class GameHistoryUI:
             print(f"{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
             print(f"  Secret Word: {game['secret_word']}")
-            print(f"  Result: {self._color_result(game['is_victory'])}")   
+            print(f"  Result:  {Color._color_result(game['is_victory'])}")   
             print(f"  Score: {game['score']}")
 
             print("\n  Game rounds:")
@@ -87,10 +87,6 @@ class GameHistoryUI:
 
         input(self.SCREEN_PAUSE)
 
-    def _color_result(self, result: str):
-        """Colorize game result"""
-        colored = f"{Color.GREEN.value}Victory{Color.END.value}" if result else f"{Color.RED.value}Defeat{Color.END.value}"
-        return colored
 
     def _display_statistics(self):
         """Display game statistics"""
