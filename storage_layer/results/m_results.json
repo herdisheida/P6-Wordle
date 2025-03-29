@@ -1,0 +1,17 @@
+[
+  [
+    {
+      "secret_word": "LIT",
+      "result": {
+        "outcome": "Defeat",
+        "score": -5
+      },
+      "history": {
+        "1": {
+          "guess": "SOL",
+          "feedback": "--c"
+        }
+      }
+    }
+  ]
+]

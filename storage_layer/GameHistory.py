@@ -156,11 +156,10 @@ class GameHistory:
     #     with open(self.RESULT_FILE_PATH, "w") as file:
     #         json.dump(all_games, file, indent=2)
     
-    def save_game(self, game_series: list):
-    #     """Save game results to file"""
+    def save_game_series(self, game_series: list):
+    #     """Save game series results to file"""
         game_series_list = []
         for game in game_series:
-
             data = {
                 "secret_word": game["secret_word"],
                 "result": game["game_result"],

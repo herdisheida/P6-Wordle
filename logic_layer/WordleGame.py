@@ -1,5 +1,4 @@
 from logic_layer.Guess import Guess
-from pathlib import Path
 
 
 class WordleGame:
@@ -12,8 +11,7 @@ class WordleGame:
         self.game_round_history = {} # guesses, feedback
         self.guess_count = 0
 
-        self.game_series = []
-        # self.is_game_over = None
+        self.game_series = None
 
     def submit_guess(self, guess: str) -> str:
         """Process a guess and return feedback"""
@@ -27,10 +25,10 @@ class WordleGame:
         
         if feedback == "C" * self.word_length:
             self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")}
-            self._add_game_to_series()
+            self._save_game()
         elif self.guess_count >= self.max_guesses:
             self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")}
-            self._add_game_to_series()
+            self._save_game()
         return feedback
     
     def _validate_guess(self, guess: str) -> tuple[bool, str]:
@@ -87,19 +85,21 @@ class WordleGame:
         guess_penalty = (self.max_guesses - self.guess_count + 1) * 5
         return word_bonus - guess_penalty
 
-    def _add_game_to_series(self):
-        self.game_series.append({
+    def _save_game(self):
+        """Store game in game series variable"""
+        self.game_series = {
                 "secret_word": self.secret_word,
                 "game_result": self.game_result,
                 "game_round_history": self.game_round_history
-                })
+                }
 
     @property
     def is_game_over(self) -> bool:
-        return len(self.game_series) == 5
+        return self.game_result is not None
 
-    def reset(self):
+    def reset_game(self):
         """Reset game state"""
         self.game_result = None
         self.game_round_history = {}
         self.guess_count = 0
+        self.game_series = None

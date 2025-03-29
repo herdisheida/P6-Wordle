@@ -21,10 +21,12 @@ class GameUI:
                 self._display_feedback(feedback)
             except ValueError as e:
                 print(f"{Color.RED.value}{str(e)}{Color.END.value}")
-        
+                continue
+            
         self._display_result()
         self._save_game_series()
-        self.games.reset()
+        self.games.reset_game()
+
 
     def _get_guess(self):
         """Get and validate user input"""
@@ -58,7 +60,7 @@ class GameUI:
 
     def _save_game(self): # EYDA old save game
         """Trigger saving game"""
-        self.history.save_game(
+        self.history.save_game_series(
             secret_word = self.games.secret_word,
             game_result = self.games.game_result,
             game_history = self.games.game_round_history
@@ -66,4 +68,4 @@ class GameUI:
 
     def _save_game_series(self): # FIX
         """Trigger saving game"""
-        self.history.save_game(self.games.game_series)
+        self.history.save_game_series(self.games.game_series)
