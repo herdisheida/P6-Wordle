@@ -23,11 +23,12 @@ Wordle is a daily word-guessing game where the goal is to deduce the hidden word
 
 ## Usage
 ### Run program
-Go to the Game folder and run the program in start.py file
+Go to the directory of the Wordle program and run it with the start.py file.
 ```bash
 cd <your-wordle-game-folder>
 python3 start.py
 ```
+Or run it in VS Code with the start.py file.
 
 ### Users
 You can sign-/log-in by typing your username at the start of the programm, no password needed :D.
