@@ -9,10 +9,8 @@
 
         "game": {
             "secret_word": "LEMON",
-            "result": {
-                "outcome": "Victory",
-                "score": 20
-            },
+            "outcome": "Victory",
+            "score": 20,
             "history": {
                 "1": {
                     "guess": "LINTS",
@@ -39,10 +37,8 @@
         "game": [
             {
                 "secret_word": "MA",
-                "result": {
-                    "outcome": "Victory",
-                    "score": 120
-                },
+                "outcome": "Victory",
+                "score": 120,
                 "history": {
                     "1": {
                         "guess": "MA",
