@@ -3,7 +3,7 @@ from logic_layer.WordleGame import WordleGame
 from pathlib import Path
 import json
 
-class GameHistory_storage:
+class GameHistory:
     RESULTS_FOLDER = Path("./storage_layer/results")
 
     GUESS_HISTORY_FORMAT = "   {0:<8}{1:<20}{2:<20}" # nr, guesses, feedback
