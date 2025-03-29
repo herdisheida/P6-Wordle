@@ -113,8 +113,10 @@ class GameHistoryUI:
 
     def _calculate_average_score(self, total_games):
         """Calculate and return average score for all games"""
-        total_score = sum([game["total_score"] for game in self.series_list])
-        avg = total_score / total_games
+        score_sum = 0
+        for game in self.series_list:
+            score_sum += sum([game["score"] for game in game["game_list"]])
+        avg = score_sum / total_games
         return round(avg, 2)
     
     def _calculate_high_score(self):

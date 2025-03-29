@@ -18,7 +18,7 @@
       {
         "secret_word": "BAE",
         "is_victory": false,
-        "score": -3,
+        "score": 1,
         "history": {
           "1": {
             "guess": "SUS",
