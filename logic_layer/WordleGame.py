@@ -8,7 +8,7 @@ class WordleGame:
         self.word_length = len(secret_word)
 
         self.game_result = None  # outcome, score
-        self.outcome = None
+        self.is_victory = None
         self.score = 0
 
         self.game_round_history = {} # guesses & feedbacks for each round in a single game instance
@@ -27,13 +27,13 @@ class WordleGame:
         self._save_guess(guess, feedback)
         
         if feedback == "C" * self.word_length:
-            self.outcome = "Victory"
-            self.score = self._calculate_score("Victory")
+            self.is_victory = True
+            self.score = self._calculate_score()
             # self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")} # EYDA setti kóða í variable
             self._save_game()
         elif self.guess_count >= self.max_guesses:
-            self.outcome = "Defeat"
-            self.score = self._calculate_score("Defeat")
+            self.is_victory = False
+            self.score = self._calculate_score()
             # self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")} # EYDA setti kóða í class variable
             self._save_game()
         return feedback
@@ -81,11 +81,12 @@ class WordleGame:
         """Store guess in history"""
         self.game_round_history[self.guess_count] = Guess(self.guess_count, guess, feedback)
 
-    def _calculate_score(self, outcome: str) -> int:
+    def _calculate_score(self) -> int:
         """Calculate game score.
         The score is higher the fewer guesses the player used and the longer the wordle word is"""
-        if outcome == "Defeat":
+        if not self.is_victory:
             return -5 * self.guess_count
+        
         word_bonus = 2 * self.word_length
         if self.max_guesses == self.guess_count:
             return 50 + word_bonus
