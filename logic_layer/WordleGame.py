@@ -8,7 +8,10 @@ class WordleGame:
         self.word_length = len(secret_word)
 
         self.game_result = None  # outcome, score
-        self.game_round_history = {} # guesses, feedback
+        self.outcome = None
+        self.score = 0
+
+        self.game_round_history = {} # guesses & feedbacks for each round in a single game instance
         self.guess_count = 0
 
         self.game_series = None
@@ -24,10 +27,14 @@ class WordleGame:
         self._save_guess(guess, feedback)
         
         if feedback == "C" * self.word_length:
-            self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")}
+            self.outcome = "Victory"
+            self.score = self._calculate_score("Victory")
+            # self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")} # EYDA setti kóða í variable
             self._save_game()
         elif self.guess_count >= self.max_guesses:
-            self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")}
+            self.outcome = "Defeat"
+            self.score = self._calculate_score("Defeat")
+            # self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")} # EYDA setti kóða í class variable
             self._save_game()
         return feedback
     
@@ -95,7 +102,7 @@ class WordleGame:
 
     @property
     def is_game_over(self) -> bool:
-        return self.game_result is not None
+        return self.outcome is not None
 
     def reset_game(self):
         """Reset game state"""
