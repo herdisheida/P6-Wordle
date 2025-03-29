@@ -1,4 +1,5 @@
 from ui_layer.ColorText import Color
+from logic_layer.WordleGame import WordleGame
 from pathlib import Path
 import json
 
@@ -156,7 +157,7 @@ class GameHistory:
     #     with open(self.RESULT_FILE_PATH, "w") as file:
     #         json.dump(all_games, file, indent=2)
     
-    def save_game_series(self, series: list):
+    def save_game_series(self, series: list[WordleGame]):
     #     """Save game series results to file"""
         series_list = []
         
