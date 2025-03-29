@@ -32,3 +32,4 @@ Or run it in VS Code with the start.py file.
 
 ### Users
 You can sign-/log-in by typing your username at the start of the programm, no password needed :D.
+\If you want to try an existing account, use username: 'mima'
