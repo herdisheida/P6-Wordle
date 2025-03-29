@@ -1,13 +1,13 @@
 from ui_layer.GameUI import GameUI
 from ui_layer.ColorText import Color
 from logic_layer.WordleGame import WordleGame
+from logic_layer.GameSeries import GameSeries
 from storage_layer.wordbank.WordBank import WordBank
 from storage_layer.GameHistory import GameHistory
 
 class GameMenu:
     def __init__(self):
         self.online = True
-        self.active_game = None
         self.username = None
         self.game_history = None
 
@@ -51,33 +51,65 @@ class GameMenu:
             choice = input("\nEnter: ").lower()
 
             match choice:
-                case "1": self._start_new_game()
+                case "1": self._start_new_series()
                 case "2": self.game_history.history_menu()
                 case "3": self._add_word_to_wordbank()
                 case "l": return # return to login
                 case "q": self.online = False
                 case _: self._display_error("Invalid input")
 
-    def _start_new_game(self):
-        """Configure and start a new game"""
+    def _start_new_series(self):
+        """Start a ew game series"
+        and configure game settings"""
+        print(f"\n{Color.BLUE.value}------- Game Start ------{Color.END.value}")
 
-        try:
-            # configure game
-            word_length = self._get_valid_input("Enter word length: ", self._get_valid_num)
-            max_guess_count = self._get_valid_input("Enter number of guess attempts: ", self._get_valid_num)
-            secret_word = self.word_bank.get_random_word(word_length)
-            # secret_word = "HELLO" # EYDA debug
+        # initialize game series
+        word_length = self._get_valid_input("Enter word length: ", self._get_valid_word_length)
+        max_guess_count = self._get_valid_input("Enter number of guess attempts: ", self._get_valid_attempts)
+        series = GameSeries(word_length, max_guess_count)
+
+        while True: # TODO breya while true
+        
+            try:
+                # configure game
+                secret_word = self.word_bank.get_random_word(word_length)
+
+                # secret_word = "HELLO" # EYDA debug
+                # print(f"Secret word: {Color.BLUE.value}{Color.UNDERLINE.value}{secret_word}{Color.END.value}") # EYDA DEBUG
+                # GameUI(active_game, self.game_history).run() # TODO breyta
+
+                # start game
+                active_game = WordleGame(secret_word, max_guess_count)
+                GameUI(active_game, series).run()
+                series.add_game(active_game.game_result)
+
+                # display series stats
+                print(f"\nSeries Total Score: {series.total_score}")
+                print(f"Current Streak: {series.current_streak}")
+
+                if not self._ask_continue_playing():
+                    self.game_history.save_series(series)
+                    break
+
+            except ValueError as e:
+                self._display_error(str(e))
+
             
-            # start game
-            print(f"\n{Color.BLUE.value}------- Game Start ------{Color.END.value}")
-            # print(f"Secret word: {Color.BLUE.value}{Color.UNDERLINE.value}{secret_word}{Color.END.value}") # EYDA DEBUG
-            self.active_game = WordleGame(secret_word, int(max_guess_count))
-            GameUI(self.active_game, self.game_history).run()
 
-        except ValueError as e:
-            self._display_error(str(e))
-        finally:
-            self.active_game = None
+    def _ask_continue_playing(self):
+        """Check if user wants to keep playing"""
+        play_again = None
+        while not play_again:
+            choice = input("\nDo you want to continue playing? (Y/N): ").lower()
+
+            if choice == "y":
+                return True
+            elif choice == "n":
+                return False
+            else:
+                print(f"{Color.RED.value}Invalid input.{Color.END.value}")
+                continue
+
 
     def _add_word_to_wordbank(self):
         """Add a word to the word bank"""
@@ -88,7 +120,7 @@ class GameMenu:
         except ValueError as e:
             self._display_error(str(e))
 
-    def _get_valid_num(self, num: int) -> int:
+    def _get_valid_attempts(self, num: str) -> int:
         """Validate the user input for guess count"""
         if not num.isdigit():
             raise ValueError("Num needs to be an integer")
@@ -97,6 +129,14 @@ class GameMenu:
         if int(num) > 20:
             raise ValueError("Num too high (max 20)")
         return int(num)
+    
+    def _get_valid_word_length(self, word_length: str) -> int:
+        if not word_length.isdigit():
+            raise ValueError("Word length needs to be an integer")
+        min_length, max_length = self.word_bank.get_max_min_word_length()
+        if int(word_length) < min_length or int(word_length) > max_length:
+            raise ValueError(f"Word length must be between {min_length} and {max_length}")
+        return int(word_length)
 
     def _get_valid_input(self, prompt: str, validation_func: callable) -> str:
         """Get valid input from user"""
