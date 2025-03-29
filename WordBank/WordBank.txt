@@ -111,7 +111,6 @@ Meme
 YOLO
 Noob
 Flex
-Stan
 Hype
 Simp
 Karen
@@ -127,7 +126,6 @@ Drake
 Kanye
 Zaddy
 TikTok
-BTS
 Sheesh
 Based
 Bieber
@@ -138,16 +136,12 @@ Boomer
 Stan
 Twitter
 Hashtag
-Bingeing
 Swaggy
 Yassify
 Yeeted
 Fleek
-Vlogger
-Tinder
 Netflix
 Doomscrol
-Cheesedog
 Ghosting
 SubTweet
 Clickbait
@@ -157,4 +151,3 @@ ViralMeme
 CancelCult
 Zoomer
 Photobomb
-Streisand

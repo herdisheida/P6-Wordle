@@ -31,5 +31,18 @@
         "feedback": "CCCCC"
       }
     }
+  },
+  {
+    "secret_word": "MA",
+    "result": {
+      "outcome": "Victory",
+      "score": 120
+    },
+    "history": {
+      "1": {
+        "guess": "MA",
+        "feedback": "CC"
+      }
+    }
   }
 ]

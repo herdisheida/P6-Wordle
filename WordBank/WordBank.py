@@ -22,7 +22,18 @@ class WordBank:
     
     def add_word(self, word: str):
         """ Add a word to the word bank"""
+        self._validate_word(word)
         with open(self.WORD_BANK_FILE, mode="a") as file:
             file.write(f"\n{word.upper()}")
         self.words.append(word.upper())
-        # TODO word check... maybe þurfum við?
+
+    def _validate_word(self, word: str):
+        """Validate the word format"""
+        if not word.isalpha():
+            raise ValueError("Word needs to be alphabetic")
+        if len(word) < 2:
+            raise ValueError("Word too short (min 2 letters)")
+        if len(word) > 20:
+            raise ValueError("Word too long (max 20 letters)")
+        if word in self.words:
+            raise ValueError("Word already exists in word bank")

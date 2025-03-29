@@ -57,7 +57,7 @@ class GameMenu:
         while self.online:
             self._display_main_menu()
             choice = input("\nEnter: ").lower()
-            
+
             match choice:
                 case "1": self._start_new_game()
                 case "2": self.game_history.menu_loop()
@@ -85,6 +85,15 @@ class GameMenu:
             self._display_error(str(e))
         finally:
             self.active_game = None
+
+    def add_word_to_wordbank(self):
+        """Add a word to the word bank"""
+        new_word = input("Enter a new word: ").upper()
+        try:
+            self.word_bank.add_word(new_word)
+            print(f"{Color.GREEN.value}Word added successfully!{Color.END.value}")
+        except ValueError as e:
+            self._display_error(str(e))
 
     def _get_valid_num(self, num: int):
         """Validate the user input for guess count"""
