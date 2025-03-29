@@ -1,0 +1,15 @@
+[
+  {
+    "secret_word": "NOOB",
+    "result": {
+      "outcome": "Defeat",
+      "score": 140
+    },
+    "history": {
+      "1": {
+        "guess": "HELL",
+        "feedback": "----"
+      }
+    }
+  }
+]

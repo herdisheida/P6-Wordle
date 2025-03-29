@@ -6,7 +6,7 @@ from storage_layer.GameHistory import GameHistory
 class GameUI:
 
     def __init__(self, game: WordleGame, history: GameHistory):
-        self.game = game
+        self.games = game
         self.history = history
 
     def run(self):
@@ -15,17 +15,18 @@ class GameUI:
 
     def game_loop(self):
         """Handle user guess flow"""
-        while not self.game.is_game_over:
+        while not self.games.is_game_over:
             guess = self._get_guess()
             try:
-                feedback = self.game.submit_guess(guess)
+                feedback = self.games.submit_guess(guess)
                 self._display_feedback(feedback)
             except ValueError as e:
                 print(f"{Color.RED.value}{str(e)}{Color.END.value}")
-
+        
         self._display_result()
-        self._save_game()
-        self.game.reset()
+        # self._save_game() # FIX
+        self._save_game_series()
+        self.games.reset()
 
     def _get_guess(self):
         """Get and validate user input"""
@@ -33,18 +34,18 @@ class GameUI:
 
     def _display_feedback(self, feedback: str):
         """Show colored feedback"""
-        print("Feedback: " + Color.colorize_feedback(feedback))
+        print("Hint:  " + Color.colorize_feedback(feedback))
 
     def _display_result(self):
         """Show win/loss message"""
         self._print_history()
         
-        if self.game.game_result["outcome"] == "Victory":
+        if self.games.game_result["outcome"] == "Victory":
             print(f"\n{Color.GREEN.value}{Color.BOLD.value}VICTORY!{Color.END.value}")
-            print(f"Score: {Color.BLUE.value}{self.game.game_result['score']}{Color.END.value}")
+            print(f"Score: {Color.BLUE.value}{self.games.game_result['score']}{Color.END.value}")
         else:
             print(f"\n{Color.RED.value}{Color.BOLD.value}GAME OVER!{Color.END.value}")
-            print(f"Word was: {Color.BLUE.value}{Color.UNDERLINE.value}{self.game.secret_word}{Color.END.value}")
+            print(f"Word was: {Color.BLUE.value}{Color.UNDERLINE.value}{self.games.secret_word}{Color.END.value}")
         
         input(self.history.SCREEN_PAUSE)
 
@@ -53,14 +54,19 @@ class GameUI:
         """Show guess history for game round"""
         print("\n---------- GAME HISTORY ----------")
         print(self.history.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
-        for nr, round in self.game.game_history.items():
+        for nr, round in self.games.game_round_history.items():
             feedback = Color.colorize_feedback(round.feedback)
             print(self.history.GUESS_HISTORY_FORMAT.format(nr, round.word, feedback))
 
-    def _save_game(self):
+    def _save_game(self): # EYDA old save game
         """Trigger saving game"""
         self.history.save_game(
-            secret_word = self.game.secret_word,
-            game_result = self.game.game_result,
-            game_history = self.game.game_history
+            secret_word = self.games.secret_word,
+            game_result = self.games.game_result,
+            game_history = self.games.game_round_history
         )
+
+    def _save_game_series(self): # FIX
+        """Trigger saving game"""
+
+        self.history.save_game(self.games.game_series)

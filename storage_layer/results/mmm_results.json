@@ -1,0 +1,15 @@
+[
+  {
+    "secret_word": "AFK",
+    "result": {
+      "outcome": "Defeat",
+      "score": 130
+    },
+    "history": {
+      "1": {
+        "guess": "LAS",
+        "feedback": "-c-"
+      }
+    }
+  }
+]

@@ -14,7 +14,7 @@ class GameHistory:
 
         # create folder if it doesn't exist
         self.RESULTS_FOLDER.mkdir(exist_ok=True) # EYDA þarf þetta ?
-        self.RESULT_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"      
+        self.RESULT_FILE_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"      
         
 
     def display_history_menu(self):
@@ -105,29 +105,57 @@ class GameHistory:
     def load_history(self):
         """Load game history from file"""
         try:
-            with open(self.RESULT_PATH, "r") as file:
+            with open(self.RESULT_FILE_PATH, "r") as file:
                 all_games = json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             all_games = []
         return all_games
 
-    def save_game(self, secret_word: str, game_result: dict, game_history: dict):
-        """Save game results to file"""
-        data = {
-            "secret_word": secret_word,
-            "result": game_result,
-            "history": {
-                nr: {
-                    "guess": round.word,
-                    "feedback": round.feedback
-                }
-                for nr, round in game_history.items()
-            }
-        }
+    # def save_game(self, secret_word: str, game_result: dict, game_history: dict): # EYDA OLD CODE
+    #     """Save game results to file"""
+    #     data = {
+    #         "secret_word": secret_word,
+    #         "result": game_result,
+    #         "history": {
+    #             nr: {
+    #                 "guess": round.word,
+    #                 "feedback": round.feedback
+    #             }
+    #             for nr, round in game_history.items()
+    #         }
+    #     }
         
+    #     # get existing data and add new game to it
+    #     all_games = self.load_history()
+    #     all_games.append(data)
+    #     with open(self.RESULT_FILE_PATH, "w") as file:
+    #         json.dump(all_games, file, indent=2)
+    
+    def save_game(self, game_series: list):
+    #     """Save game results to file"""
+        game_series_list = []
+        for game in game_series:
+
+                # "secret_word": self.secret_word,
+                # "game_result": self.game_result,
+                # "game_round_history": self.game_round_history
+
+
+            data = {
+                "secret_word": game["secret_word"],
+                "result": game["game_result"],
+                "history": {
+                    nr: {
+                        "guess": round.word,
+                        "feedback": round.feedback
+                    }
+                    for nr, round in game["game_round_history"].items()
+                }
+            }
+            game_series_list.append(data)
+
         # get existing data and add new game to it
         all_games = self.load_history()
         all_games.append(data)
-        with open(self.RESULT_PATH, "w") as file:
+        with open(self.RESULT_FILE_PATH, "w") as file:
             json.dump(all_games, file, indent=2)
-    
