@@ -51,38 +51,39 @@ class GameHistory:
     def display_all_games(self):
         """Display all games in history"""        
         print("\n----------- ALL GAMES ----------")
-        print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Outcome"))
+        print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Result"))
 
         for series_nr, games in enumerate(self.series_list, 1):
             for round_nr, round in enumerate(games["game_list"], 1):
 
                 # colorize outcome
-                outcome = f"{Color.GREEN.value}Victory{Color.END.value}" if round["is_victory"] else f"{Color.RED.value}Defeat{Color.END.value}"
+                result = f"{Color.GREEN.value}Victory{Color.END.value}" if round["is_victory"] else f"{Color.RED.value}Defeat{Color.END.value}"
 
                 # get game series nr
                 nr = series_nr if round_nr == 1 else ""
-                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], outcome))
+                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], result))
                 if nr == "":
                     print()
 
         input(self.SCREEN_PAUSE)
 
     def display_game_details(self, game_nr: int):
-        """Display details for a specific game"""
+        """Display details for a specific game series"""
         try:
-            game_series = self.series_list[int(game_nr) - 1]
+            a_series = self.series_list[int(game_nr) - 1]
         except (IndexError, ValueError):
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
          
         print(f"\n\n------- GAME SERIES nr.{game_nr} ------\n")
-        for i in range(len(game_series)):
-            game = game_series[i]
+        for game in a_series["game_list"]:
+            i = a_series["game_list"].index(game)
+
             print(f"{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
             print(f"  Secret Word: {game['secret_word']}")
-            print(f"  Result: {game['result']['outcome']}")   
-            print(f"  Score: {game['result']['score']}")
+            print(f"  Result: {game['is_victory']}")   
+            print(f"  Score: {game['score']}")
 
             print("\n  Game rounds:")
             print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
