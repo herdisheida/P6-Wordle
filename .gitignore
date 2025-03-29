@@ -28,3 +28,7 @@ logic_layer/__pycache__/WordleGame.cpython-313.pyc
 ui_layer/__pycache__/GameMenu.cpython-313.pyc
 logic_layer/__pycache__/WordleGame.cpython-313.pyc
 logic_layer/__pycache__/WordleGame.cpython-313.pyc
+logic_layer/__pycache__/WordleGame.cpython-313.pyc
+storage_layer/results/ggg_results.json
+storage_layer/wordbank/WordBank.txt
+ui_layer/__pycache__/GameMenu.cpython-313.pyc
