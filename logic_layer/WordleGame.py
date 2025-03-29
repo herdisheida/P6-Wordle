@@ -90,10 +90,3 @@ class WordleGame:
     @property
     def is_game_over(self) -> bool:
         return self.is_victory is not None
-
-    def reset_game(self): # EYDA þarf ég ? því ég bý alltaf til nýjan WordleGame
-        """Reset game state"""
-        self.is_victory = None
-        self.score = 0
-        self.guess_history = {}
-        self.guess_count = 0

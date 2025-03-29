@@ -74,7 +74,6 @@ class GameMenu:
             try:
                 # configure game
                 secret_word = self.word_bank.get_random_word(word_length)
-                secret_word = "HELLO" # EYDA debug
 
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
@@ -153,57 +152,3 @@ class GameMenu:
     def _display_error(self, message):
         """ Display error message in red """
         print(f"{Color.RED.value}{message}{Color.END.value}")
-
-
-
-
-
-# 1. BASIC GAME - 50%
-# [x] Display previous guesses in the round - 10%
-# [x] Display code with each guess, -c-C- - 10%
-# [x] Lets user know if wrong format and doesn't crash - 5%
-# [x] Handles uppercase and lowercase without complaint - 5%
-# [x] Detect loss when guesses are finished - 10%
-# [x] Detect victory when a guess is correct - 10%
-
-# 2. MORE REFINED SINGLE GAME - 30%
-# [x] User can input or select number of letters and guesses before the game begins - 5%
-    # ○ Extends the "5 letters, 5 guesses" requirement
-# [x] After finishing a game the user can select to quit or start a new game - 5%
-# [x] Program stores word bank in a data structure - 5%
-# [x] Program randomly selects word from word bank - 5%
-# [x] The word bank is stored in and read from a file - 10%
-
-# 3. CONNECTED SERIES OF GAMES - 30% (that makes 110%)
-# [x] Keep track of wins and losses throughout the run (store in classes/variables) - 5%
-# [x] Find a way to score series of games and keep track of high scores - 5%
-    # ○ Total scores can for example be affected by (but not limited by):
-        # ■ # of wrong guesses per word
-        # ■ length of word
-        # ■ # of games before loss (or total score of those games), etc.
-# [x] Scores/highscores stored so that they live between runs of the program - 5%
-# [x] Allow words to be added to the word bank (and file) through the program itself - 5%
-# [x] Allow user to see their history of games/scores - 5%
-# [x] Allow save/profile for multiple users - 5%
-    # ○ Students figure out how best to accomplish this
-    # ○ Don't need password login, but switching/selecting users
-
-
-
-
-# TODO 'connected' series of games (not singular instance)
-    # add calass variables:
-        # [x] scores ( scoring series of games --- breyta kerfinu ugghhh)
-
-    # FIX :
-        # [x] user see history games/scores -- lookar öðruvísi í series of games
-        # [x] let user choose to continue playing game:
-            # [x] if played 1's = single game instance, else = series of connected games
-
-# TODO
-    # [x] the feedback is not good enough
-    # [x] when lette is correct stop showing that letter as yellow in other places
-
-
-# IDEAS
-    # [x] make class for SeriesOfGames, save stuff their...?
