@@ -55,7 +55,28 @@ class WordleGame:
             else:
                 feedback += "-"
 
+        guessed_letter = [] # correctly guessed letters
+        feedback = []
+        for index in range(len(self.secret_word)):
+            # Correct position
+            if guess[index] == self.secret_word[index]:
+                feedback.append("C")
+                guessed_letter.append(guess[index])
+
+        for index in range(len(self.secret_word)):
+            char = guess[index]
+            if char in self.secret_word:
+                # don't show C if letter has been guessed
+                if guessed_letter.count(char) < self.secret_word.count(char):
+                    feedback.insert(index, "C")
+    
+            else:
+                feedback.insert(index, "-")
+
+
         self._save_guess(guess, feedback)
+
+        print(feedback) # EYDA debugging
         return feedback
 
     def _save_guess(self, guess: str, feedback: str):
