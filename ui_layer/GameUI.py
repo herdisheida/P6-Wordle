@@ -44,7 +44,7 @@ class GameUI:
         
         if self.games.is_victory:
             print(f"\n{Color.GREEN.value}{Color.BOLD.value}VICTORY!{Color.END.value}")
-            print(f"Score: {Color.BLUE.value}{self.games.game_result['score']}{Color.END.value}")
+            print(f"Score: {Color.BLUE.value}{self.games.score}{Color.END.value}")
         else:
             print(f"\n{Color.RED.value}{Color.BOLD.value}GAME OVER!{Color.END.value}")
             print(f"Word was: {Color.BLUE.value}{Color.UNDERLINE.value}{self.games.secret_word}{Color.END.value}")
