@@ -22,7 +22,7 @@ Wordle is a daily word-guessing game where the goal is to deduce the hidden word
 
 
 ## Usage
-### Play the game
+### Run program
 Go to the Game folder and run the program in start.py file
 ```bash
 cd <your-wordle-game-folder>
