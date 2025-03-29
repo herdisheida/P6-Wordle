@@ -1,5 +1,5 @@
 from ui_layer.GameUI import GameUI
-from logic_layer.ColorText import Color
+from ui_layer.ColorText import Color
 from logic_layer.WordleGame import WordleGame
 from storage_layer.wordbank.WordBank import WordBank
 from storage_layer.GameHistory import GameHistory

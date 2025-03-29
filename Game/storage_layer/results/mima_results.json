@@ -44,5 +44,54 @@
         "feedback": "CC"
       }
     }
+  },
+  {
+    "secret_word": "GRASP",
+    "result": {
+      "outcome": "Defeat",
+      "score": 60
+    },
+    "history": {
+      "1": {
+        "guess": "HANGS",
+        "feedback": "-c-cc"
+      },
+      "2": {
+        "guess": "SKILL",
+        "feedback": "c----"
+      },
+      "3": {
+        "guess": "STICK",
+        "feedback": "c----"
+      },
+      "4": {
+        "guess": "DRINK",
+        "feedback": "-C---"
+      },
+      "5": {
+        "guess": "TINKS",
+        "feedback": "----c"
+      },
+      "6": {
+        "guess": "LINKS",
+        "feedback": "----c"
+      },
+      "7": {
+        "guess": "DDDDD",
+        "feedback": "-----"
+      },
+      "8": {
+        "guess": "DDDDD",
+        "feedback": "-----"
+      },
+      "9": {
+        "guess": "EEEEE",
+        "feedback": "-----"
+      },
+      "10": {
+        "guess": "FFFFF",
+        "feedback": "-----"
+      }
+    }
   }
 ]

@@ -1,4 +1,4 @@
-from logic_layer.ColorText import Color
+from ui_layer.ColorText import Color
 from pathlib import Path
 import json
 

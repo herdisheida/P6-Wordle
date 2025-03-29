@@ -1,5 +1,4 @@
-from Game.ui_layer
-from Game.logic_layer.ColorText import Color
+from Game.ui_layer.ColorText import Color
 from Game.logic_layer.Guess import Guess
 from pathlib import Path
 import json
