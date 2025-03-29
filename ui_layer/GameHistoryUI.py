@@ -101,6 +101,7 @@ class GameHistoryUI:
         print(f"Total series:    {len(self.series_list)}")
         print(f"Total games      {total_games}\n")
 
+        print(f"Win percentage:  {round((victory_count / total_games) * 100, 2)}%")
         print(f"Total victories: {victory_count}")
         print(f"Total defeats:   {total_games - victory_count}\n")
 
