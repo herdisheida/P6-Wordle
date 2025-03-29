@@ -137,8 +137,7 @@ class WordleGame():
     def save_game_result(self):
         """Save the game result to a file"""
         # username
-        username = input("Enter your username: ") # LATER add this username in the menu section
-        # username = self.get_user()
+        username = input("Enter your username: ")
         filename = f"{username}_results.txt"
         file_path = self.RESULT_FOLDER / filename
 

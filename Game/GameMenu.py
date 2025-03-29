@@ -25,7 +25,7 @@ class GameMenu:
     def _login(self):
         """Handle user login flow"""
         print("\n------- LOGIN -------")
-        print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}") # LATER looks weird
+        print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}") # LATER UI weird
 
         while self.online:
             choice = input("\n(L)ogin | (Q)uit: ").lower()
@@ -127,16 +127,30 @@ class GameMenu:
         """ Display error message in red """
         print(f"{Color.RED.value}{message}{Color.END.value}")
 
-# MORE REFINED SINGLE GAME - 30%
+
+
+
+
+# 1. BASIC GAME - 50%
+# [x] Display previous guesses in the round - 10%
+# [x] Display code with each guess, -c-C- - 10%
+# [x] Lets user know if wrong format and doesn't crash - 5%
+# [x] Handles uppercase and lowercase without complaint - 5%
+# [x] Detect loss when guesses are finished - 10%
+# [x] Detect victory when a guess is correct - 10%
+
+# 2. MORE REFINED SINGLE GAME - 30%
 # [x] User can input or select number of letters and guesses before the game begins - 5%
     # ○ Extends the "5 letters, 5 guesses" requirement
-# [x] After finishing a game the user can select to quit or start a new game - 5%
+# [ ] After finishing a game the user can select to quit or start a new game - 5%
+        # TODO i can only let them play again, not continue the game...
 # [x] Program stores word bank in a data structure - 5%
 # [x] Program randomly selects word from word bank - 5%
 # [x] The word bank is stored in and read from a file - 10%
 
 # 3. CONNECTED SERIES OF GAMES - 30% (that makes 110%)
 # [ ] Keep track of wins and losses throughout the run (store in classes/variables) - 5%
+        # TODO i only have that in a file
 # [ ] Find a way to score series of games and keep track of high scores - 5%
     # ○ Total scores can for example be affected by (but not limited by):
         # ■ # of wrong guesses per word
