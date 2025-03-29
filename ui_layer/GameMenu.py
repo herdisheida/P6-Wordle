@@ -69,6 +69,7 @@ class GameMenu:
         series = GameSeries(word_length, max_guess_count)
 
         while True: # TODO breya while true
+            print(f"\n{Color.BLUE.value} -- New Game -- {Color.END.value}")
         
             try:
                 # configure game
@@ -83,8 +84,7 @@ class GameMenu:
                 GameUI(active_game, series, self.game_history).run() # FIX vtk hvort ég ætli að hafa game_history sem argument
                 series.add_game(active_game)
 
-
-                if not self._ask_continue_playing():
+                if not self._continue_playing():
                     break
 
             except ValueError as e:
@@ -93,7 +93,7 @@ class GameMenu:
         self.game_history.save_game_series(series)
             
 
-    def _ask_continue_playing(self):
+    def _continue_playing(self):
         """Check if user wants to keep playing"""
         play_again = None
         while not play_again:
