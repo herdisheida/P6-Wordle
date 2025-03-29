@@ -1,0 +1,28 @@
+[
+  {
+    "total_score": 0,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "series_list": [
+      {
+        "secret_word": "SUS",
+        "is_victory": null,
+        "score": 0,
+        "history": {}
+      }
+    ]
+  },
+  {
+    "total_score": 0,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "series_list": [
+      {
+        "secret_word": "LIT",
+        "is_victory": null,
+        "score": 0,
+        "history": {}
+      }
+    ]
+  }
+]
