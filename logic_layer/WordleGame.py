@@ -3,8 +3,6 @@ from pathlib import Path
 
 
 class WordleGame:
-    RESULT_FOLDER = Path("./storage_layer/results")
-
     def __init__(self, secret_word: str, max_guesses: int):
         self.secret_word = secret_word
         self.max_guesses = max_guesses

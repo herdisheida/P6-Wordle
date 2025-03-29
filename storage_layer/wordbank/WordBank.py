@@ -1,8 +1,6 @@
-from pathlib import Path
 import random
 
 class WordBank:
-    # WORD_BANK_FILE = Path("Game/storage_layer/WordBank") / "wordbank.txt" # EYDA
     WORD_BANK_FILE = "./storage_layer/WordBank/wordbank.txt" 
 
     def __init__(self):

@@ -3,7 +3,6 @@ from ui_layer.ColorText import Color
 from logic_layer.WordleGame import WordleGame
 from storage_layer.wordbank.WordBank import WordBank
 from storage_layer.GameHistory import GameHistory
-from pathlib import Path
 
 class GameMenu:
     def __init__(self):

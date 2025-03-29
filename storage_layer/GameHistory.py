@@ -3,7 +3,6 @@ from pathlib import Path
 import json
 
 class GameHistory:
-    # RESULTS_FOLDER = Path("Game") / "storage_layer" / "results" # EYDA
     RESULTS_FOLDER = Path("./storage_layer/results")
 
     GUESS_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}" # nr, guesses, feedback
@@ -14,7 +13,7 @@ class GameHistory:
         self.username = username
 
         # create folder if it doesn't exist
-        self.RESULTS_FOLDER.mkdir(exist_ok=True)
+        self.RESULTS_FOLDER.mkdir(exist_ok=True) # EYDA þarf þetta ?
         self.RESULT_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"      
         
 
