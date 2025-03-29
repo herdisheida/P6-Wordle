@@ -6,8 +6,6 @@ from storage_layer.GameHistory import GameHistory
 from pathlib import Path
 
 class GameMenu:
-    WORDBANK_FILE_PATH = Path("WordBank") / "wordbank.txt"
-
     def __init__(self):
         self.online = True
         self.active_game = None
@@ -19,7 +17,7 @@ class GameMenu:
     def run(self):
         """Run the game menu"""
         self._login()
-        print(f"\n{Color.BLUE.value}Goodbye!{Color.END.value}")
+        print(f"\n{Color.BLUE.value}Goodbye {self.username}!{Color.END.value}")
 
     def _login(self):
         """Handle user login flow"""
@@ -70,7 +68,7 @@ class GameMenu:
             max_guess_count = self._get_valid_input("Enter number of guess attempts: ", self._get_valid_num)
             secret_word = self.word_bank.get_random_word(word_length)
             # secret_word = "HELLO" # EYDA debug
-
+            
             # start game
             print(f"\n{Color.BLUE.value}------- Game Start ------{Color.END.value}")
             # print(f"Secret word: {Color.BLUE.value}{Color.UNDERLINE.value}{secret_word}{Color.END.value}") # EYDA DEBUG
