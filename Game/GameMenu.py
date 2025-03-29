@@ -71,10 +71,10 @@ class GameMenu:
             # configure game
             word_length = self._get_valid_input("Enter word length: ", self._get_valid_num)
             max_guess_count = self._get_valid_input("Enter number of guess attempts: ", self._get_valid_num)
+            secret_word = self.word_bank.get_random_word(word_length)
 
             # start game
             print(f"\n{Color.BLUE.value}------- Game Start ------{Color.END.value}")
-            secret_word = self.word_bank.get_random_word(word_length)
             print(f"Secret word: {Color.BLUE.value}{Color.UNDERLINE.value}{secret_word}{Color.END.value}") # EYDA DEBUG
             self.active_game = WordleGame(secret_word, int(max_guess_count))
             GameUI(self.active_game, self.game_history).run()
@@ -105,13 +105,15 @@ class GameMenu:
 
     def _get_valid_input(self, prompt: str, validation_func: callable) -> str:
         """Get valid input from user"""
-        while True: # FIX vtk hvort ég megi nota while True
+        not_valid_input = True
+        while not_valid_input:
             user_input = input(prompt)
             try:
                 if validation_func(user_input):
-                    return user_input
+                    not_valid_input = False
             except ValueError as e:
                 self._display_error(str(e))
+        return user_input
 
     def _validate_username(self, username: str) -> bool:
         """Validate the username"""

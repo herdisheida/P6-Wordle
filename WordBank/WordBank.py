@@ -15,9 +15,8 @@ class WordBank:
     def get_random_word(self, length: int) -> str:
         """Get a random word from the word bank with specified length"""
         filtered = [word for word in self.words if len(word) == int(length)]
-
         if not filtered:
-            raise ValueError("No word found with that length\n")
+            raise ValueError(f"No word found with {length}-letters\n")
         return random.choice(filtered).upper()
     
     def add_word(self, word: str):

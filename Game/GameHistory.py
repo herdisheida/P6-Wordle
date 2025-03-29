@@ -6,7 +6,6 @@ class GameHistory:
     RESULTS_FOLDER = Path("results")
     GUESS_HISTORY_FORMAT = " {0:<5}{1:<20}{2:<20}" # nr, guesses, feedback
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
-
     SCREEN_PAUSE = "\nEnter to continue..."
 
     def __init__(self, username: str):
@@ -19,7 +18,6 @@ class GameHistory:
 
     def display_history_menu(self):
         """Display the history menu"""
-        # load game history
         print("\n------- GAME HISTORY -------")
         print(f"User: {self.username}\n")
 
@@ -44,7 +42,6 @@ class GameHistory:
                 case "b": break
                 case _: print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
-        # if no games are found
         if not self.games:
             print(f"{Color.RED.value}User ({self.username}) hasn't played any games{Color.END.value}")
             input(self.SCREEN_PAUSE)
