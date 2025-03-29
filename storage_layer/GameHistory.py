@@ -5,7 +5,7 @@ import json
 class GameHistory:
     RESULTS_FOLDER = Path("./storage_layer/results")
 
-    GUESS_HISTORY_FORMAT = "  {0:<8}{1:<20}{2:<20}" # nr, guesses, feedback
+    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<20}{2:<20}" # nr, guesses, feedback
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
     SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
@@ -75,20 +75,20 @@ class GameHistory:
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
          
-        print(f"\n\n------- GAME SERIES nr.{game_nr} ------")
+        print(f"\n\n------- GAME SERIES nr.{game_nr} ------\n")
         for i in range(len(game_series)):
             game = game_series[i]
-            print(f"{Color.BLUE.value}GAME: {i}{Color.END.value}")
+            print(f"{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
-            print(f" Secret Word: {game['secret_word']}")
-            print(f" Result: {game['result']['outcome']}")   
-            print(f" Score: {game['result']['score']}")
+            print(f"  Secret Word: {game['secret_word']}")
+            print(f"  Result: {game['result']['outcome']}")   
+            print(f"  Score: {game['result']['score']}")
 
-            print("\n Game rounds:")
+            print("\n  Game rounds:")
             print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
             for nr, round in game["history"].items():
                 print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color.colorize_feedback(round["feedback"])))
-                print()
+            print()
 
         input(self.SCREEN_PAUSE)
 
