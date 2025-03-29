@@ -1,0 +1,63 @@
+[
+  {
+    "total_score": -30,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "series_list": [
+      {
+        "secret_word": "LEMON",
+        "is_victory": false,
+        "score": -15,
+        "history": {
+          "1": {
+            "guess": "HELLO",
+            "feedback": "-Cc-c"
+          },
+          "2": {
+            "guess": "WORLD",
+            "feedback": "-c-c-"
+          },
+          "3": {
+            "guess": "MANDY",
+            "feedback": "c-c--"
+          },
+          "4": {
+            "guess": "KITCH",
+            "feedback": "-----"
+          },
+          "5": {
+            "guess": "MONKE",
+            "feedback": "ccc-c"
+          }
+        }
+      },
+      {
+        "secret_word": "RAISE",
+        "is_victory": false,
+        "score": -15,
+        "history": {
+          "1": {
+            "guess": "WHOAH",
+            "feedback": "---c-"
+          },
+          "2": {
+            "guess": "LOLLY",
+            "feedback": "-----"
+          },
+          "3": {
+            "guess": "WORLD",
+            "feedback": "--c--"
+          },
+          "4": {
+            "guess": "LEMON",
+            "feedback": "-c---"
+          },
+          "5": {
+            "guess": "SADIE",
+            "feedback": "cC-cC"
+          }
+        }
+      }
+    ]
+  }
+]
