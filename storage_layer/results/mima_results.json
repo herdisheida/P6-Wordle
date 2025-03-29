@@ -1,0 +1,47 @@
+[
+  {
+    "total_score": -18,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "QUICK",
+        "is_victory": false,
+        "score": -9,
+        "history": {
+          "1": {
+            "guess": "WORLD",
+            "feedback": "-----"
+          },
+          "2": {
+            "guess": "MATCH",
+            "feedback": "---C-"
+          },
+          "3": {
+            "guess": "CANDY",
+            "feedback": "c----"
+          }
+        }
+      },
+      {
+        "secret_word": "RHYME",
+        "is_victory": false,
+        "score": -9,
+        "history": {
+          "1": {
+            "guess": "YOHOO",
+            "feedback": "c-c--"
+          },
+          "2": {
+            "guess": "WHATS",
+            "feedback": "-C---"
+          },
+          "3": {
+            "guess": "ROUGH",
+            "feedback": "C---c"
+          }
+        }
+      }
+    ]
+  }
+]

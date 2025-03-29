@@ -1,10 +1,9 @@
 from ui_layer.ColorText import Color
-from logic_layer.WordleGame import WordleGame
-from pathlib import Path
-import json
+from storage_layer.GameHistory_storage import GameHistory_Storage
 
-class GameHistory:
-    RESULTS_FOLDER = Path("./storage_layer/results")
+class GameHistoryUI:
+    """Class to handle game history user interface"""
+    # RESULTS_FOLDER = Path("./storage_layer/results")
 
     GUESS_HISTORY_FORMAT = "   {0:<8}{1:<20}{2:<20}" # nr, guesses, feedback
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
@@ -12,11 +11,12 @@ class GameHistory:
 
     def __init__(self, username: str):
         self.username = username
+        self.storage = GameHistory_Storage(username)
 
         # create folder if it doesn't exist
-        self.RESULTS_FOLDER.mkdir(exist_ok=True) # EYDA þarf þetta ?
-        self.RESULT_FILE_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"      
-        
+        # self.RESULTS_FOLDER.mkdir(exist_ok=True) # EYDA þarf þetta ?
+        # self.RESULT_FILE_PATH = self.RESULTS_FOLDER / f"{self.username}_results.json"      
+
 
     def display_history_menu(self):
         """Display the history menu"""
@@ -31,7 +31,7 @@ class GameHistory:
 
     def history_menu(self):
         """History menu loop"""
-        self.series_list = self.load_history()
+        self.series_list = self.storage.load_history()
         if not self.series_list:
             print(f"{Color.RED.value}User ({self.username}) hasn't played any games{Color.END.value}")
             input(self.SCREEN_PAUSE)
@@ -131,47 +131,7 @@ class GameHistory:
                 high_score = score
         return high_score
     
-    def load_history(self):
-        """Load game history from file"""
-        try:
-            with open(self.RESULT_FILE_PATH, "r") as file:
-                all_games = json.load(file)
-        except (FileNotFoundError, json.JSONDecodeError):
-            all_games = []
-        return all_games
-    
-    def save_game_series(self, series: list[WordleGame]):
-        """Save game series results to file"""
-        series_list = []
-        
-        # get all games in the series
-        for game in series.series_list:
-            data = {
-                "secret_word": game.secret_word,
-                "is_victory": game.is_victory,
-                "score": game.score,
-                "history": {
-                    nr: {
-                        "guess": round.word,
-                        "feedback": round.feedback
-                    }
-                    for nr, round in game.guess_history.items()
-                    }
-                }
-            series_list.append(data)
-
-        # create game series data
-        game_series = {
-            "total_score": series.total_score,
-            "curr_streak": series.curr_streak,
-            "longest_streak": series.longest_streak,
-            "game_list": series_list
-        }        
-
-        # get existing user series history and add new game to it
-        all_series = self.load_history()
-        all_series.append(game_series)
-
-        # save to file
-        with open(self.RESULT_FILE_PATH, "w") as file:
-            json.dump(all_series, file, indent=2)
+    def save_game_series(self, series):
+        """Trigger saving game series"""
+        self.storage.save_game_series(series)
+        print(f"{Color.GREEN.value}Game series saved successfully!{Color.END.value}")

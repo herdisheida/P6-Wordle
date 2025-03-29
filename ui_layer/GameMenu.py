@@ -3,7 +3,7 @@ from ui_layer.ColorText import Color
 from logic_layer.WordleGame import WordleGame
 from logic_layer.GameSeries import GameSeries
 from storage_layer.wordbank.WordBank import WordBank
-from ui_layer.GameHistoryUI import GameHistory
+from ui_layer.GameHistoryUI import GameHistoryUI
 
 class GameMenu:
     def __init__(self):
@@ -32,7 +32,7 @@ class GameMenu:
     def _handle_login(self) -> str:
         """Authenticate user and initalize game history"""
         self.username = self._get_valid_input("Enter username: ", self._validate_username)
-        self.game_history = GameHistory(self.username)
+        self.game_history = GameHistoryUI(self.username)
         self._main_menu()
     
     def _display_main_menu(self):

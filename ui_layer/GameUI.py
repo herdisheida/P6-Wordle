@@ -1,11 +1,11 @@
 from ui_layer.ColorText import Color
 from logic_layer.WordleGame import WordleGame
 from logic_layer.GameSeries import GameSeries
-from ui_layer.GameHistoryUI import GameHistory
+from ui_layer.GameHistoryUI import GameHistoryUI
 
 
 class GameUI:
-    def __init__(self, game: WordleGame, series: GameSeries, history: GameHistory):
+    def __init__(self, game: WordleGame, series: GameSeries, history: GameHistoryUI):
         self.game = game
         self.game_series = series
         self.history = history
