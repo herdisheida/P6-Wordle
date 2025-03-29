@@ -1,11 +1,13 @@
 from ui_layer.ColorText import Color
 from logic_layer.WordleGame import WordleGame
+from logic_layer.GameSeries import GameSeries
 from storage_layer.GameHistory import GameHistory
 
 
 class GameUI:
-    def __init__(self, game: WordleGame, history: GameHistory):
+    def __init__(self, game: WordleGame, series: GameSeries, history: GameHistory):
         self.games = game
+        self.game_seris = series
         self.history = history
 
     def run(self):
@@ -24,7 +26,7 @@ class GameUI:
                 continue
             
         self._display_result()
-        self._save_game_series()
+        # self._save_game_series()
         self.games.reset_game()
 
 

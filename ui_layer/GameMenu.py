@@ -64,8 +64,8 @@ class GameMenu:
         print(f"\n{Color.BLUE.value}------- Game Start ------{Color.END.value}")
 
         # initialize game series
-        word_length = self._get_valid_input("Enter word length: ", self._get_valid_word_length)
-        max_guess_count = self._get_valid_input("Enter number of guess attempts: ", self._get_valid_attempts)
+        word_length = int(self._get_valid_input("Enter word length: ", self._get_valid_word_length))
+        max_guess_count = int(self._get_valid_input("Enter number of guess attempts: ", self._get_valid_attempts))
         series = GameSeries(word_length, max_guess_count)
 
         while True: # TODO breya while true
@@ -80,12 +80,9 @@ class GameMenu:
 
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
-                GameUI(active_game, series).run()
+                GameUI(active_game, series, self.game_history).run() # FIX vtk hvort ég ætli að hafa game_history sem argument
                 series.add_game(active_game.game_result)
 
-                # display series stats
-                print(f"\nSeries Total Score: {series.total_score}")
-                print(f"Current Streak: {series.current_streak}")
 
                 if not self._ask_continue_playing():
                     self.game_history.save_series(series)
@@ -123,11 +120,11 @@ class GameMenu:
     def _get_valid_attempts(self, num: str) -> int:
         """Validate the user input for guess count"""
         if not num.isdigit():
-            raise ValueError("Num needs to be an integer")
+            raise ValueError("Num needs to be an integer\n")
         if int(num) < 1:
-            raise ValueError("Num must be greater than 0")
+            raise ValueError("Num must be greater than 0\n")
         if int(num) > 20:
-            raise ValueError("Num too high (max 20)")
+            raise ValueError("Num too high (max 20)\n")
         return int(num)
     
     def _get_valid_word_length(self, word_length: str) -> int:
@@ -135,7 +132,7 @@ class GameMenu:
             raise ValueError("Word length needs to be an integer")
         min_length, max_length = self.word_bank.get_max_min_word_length()
         if int(word_length) < min_length or int(word_length) > max_length:
-            raise ValueError(f"Word length must be between {min_length} and {max_length}")
+            raise ValueError(f"No word found with {word_length}-letters \nWord length must be between {min_length} and {max_length}\n")
         return int(word_length)
 
     def _get_valid_input(self, prompt: str, validation_func: callable) -> str:
