@@ -28,3 +28,4 @@ Go to the Game folder and run the program in start.py file
 cd <your-wordle-game-folder>
 python3 start.py
 ```
+You sign-/log-in by typing your username at the start of the program.
