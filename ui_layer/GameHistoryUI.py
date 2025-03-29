@@ -42,7 +42,7 @@ class GameHistoryUI:
 
             match choice:
                 case "1": self.display_all_games()
-                case "2": self.display_game_details(input("Enter game number: "))
+                case "2": self.display_game_details(input("Enter series nr: "))
                 case "3": self.display_statistics()
                 case "b": break
                 case _: print(f"{Color.RED.value}Invalid input{Color.END.value}")
@@ -109,17 +109,17 @@ class GameHistoryUI:
         print(f"Total victories: {victory_count}")
         print(f"Total defeats:   {total_games - victory_count}\n")
 
-        print(f"Average score:   {self._calculate_average_score()}")
+        print(f"Average score:   {self._calculate_average_score(total_games)}")
         print(f"High score:      {self._calculate_high_score()}\n")
         print(f"Current streak:  {self.series_list[-1]["curr_streak"]}")
         print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}")
 
         input(self.SCREEN_PAUSE)
 
-    def _calculate_average_score(self):
+    def _calculate_average_score(self, total_games):
         """Calculate and return average score for all games"""
         total_score = sum([game["total_score"] for game in self.series_list])
-        avg = total_score / len(self.series_list)
+        avg = total_score / total_games
         return round(avg, 2)
     
     def _calculate_high_score(self):
