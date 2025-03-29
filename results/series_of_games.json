@@ -28,5 +28,28 @@
                 }
             }
         }
+    },
+    {
+        "highscore": 120,
+        "wins": 1,
+        "losses": 0,
+        "total_games": 1,
+        "total_score": 120,
+
+        "game": [
+            {
+                "secret_word": "MA",
+                "result": {
+                    "outcome": "Victory",
+                    "score": 120
+                },
+                "history": {
+                    "1": {
+                        "guess": "MA",
+                        "feedback": "CC"
+                    }
+                }
+            }
+        ]
     }
 ]
