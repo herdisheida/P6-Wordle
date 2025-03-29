@@ -25,13 +25,9 @@ class WordleGame:
         if feedback == "C" * self.word_length:
             self.is_victory = True
             self.score = self._calculate_score()
-            # self.game_result = {"outcome": "Victory", "score": self._calculate_score("Victory")} # EYDA setti kóða í variable
-            # self._save_game()
         elif self.guess_count >= self.max_guesses:
             self.is_victory = False
             self.score = self._calculate_score()
-            # self.game_result = {"outcome": "Defeat", "score": self._calculate_score("Defeat")} # EYDA setti kóða í class variable
-            # self._save_game()
         return feedback
     
     def _validate_guess(self, guess: str) -> tuple[bool, str]:
@@ -91,19 +87,11 @@ class WordleGame:
         # user won using fewer guesses
         return self.word_length * 2 + (self.max_guesses - self.guess_count) * 2
 
-    # def _save_game(self): # EYDA ég held ég þarf ekki
-    #     """Store game in game series variable"""
-    #     self.game_series = {
-    #             "secret_word": self.secret_word,
-    #             "game_result": self.game_result,
-    #             "game_round_history": self.game_round_history
-    #             }
-
     @property
     def is_game_over(self) -> bool:
         return self.is_victory is not None
 
-    def reset_game(self):
+    def reset_game(self): # EYDA þarf ég ? því ég bý alltaf til nýjan WordleGame
         """Reset game state"""
         self.is_victory = None
         self.score = 0

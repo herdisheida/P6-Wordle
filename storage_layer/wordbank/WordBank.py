@@ -7,32 +7,30 @@ class WordBank:
         self.words = self._load_words()
 
     def _load_words(self) -> list[str]:
-        """Load words from file"""
+        """Load words from wordbank.txt file"""
         with open(self.WORD_BANK_FILE, mode="r") as file:
             return [word.strip() for word in file.readlines()]
 
     def get_random_word(self, length: int) -> str:
-        """Get a random word from the word bank with specified length"""
+        """Get a random word from the Word Bank with specific length"""
         filtered = [word for word in self.words if len(word) == int(length)]
-        # if not filtered: # EYDA þarf ekki þcí ég  hef check annarstaðar
-        #     raise ValueError(f"No word found with {length}-letters\n")
         return random.choice(filtered).upper()
     
     def get_max_min_word_length(self) -> tuple[int, int]:
-        """Get the max and min word length from the word bank"""
+        """Get the max and min word length from the Word Bank"""
         min_length = min(len(word) for word in self.words)
         max_length = max(len(word) for word in self.words)
         return min_length, max_length
     
     def add_word(self, word: str):
-        """ Add a word to the word bank"""
+        """Add a word to the Word Bank"""
         self._validate_word(word)
         with open(self.WORD_BANK_FILE, mode="a") as file:
             file.write(f"\n{word.upper()}")
         self.words.append(word.upper())
 
     def _validate_word(self, word: str):
-        """Validate the word format"""
+        """Validate word for Word Bank"""
         if not word.isalpha():
             raise ValueError("Word needs to be alphabetic")
         if len(word) < 2:
@@ -40,4 +38,4 @@ class WordBank:
         if len(word) > 20:
             raise ValueError("Word too long (max 20 letters)")
         if word in self.words:
-            raise ValueError("Word already exists in word bank")
+            raise ValueError("Word already exists in Word Bank")

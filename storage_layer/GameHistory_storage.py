@@ -7,13 +7,14 @@ class GameHistory_Storage:
     RESULTS_FOLDER = Path("./storage_layer/results")
 
     def __init__(self, username: str):
-        # create folder if it doesn't exist
-        self.RESULTS_FOLDER.mkdir(exist_ok=True) # EYDA þarf þetta ?
+        # create results folder if it doesn't exist
+        self.RESULTS_FOLDER.mkdir(exist_ok=True)
+        # set file path for specific user
         self.RESULT_FILE_PATH = self.RESULTS_FOLDER / f"{username}_results.json"      
         
-    
     def load_history(self):
-        """Load game history from file"""
+        """Get game history from file,
+        return empty list if file doesn't exist"""
         try:
             with open(self.RESULT_FILE_PATH, "r") as file:
                 all_games = json.load(file)
