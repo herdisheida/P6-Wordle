@@ -136,29 +136,9 @@ class GameHistory:
         except (FileNotFoundError, json.JSONDecodeError):
             all_games = []
         return all_games
-
-    # def save_game(self, secret_word: str, game_result: dict, game_history: dict): # EYDA OLD CODE
-    #     """Save game results to file"""
-    #     data = {
-    #         "secret_word": secret_word,
-    #         "result": game_result,
-    #         "history": {
-    #             nr: {
-    #                 "guess": round.word,
-    #                 "feedback": round.feedback
-    #             }
-    #             for nr, round in game_history.items()
-    #         }
-    #     }
-        
-    #     # get existing data and add new game to it
-    #     all_games = self.load_history()
-    #     all_games.append(data)
-    #     with open(self.RESULT_FILE_PATH, "w") as file:
-    #         json.dump(all_games, file, indent=2)
     
     def save_game_series(self, series: list[WordleGame]):
-    #     """Save game series results to file"""
+    """Save game series results to file"""
         series_list = []
         
         # get all games in the series
