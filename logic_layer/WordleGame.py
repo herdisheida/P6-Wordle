@@ -40,49 +40,33 @@ class WordleGame:
 
     def _calculate_feedback(self, guess: str) -> list:
         """Generate feedback string (C/c/-)"""
-        # feedback = "" # EYDA
-
-        # for index in range(len(self.secret_word)):
-        #     # Correct position
-        #     if guess[index] == self.secret_word[index]:
-        #         feedback += "C"
-
-        #     # Correct letter in wrong position
-        #     elif guess[index] in self.secret_word:
-        #         feedback += "c"
-            
-        #     # Incorrect letter
-        #     else:
-        #         feedback += "-"
-
-        guessed_letter = [] # correctly guessed letters
+        secret_word = list(self.secret_word)
+        guess_letters = list(guess)
         feedback = []
-        for index in range(len(self.secret_word)):
+
+        # check correct letters in correct position
+        for i in range(len(secret_word)):
             # Correct position
-            if guess[index] == self.secret_word[index]:
+            if guess[i] == secret_word[i]:
                 feedback.append("C")
-                guessed_letter.append(guess[index])
+
+                # mark as matched
+                secret_word[i] = None
+                guess_letters[i] = None
             else:
                 feedback.append("-")
 
-        for index in range(len(self.secret_word)):
-            char = guess[index]
-            if char == self.secret_word[index]:
+        # check correct letters in incorrect
+        for i in range(len(secret_word)):
+            curr_char = guess_letters[i]
+            # skip letters in correct position
+            if curr_char is None:
                 continue
-
-            if char in self.secret_word:
-                # don't show C if letter has been guessed
-                if guessed_letter.count(char) >= self.secret_word.count(char):
-                    feedback[index] = "-"
-                else:
-                    feedback[index] = "c"
-            else:
-                feedback[index] = "-"
-
+            if guess[i] in secret_word:
+                feedback[i] = "c"
+                secret_word[secret_word.index(curr_char)] = None
 
         self._save_guess(guess, feedback)
-
-        print(feedback) # EYDA debugging
         return feedback
 
     def _save_guess(self, guess: str, feedback: str):
