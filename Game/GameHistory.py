@@ -22,7 +22,7 @@ class GameHistory:
         # load game history
         print("\n------- GAME HISTORY -------")
         print(f"User: {self.username}\n")
-        
+
         print("(1) See all games")
         print("(2) See game details")
         print("(3) See game statistics")
@@ -35,21 +35,16 @@ class GameHistory:
 
         while self.games:
             self.display_history_menu()
+            choice = input("\nEnter: ").lower()
+            
+            match choice:
+                case "1": self.display_all_games()
+                case "2": self.display_game_details(input("Enter game number: "))
+                case "3": self.display_statistics()
+                case "b": break
+                case _: print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
-            user_input = input("\nEnter: ").lower()
-
-            if user_input == "1":
-                self.display_all_games()
-            elif user_input == "2":
-                game_nr = input("Enter game number: ")
-                self.display_game_details(game_nr)
-            elif user_input == "3":
-                self.display_statistics()
-            elif user_input == "b":
-                break
-            else:
-                print(f"{Color.RED.value}Invalid input{Color.END.value}")
-
+        # if no games are found
         if not self.games:
             print(f"{Color.RED.value}User ({self.username}) hasn't played any games{Color.END.value}")
             input(self.SCREEN_PAUSE)

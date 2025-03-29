@@ -57,8 +57,7 @@ class GameMenu:
         while self.online:
             self._display_main_menu()
             choice = input("\nEnter: ").lower()
-
-
+            
             match choice:
                 case "1": self._start_new_game()
                 case "2": self.game_history.menu_loop()
