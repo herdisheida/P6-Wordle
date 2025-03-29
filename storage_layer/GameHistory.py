@@ -7,7 +7,7 @@ class GameHistory:
 
     GUESS_HISTORY_FORMAT = "  {0:<8}{1:<20}{2:<20}" # nr, guesses, feedback
     GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # nr, score, secret_word, outcome
-    SCREEN_PAUSE = "\nEnter to continue..."
+    SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
     def __init__(self, username: str):
         self.username = username
@@ -90,7 +90,6 @@ class GameHistory:
                 print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color.colorize_feedback(round["feedback"])))
                 print()
 
-            # input("\nEnter for next game...\n")
         input(self.SCREEN_PAUSE)
 
     def display_statistics(self):
@@ -161,7 +160,7 @@ class GameHistory:
     #     """Save game results to file"""
         game_series_list = []
         for game in game_series:
-            
+
             data = {
                 "secret_word": game["secret_word"],
                 "result": game["game_result"],

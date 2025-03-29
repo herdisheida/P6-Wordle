@@ -10,6 +10,8 @@ class Color(Enum):
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+    GRAY = "\033[90m"
+
     @staticmethod
     def colorize_feedback(feedback: str):
         """Colorize feedback string"""
