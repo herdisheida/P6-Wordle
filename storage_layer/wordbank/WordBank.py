@@ -24,6 +24,13 @@ class WordBank:
         max_length = max(len(word) for word in self.words)
         return min_length, max_length
     
+    def get_word_lengths(self) -> list[int]:
+        """Get all word lengths from the Word Bank"""
+        lengths = sorted(set([len(word) for word in self.words]))
+        if 0 in lengths:
+            lengths.remove(0)
+        return lengths
+      
     def add_word(self, word: str):
         """Add a word to the Word Bank"""
         self._validate_word(word)

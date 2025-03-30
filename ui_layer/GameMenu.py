@@ -85,6 +85,7 @@ class GameMenu:
             except ValueError as e:
                 self._display_error(str(e))
 
+
         self.game_history.save_game_series(series)
 
     def _continue_playing(self):
@@ -107,7 +108,7 @@ class GameMenu:
         new_word = input("Enter a new word: ").upper()
         try:
             self.word_bank.add_word(new_word)
-            print(f"{Color.GREEN.value}Word added successfully!{Color.END.value}")
+            print(f"{Color.GREEN.value}{new_word} was added successfully!{Color.END.value}")
         except ValueError as e:
             self._display_error(str(e))
 
@@ -124,9 +125,9 @@ class GameMenu:
     def _get_valid_word_length(self, word_length: str) -> int:
         if not word_length.isdigit():
             raise ValueError("Word length needs to be an integer")
-        min_length, max_length = self.word_bank.get_max_min_word_length()
-        if int(word_length) < min_length or int(word_length) > max_length:
-            raise ValueError(f"No word found with {word_length}-letters \nWord length must be between {min_length} and {max_length}\n")
+        letter_lengths = self.word_bank.get_word_lengths()
+        if int(word_length) not in letter_lengths:
+            raise ValueError(f"No word found with {word_length}-letters \nWord length available: {str(letter_lengths)}\n")
         return int(word_length)
 
     def _get_valid_input(self, prompt: str, validation_func: callable) -> str:
