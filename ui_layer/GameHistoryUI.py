@@ -39,7 +39,7 @@ class GameHistoryUI:
 
 
     def _display_all_games(self):
-        """Display all games series in user's history"""        
+        """Display all games series in user"s history"""        
         print("\n----------- ALL GAMES SERIES ----------")
         print(f"Total Series: {len(self.series_list)}\n")
 
@@ -50,7 +50,6 @@ class GameHistoryUI:
     
                 nr = series_nr if round_nr == 1 else "" # print series nr for first game only
                 print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], Color._color_result(round["is_victory"])))
-
 
             # show one game series at a time
             if series_nr < len(self.series_list):
@@ -74,9 +73,9 @@ class GameHistoryUI:
 
             print(f"{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
-            print(f"  Secret Word: {game['secret_word']}")
-            print(f"  Result:  {Color._color_result(game['is_victory'])}")   
-            print(f"  Score: {game['score']}")
+            print(f"  Secret Word: {game["secret_word"]}")
+            print(f"  Result:  {Color._color_result(game["is_victory"])}")   
+            print(f"  Score: {game["score"]}")
 
             print("\n  Game rounds:")
             print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
@@ -90,9 +89,11 @@ class GameHistoryUI:
     def _display_statistics(self):
         """Display game statistics"""
         print(f"\n{Color.BLUE.value}------- SERIES STATISTICS ------{Color.END.value}")
-        print(f"Total series:    {len(self.series_list)}")
+        print(f"Total series:    {len(self.series_list)}\n")
         print(f"Current streak:  {self.series_list[-1]["curr_streak"]}")
-        print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}")
+        print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}\n")
+        print(f"Highest total score: {max([game["total_score"] for game in self.series_list])}")
+        print(f"Lowest total score:  {min([game["total_score"] for game in self.series_list])}")
 
         total_games, victory_count, defeat_count, win_percentage = self._calculate_game_statistics()
 
@@ -103,7 +104,7 @@ class GameHistoryUI:
         print(f"Total victories: {victory_count}")
         print(f"Total defeats:   {defeat_count}\n")
 
-        print(f"High score:      {self._calculate_high_score()}")
+        print(f"Highest score:   {self._calculate_high_score()}")
         print(f"Average score:   {self._calculate_average_score(total_games)}")
 
         input(self.SCREEN_PAUSE)
