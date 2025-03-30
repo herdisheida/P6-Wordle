@@ -110,13 +110,13 @@ class GameHistoryUI:
         input(self.SCREEN_PAUSE)
 
     def _calculate_game_statistics(self) -> list:
-        """Calculate and return game statistics,
+        """Calculate and return game statistics for game instances in series,
         returning total games, victories, defeats and win percentage"""
         total_games = 0
         victory_count = 0
-        for game in self.series_list:
-            total_games += len(game["game_list"])
-            victory_count += len([game for game in game["game_list"] if game["is_victory"]])
+        for series in self.series_list:
+            total_games += len(series["game_list"])
+            victory_count += len([game for game in series["game_list"] if game["is_victory"]])
         defeat_count = total_games - victory_count
         win_percentage = round((victory_count / total_games) * 100, 2)
         return total_games, victory_count, defeat_count, win_percentage
@@ -124,16 +124,16 @@ class GameHistoryUI:
     def _calculate_average_score(self, total_games):
         """Calculate and return average score for all games"""
         score_sum = 0
-        for game in self.series_list:
-            score_sum += sum([game["score"] for game in game["game_list"]])
+        for series in self.series_list:
+            score_sum += sum([game["score"] for game in series["game_list"]])
         avg = score_sum / total_games
         return round(avg, 2)
     
     def _calculate_high_score(self):
         """Calculate and return high score from all games"""
         high_score = 0
-        for game in self.series_list:
-            score = max([game["score"] for game in game["game_list"]])
+        for series in self.series_list:
+            score = max([game["score"] for game in series["game_list"]])
             if score > high_score:
                 high_score = score
         return high_score

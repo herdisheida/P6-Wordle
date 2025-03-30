@@ -2,7 +2,6 @@
   {
     "total_score": -1,
     "curr_streak": 0,
-    "longest_streak": 0,
     "game_list": [
       {
         "secret_word": "TO",
@@ -39,7 +38,6 @@
   {
     "total_score": 10,
     "curr_streak": 0,
-    "longest_streak": 0,
     "game_list": [
       {
         "secret_word": "JUJUTSUKAISEN",

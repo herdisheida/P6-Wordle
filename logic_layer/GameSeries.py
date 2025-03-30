@@ -6,7 +6,7 @@ class GameSeries:
         self.series_list = [] # list of WordleGame objects
         self.total_score = 0
         self.curr_streak = 0
-        self.longest_streak = 0
+        self.longest_streak = self.curr_streak
 
     def add_game(self, game: dict):
         """Add a game to the series"""
@@ -18,7 +18,7 @@ class GameSeries:
         else:
             self.curr_streak = 0
 
-    def _calculate_longest_streak(self):
-        """Calculate the longest streak"""
+    def calculate_longest_streak(self) -> int:
+        """Calculate the longest streak from the series"""
         if self.curr_streak > self.longest_streak:
             self.longest_streak = self.curr_streak

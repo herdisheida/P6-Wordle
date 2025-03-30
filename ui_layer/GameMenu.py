@@ -74,17 +74,18 @@ class GameMenu:
             try:
                 # configure game
                 secret_word = self.word_bank.get_random_word(word_length)
+                print(secret_word) # EYDA debug
 
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
                 GameUI(active_game, series, self.game_history).run()
                 series.add_game(active_game)
+                series.calculate_longest_streak()
 
                 if not self._continue_playing():
                     break
             except ValueError as e:
                 self._display_error(str(e))
-
 
         self.game_history.save_game_series(series)
 
@@ -115,16 +116,16 @@ class GameMenu:
     def _get_valid_attempts(self, num: str) -> int:
         """Validate the user input for guess count"""
         if not num.isdigit():
-            raise ValueError("Num needs to be an integer\n")
+            raise ValueError("Num needs to be a positive integer")
         if int(num) < 1:
-            raise ValueError("Num must be greater than 0\n")
+            raise ValueError("Num must be greater than 0")
         if int(num) > 20:
-            raise ValueError("Num too high (max 20)\n")
+            raise ValueError("Num too high (max 20)")
         return int(num)
     
     def _get_valid_word_length(self, word_length: str) -> int:
         if not word_length.isdigit():
-            raise ValueError("Word length needs to be an integer")
+            raise ValueError("Word length needs to be a positive integer")
         letter_lengths = self.word_bank.get_word_lengths()
         if int(word_length) not in letter_lengths:
             raise ValueError(f"No word found with {word_length}-letters \nWord length available: {str(letter_lengths)}\n")
