@@ -89,27 +89,36 @@ class GameHistoryUI:
 
     def _display_statistics(self):
         """Display game statistics"""
+        print(f"\n{Color.BLUE.value}------- SERIES STATISTICS ------{Color.END.value}")
+        print(f"Total series:    {len(self.series_list)}")
+        print(f"Current streak:  {self.series_list[-1]["curr_streak"]}")
+        print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}")
 
+        total_games, victory_count, defeat_count, win_percentage = self._calculate_game_statistics()
+
+        print(f"\n{Color.BLUE.value}------- GAME STATISTICS ------{Color.END.value}")
+        print(f"Total games      {total_games}\n")
+
+        print(f"Win percentage:  {win_percentage}%")
+        print(f"Total victories: {victory_count}")
+        print(f"Total defeats:   {defeat_count}\n")
+
+        print(f"High score:      {self._calculate_high_score()}")
+        print(f"Average score:   {self._calculate_average_score(total_games)}")
+
+        input(self.SCREEN_PAUSE)
+
+    def _calculate_game_statistics(self) -> list:
+        """Calculate and return game statistics,
+        returning total games, victories, defeats and win percentage"""
         total_games = 0
         victory_count = 0
         for game in self.series_list:
             total_games += len(game["game_list"])
             victory_count += len([game for game in game["game_list"] if game["is_victory"]])
-
-        print("\n------- GAME STATISTICS ------")
-        print(f"Total series:    {len(self.series_list)}")
-        print(f"Total games      {total_games}\n")
-
-        print(f"Win percentage:  {round((victory_count / total_games) * 100, 2)}%")
-        print(f"Total victories: {victory_count}")
-        print(f"Total defeats:   {total_games - victory_count}\n")
-
-        print(f"Average score:   {self._calculate_average_score(total_games)}")
-        print(f"High score:      {self._calculate_high_score()}\n")
-        print(f"Current streak:  {self.series_list[-1]["curr_streak"]}")
-        print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}")
-
-        input(self.SCREEN_PAUSE)
+        defeat_count = total_games - victory_count
+        win_percentage = round((victory_count / total_games) * 100, 2)
+        return total_games, victory_count, defeat_count, win_percentage
 
     def _calculate_average_score(self, total_games):
         """Calculate and return average score for all games"""
