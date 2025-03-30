@@ -40,7 +40,7 @@ class GameHistoryUI:
 
     def _display_all_games(self):
         """Display all games series in user's history"""        
-        print("\n----------- ALL GAMES ----------")
+        print("\n----------- ALL GAMES SERIES ----------")
         print(f"Total Series: {len(self.series_list)}\n")
 
         print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Result"))
@@ -51,12 +51,12 @@ class GameHistoryUI:
                 nr = series_nr if round_nr == 1 else "" # print series nr for first game only
                 print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], Color._color_result(round["is_victory"])))
 
-                # only show one series at a time
-                if nr == "" and series_nr != len(self.series_list):
-                    # ask if user wants to see more series
-                    choice = input(f"\n{Color.GRAY.value}(B) back | (Enter) next...{Color.END.value}\n").lower()
-                    if choice == "b":
-                        return
+
+            # show one game series at a time
+            if series_nr < len(self.series_list):
+                choice = input(f"\n{Color.GRAY.value}(B) back | Enter for next...{Color.END.value}\n").lower()
+                if choice == "b":
+                    return
 
         input(self.SCREEN_PAUSE)
 
