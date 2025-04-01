@@ -17,7 +17,7 @@ class GameMenu:
     def run(self):
         """Run the game menu"""
         self._login()
-        print(f"\n{Color.BLUE.value}Goodbye {self.username}!{Color.END.value}")
+        print(f"\n{Color.BLUE.value}Goodbye {self.username.capitalize()}!{Color.END.value}")
 
     def _login(self):
         """Handle user login flow"""

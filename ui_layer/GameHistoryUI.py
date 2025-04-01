@@ -4,11 +4,8 @@ from storage_layer.GameHistory_storage import GameHistory_Storage
 
 class GameHistoryUI:
     """Class to handle game history user interface"""
+    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<30}{3:<20}"  # series nr, score, secret_word, result
 
-    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<15}{2:<15}"  # guess nr, guesses, feedback
-    GAME_HISTORY_LIST_FORMAT = (
-        " {0:<5}{1:<10}{2:<30}{3:<20}"  # series nr, score, secret_word, result
-    )
     SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
     def __init__(self, username: str):
@@ -18,7 +15,7 @@ class GameHistoryUI:
 
     def display_history_menu(self):
         """Display the history menu"""
-        print(f"\n------- {self.username}'s HISTORY -------")
+        print(f"\n------- {self.username.capitalize()}'s HISTORY -------")
         print("(1) See all games")
         print("(2) See game details")
         print("(3) See game statistics")
@@ -67,12 +64,8 @@ class GameHistoryUI:
                         Color._color_result(round["is_victory"]),
                     )
                 )
-
-            # show one game series at a time
             if series_nr < len(self.series_list):
-                choice = input(f"\n{Color.GRAY.value}(B)ack | (N)ext...{Color.END.value}\n").lower()
-                if choice == "b":
-                    return
+                print() # add space between series
         input(self.SCREEN_PAUSE)
 
     def _display_game_details(self, game_nr: int):
@@ -83,20 +76,24 @@ class GameHistoryUI:
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
 
-        print(f"\n\n------- GAME SERIES nr.{game_nr} ------\n")
+        print(f"\n\n------- GAME SERIES nr.{game_nr} ------")
         for game in a_series["game_list"]:
             i = a_series["game_list"].index(game)
 
-            print(f"{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
+            print(f"\n{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
             print(f"  Secret Word: {game["secret_word"]}")
             print(f"  Result:  {Color._color_result(game["is_victory"])}")
             print(f"  Score: {game["score"]}")
 
             print("\n  Game rounds:")
-            print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
+
+            word_length = len(game["secret_word"])
+            print(f"      {"Nr":<5} {"Guess":<{word_length + 4}} {"Feedback":<{word_length}}")
             for nr, round in game["history"].items():
-                print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color.colorize_feedback(round["feedback"])))
+                feedback = Color.colorize_feedback(round["feedback"])
+                print(f"      {nr:<5} {round["guess"]:<{word_length + 4}} {feedback:<{word_length}}")
+
         input(self.SCREEN_PAUSE)
 
     def _display_statistics(self):

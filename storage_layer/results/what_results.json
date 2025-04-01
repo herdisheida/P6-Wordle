@@ -1,0 +1,233 @@
+[
+  {
+    "total_score": 16,
+    "curr_streak": 0,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "PROFESSORANAXAGORAS",
+        "is_victory": true,
+        "score": 19,
+        "history": {
+          "1": {
+            "guess": "PROFESSORANAXAGORAS",
+            "feedback": "CCCCCCCCCCCCCCCCCCC"
+          }
+        }
+      },
+      {
+        "secret_word": "PROFESSORANAXAGORAS",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "ANAXAGORASPROFESSOR",
+            "feedback": "ccccccccccccccccccc"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -9,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "SIT",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "DAB",
+            "feedback": "---"
+          }
+        }
+      },
+      {
+        "secret_word": "SIT",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "AFK",
+            "feedback": "---"
+          }
+        }
+      },
+      {
+        "secret_word": "CUP",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "SAT",
+            "feedback": "---"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 16,
+    "curr_streak": 1,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "PROFESSORANAXAGORAS",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "ANAXAGORASPROFESSOR",
+            "feedback": "ccccccccccccccccccc"
+          }
+        }
+      },
+      {
+        "secret_word": "PROFESSORANAXAGORAS",
+        "is_victory": true,
+        "score": 19,
+        "history": {
+          "1": {
+            "guess": "PROFESSORANAXAGORAS",
+            "feedback": "CCCCCCCCCCCCCCCCCCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -24,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "HYPE",
+        "is_victory": false,
+        "score": -12,
+        "history": {
+          "1": {
+            "guess": "HELL",
+            "feedback": "Cc--"
+          },
+          "2": {
+            "guess": "HILL",
+            "feedback": "C---"
+          },
+          "3": {
+            "guess": "HREP",
+            "feedback": "C-cc"
+          },
+          "4": {
+            "guess": "STEP",
+            "feedback": "--cc"
+          }
+        }
+      },
+      {
+        "secret_word": "SIMP",
+        "is_victory": false,
+        "score": -12,
+        "history": {
+          "1": {
+            "guess": "WHAT",
+            "feedback": "----"
+          },
+          "2": {
+            "guess": "SHIT",
+            "feedback": "C-c-"
+          },
+          "3": {
+            "guess": "MANS",
+            "feedback": "c--c"
+          },
+          "4": {
+            "guess": "LUCK",
+            "feedback": "----"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -12,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "OWL",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "AFK",
+            "feedback": "---"
+          }
+        }
+      },
+      {
+        "secret_word": "MAP",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "DAB",
+            "feedback": "-C-"
+          }
+        }
+      },
+      {
+        "secret_word": "DAB",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "SAT",
+            "feedback": "-C-"
+          }
+        }
+      },
+      {
+        "secret_word": "MAP",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "SIT",
+            "feedback": "---"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -6,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "CAR",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "DAB",
+            "feedback": "-C-"
+          }
+        }
+      },
+      {
+        "secret_word": "LIT",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "CAT",
+            "feedback": "--C"
+          }
+        }
+      }
+    ]
+  }
+]
