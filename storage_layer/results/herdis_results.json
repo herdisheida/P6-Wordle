@@ -1,0 +1,60 @@
+[
+  {
+    "total_score": -6,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "FLEX",
+        "is_victory": false,
+        "score": -6,
+        "history": {
+          "1": {
+            "guess": "HELL",
+            "feedback": "-cc-"
+          },
+          "2": {
+            "guess": "WHAT",
+            "feedback": "----"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -3,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "MARCH",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "WHATS",
+            "feedback": "-cc--"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -3,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "KEY",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "DAB",
+            "feedback": "---"
+          }
+        }
+      }
+    ]
+  }
+]

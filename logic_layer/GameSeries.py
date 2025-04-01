@@ -3,14 +3,14 @@ class GameSeries:
         self.word_length = word_length
         self.max_guesses = max_guesses
 
-        self.series_list = []  # list of WordleGame objects
+        self.game_list = []  # list of WordleGame objects
         self.total_score = 0
         self.curr_streak = 0
         self.longest_streak = self.curr_streak
 
     def add_game(self, game: dict):
         """Add a game to the series"""
-        self.series_list.append(game)
+        self.game_list.append(game)
         self.total_score += game.score
 
         if game.is_victory:

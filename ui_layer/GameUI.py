@@ -29,7 +29,6 @@ class GameUI:
         self.game_series.calculate_longest_streak()
         self._display_result()
 
-
     def _get_guess(self):
         """Get and validate user input"""
         return input("\nGuess: ").upper()
@@ -44,10 +43,11 @@ class GameUI:
         
         if self.game.is_victory:
             print(f"\n{Color.GREEN.value}{Color.BOLD.value}VICTORY!{Color.END.value}")
-            print(f"Score: {Color.BLUE.value}{self.game.score}{Color.END.value}")
         else:
             print(f"\n{Color.RED.value}{Color.BOLD.value}GAME OVER!{Color.END.value}")
             print(f"Word was: {Color.BLUE.value}{Color.UNDERLINE.value}{self.game.secret_word}{Color.END.value}")
+        print(f"Score: {Color.BLUE.value}{self.game.score}{Color.END.value}")
+
 
     def _print_history(self):
         """Show guess history for game round"""

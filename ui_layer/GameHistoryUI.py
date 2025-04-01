@@ -46,7 +46,7 @@ class GameHistoryUI:
 
     def _display_all_games(self):
         """Display all games series in user"s history"""
-        print("\n----------- ALL GAMES SERIES ----------")
+        print("\n----------- All Game Series ----------")
         print(f"Total Series: {len(self.series_list)}\n")
 
         print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Result"))
@@ -76,7 +76,7 @@ class GameHistoryUI:
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
 
-        print(f"\n\n------- GAME SERIES nr.{game_nr} ------")
+        print(f"\n\n------- Game Series nr.{game_nr} ------")
         for game in a_series["game_list"]:
             i = a_series["game_list"].index(game)
 
@@ -98,7 +98,7 @@ class GameHistoryUI:
 
     def _display_statistics(self):
         """Display game statistics"""
-        print(f"\n{Color.BLUE.value}------- SERIES STATISTICS ------{Color.END.value}")
+        print(f"\n{Color.BLUE.value}------- Series Statistics ------{Color.END.value}")
         print(f"Total series:    {len(self.series_list)}\n")
         print(f"Current streak:  {self.series_list[-1]["curr_streak"]}")
         print(f"Longest streak:  {max([game["longest_streak"] for game in self.series_list])}\n")

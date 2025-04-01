@@ -36,8 +36,8 @@ class GameHistory_Storage:
     def _get_game_series(self, series: list[WordleGame]) -> dict:
         """Get all game series data, including new game series"""
         # get all games in the series
-        series_list = []
-        for game in series.series_list:
+        game_list = []
+        for game in series.game_list:
             data = {
                 "secret_word": game.secret_word,
                 "is_victory": game.is_victory,
@@ -47,16 +47,16 @@ class GameHistory_Storage:
                     for nr, round in game.guess_history.items()
                 },
             }
-            series_list.append(data)
+            game_list.append(data)
 
         # create game series data
-        game_series = {
+        new_series = {
             "total_score": series.total_score,
             "curr_streak": series.curr_streak,
             "longest_streak": series.longest_streak,
-            "game_list": series_list,
+            "game_list": game_list,
         }
-        return game_series
+        return new_series
 
     def _write_to_file(self, data: dict):
         """Write game data to file"""

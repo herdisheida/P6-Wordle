@@ -24,9 +24,9 @@ class GameMenu:
         while self.online:
             print("\n------- LOGIN -------")
             print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}")
-            choice = input("\n(L)ogin | (Q)uit: ").lower()
+            choice = input("\n(S) Signup | (L)ogin | (Q)uit\n").lower()
             match choice:
-                case "l":
+                case "l" | "s":
                     self._handle_login()
                 case "q":
                     self.online = False
@@ -93,6 +93,8 @@ class GameMenu:
                     break
             except ValueError as e:
                 self._display_error(str(e))
+
+        self._display_series_result(series)
         self.game_history.save_game_series(series)
 
     def _continue_playing(self):
@@ -108,6 +110,15 @@ class GameMenu:
                     return False
                 case _:
                     print(f"{Color.RED.value}Invalid input.{Color.END.value}")
+
+    def _display_series_result(self, series: GameSeries):
+        """Display game series result,
+        including longest streak and total score
+        """
+        print(f"\n{Color.BLUE.value}------- Game Series Result -------{Color.END.value}")
+        print(f"Total games played: {len(series.game_list)}")
+        print(f"Total score: {series.total_score}")
+        input(self.game_history.SCREEN_PAUSE)
 
     def _add_word_to_wordbank(self):
         """Add a word to the word bank"""
