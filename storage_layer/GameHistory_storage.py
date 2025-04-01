@@ -9,10 +9,10 @@ class GameHistory_Storage:
     def __init__(self, username: str):
         # create results folder if it doesn't exist
         self.RESULTS_FOLDER.mkdir(exist_ok=True)
-        # set file path for specific user
+        # set file path for user
         self.RESULT_FILE_PATH = self.RESULTS_FOLDER / f"{username}_results.json"      
         
-    def load_history(self):
+    def load_history(self) -> list[dict]:
         """Get game history from file,
         return empty list if file doesn't exist"""
         try:
@@ -31,8 +31,8 @@ class GameHistory_Storage:
         all_series.append(game_series)
         self._write_to_file(data=all_series)
 
-    def _get_game_series(self, series: list[WordleGame]):
-        """Get game series data"""        
+    def _get_game_series(self, series: list[WordleGame]) -> dict:
+        """Get all game series data, including new game series"""        
         # get all games in the series
         series_list = []
         for game in series.series_list:
@@ -49,7 +49,7 @@ class GameHistory_Storage:
                     }
                 }
             series_list.append(data)
-            
+
         # create game series data
         game_series = {
             "total_score": series.total_score,

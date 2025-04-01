@@ -1,15 +1,23 @@
+from pathlib import Path
 import random
 
 class WordBank:
-    WORD_BANK_FILE = "./storage_layer/WordBank/wordbank.txt" 
+    WORD_BANK_FILE = Path("./storage_layer/WordBank/wordbank.txt")
 
     def __init__(self):
+        # create word bank file if it doesn't exist
+        self.WORD_BANK_FILE.touch(exist_ok=True)
         self.words = self._load_words()
 
     def _load_words(self) -> list[str]:
         """Load words from wordbank.txt file"""
-        with open(self.WORD_BANK_FILE, mode="r") as file:
-            return [word.strip().upper() for word in file.readlines()]
+        try:
+            with open(self.WORD_BANK_FILE, mode="r") as file:
+                return [word.strip().upper() for word in file.readlines()]
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Word Bank file not found: {self.WORD_BANK_FILE}")
+        except Exception as e:
+            raise Exception(f"Error loading Word Bank: {e}")
 
     def get_random_word(self, length: int) -> str:
         """Get a random word from the Word Bank with specific length"""
@@ -28,9 +36,12 @@ class WordBank:
     def add_word(self, word: str):
         """Add a word to the Word Bank"""
         self._validate_word(word)
-        with open(self.WORD_BANK_FILE, mode="a") as file:
-            file.write(f"\n{word.upper()}")
-        self.words.append(word.upper())
+        try:
+            with open(self.WORD_BANK_FILE, mode="a") as file:
+                file.write(f"\n{word.upper()}")
+                self.words.append(word.upper())
+        except Exception as e:
+            print(f"Error writing to Word Bank file: {e}")
 
     def _validate_word(self, word: str):
         """Validate word for Word Bank"""
