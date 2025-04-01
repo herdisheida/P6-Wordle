@@ -5,6 +5,7 @@ from logic_layer.GameSeries import GameSeries
 from storage_layer.wordbank.WordBank import WordBank
 from ui_layer.GameHistoryUI import GameHistoryUI
 
+
 class GameMenu:
     def __init__(self):
         self.online = True
@@ -25,24 +26,27 @@ class GameMenu:
             print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}")
             choice = input("\n(L)ogin | (Q)uit: ").lower()
             match choice:
-                case "l": self._handle_login()
-                case "q": self.online = False
-                case _: self._display_error("Invalid input")
+                case "l":
+                    self._handle_login()
+                case "q":
+                    self.online = False
+                case _:
+                    self._display_error("Invalid input")
 
     def _handle_login(self) -> str:
         """Authenticate user and initalize game history"""
         self.username = self._get_valid_input("Enter username: ", self._validate_username)
         self.game_history = GameHistoryUI(self.username)
         self._main_menu()
-    
+
     def _display_main_menu(self):
-            """Display the main menu"""
-            print(f"\n{Color.BLUE.value}------- {self.username.capitalize()}'s WORDLE -------{Color.END.value}")
-            print("(1) New Game")
-            print("(2) See Game History")
-            print("(3) Add Word to Word Bank\n")
-            print("(L)ogout")
-            print("(Q)uit")
+        """Display the main menu"""
+        print(f"\n{Color.BLUE.value}------- {self.username.capitalize()}'s WORDLE -------{Color.END.value}")
+        print("(1) New Game")
+        print("(2) See Game History")
+        print("(3) Add Word to Word Bank\n")
+        print("(L)ogout")
+        print("(Q)uit")
 
     def _main_menu(self):
         """Main menu loop"""
@@ -51,12 +55,18 @@ class GameMenu:
             choice = input("\nEnter: ").lower()
 
             match choice:
-                case "1": self._start_new_series()
-                case "2": self.game_history.history_menu()
-                case "3": self._add_word_to_wordbank()
-                case "l": return # return to login
-                case "q": self.online = False
-                case _: self._display_error("Invalid input")
+                case "1":
+                    self._start_new_series()
+                case "2":
+                    self.game_history.history_menu()
+                case "3":
+                    self._add_word_to_wordbank()
+                case "l":
+                    return  # return to login
+                case "q":
+                    self.online = False
+                case _:
+                    self._display_error("Invalid input")
 
     def _start_new_series(self):
         """Start a ew game series"
@@ -70,24 +80,20 @@ class GameMenu:
 
         while self.online:
             print(f"\n{Color.BLUE.value} -- New Game -- {Color.END.value}")
-        
+
             try:
                 # configure game
                 secret_word = self.word_bank.get_random_word(word_length)
-                print(secret_word) # EYDA debug
 
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
                 GameUI(active_game, series, self.game_history).run()
-                # series.add_game(active_game)
-                # series.calculate_longest_streak()
 
                 if not self._continue_playing():
                     break
             except ValueError as e:
                 self._display_error(str(e))
         self.game_history.save_game_series(series)
-
 
     def _continue_playing(self):
         """Check if user wants to keep playing"""
@@ -96,9 +102,12 @@ class GameMenu:
             choice = input("\nDo you want to continue playing? (Y/N): ").lower()
 
             match choice:
-                case "y": return True
-                case "n": return False
-                case _: print(f"{Color.RED.value}Invalid input.{Color.END.value}")
+                case "y":
+                    return True
+                case "n":
+                    return False
+                case _:
+                    print(f"{Color.RED.value}Invalid input.{Color.END.value}")
 
     def _add_word_to_wordbank(self):
         """Add a word to the word bank"""
@@ -118,7 +127,7 @@ class GameMenu:
         if int(num) > 20:
             raise ValueError("Num too high (max 20)")
         return int(num)
-    
+
     def _get_valid_word_length(self, word_length: str) -> int:
         if not word_length.isdigit():
             raise ValueError("Word length needs to be a positive integer")
@@ -148,5 +157,5 @@ class GameMenu:
         return True
 
     def _display_error(self, message):
-        """ Display error message in red """
+        """Display error message in red"""
         print(f"{Color.RED.value}{message}{Color.END.value}")

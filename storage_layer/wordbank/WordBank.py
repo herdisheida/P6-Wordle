@@ -1,6 +1,7 @@
 from pathlib import Path
 import random
 
+
 class WordBank:
     WORD_BANK_FILE = Path("./storage_layer/WordBank/wordbank.txt")
 
@@ -25,14 +26,14 @@ class WordBank:
         if not filtered:
             raise ValueError(f"No words found with length {length}")
         return random.choice(filtered).upper()
-    
+
     def get_word_lengths(self) -> list[int]:
         """Get all word lengths from the Word Bank"""
         lengths = sorted(set([len(word) for word in self.words]))
         if 0 in lengths:
             lengths.remove(0)
         return lengths
-      
+
     def add_word(self, word: str):
         """Add a word to the Word Bank"""
         self._validate_word(word)

@@ -1,10 +1,14 @@
 from ui_layer.ColorText import Color
 from storage_layer.GameHistory_storage import GameHistory_Storage
 
+
 class GameHistoryUI:
     """Class to handle game history user interface"""
-    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<15}{2:<15}" # guess nr, guesses, feedback
-    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<30}{3:<20}" # series nr, score, secret_word, result
+
+    GUESS_HISTORY_FORMAT = "   {0:<8}{1:<15}{2:<15}"  # guess nr, guesses, feedback
+    GAME_HISTORY_LIST_FORMAT = (
+        " {0:<5}{1:<10}{2:<30}{3:<20}"  # series nr, score, secret_word, result
+    )
     SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
     def __init__(self, username: str):
@@ -32,15 +36,19 @@ class GameHistoryUI:
             choice = input("\nEnter: ").lower()
 
             match choice:
-                case "1": self._display_all_games()
-                case "2": self._display_game_details(input("Enter series nr: "))
-                case "3": self._display_statistics()
-                case "b": break
-                case _: print(f"{Color.RED.value}Invalid input{Color.END.value}")
-
+                case "1":
+                    self._display_all_games()
+                case "2":
+                    self._display_game_details(input("Enter series nr: "))
+                case "3":
+                    self._display_statistics()
+                case "b":
+                    break
+                case _:
+                    print(f"{Color.RED.value}Invalid input{Color.END.value}")
 
     def _display_all_games(self):
-        """Display all games series in user"s history"""        
+        """Display all games series in user"s history"""
         print("\n----------- ALL GAMES SERIES ----------")
         print(f"Total Series: {len(self.series_list)}\n")
 
@@ -48,16 +56,23 @@ class GameHistoryUI:
 
         for series_nr, games in enumerate(self.series_list, 1):
             for round_nr, round in enumerate(games["game_list"], 1):
-    
-                nr = series_nr if round_nr == 1 else "" # print series nr for first game only
-                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], Color._color_result(round["is_victory"])))
+
+                # print series nr for first game only
+                nr = (series_nr if round_nr == 1 else "")
+                print(
+                    self.GAME_HISTORY_LIST_FORMAT.format(
+                        nr,
+                        round["score"],
+                        round["secret_word"],
+                        Color._color_result(round["is_victory"]),
+                    )
+                )
 
             # show one game series at a time
             if series_nr < len(self.series_list):
-                choice = input(f"\n{Color.GRAY.value}(B) back | (N) next...{Color.END.value}\n").lower()
+                choice = input(f"\n{Color.GRAY.value}(B)ack | (N)ext...{Color.END.value}\n").lower()
                 if choice == "b":
                     return
-
         input(self.SCREEN_PAUSE)
 
     def _display_game_details(self, game_nr: int):
@@ -67,7 +82,7 @@ class GameHistoryUI:
         except (IndexError, ValueError):
             print(f"{Color.RED.value}Invalid game number{Color.END.value}")
             return
-         
+
         print(f"\n\n------- GAME SERIES nr.{game_nr} ------\n")
         for game in a_series["game_list"]:
             i = a_series["game_list"].index(game)
@@ -75,17 +90,14 @@ class GameHistoryUI:
             print(f"{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
             print(f"  Secret Word: {game["secret_word"]}")
-            print(f"  Result:  {Color._color_result(game["is_victory"])}")   
+            print(f"  Result:  {Color._color_result(game["is_victory"])}")
             print(f"  Score: {game["score"]}")
 
             print("\n  Game rounds:")
             print(self.GUESS_HISTORY_FORMAT.format("Nr", "Guess", "Feedback"))
             for nr, round in game["history"].items():
                 print(self.GUESS_HISTORY_FORMAT.format(nr, round["guess"], Color.colorize_feedback(round["feedback"])))
-            print()
-
         input(self.SCREEN_PAUSE)
-
 
     def _display_statistics(self):
         """Display game statistics"""
@@ -96,11 +108,10 @@ class GameHistoryUI:
         print(f"Highest total score: {max([game["total_score"] for game in self.series_list])}")
         print(f"Lowest total score:  {min([game["total_score"] for game in self.series_list])}")
 
-        total_games, victory_count, defeat_count, win_percentage = self._calculate_game_statistics()
-
         print(f"\n{Color.BLUE.value}------- GAME STATISTICS ------{Color.END.value}")
-        print(f"Total games:     {total_games}\n")
 
+        total_games, victory_count, defeat_count, win_percentage = (self._calculate_game_statistics())
+        print(f"Total games:     {total_games}\n")
         print(f"Win percentage:  {win_percentage}%")
         print(f"Total victories: {victory_count}")
         print(f"Total defeats:   {defeat_count}\n")
@@ -109,7 +120,7 @@ class GameHistoryUI:
         print(f"Highest score:   {high_score}")
         print(f"Lowest score:    {lowest_score}")
         print(f"Average score:   {self._calculate_average_score(total_games)}")
-
+        
         input(self.SCREEN_PAUSE)
 
     def _calculate_game_statistics(self) -> tuple[int, int, int, float]:
@@ -118,18 +129,23 @@ class GameHistoryUI:
             Tuple: (total_games, victory_count, defeat_count, win_percentage)
         """
         total_games = sum([len(series["game_list"]) for series in self.series_list])
-        victory_count = sum([len([game for game in series["game_list"] if game["is_victory"]]) for series in self.series_list])
+        victory_count = sum(
+            [
+                len([game for game in series["game_list"] if game["is_victory"]])
+                for series in self.series_list
+            ]
+        )
         defeat_count = total_games - victory_count
         win_percentage = round((victory_count / total_games) * 100, 2)
         return total_games, victory_count, defeat_count, win_percentage
 
     def _calculate_average_score(self, total_games) -> float:
-        """Calculate average score for all games"""        
+        """Calculate average score for all games"""
         total_score = sum(
             game["score"]
             for series in self.series_list
             for game in series["game_list"]
-            )
+        )
         return round(total_score / total_games, 2)
 
     def _calculate_scores(self) -> tuple[int, int]:
@@ -138,15 +154,14 @@ class GameHistoryUI:
             game["score"]
             for series in self.series_list
             for game in series["game_list"]
-            )
+        )
         lowest_score = min(
             game["score"]
             for series in self.series_list
             for game in series["game_list"]
-              )
+        )
         return high_score, lowest_score
 
-    
     def save_game_series(self, series) -> None:
         """Trigger saving game series"""
         try:

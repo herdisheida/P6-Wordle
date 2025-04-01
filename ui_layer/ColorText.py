@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Color(Enum):
     RED = "\033[31m"
     GREEN = "\033[32m"
@@ -7,14 +8,17 @@ class Color(Enum):
     END = "\033[0m"
 
     BLUE = "\033[34m"
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
     GRAY = "\033[90m"
 
     @staticmethod
     def colorize_feedback(feedback: str) -> str:
-        """Colorize feedback string"""
+        """Colorize feedback string,
+        where C is green,
+        c is yellow,
+        and - is red"""
         colored = ""
         for char in feedback:
             if char == "C":
@@ -24,8 +28,13 @@ class Color(Enum):
             elif char == "-":
                 colored += f"{Color.RED.value}{char}{Color.END.value}"
         return colored
-    
+
     @staticmethod
     def _color_result(result: str) -> str:
-        """Colorize game result"""
-        return f"{Color.GREEN.value}Victory{Color.END.value}" if result else f"{Color.RED.value}Defeat{Color.END.value}"
+        """Colorize game result,
+        either victory or defeat"""
+        return (
+            f"{Color.GREEN.value}Victory{Color.END.value}"
+            if result
+            else f"{Color.RED.value}Defeat{Color.END.value}"
+        )

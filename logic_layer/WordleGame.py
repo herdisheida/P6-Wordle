@@ -7,7 +7,7 @@ class WordleGame:
         self.max_guesses = max_guesses
         self.word_length = len(secret_word)
 
-        self.guess_history = {} # guesses & feedbacks for each round in a single game instance
+        self.guess_history = {} # guesses, feedbacks for each round in a game
         self.guess_count = 0
         self.is_victory = None
         self.score = 0
@@ -21,7 +21,7 @@ class WordleGame:
         self.guess_count += 1
         feedback = self._calculate_feedback(guess)
         self._save_guess(guess, feedback)
-        
+
         if feedback == "C" * self.word_length:
             self.is_victory = True
             self.score = self._calculate_score()
@@ -29,7 +29,7 @@ class WordleGame:
             self.is_victory = False
             self.score = self._calculate_score()
         return feedback
-    
+
     def _validate_guess(self, guess: str) -> tuple[bool, str]:
         """Validate guess format (pure logic)"""
         if not guess.isalpha():
@@ -75,15 +75,16 @@ class WordleGame:
 
     def _calculate_score(self) -> int:
         """Calculate game score.
-        The score is higher the fewer guesses the player used and the longer the wordle word is"""
+        The score is higher the fewer guesses the player used and the longer the wordle word is
+        """
         # user lost
         if not self.is_victory:
             return self.guess_count * -3
-        
+
         # user won using all guesses
         if self.max_guesses == self.guess_count:
             return self.word_length - self.guess_count + 1
-        
+
         # user won using fewer guesses
         return self.word_length * 2 + (self.max_guesses - self.guess_count) * 2
 

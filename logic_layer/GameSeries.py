@@ -3,7 +3,7 @@ class GameSeries:
         self.word_length = word_length
         self.max_guesses = max_guesses
 
-        self.series_list = [] # list of WordleGame objects
+        self.series_list = []  # list of WordleGame objects
         self.total_score = 0
         self.curr_streak = 0
         self.longest_streak = self.curr_streak
