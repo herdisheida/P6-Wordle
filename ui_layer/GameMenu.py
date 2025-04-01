@@ -79,15 +79,15 @@ class GameMenu:
                 # start game
                 active_game = WordleGame(secret_word, max_guess_count)
                 GameUI(active_game, series, self.game_history).run()
-                series.add_game(active_game)
-                series.calculate_longest_streak()
+                # series.add_game(active_game)
+                # series.calculate_longest_streak()
 
                 if not self._continue_playing():
                     break
             except ValueError as e:
                 self._display_error(str(e))
-
         self.game_history.save_game_series(series)
+
 
     def _continue_playing(self):
         """Check if user wants to keep playing"""

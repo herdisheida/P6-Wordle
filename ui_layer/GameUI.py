@@ -25,7 +25,10 @@ class GameUI:
                 print(f"{Color.RED.value}{str(e)}{Color.END.value}")
                 continue
             
+        self.game_series.add_game(self.game)
+        self.game_series.calculate_longest_streak()
         self._display_result()
+
 
     def _get_guess(self):
         """Get and validate user input"""
@@ -45,9 +48,6 @@ class GameUI:
         else:
             print(f"\n{Color.RED.value}{Color.BOLD.value}GAME OVER!{Color.END.value}")
             print(f"Word was: {Color.BLUE.value}{Color.UNDERLINE.value}{self.game.secret_word}{Color.END.value}")
-        
-        # input(self.history.SCREEN_PAUSE) # EYDA þarf ekki
-
 
     def _print_history(self):
         """Show guess history for game round"""

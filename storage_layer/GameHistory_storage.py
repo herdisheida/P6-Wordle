@@ -48,7 +48,7 @@ class GameHistory_Storage:
             "curr_streak": series.curr_streak,
             "longest_streak": series.longest_streak,
             "game_list": series_list
-        }        
+        }
 
         # get existing user series history and add new game to it
         all_series = self.load_history()

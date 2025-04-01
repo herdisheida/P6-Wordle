@@ -10,6 +10,7 @@ class GameHistoryUI:
     def __init__(self, username: str):
         self.username = username
         self.storage = GameHistory_Storage(username)
+        self.series_list = []
 
     def display_history_menu(self):
         """Display the history menu"""
@@ -53,7 +54,7 @@ class GameHistoryUI:
 
             # show one game series at a time
             if series_nr < len(self.series_list):
-                choice = input(f"\n{Color.GRAY.value}(B) back | Enter for next...{Color.END.value}\n").lower()
+                choice = input(f"\n{Color.GRAY.value}(B) back | (N) next...{Color.END.value}\n").lower()
                 if choice == "b":
                     return
 
@@ -98,13 +99,15 @@ class GameHistoryUI:
         total_games, victory_count, defeat_count, win_percentage = self._calculate_game_statistics()
 
         print(f"\n{Color.BLUE.value}------- GAME STATISTICS ------{Color.END.value}")
-        print(f"Total games      {total_games}\n")
+        print(f"Total games:     {total_games}\n")
 
         print(f"Win percentage:  {win_percentage}%")
         print(f"Total victories: {victory_count}")
         print(f"Total defeats:   {defeat_count}\n")
 
-        print(f"Highest score:   {self._calculate_high_score()}")
+        high_score, lowest_score = self._calculate_scores()
+        print(f"Highest score:   {high_score}")
+        print(f"Lowest score:    {lowest_score}")
         print(f"Average score:   {self._calculate_average_score(total_games)}")
 
         input(self.SCREEN_PAUSE)
@@ -129,14 +132,17 @@ class GameHistoryUI:
         avg = score_sum / total_games
         return round(avg, 2)
     
-    def _calculate_high_score(self):
-        """Calculate and return high score from all games"""
+    def _calculate_scores(self):
+        """Calculate and return high score and lowest score from all games"""
         high_score = self.series_list[0]["game_list"][0]["score"] # initialize with first game score
+        lowest_score = self.series_list[0]["game_list"][0]["score"]
         for series in self.series_list:
             score = max([game["score"] for game in series["game_list"]])
             if score > high_score:
                 high_score = score
-        return high_score
+            if score < lowest_score:
+                lowest_score = score
+        return high_score, lowest_score
     
     def save_game_series(self, series):
         """Trigger saving game series"""
