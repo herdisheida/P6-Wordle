@@ -27,7 +27,7 @@ Go to the directory of the Wordle program and run it with the start.py file.
 cd <your-wordle-game-folder>
 python3 start.py
 ```
-Or run it in VS Code with the start.py file.
+Or run it in VS Code by running the start.py file.
 
 ### Users
 You can sign-/log-in by typing your username at the start of the programm, no password needed :D.
