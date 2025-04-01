@@ -4,7 +4,7 @@ from storage_layer.GameHistory_storage import GameHistory_Storage
 class GameHistoryUI:
     """Class to handle game history user interface"""
     GUESS_HISTORY_FORMAT = "   {0:<8}{1:<15}{2:<15}" # guess nr, guesses, feedback
-    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<20}" # series nr, score, secret_word, result
+    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<30}" # series nr, score, secret_word, result
     SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
     def __init__(self, username: str):
@@ -43,13 +43,13 @@ class GameHistoryUI:
         print("\n----------- ALL GAMES SERIES ----------")
         print(f"Total Series: {len(self.series_list)}\n")
 
-        print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Result"))
+        print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Result", "Secret Word"))
 
         for series_nr, games in enumerate(self.series_list, 1):
             for round_nr, round in enumerate(games["game_list"], 1):
     
                 nr = series_nr if round_nr == 1 else "" # print series nr for first game only
-                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], Color._color_result(round["is_victory"])))
+                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], Color._color_result(round["is_victory"]), round["secret_word"]))
 
             # show one game series at a time
             if series_nr < len(self.series_list):
