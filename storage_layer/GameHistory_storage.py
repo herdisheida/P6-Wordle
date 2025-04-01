@@ -24,9 +24,17 @@ class GameHistory_Storage:
     
     def save_game_series(self, series: list[WordleGame]):
         """Save game series results to file"""
-        series_list = []
-        
+        game_series = self._get_game_series(series)
+
+        # get existing user series history and add new game to it
+        all_series = self.load_history()
+        all_series.append(game_series)
+        self._write_to_file(data=all_series)
+
+    def _get_game_series(self, series: list[WordleGame]):
+        """Get game series data"""        
         # get all games in the series
+        series_list = []
         for game in series.series_list:
             data = {
                 "secret_word": game.secret_word,
@@ -41,7 +49,7 @@ class GameHistory_Storage:
                     }
                 }
             series_list.append(data)
-
+            
         # create game series data
         game_series = {
             "total_score": series.total_score,
@@ -49,11 +57,12 @@ class GameHistory_Storage:
             "longest_streak": series.longest_streak,
             "game_list": series_list
         }
+        return game_series
 
-        # get existing user series history and add new game to it
-        all_series = self.load_history()
-        all_series.append(game_series)
-
-        # save to file
-        with open(self.RESULT_FILE_PATH, "w") as file:
-            json.dump(all_series, file, indent=2)
+    def _write_to_file(self, data: dict):
+        """Write game data to file"""
+        try:
+            with open(self.RESULT_FILE_PATH, "w") as file:
+                json.dump(data, file, indent=2)
+        except Exception as e:
+            raise IOError(f"Error writing to file: {e}")

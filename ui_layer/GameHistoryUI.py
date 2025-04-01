@@ -149,5 +149,8 @@ class GameHistoryUI:
     
     def save_game_series(self, series) -> None:
         """Trigger saving game series"""
-        self.storage.save_game_series(series)
-        print(f"{Color.GREEN.value}Game series saved successfully!{Color.END.value}")
+        try:
+            self.storage.save_game_series(series)
+            print(f"{Color.GREEN.value}Game series saved successfully!{Color.END.value}")
+        except Exception as e:
+            print(f"{Color.RED.value}Error saving game series: {str(e)}{Color.END.value}")
