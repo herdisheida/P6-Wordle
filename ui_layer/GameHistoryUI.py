@@ -112,19 +112,18 @@ class GameHistoryUI:
 
         input(self.SCREEN_PAUSE)
 
-    def _calculate_game_statistics(self) -> list:
-        """Calculate and return game statistics for game instances in series,
-        returning total games, victories, defeats and win percentage"""
-        total_games = 0
-        victory_count = 0
-        for series in self.series_list:
-            total_games += len(series["game_list"])
-            victory_count += len([game for game in series["game_list"] if game["is_victory"]])
+    def _calculate_game_statistics(self) -> tuple[int, int, int, float]:
+        """Calculate and return game statistics for game instances.
+        Returns:
+            Tuple: (total_games, victory_count, defeat_count, win_percentage)
+        """
+        total_games = sum([len(series["game_list"]) for series in self.series_list])
+        victory_count = sum([len([game for game in series["game_list"] if game["is_victory"]]) for series in self.series_list])
         defeat_count = total_games - victory_count
         win_percentage = round((victory_count / total_games) * 100, 2)
         return total_games, victory_count, defeat_count, win_percentage
 
-    def _calculate_average_score(self, total_games):
+    def _calculate_average_score(self, total_games) -> float:
         """Calculate and return average score for all games"""
         score_sum = 0
         for series in self.series_list:
@@ -132,7 +131,7 @@ class GameHistoryUI:
         avg = score_sum / total_games
         return round(avg, 2)
     
-    def _calculate_scores(self):
+    def _calculate_scores(self) -> tuple[int, int]:
         """Calculate and return high score and lowest score from all games"""
         high_score = self.series_list[0]["game_list"][0]["score"] # initialize with first game score
         lowest_score = self.series_list[0]["game_list"][0]["score"]
@@ -144,7 +143,7 @@ class GameHistoryUI:
                 lowest_score = score
         return high_score, lowest_score
     
-    def save_game_series(self, series):
+    def save_game_series(self, series) -> None:
         """Trigger saving game series"""
         self.storage.save_game_series(series)
         print(f"{Color.GREEN.value}Game series saved successfully!{Color.END.value}")
