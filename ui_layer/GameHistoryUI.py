@@ -82,8 +82,8 @@ class GameHistoryUI:
 
             print(f"\n{Color.BLUE.value}GAME: {i + 1}{Color.END.value}")
 
-            print(f"  Secret Word: {game["secret_word"]}")
-            print(f"  Result:  {Color._color_result(game["is_victory"])}")
+            print(f"  Secret Word: {Color.UNDERLINE.value + game["secret_word"] + Color.END.value}")
+            print(f"  Result: {Color._color_result(game["is_victory"])}")
             print(f"  Score: {game["score"]}")
 
             print("\n  Game rounds:")
