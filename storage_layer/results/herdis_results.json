@@ -1,0 +1,103 @@
+[
+  {
+    "total_score": 28,
+    "curr_streak": 1,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "LIGHT",
+        "is_victory": true,
+        "score": 28,
+        "history": {
+          "1": {
+            "guess": "LIGHT",
+            "feedback": "CCCCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 14,
+    "curr_streak": 2,
+    "longest_streak": 2,
+    "game_list": [
+      {
+        "secret_word": "PENGUIN",
+        "is_victory": true,
+        "score": 7,
+        "history": {
+          "1": {
+            "guess": "PENGUIN",
+            "feedback": "CCCCCCC"
+          }
+        }
+      },
+      {
+        "secret_word": "HORIZON",
+        "is_victory": true,
+        "score": 7,
+        "history": {
+          "1": {
+            "guess": "HORIZON",
+            "feedback": "CCCCCCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": -30,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "SIT",
+        "is_victory": false,
+        "score": -30,
+        "history": {
+          "1": {
+            "guess": "SAT",
+            "feedback": "C-C"
+          },
+          "2": {
+            "guess": "BAT",
+            "feedback": "--C"
+          },
+          "3": {
+            "guess": "RAT",
+            "feedback": "--C"
+          },
+          "4": {
+            "guess": "ITS",
+            "feedback": "ccc"
+          },
+          "5": {
+            "guess": "LIM",
+            "feedback": "-C-"
+          },
+          "6": {
+            "guess": "DIM",
+            "feedback": "-C-"
+          },
+          "7": {
+            "guess": "PIP",
+            "feedback": "-C-"
+          },
+          "8": {
+            "guess": "DIP",
+            "feedback": "-C-"
+          },
+          "9": {
+            "guess": "TIP",
+            "feedback": "cC-"
+          },
+          "10": {
+            "guess": "EAT",
+            "feedback": "--C"
+          }
+        }
+      }
+    ]
+  }
+]

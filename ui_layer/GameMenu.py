@@ -95,14 +95,10 @@ class GameMenu:
         while not play_again:
             choice = input("\nDo you want to continue playing? (Y/N): ").lower()
 
-            if choice == "y":
-                return True
-            elif choice == "n":
-                return False
-            else:
-                print(f"{Color.RED.value}Invalid input.{Color.END.value}")
-                continue
-
+            match choice:
+                case "y": return True
+                case "n": return False
+                case _: print(f"{Color.RED.value}Invalid input.{Color.END.value}")
 
     def _add_word_to_wordbank(self):
         """Add a word to the word bank"""

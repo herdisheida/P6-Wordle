@@ -4,7 +4,7 @@ from storage_layer.GameHistory_storage import GameHistory_Storage
 class GameHistoryUI:
     """Class to handle game history user interface"""
     GUESS_HISTORY_FORMAT = "   {0:<8}{1:<15}{2:<15}" # guess nr, guesses, feedback
-    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<20}{3:<30}" # series nr, score, secret_word, result
+    GAME_HISTORY_LIST_FORMAT = " {0:<5}{1:<10}{2:<30}{3:<20}" # series nr, score, secret_word, result
     SCREEN_PAUSE = f"{Color.GRAY.value}\nEnter to continue...{Color.END.value}"
 
     def __init__(self, username: str):
@@ -43,13 +43,13 @@ class GameHistoryUI:
         print("\n----------- ALL GAMES SERIES ----------")
         print(f"Total Series: {len(self.series_list)}\n")
 
-        print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Result", "Secret Word"))
+        print(self.GAME_HISTORY_LIST_FORMAT.format(f"Nr", "Score", "Secret Word", "Result"))
 
         for series_nr, games in enumerate(self.series_list, 1):
             for round_nr, round in enumerate(games["game_list"], 1):
     
                 nr = series_nr if round_nr == 1 else "" # print series nr for first game only
-                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], Color._color_result(round["is_victory"]), round["secret_word"]))
+                print(self.GAME_HISTORY_LIST_FORMAT.format(nr, round["score"], round["secret_word"], Color._color_result(round["is_victory"])))
 
             # show one game series at a time
             if series_nr < len(self.series_list):
@@ -91,7 +91,7 @@ class GameHistoryUI:
         print(f"\n{Color.BLUE.value}------- SERIES STATISTICS ------{Color.END.value}")
         print(f"Total series:    {len(self.series_list)}\n")
         print(f"Current streak:  {self.series_list[-1]["curr_streak"]}")
-        print(f"Longest streak:  {self.series_list[-1]["longest_streak"]}\n")
+        print(f"Longest streak:  {max([game["longest_streak"] for game in self.series_list])}\n")
         print(f"Highest total score: {max([game["total_score"] for game in self.series_list])}")
         print(f"Lowest total score:  {min([game["total_score"] for game in self.series_list])}")
 
