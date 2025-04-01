@@ -113,7 +113,7 @@ class GameHistoryUI:
         input(self.SCREEN_PAUSE)
 
     def _calculate_game_statistics(self) -> tuple[int, int, int, float]:
-        """Calculate and return game statistics for game instances.
+        """Calculate game statistics for game instances.
         Returns:
             Tuple: (total_games, victory_count, defeat_count, win_percentage)
         """
@@ -124,24 +124,28 @@ class GameHistoryUI:
         return total_games, victory_count, defeat_count, win_percentage
 
     def _calculate_average_score(self, total_games) -> float:
-        """Calculate and return average score for all games"""
-        score_sum = 0
-        for series in self.series_list:
-            score_sum += sum([game["score"] for game in series["game_list"]])
-        avg = score_sum / total_games
-        return round(avg, 2)
-    
+        """Calculate average score for all games"""        
+        total_score = sum(
+            game["score"]
+            for series in self.series_list
+            for game in series["game_list"]
+            )
+        return round(total_score / total_games, 2)
+
     def _calculate_scores(self) -> tuple[int, int]:
-        """Calculate and return high score and lowest score from all games"""
-        high_score = self.series_list[0]["game_list"][0]["score"] # initialize with first game score
-        lowest_score = self.series_list[0]["game_list"][0]["score"]
-        for series in self.series_list:
-            score = max([game["score"] for game in series["game_list"]])
-            if score > high_score:
-                high_score = score
-            if score < lowest_score:
-                lowest_score = score
+        """Calculate high score and lowest score for all games"""
+        high_score = max(
+            game["score"]
+            for series in self.series_list
+            for game in series["game_list"]
+            )
+        lowest_score = min(
+            game["score"]
+            for series in self.series_list
+            for game in series["game_list"]
+              )
         return high_score, lowest_score
+
     
     def save_game_series(self, series) -> None:
         """Trigger saving game series"""
