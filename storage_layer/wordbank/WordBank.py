@@ -9,7 +9,7 @@ class WordBank:
     def _load_words(self) -> list[str]:
         """Load words from wordbank.txt file"""
         with open(self.WORD_BANK_FILE, mode="r") as file:
-            return [word.strip() for word in file.readlines()]
+            return [word.strip().upper() for word in file.readlines()]
 
     def get_random_word(self, length: int) -> str:
         """Get a random word from the Word Bank with specific length"""
@@ -40,5 +40,5 @@ class WordBank:
             raise ValueError("Word too short (min 2 letters)")
         if len(word) > 20:
             raise ValueError("Word too long (max 20 letters)")
-        if word in self.words:
+        if word.upper() in self.words:
             raise ValueError("Word already exists in Word Bank")

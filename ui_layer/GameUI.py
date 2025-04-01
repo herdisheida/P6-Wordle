@@ -46,7 +46,7 @@ class GameUI:
             print(f"\n{Color.RED.value}{Color.BOLD.value}GAME OVER!{Color.END.value}")
             print(f"Word was: {Color.BLUE.value}{Color.UNDERLINE.value}{self.game.secret_word}{Color.END.value}")
         
-        input(self.history.SCREEN_PAUSE)
+        # input(self.history.SCREEN_PAUSE) # EYDA þarf ekki
 
 
     def _print_history(self):

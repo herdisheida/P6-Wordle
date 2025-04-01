@@ -1,0 +1,267 @@
+[
+  {
+    "total_score": -30,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "KOALA",
+        "is_victory": false,
+        "score": -30,
+        "history": {
+          "1": {
+            "guess": "MONKS",
+            "feedback": "-C-c-"
+          },
+          "2": {
+            "guess": "LUNGE",
+            "feedback": "c----"
+          },
+          "3": {
+            "guess": "BIRTH",
+            "feedback": "-----"
+          },
+          "4": {
+            "guess": "RICKY",
+            "feedback": "---c-"
+          },
+          "5": {
+            "guess": "CYCLE",
+            "feedback": "---C-"
+          },
+          "6": {
+            "guess": "WHATS",
+            "feedback": "--C--"
+          },
+          "7": {
+            "guess": "LICKS",
+            "feedback": "c--c-"
+          },
+          "8": {
+            "guess": "KILLS",
+            "feedback": "C--C-"
+          },
+          "9": {
+            "guess": "SHELF",
+            "feedback": "---C-"
+          },
+          "10": {
+            "guess": "CLOTH",
+            "feedback": "-cc--"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 14,
+    "curr_streak": 1,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "OCEAN",
+        "is_victory": true,
+        "score": 14,
+        "history": {
+          "1": {
+            "guess": "OCEAN",
+            "feedback": "CCCCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 9,
+    "curr_streak": 3,
+    "longest_streak": 3,
+    "game_list": [
+      {
+        "secret_word": "PEN",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "PEN",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "SIT",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "SIT",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "PEN",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "PEN",
+            "feedback": "CCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 2,
+    "curr_streak": 0,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "NET",
+        "is_victory": true,
+        "score": 8,
+        "history": {
+          "1": {
+            "guess": "NET",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "HAT",
+        "is_victory": false,
+        "score": -6,
+        "history": {
+          "1": {
+            "guess": "RAT",
+            "feedback": "-CC"
+          },
+          "2": {
+            "guess": "CAT",
+            "feedback": "-CC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 18,
+    "curr_streak": 6,
+    "longest_streak": 6,
+    "game_list": [
+      {
+        "secret_word": "CAT",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "CAT",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "OWL",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "OWL",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "PEN",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "PEN",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "NET",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "NET",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "PEN",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "PEN",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "SIT",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "SIT",
+            "feedback": "CCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 4,
+    "curr_streak": 1,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "YEET",
+        "is_victory": true,
+        "score": 4,
+        "history": {
+          "1": {
+            "guess": "YEET",
+            "feedback": "CCCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 8,
+    "curr_streak": 2,
+    "longest_streak": 2,
+    "game_list": [
+      {
+        "secret_word": "HYPE",
+        "is_victory": true,
+        "score": 4,
+        "history": {
+          "1": {
+            "guess": "HYPE",
+            "feedback": "CCCC"
+          }
+        }
+      },
+      {
+        "secret_word": "SIMP",
+        "is_victory": true,
+        "score": 4,
+        "history": {
+          "1": {
+            "guess": "SIMP",
+            "feedback": "CCCC"
+          }
+        }
+      }
+    ]
+  }
+]

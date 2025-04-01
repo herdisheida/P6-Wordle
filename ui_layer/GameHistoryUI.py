@@ -131,7 +131,7 @@ class GameHistoryUI:
     
     def _calculate_high_score(self):
         """Calculate and return high score from all games"""
-        high_score = 0
+        high_score = self.series_list[0]["game_list"][0]["score"] # initialize with first game score
         for series in self.series_list:
             score = max([game["score"] for game in series["game_list"]])
             if score > high_score:
