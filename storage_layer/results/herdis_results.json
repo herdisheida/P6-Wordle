@@ -56,5 +56,57 @@
         }
       }
     ]
+  },
+  {
+    "total_score": -18,
+    "curr_streak": 0,
+    "longest_streak": 0,
+    "game_list": [
+      {
+        "secret_word": "YEET",
+        "is_victory": false,
+        "score": -6,
+        "history": {
+          "1": {
+            "guess": "HELL",
+            "feedback": "-C--"
+          },
+          "2": {
+            "guess": "WHAT",
+            "feedback": "---C"
+          }
+        }
+      },
+      {
+        "secret_word": "GOAT",
+        "is_victory": false,
+        "score": -6,
+        "history": {
+          "1": {
+            "guess": "WHAT",
+            "feedback": "--CC"
+          },
+          "2": {
+            "guess": "MANS",
+            "feedback": "-c--"
+          }
+        }
+      },
+      {
+        "secret_word": "MEME",
+        "is_victory": false,
+        "score": -6,
+        "history": {
+          "1": {
+            "guess": "WHOO",
+            "feedback": "----"
+          },
+          "2": {
+            "guess": "WILL",
+            "feedback": "----"
+          }
+        }
+      }
+    ]
   }
 ]

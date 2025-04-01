@@ -24,7 +24,7 @@ class GameMenu:
         while self.online:
             print("\n------- LOGIN -------")
             print(f" {Color.BLUE.value}Welcome to Wordle!{Color.END.value}")
-            choice = input("\n(S) Signup | (L)ogin | (Q)uit\n").lower()
+            choice = input("\n(S) Signup | (L)ogin | (Q)uit: ").lower()
             match choice:
                 case "l" | "s":
                     self._handle_login()
@@ -35,7 +35,7 @@ class GameMenu:
 
     def _handle_login(self) -> str:
         """Authenticate user and initalize game history"""
-        self.username = self._get_valid_input("Enter username: ", self._validate_username)
+        self.username = self._get_valid_input("Enter username: ", self._validate_username).lower()
         self.game_history = GameHistoryUI(self.username)
         self._main_menu()
 
