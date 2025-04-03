@@ -118,7 +118,6 @@ class GameMenu:
         print(f"\n{Color.BLUE.value}------- Game Series Result -------{Color.END.value}")
         print(f"Total games played: {len(series.game_list)}")
         print(f"Total score: {series.total_score}")
-        input(self.game_history.SCREEN_PAUSE)
 
     def _add_word_to_wordbank(self):
         """Add a word to the word bank"""
