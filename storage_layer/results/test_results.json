@@ -1,0 +1,194 @@
+[
+  {
+    "total_score": 33,
+    "curr_streak": 0,
+    "longest_streak": 3,
+    "game_list": [
+      {
+        "secret_word": "APPLE",
+        "is_victory": true,
+        "score": 16,
+        "history": {
+          "1": {
+            "guess": "WHATS",
+            "feedback": "--c--"
+          },
+          "2": {
+            "guess": "APPLE",
+            "feedback": "CCCCC"
+          }
+        }
+      },
+      {
+        "secret_word": "JELLY",
+        "is_victory": true,
+        "score": 16,
+        "history": {
+          "1": {
+            "guess": "JELLO",
+            "feedback": "CCCC-"
+          },
+          "2": {
+            "guess": "JELLY",
+            "feedback": "CCCCC"
+          }
+        }
+      },
+      {
+        "secret_word": "SUGAR",
+        "is_victory": true,
+        "score": 16,
+        "history": {
+          "1": {
+            "guess": "SANDY",
+            "feedback": "Cc---"
+          },
+          "2": {
+            "guess": "SUGAR",
+            "feedback": "CCCCC"
+          }
+        }
+      },
+      {
+        "secret_word": "TOUCH",
+        "is_victory": false,
+        "score": -15,
+        "history": {
+          "1": {
+            "guess": "TATTO",
+            "feedback": "C---c"
+          },
+          "2": {
+            "guess": "LATTE",
+            "feedback": "--c--"
+          },
+          "3": {
+            "guess": "SUGAR",
+            "feedback": "-c---"
+          },
+          "4": {
+            "guess": "FLYER",
+            "feedback": "-----"
+          },
+          "5": {
+            "guess": "SIGNS",
+            "feedback": "-----"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 20,
+    "curr_streak": 1,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "JOURNEY",
+        "is_victory": true,
+        "score": 20,
+        "history": {
+          "1": {
+            "guess": "JOURNEY",
+            "feedback": "CCCCCCC"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "total_score": 12,
+    "curr_streak": 6,
+    "longest_streak": 6,
+    "game_list": [
+      {
+        "secret_word": "FOX",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "DAB",
+            "feedback": "---"
+          }
+        }
+      },
+      {
+        "secret_word": "CAR",
+        "is_victory": false,
+        "score": -3,
+        "history": {
+          "1": {
+            "guess": "FOX",
+            "feedback": "---"
+          }
+        }
+      },
+      {
+        "secret_word": "PEN",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "PEN",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "VAN",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "VAN",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "OWL",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "OWL",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "NET",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "NET",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "OWL",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "OWL",
+            "feedback": "CCC"
+          }
+        }
+      },
+      {
+        "secret_word": "JAM",
+        "is_victory": true,
+        "score": 3,
+        "history": {
+          "1": {
+            "guess": "JAM",
+            "feedback": "CCC"
+          }
+        }
+      }
+    ]
+  }
+]

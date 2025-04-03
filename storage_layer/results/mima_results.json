@@ -1,0 +1,79 @@
+[
+  {
+    "total_score": -10,
+    "curr_streak": 1,
+    "longest_streak": 1,
+    "game_list": [
+      {
+        "secret_word": "DANCE",
+        "is_victory": false,
+        "score": -24,
+        "history": {
+          "1": {
+            "guess": "WORLD",
+            "feedback": "----c"
+          },
+          "2": {
+            "guess": "PLACE",
+            "feedback": "--cCC"
+          },
+          "3": {
+            "guess": "BRACE",
+            "feedback": "--cCC"
+          },
+          "4": {
+            "guess": "GRACE",
+            "feedback": "--cCC"
+          },
+          "5": {
+            "guess": "GREAT",
+            "feedback": "--cc-"
+          },
+          "6": {
+            "guess": "LEACE",
+            "feedback": "--cCC"
+          },
+          "7": {
+            "guess": "FARCE",
+            "feedback": "-C-CC"
+          },
+          "8": {
+            "guess": "CACHE",
+            "feedback": "cC--C"
+          }
+        }
+      },
+      {
+        "secret_word": "ALIBI",
+        "is_victory": true,
+        "score": 14,
+        "history": {
+          "1": {
+            "guess": "WORLD",
+            "feedback": "---c-"
+          },
+          "2": {
+            "guess": "PLACE",
+            "feedback": "-Cc--"
+          },
+          "3": {
+            "guess": "BLAZE",
+            "feedback": "cCc--"
+          },
+          "4": {
+            "guess": "ALICE",
+            "feedback": "CCC--"
+          },
+          "5": {
+            "guess": "ALIAS",
+            "feedback": "CCC--"
+          },
+          "6": {
+            "guess": "ALIBI",
+            "feedback": "CCCCC"
+          }
+        }
+      }
+    ]
+  }
+]
