@@ -22,13 +22,16 @@ Wordle is a daily word-guessing game where the goal is to deduce the hidden word
 
 ## Usage
 ### Run program
-Go to the directory of the Wordle program and run it with the start.py file.
+Clone the repositor, use the terminal to go to the directory of the Wordle program and run it with the start.py file.
 ```bash
+git clone https://github.com/herdisheida/P6-Wordle
 cd <your-wordle-game-folder>
 python3 start.py
 ```
-Or run it in VS Code by running the start.py file.
+Or you can run it in VS Code by running the start.py file.
 
 ### Users
 You can signup and login by typing your username at the start of the programm, no password needed :D.
-If you want to try an existing account, use username: 'test'
+If you want to try an existing account, use username:
+* 'test'
+* 'mima'
